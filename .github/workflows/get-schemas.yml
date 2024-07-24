@@ -13,7 +13,7 @@ permissions:
 
 env:
   # REGIONS: vars.REGIONS
-  URL_FORMAT: ${{ vars.URL_FORMAT || 'https://schema.cloudformation.${REGION}.amazonaws.com/CloudformationSchema.zip' }}
+  URL_FORMAT: ${{ vars.URL_FORMAT || 'https://schema.cloudformation.${region}.amazonaws.com/CloudformationSchema.zip' }}
 
 jobs:
   build-matrix:
