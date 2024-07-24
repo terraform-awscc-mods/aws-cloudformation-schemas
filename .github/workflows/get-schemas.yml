@@ -28,7 +28,7 @@ jobs:
         name: Interpolate URL per region
         run: |
           set -eux
-          for region in "us-east-1 us-east-2" do
+          for region in "us-east-1 us-east-2"; do
             echo "${URL_FORMAT}"
           done
 ...
