@@ -1,0 +1,34 @@
+---
+name: Get Schemas
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  # REGIONS: vars.REGIONS
+  URL_FORMAT: ${{ vars.URL_FORMAT || 'https://schema.cloudformation.$${REGION}.amazonaws.com/CloudformationSchema.zip' }}
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    # strategy:
+    #   matrix:
+    #     regions: ${{ env.REGIONS }}
+    steps:
+      - id: build-matrix
+        name: Interpolate URL per region
+        run: |
+          set -eux
+          for region in "us-east-1 us-east-2" do
+            echo "${URL_FORMAT}"
+          done
+...
