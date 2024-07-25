@@ -29,7 +29,7 @@ jobs:
             echo "Current region: ${region}"
             download_url=$(echo "${URL_FORMAT}" | envsubst)
             file=$(basename $download_url)
-            curl -o ${region}.zip $download_url &> /dev/null
+            curl -o ${region}.zip $download_url 2>&1 > /dev/null
             if [[ -f "./${region}.zip" ]]; then
               echo "Unzipping: ${region}.zip"
               mkdir -p ./schemas/${region}
