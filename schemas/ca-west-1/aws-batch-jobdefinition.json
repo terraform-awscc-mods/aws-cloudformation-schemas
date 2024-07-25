@@ -1,0 +1,747 @@
+{
+  "typeName" : "AWS::Batch::JobDefinition",
+  "description" : "Resource Type definition for AWS::Batch::JobDefinition",
+  "additionalProperties" : false,
+  "properties" : {
+    "Status" : {
+      "type" : "string"
+    },
+    "Parameters" : {
+      "type" : "object",
+      "patternProperties" : {
+        "[a-zA-Z0-9]+" : {
+          "type" : "string"
+        }
+      }
+    },
+    "JobDefinitionArn" : {
+      "type" : "string"
+    },
+    "Timeout" : {
+      "$ref" : "#/definitions/JobTimeout"
+    },
+    "JobDefinitionName" : {
+      "type" : "string"
+    },
+    "PropagateTags" : {
+      "type" : "boolean"
+    },
+    "PlatformCapabilities" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "EksProperties" : {
+      "$ref" : "#/definitions/EksProperties"
+    },
+    "Type" : {
+      "type" : "string"
+    },
+    "Revision" : {
+      "type" : "integer"
+    },
+    "NodeProperties" : {
+      "$ref" : "#/definitions/NodeProperties"
+    },
+    "SchedulingPriority" : {
+      "type" : "integer"
+    },
+    "ContainerProperties" : {
+      "$ref" : "#/definitions/ContainerProperties"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "ContainerOrchestrationType" : {
+      "type" : "string"
+    },
+    "RetryStrategy" : {
+      "$ref" : "#/definitions/RetryStrategy"
+    },
+    "Tags" : {
+      "type" : "object",
+      "patternProperties" : {
+        "[a-zA-Z0-9]+" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "JobTimeout" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AttemptDurationSeconds" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "NodeRangeProperty" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Container" : {
+          "$ref" : "#/definitions/ContainerProperties"
+        },
+        "TargetNodes" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "TargetNodes" ]
+    },
+    "EksContainerEnvironmentVariable" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    },
+    "EksEmptyDir" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Medium" : {
+          "type" : "string"
+        },
+        "SizeLimit" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LogConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SecretOptions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Secret"
+          }
+        },
+        "Options" : {
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "LogDriver" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "LogDriver" ]
+    },
+    "RuntimePlatform" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "OperatingSystemFamily" : {
+          "type" : "string"
+        },
+        "CpuArchitecture" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NodeProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MainNode" : {
+          "type" : "integer"
+        },
+        "NodeRangeProperties" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/NodeRangeProperty"
+          }
+        },
+        "NumNodes" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "MainNode", "NodeRangeProperties", "NumNodes" ]
+    },
+    "Tmpfs" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ContainerPath" : {
+          "type" : "string"
+        },
+        "MountOptions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Size" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "Size", "ContainerPath" ]
+    },
+    "ContainerProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "User" : {
+          "type" : "string"
+        },
+        "Secrets" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Secret"
+          }
+        },
+        "Memory" : {
+          "type" : "integer"
+        },
+        "Privileged" : {
+          "type" : "boolean"
+        },
+        "LinuxParameters" : {
+          "$ref" : "#/definitions/LinuxParameters"
+        },
+        "FargatePlatformConfiguration" : {
+          "$ref" : "#/definitions/FargatePlatformConfiguration"
+        },
+        "JobRoleArn" : {
+          "type" : "string"
+        },
+        "ReadonlyRootFilesystem" : {
+          "type" : "boolean"
+        },
+        "Vcpus" : {
+          "type" : "integer"
+        },
+        "Image" : {
+          "type" : "string"
+        },
+        "ResourceRequirements" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/ResourceRequirement"
+          }
+        },
+        "LogConfiguration" : {
+          "$ref" : "#/definitions/LogConfiguration"
+        },
+        "MountPoints" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/MountPoint"
+          }
+        },
+        "ExecutionRoleArn" : {
+          "type" : "string"
+        },
+        "RuntimePlatform" : {
+          "$ref" : "#/definitions/RuntimePlatform"
+        },
+        "Volumes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Volume"
+          }
+        },
+        "Command" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Environment" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Environment"
+          }
+        },
+        "Ulimits" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Ulimit"
+          }
+        },
+        "NetworkConfiguration" : {
+          "$ref" : "#/definitions/NetworkConfiguration"
+        },
+        "InstanceType" : {
+          "type" : "string"
+        },
+        "EphemeralStorage" : {
+          "$ref" : "#/definitions/EphemeralStorage"
+        }
+      },
+      "required" : [ "Image" ]
+    },
+    "EksContainerResourceRequirements" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Requests" : {
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "Limits" : {
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "NetworkConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AssignPublicIp" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EksContainerSecurityContext" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RunAsUser" : {
+          "type" : "integer"
+        },
+        "RunAsGroup" : {
+          "type" : "integer"
+        },
+        "RunAsNonRoot" : {
+          "type" : "boolean"
+        },
+        "Privileged" : {
+          "type" : "boolean"
+        },
+        "ReadOnlyRootFilesystem" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "EksMetadata" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Labels" : {
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "EksSecret" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SecretName" : {
+          "type" : "string"
+        },
+        "Optional" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "SecretName" ]
+    },
+    "EFSVolumeConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FileSystemId" : {
+          "type" : "string"
+        },
+        "TransitEncryption" : {
+          "type" : "string"
+        },
+        "RootDirectory" : {
+          "type" : "string"
+        },
+        "TransitEncryptionPort" : {
+          "type" : "integer"
+        },
+        "AuthorizationConfig" : {
+          "$ref" : "#/definitions/EFSAuthorizationConfig"
+        }
+      },
+      "required" : [ "FileSystemId" ]
+    },
+    "EvaluateOnExit" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Action" : {
+          "type" : "string"
+        },
+        "OnStatusReason" : {
+          "type" : "string"
+        },
+        "OnExitCode" : {
+          "type" : "string"
+        },
+        "OnReason" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Action" ]
+    },
+    "Device" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Permissions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "HostPath" : {
+          "type" : "string"
+        },
+        "ContainerPath" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LinuxParameters" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Swappiness" : {
+          "type" : "integer"
+        },
+        "Tmpfs" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Tmpfs"
+          }
+        },
+        "SharedMemorySize" : {
+          "type" : "integer"
+        },
+        "Devices" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Device"
+          }
+        },
+        "InitProcessEnabled" : {
+          "type" : "boolean"
+        },
+        "MaxSwap" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "FargatePlatformConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PlatformVersion" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Ulimit" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SoftLimit" : {
+          "type" : "integer"
+        },
+        "HardLimit" : {
+          "type" : "integer"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SoftLimit", "HardLimit", "Name" ]
+    },
+    "Host" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourcePath" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EFSAuthorizationConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Iam" : {
+          "type" : "string"
+        },
+        "AccessPointId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EksVolume" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Secret" : {
+          "$ref" : "#/definitions/EksSecret"
+        },
+        "EmptyDir" : {
+          "$ref" : "#/definitions/EksEmptyDir"
+        },
+        "HostPath" : {
+          "$ref" : "#/definitions/EksHostPath"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    },
+    "EksContainerVolumeMount" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MountPath" : {
+          "type" : "string"
+        },
+        "ReadOnly" : {
+          "type" : "boolean"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EksProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PodProperties" : {
+          "$ref" : "#/definitions/EksPodProperties"
+        }
+      }
+    },
+    "Secret" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ValueFrom" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ValueFrom", "Name" ]
+    },
+    "MountPoint" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ReadOnly" : {
+          "type" : "boolean"
+        },
+        "SourceVolume" : {
+          "type" : "string"
+        },
+        "ContainerPath" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Volume" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Host" : {
+          "$ref" : "#/definitions/Host"
+        },
+        "EfsVolumeConfiguration" : {
+          "$ref" : "#/definitions/EFSVolumeConfiguration"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EksHostPath" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Path" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Environment" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResourceRequirement" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EphemeralStorage" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SizeInGiB" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "SizeInGiB" ]
+    },
+    "RetryStrategy" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "EvaluateOnExit" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EvaluateOnExit"
+          }
+        },
+        "Attempts" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "EksContainer" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Args" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "VolumeMounts" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EksContainerVolumeMount"
+          }
+        },
+        "ImagePullPolicy" : {
+          "type" : "string"
+        },
+        "Command" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "SecurityContext" : {
+          "$ref" : "#/definitions/EksContainerSecurityContext"
+        },
+        "Resources" : {
+          "$ref" : "#/definitions/EksContainerResourceRequirements"
+        },
+        "Image" : {
+          "type" : "string"
+        },
+        "Env" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EksContainerEnvironmentVariable"
+          }
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Image" ]
+    },
+    "EksPodProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Volumes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EksVolume"
+          }
+        },
+        "DnsPolicy" : {
+          "type" : "string"
+        },
+        "Containers" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EksContainer"
+          }
+        },
+        "Metadata" : {
+          "$ref" : "#/definitions/EksMetadata"
+        },
+        "ServiceAccountName" : {
+          "type" : "string"
+        },
+        "HostNetwork" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  },
+  "required" : [ "Type" ],
+  "createOnlyProperties" : [ "/properties/PropagateTags", "/properties/PlatformCapabilities", "/properties/ContainerProperties", "/properties/NodeProperties", "/properties/Type", "/properties/Parameters", "/properties/EksProperties", "/properties/SchedulingPriority", "/properties/JobDefinitionName", "/properties/RetryStrategy", "/properties/Timeout" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Revision", "/properties/Id", "/properties/Status", "/properties/JobDefinitionArn", "/properties/ContainerOrchestrationType" ]
+}

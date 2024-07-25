@@ -1,0 +1,126 @@
+{
+  "typeName" : "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+  "description" : "Resource Type definition for AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+  "additionalProperties" : false,
+  "properties" : {
+    "CloudformationStackArn" : {
+      "type" : "string"
+    },
+    "ProductName" : {
+      "type" : "string"
+    },
+    "NotificationArns" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "ProductId" : {
+      "type" : "string"
+    },
+    "PathId" : {
+      "type" : "string"
+    },
+    "ProvisioningParameters" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/ProvisioningParameter"
+      }
+    },
+    "ProvisioningPreferences" : {
+      "$ref" : "#/definitions/ProvisioningPreferences"
+    },
+    "ProvisioningArtifactName" : {
+      "type" : "string"
+    },
+    "AcceptLanguage" : {
+      "type" : "string"
+    },
+    "RecordId" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "ProvisionedProductName" : {
+      "type" : "string"
+    },
+    "ProvisioningArtifactId" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "ProvisioningPreferences" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "StackSetAccounts" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "StackSetFailureToleranceCount" : {
+          "type" : "integer"
+        },
+        "StackSetMaxConcurrencyPercentage" : {
+          "type" : "integer"
+        },
+        "StackSetMaxConcurrencyCount" : {
+          "type" : "integer"
+        },
+        "StackSetRegions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "StackSetOperationType" : {
+          "type" : "string"
+        },
+        "StackSetFailureTolerancePercentage" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "ProvisioningParameter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "createOnlyProperties" : [ "/properties/NotificationArns", "/properties/ProvisionedProductName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/RecordId", "/properties/CloudformationStackArn" ]
+}

@@ -1,0 +1,70 @@
+{
+  "typeName" : "AWS::EC2::VPNConnection",
+  "description" : "Resource Type definition for AWS::EC2::VPNConnection",
+  "additionalProperties" : false,
+  "properties" : {
+    "TransitGatewayId" : {
+      "type" : "string"
+    },
+    "Type" : {
+      "type" : "string"
+    },
+    "VpnTunnelOptionsSpecifications" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/VpnTunnelOptionsSpecification"
+      }
+    },
+    "CustomerGatewayId" : {
+      "type" : "string"
+    },
+    "VpnGatewayId" : {
+      "type" : "string"
+    },
+    "StaticRoutesOnly" : {
+      "type" : "boolean"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions" : {
+    "VpnTunnelOptionsSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TunnelInsideCidr" : {
+          "type" : "string"
+        },
+        "PreSharedKey" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "Type", "CustomerGatewayId" ],
+  "createOnlyProperties" : [ "/properties/TransitGatewayId", "/properties/Type", "/properties/CustomerGatewayId", "/properties/StaticRoutesOnly", "/properties/VpnGatewayId", "/properties/VpnTunnelOptionsSpecifications" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

@@ -1,0 +1,37 @@
+{
+  "typeName" : "AWS::GuardDuty::PublishingDestination",
+  "description" : "Resource Type definition for AWS::GuardDuty::PublishingDestination",
+  "additionalProperties" : false,
+  "properties" : {
+    "DestinationProperties" : {
+      "$ref" : "#/definitions/DestinationProperties"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "DestinationType" : {
+      "type" : "string"
+    },
+    "DetectorId" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "DestinationProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "KmsKeyArn" : {
+          "type" : "string"
+        },
+        "DestinationArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "DestinationProperties", "DetectorId", "DestinationType" ],
+  "createOnlyProperties" : [ "/properties/DetectorId", "/properties/DestinationType" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}
