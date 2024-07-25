@@ -26,7 +26,7 @@ jobs:
           regions=$(curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[].regions | keys[]')
           for region in $regions; do
             export region
-            download_url=$(cat "${URL_FORMAT}" | envsubst)
+            download_url=$(echo "${URL_FORMAT}" | envsubst)
             file=$(basename $download_url)
             curl -s -o ${region}.zip $download_url
             if [[ -f "${region}.zip" ]]; then
