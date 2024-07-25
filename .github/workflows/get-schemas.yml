@@ -15,7 +15,7 @@ env:
   URL_FORMAT: ${{ vars.URL_FORMAT || 'https://schema.cloudformation.${region}.amazonaws.com/CloudformationSchema.zip' }}
 
 jobs:
-  build-matrix:
+  get-schemas:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
