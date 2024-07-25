@@ -7,28 +7,39 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
   pull-requests: write
 
 env:
-  # REGIONS: vars.REGIONS
   URL_FORMAT: ${{ vars.URL_FORMAT || 'https://schema.cloudformation.${region}.amazonaws.com/CloudformationSchema.zip' }}
 
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.build-matrix.outputs.matrix }}
-    # strategy:
-    #   matrix:
-    #     regions: ${{ env.REGIONS }}
     steps:
-      - id: build-matrix
-        name: Interpolate URL per region
+      - id: checkout
+        uses: actions/checkout@v4
+      - id: download-schemas
+        name: Download per-region CloudFormation schemas
         run: |
           set -eux
-          for region in "us-east-1 us-east-2"; do
-            echo "${URL_FORMAT}"
+          regions=$(curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[].regions | keys[]')
+          for region in $regions; do
+            export region
+            download_url=$(cat "${URL_FORMAT}" | envsubst)
+            file=$(basename $download_url)
+            curl -s -o ${region}.zip $download_url
+            if [ -f "${region}.zip" ]; then
+              mkdir -p ./schemas/${region}
+              unzip -o ${region}.zip -d ./schemas/${region} && rm -f ./schemas/${region}/${file}
+            fi
           done
+          unset region
+      - id: commit
+        name: Commit changes
+        run: |
+          git add .
+          git commit -m "Update CloudFormation schemas"
+          git push origin ${{ github.event.repository.default_branch }}
 ...
