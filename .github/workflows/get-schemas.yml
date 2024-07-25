@@ -28,9 +28,11 @@ jobs:
             export region
             echo "Current region: ${region}"
             download_url=$(echo "${URL_FORMAT}" | envsubst)
-            if [[ $download_url ?? 'cn' ]]; then
-              download_url=$(echo $download_url | sed 's/amazonaws.com/amazonaws.com.cn/')
-            fi
+            case $region in
+              cn-*)
+                download_url=$(echo $download_url | sed 's/.amazonaws.com/.amazonaws.com.cn/')
+                ;;
+            esac
             file=$(basename $download_url)
             curl -o ${region}.zip $download_url 2>&1 > /dev/null
             if [[ -f "./${region}.zip" ]]; then
