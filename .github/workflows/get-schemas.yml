@@ -32,12 +32,12 @@ jobs:
               cn-*)
                 download_url=$(echo $download_url | sed 's/.amazonaws.com/.amazonaws.com.cn/')
                 ;;
-              us-iso*)
+              *iso*)
                 continue
                 ;;
             esac
             file=$(basename $download_url)
-            curl -o ${region}.zip $download_url 2>&1 > /dev/null
+            curl -o ${region}.zip $download_url 2>&1 > /dev/null || true
             if [[ -f "./${region}.zip" ]]; then
               echo "Unzipping: ${region}.zip"
               mkdir -p ./schemas/${region}
