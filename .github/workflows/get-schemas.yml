@@ -28,7 +28,7 @@ jobs:
             export region
             download_url=$(echo "${URL_FORMAT}" | envsubst)
             file=$(basename $download_url)
-            curl -s -o ${region}.zip $download_url
+            curl -s -o ${region}.zip $download_url &> /dev/null
             if [[ -f "${region}.zip" ]]; then
               mkdir -p ./schemas/${region}
               unzip -q -o ${region}.zip -d ./schemas/${region} && rm -f ./schemas/${region}/${file}
