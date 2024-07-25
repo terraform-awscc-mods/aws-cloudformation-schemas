@@ -4,6 +4,8 @@ The Terraform AWSCC provider is dynamically built from the AWS CloudFormation sc
 
 This repository is a store for the schemas with a workflow to periodically download the compressed schemas for each region (since regions have different resource options) and extracts them into a directory structure that can be treated like an API.  The available schemas will then be used by the terraform-awscc-mods that are developed for input validation and documentation.
 
+The schemas update every 24 hours.
+
 ## Usage
 
 Query the schemas with the following:
