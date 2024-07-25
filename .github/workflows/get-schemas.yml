@@ -32,7 +32,7 @@ jobs:
               cn-*)
                 download_url=$(echo $download_url | sed 's/.amazonaws.com/.amazonaws.com.cn/')
                 ;;
-              us-iso-*)
+              us-iso*)
                 continue
                 ;;
             esac
