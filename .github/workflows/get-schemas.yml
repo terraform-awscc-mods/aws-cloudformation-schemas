@@ -23,14 +23,13 @@ jobs:
       - id: download-schemas
         name: Download per-region CloudFormation schemas
         run: |
-          set -eux
           regions=$(curl -s https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json | jq -r '.partitions[].regions | keys[]')
           for region in $regions; do
             export region
             download_url=$(cat "${URL_FORMAT}" | envsubst)
             file=$(basename $download_url)
             curl -s -o ${region}.zip $download_url
-            if [ -f "${region}.zip" ]; then
+            if [[ -f "${region}.zip" ]]; then
               mkdir -p ./schemas/${region}
               unzip -o ${region}.zip -d ./schemas/${region} && rm -f ./schemas/${region}/${file}
             fi
