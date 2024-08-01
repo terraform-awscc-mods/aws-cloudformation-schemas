@@ -31,9 +31,32 @@
         },
         "S3Configuration" : {
           "$ref" : "#/definitions/S3DataSourceConfiguration"
+        },
+        "ConfluenceConfiguration" : {
+          "$ref" : "#/definitions/ConfluenceDataSourceConfiguration"
+        },
+        "SalesforceConfiguration" : {
+          "$ref" : "#/definitions/SalesforceDataSourceConfiguration"
+        },
+        "SharePointConfiguration" : {
+          "$ref" : "#/definitions/SharePointDataSourceConfiguration"
+        },
+        "WebConfiguration" : {
+          "$ref" : "#/definitions/WebDataSourceConfiguration"
         }
       },
-      "required" : [ "Type", "S3Configuration" ],
+      "required" : [ "Type" ],
+      "oneOf" : [ {
+        "required" : [ "S3Configuration" ]
+      }, {
+        "required" : [ "ConfluenceConfiguration" ]
+      }, {
+        "required" : [ "SalesforceConfiguration" ]
+      }, {
+        "required" : [ "SharePointConfiguration" ]
+      }, {
+        "required" : [ "WebConfiguration" ]
+      } ],
       "additionalProperties" : false
     },
     "DataSourceStatus" : {
@@ -44,7 +67,7 @@
     "DataSourceType" : {
       "type" : "string",
       "description" : "The type of the data source location.",
-      "enum" : [ "S3" ]
+      "enum" : [ "S3", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "WEB" ]
     },
     "DataDeletionPolicy" : {
       "type" : "string",
@@ -72,7 +95,7 @@
     },
     "S3DataSourceConfiguration" : {
       "type" : "object",
-      "description" : "Contains information about the S3 configuration of the data source.",
+      "description" : "The configuration information to connect to Amazon S3 as your data source.",
       "properties" : {
         "BucketArn" : {
           "type" : "string",
@@ -105,6 +128,62 @@
       "required" : [ "BucketArn" ],
       "additionalProperties" : false
     },
+    "ConfluenceDataSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration information to connect to Confluence as your data source.",
+      "properties" : {
+        "SourceConfiguration" : {
+          "$ref" : "#/definitions/ConfluenceSourceConfiguration"
+        },
+        "CrawlerConfiguration" : {
+          "$ref" : "#/definitions/ConfluenceCrawlerConfiguration"
+        }
+      },
+      "required" : [ "SourceConfiguration" ],
+      "additionalProperties" : false
+    },
+    "SalesforceDataSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration information to connect to Salesforce as your data source.",
+      "properties" : {
+        "SourceConfiguration" : {
+          "$ref" : "#/definitions/SalesforceSourceConfiguration"
+        },
+        "CrawlerConfiguration" : {
+          "$ref" : "#/definitions/SalesforceCrawlerConfiguration"
+        }
+      },
+      "required" : [ "SourceConfiguration" ],
+      "additionalProperties" : false
+    },
+    "SharePointDataSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration information to connect to SharePoint as your data source.",
+      "properties" : {
+        "SourceConfiguration" : {
+          "$ref" : "#/definitions/SharePointSourceConfiguration"
+        },
+        "CrawlerConfiguration" : {
+          "$ref" : "#/definitions/SharePointCrawlerConfiguration"
+        }
+      },
+      "required" : [ "SourceConfiguration" ],
+      "additionalProperties" : false
+    },
+    "WebDataSourceConfiguration" : {
+      "type" : "object",
+      "description" : "Configures a web data source location.",
+      "properties" : {
+        "SourceConfiguration" : {
+          "$ref" : "#/definitions/WebSourceConfiguration"
+        },
+        "CrawlerConfiguration" : {
+          "$ref" : "#/definitions/WebCrawlerConfiguration"
+        }
+      },
+      "required" : [ "SourceConfiguration" ],
+      "additionalProperties" : false
+    },
     "ServerSideEncryptionConfiguration" : {
       "type" : "object",
       "description" : "Contains details about the server-side encryption for the data source.",
@@ -128,6 +207,287 @@
         }
       },
       "additionalProperties" : false
+    },
+    "ConfluenceSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The endpoint information to connect to your Confluence data source.",
+      "properties" : {
+        "HostUrl" : {
+          "type" : "string",
+          "maxLength" : 2048,
+          "minLength" : 1,
+          "pattern" : "^https://[A-Za-z0-9][^\\s]*$",
+          "description" : "The Confluence host URL or instance URL."
+        },
+        "HostType" : {
+          "type" : "string",
+          "description" : "The supported host type, whether online/cloud or server/on-premises.",
+          "enum" : [ "SAAS" ]
+        },
+        "AuthType" : {
+          "type" : "string",
+          "description" : "The supported authentication type to authenticate and connect to your Confluence instance.",
+          "enum" : [ "BASIC", "OAUTH2_CLIENT_CREDENTIALS" ]
+        },
+        "CredentialsSecretArn" : {
+          "type" : "string",
+          "description" : "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.",
+          "pattern" : "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"
+        }
+      },
+      "required" : [ "HostUrl", "HostType", "AuthType", "CredentialsSecretArn" ],
+      "additionalProperties" : false
+    },
+    "ConfluenceCrawlerConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration of the Confluence content. For example, configuring specific types of Confluence content.",
+      "properties" : {
+        "FilterConfiguration" : {
+          "$ref" : "#/definitions/CrawlFilterConfiguration"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "SalesforceSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The endpoint information to connect to your Salesforce data source.",
+      "properties" : {
+        "HostUrl" : {
+          "type" : "string",
+          "maxLength" : 2048,
+          "minLength" : 1,
+          "pattern" : "^https://[A-Za-z0-9][^\\s]*$",
+          "description" : "The Salesforce host URL or instance URL."
+        },
+        "AuthType" : {
+          "type" : "string",
+          "description" : "The supported authentication type to authenticate and connect to your Salesforce instance.",
+          "enum" : [ "OAUTH2_CLIENT_CREDENTIALS" ]
+        },
+        "CredentialsSecretArn" : {
+          "type" : "string",
+          "description" : "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.",
+          "pattern" : "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"
+        }
+      },
+      "required" : [ "HostUrl", "AuthType", "CredentialsSecretArn" ],
+      "additionalProperties" : false
+    },
+    "SalesforceCrawlerConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.",
+      "properties" : {
+        "FilterConfiguration" : {
+          "$ref" : "#/definitions/CrawlFilterConfiguration"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "SharePointSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The endpoint information to connect to your SharePoint data source.",
+      "properties" : {
+        "SiteUrls" : {
+          "type" : "array",
+          "description" : "A list of one or more SharePoint site URLs.",
+          "items" : {
+            "type" : "string",
+            "pattern" : "^https://[A-Za-z0-9][^\\s]*$",
+            "description" : "A forced-HTTPS web url."
+          },
+          "maxItems" : 100,
+          "minItems" : 1,
+          "insertionOrder" : false
+        },
+        "HostType" : {
+          "type" : "string",
+          "description" : "The supported host type, whether online/cloud or server/on-premises.",
+          "enum" : [ "ONLINE" ]
+        },
+        "AuthType" : {
+          "type" : "string",
+          "description" : "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
+          "enum" : [ "OAUTH2_CLIENT_CREDENTIALS" ]
+        },
+        "CredentialsSecretArn" : {
+          "type" : "string",
+          "description" : "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.",
+          "pattern" : "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"
+        },
+        "TenantId" : {
+          "type" : "string",
+          "description" : "The identifier of your Microsoft 365 tenant.",
+          "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "Domain" : {
+          "type" : "string",
+          "description" : "The domain of your SharePoint instance or site URL/URLs.",
+          "maxLength" : 50,
+          "minLength" : 1
+        }
+      },
+      "required" : [ "Domain", "SiteUrls", "HostType", "AuthType", "CredentialsSecretArn" ],
+      "additionalProperties" : false
+    },
+    "SharePointCrawlerConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.",
+      "properties" : {
+        "FilterConfiguration" : {
+          "$ref" : "#/definitions/CrawlFilterConfiguration"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "WebSourceConfiguration" : {
+      "type" : "object",
+      "description" : "A web source configuration.",
+      "properties" : {
+        "urlConfiguration" : {
+          "$ref" : "#/definitions/UrlConfiguration"
+        }
+      },
+      "required" : [ "urlConfiguration" ],
+      "additionalProperties" : false
+    },
+    "UrlConfiguration" : {
+      "type" : "object",
+      "description" : "A url configuration.",
+      "properties" : {
+        "seedUrls" : {
+          "$ref" : "#/definitions/SeedUrls"
+        }
+      },
+      "required" : [ "seedUrls" ],
+      "additionalProperties" : false
+    },
+    "SeedUrl" : {
+      "type" : "object",
+      "description" : "A seed url object.",
+      "properties" : {
+        "url" : {
+          "type" : "string",
+          "pattern" : "^https?://[A-Za-z0-9][^\\s]*$",
+          "description" : "A web url."
+        }
+      },
+      "required" : [ "url" ],
+      "additionalProperties" : false
+    },
+    "SeedUrls" : {
+      "type" : "array",
+      "description" : "A list of web urls.",
+      "items" : {
+        "$ref" : "#/definitions/SeedUrl"
+      },
+      "maxItems" : 100,
+      "minItems" : 1,
+      "insertionOrder" : false
+    },
+    "WebCrawlerConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for the web crawler.",
+      "properties" : {
+        "crawlerLimits" : {
+          "$ref" : "#/definitions/WebCrawlerLimits"
+        },
+        "inclusionFilters" : {
+          "$ref" : "#/definitions/FilterList"
+        },
+        "exclusionFilters" : {
+          "$ref" : "#/definitions/FilterList"
+        },
+        "scope" : {
+          "$ref" : "#/definitions/WebScopeType"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "WebCrawlerLimits" : {
+      "type" : "object",
+      "description" : "Limit settings for the web crawler.",
+      "properties" : {
+        "rateLimit" : {
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 300,
+          "description" : "Rate of web URLs retrieved per minute."
+        }
+      },
+      "additionalProperties" : false
+    },
+    "WebScopeType" : {
+      "type" : "string",
+      "description" : "The scope that a web crawl job will be restricted to.",
+      "enum" : [ "HOST_ONLY", "SUBDOMAINS" ]
+    },
+    "CrawlFilterConfiguration" : {
+      "type" : "object",
+      "description" : "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+      "properties" : {
+        "Type" : {
+          "type" : "string",
+          "description" : "The crawl filter type.",
+          "enum" : [ "PATTERN" ]
+        },
+        "PatternObjectFilter" : {
+          "$ref" : "#/definitions/PatternObjectFilterConfiguration"
+        }
+      },
+      "required" : [ "Type" ],
+      "additionalProperties" : false
+    },
+    "PatternObjectFilterConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+      "properties" : {
+        "Filters" : {
+          "$ref" : "#/definitions/PatternObjectFilterList"
+        }
+      },
+      "required" : [ "Filters" ],
+      "additionalProperties" : false
+    },
+    "PatternObjectFilterList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/PatternObjectFilter"
+      },
+      "maxItems" : 25,
+      "minItems" : 1,
+      "description" : "Contains information"
+    },
+    "PatternObjectFilter" : {
+      "type" : "object",
+      "description" : "The specific filters applied to your data source content. You can filter out or include certain content.",
+      "properties" : {
+        "ObjectType" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "minLength" : 1,
+          "description" : "The supported object type or content type of the data source."
+        },
+        "InclusionFilters" : {
+          "$ref" : "#/definitions/FilterList"
+        },
+        "ExclusionFilters" : {
+          "$ref" : "#/definitions/FilterList"
+        }
+      },
+      "required" : [ "ObjectType" ],
+      "additionalProperties" : false
+    },
+    "FilterList" : {
+      "type" : "array",
+      "description" : "A set of regular expression filter patterns for a type of object.",
+      "items" : {
+        "type" : "string",
+        "maxLength" : 1000,
+        "description" : "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn’t crawled."
+      },
+      "maxItems" : 25,
+      "minItems" : 1,
+      "insertionOrder" : false
     }
   },
   "properties" : {
