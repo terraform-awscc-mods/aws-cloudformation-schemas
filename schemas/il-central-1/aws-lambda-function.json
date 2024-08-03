@@ -11,10 +11,10 @@
       "permissions" : [ "lambda:GetFunction", "lambda:GetFunctionCodeSigningConfig" ]
     },
     "create" : {
-      "permissions" : [ "lambda:CreateFunction", "lambda:GetFunction", "lambda:PutFunctionConcurrency", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "elasticfilesystem:DescribeMountTargets", "kms:CreateGrant", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "lambda:GetCodeSigningConfig", "lambda:GetFunctionCodeSigningConfig", "lambda:GetLayerVersion", "lambda:GetRuntimeManagementConfig", "lambda:PutRuntimeManagementConfig", "lambda:TagResource", "lambda:GetPolicy", "lambda:AddPermission", "lambda:RemovePermission", "lambda:GetResourcePolicy", "lambda:PutResourcePolicy" ]
+      "permissions" : [ "lambda:CreateFunction", "lambda:GetFunction", "lambda:PutFunctionConcurrency", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "elasticfilesystem:DescribeMountTargets", "kms:CreateGrant", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "lambda:GetCodeSigningConfig", "lambda:GetFunctionCodeSigningConfig", "lambda:GetLayerVersion", "lambda:GetRuntimeManagementConfig", "lambda:PutRuntimeManagementConfig", "lambda:TagResource" ]
     },
     "update" : {
-      "permissions" : [ "lambda:DeleteFunctionConcurrency", "lambda:GetFunction", "lambda:PutFunctionConcurrency", "lambda:ListTags", "lambda:TagResource", "lambda:UntagResource", "lambda:UpdateFunctionConfiguration", "lambda:UpdateFunctionCode", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "elasticfilesystem:DescribeMountTargets", "kms:CreateGrant", "kms:Decrypt", "kms:GenerateDataKey", "lambda:GetRuntimeManagementConfig", "lambda:PutRuntimeManagementConfig", "lambda:PutFunctionCodeSigningConfig", "lambda:DeleteFunctionCodeSigningConfig", "lambda:GetCodeSigningConfig", "lambda:GetFunctionCodeSigningConfig", "lambda:GetPolicy", "lambda:AddPermission", "lambda:RemovePermission", "lambda:GetResourcePolicy", "lambda:PutResourcePolicy", "lambda:DeleteResourcePolicy" ]
+      "permissions" : [ "lambda:DeleteFunctionConcurrency", "lambda:GetFunction", "lambda:PutFunctionConcurrency", "lambda:ListTags", "lambda:TagResource", "lambda:UntagResource", "lambda:UpdateFunctionConfiguration", "lambda:UpdateFunctionCode", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "elasticfilesystem:DescribeMountTargets", "kms:CreateGrant", "kms:Decrypt", "kms:GenerateDataKey", "lambda:GetRuntimeManagementConfig", "lambda:PutRuntimeManagementConfig", "lambda:PutFunctionCodeSigningConfig", "lambda:DeleteFunctionCodeSigningConfig", "lambda:GetCodeSigningConfig", "lambda:GetFunctionCodeSigningConfig" ]
     },
     "list" : {
       "permissions" : [ "lambda:ListFunctions" ]
@@ -337,7 +337,7 @@
       "type" : "string"
     },
     "Runtime" : {
-      "description" : "The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive.\n The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy).",
+      "description" : "The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in an error if you're deploying a function using a container image.\n The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing functions shortly after each runtime is deprecated. For more information, see [Runtime use after deprecation](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels).\n For a list of all currently supported runtimes, see [Supported runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported).",
       "type" : "string"
     },
     "KmsKeyArn" : {

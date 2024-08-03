@@ -146,6 +146,9 @@
         "CodeEditorAppSettings" : {
           "$ref" : "#/definitions/CodeEditorAppSettings"
         },
+        "StudioWebPortalSettings" : {
+          "$ref" : "#/definitions/StudioWebPortalSettings"
+        },
         "DefaultLandingUri" : {
           "type" : "string",
           "description" : "Defines which Amazon SageMaker application users are directed to by default.",
@@ -252,6 +255,16 @@
       "properties" : {
         "DefaultResourceSpec" : {
           "$ref" : "#/definitions/ResourceSpec"
+        },
+        "LifecycleConfigArns" : {
+          "type" : "array",
+          "description" : "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+          "uniqueItems" : false,
+          "minItems" : 0,
+          "maxItems" : 30,
+          "items" : {
+            "$ref" : "#/definitions/StudioLifecycleConfigArn"
+          }
         }
       }
     },
@@ -303,6 +316,16 @@
         "DefaultResourceSpec" : {
           "$ref" : "#/definitions/ResourceSpec",
           "description" : "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app."
+        },
+        "LifecycleConfigArns" : {
+          "type" : "array",
+          "description" : "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+          "uniqueItems" : false,
+          "minItems" : 0,
+          "maxItems" : 30,
+          "items" : {
+            "$ref" : "#/definitions/StudioLifecycleConfigArn"
+          }
         }
       }
     },
@@ -656,6 +679,41 @@
           "enum" : [ "R_STUDIO_ADMIN", "R_STUDIO_USER" ]
         }
       }
+    },
+    "StudioWebPortalSettings" : {
+      "type" : "object",
+      "description" : "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+      "additionalProperties" : false,
+      "properties" : {
+        "HiddenMlTools" : {
+          "type" : "array",
+          "description" : "The machine learning tools that are hidden from the Studio left navigation pane.",
+          "insertionOrder" : false,
+          "uniqueItems" : true,
+          "minItems" : 0,
+          "items" : {
+            "$ref" : "#/definitions/MlTools"
+          }
+        },
+        "HiddenAppTypes" : {
+          "type" : "array",
+          "description" : "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+          "insertionOrder" : false,
+          "uniqueItems" : true,
+          "minItems" : 0,
+          "items" : {
+            "$ref" : "#/definitions/AppType"
+          }
+        }
+      }
+    },
+    "MlTools" : {
+      "type" : "string",
+      "enum" : [ "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects" ]
+    },
+    "AppType" : {
+      "type" : "string",
+      "enum" : [ "JupyterServer", "TensorBoard", "RStudioServerPro", "JupyterLab", "CodeEditor", "DetailedProfiler", "Canvas" ]
     }
   },
   "required" : [ "AuthMode", "DefaultUserSettings", "DomainName", "SubnetIds", "VpcId" ],
