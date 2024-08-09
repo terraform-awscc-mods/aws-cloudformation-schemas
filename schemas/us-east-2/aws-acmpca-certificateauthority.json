@@ -129,9 +129,6 @@
         "RetainExpiredCertificates" : {
           "type" : "boolean"
         },
-        "MaxPartitionSizeMB" : {
-          "type" : "integer"
-        },
         "PartitioningEnabled" : {
           "type" : "boolean"
         },
