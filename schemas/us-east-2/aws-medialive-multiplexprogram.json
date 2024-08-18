@@ -220,7 +220,6 @@
   },
   "additionalProperties" : false,
   "primaryIdentifier" : [ "/properties/ProgramName", "/properties/MultiplexId" ],
-  "readOnlyProperties" : [ "/properties/ChannelId" ],
   "writeOnlyProperties" : [ "/properties/PreferredChannelPipeline" ],
   "createOnlyProperties" : [ "/properties/ProgramName", "/properties/MultiplexId" ],
   "handlers" : {

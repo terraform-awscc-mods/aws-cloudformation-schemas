@@ -126,8 +126,7 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "medialive:CreateTags", "medialive:DeleteTags" ]
+    "tagProperty" : "/properties/Tags"
   },
   "additionalProperties" : false,
   "required" : [ "AvailabilityZones", "MultiplexSettings", "Name" ],
