@@ -333,7 +333,7 @@
     },
     "ServiceManagedFleetOperatingSystemFamily" : {
       "type" : "string",
-      "enum" : [ "LINUX" ]
+      "enum" : [ "LINUX", "WINDOWS" ]
     },
     "Tag" : {
       "description" : "A key-value pair to associate with a resource.",
@@ -435,7 +435,7 @@
       "uniqueItems" : true
     }
   },
-  "required" : [ "Configuration", "DisplayName", "MaxWorkerCount", "RoleArn" ],
+  "required" : [ "Configuration", "DisplayName", "FarmId", "MaxWorkerCount", "RoleArn" ],
   "readOnlyProperties" : [ "/properties/Capabilities", "/properties/FleetId", "/properties/Status", "/properties/WorkerCount", "/properties/Arn" ],
   "createOnlyProperties" : [ "/properties/FarmId" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
