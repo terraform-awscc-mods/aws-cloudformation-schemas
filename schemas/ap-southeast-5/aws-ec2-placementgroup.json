@@ -1,0 +1,16 @@
+{
+  "typeName" : "AWS::EC2::PlacementGroup",
+  "description" : "Resource Type definition for AWS::EC2::PlacementGroup",
+  "additionalProperties" : false,
+  "properties" : {
+    "Strategy" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    }
+  },
+  "createOnlyProperties" : [ "/properties/Strategy" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

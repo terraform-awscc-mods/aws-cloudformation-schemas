@@ -7,7 +7,8 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "kafka:UntagResource", "kafka:ListTagsForResource", "kafka:TagResource" ]
   },
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-msk-replicator.git",
   "properties" : {
@@ -129,6 +130,10 @@
         "StartingPosition" : {
           "description" : "Configuration for specifying the position in the topics to start replicating from.",
           "$ref" : "#/definitions/ReplicationStartingPosition"
+        },
+        "TopicNameConfiguration" : {
+          "description" : "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
+          "$ref" : "#/definitions/ReplicationTopicNameConfiguration"
         }
       },
       "required" : [ "TopicsToReplicate" ]
@@ -148,6 +153,22 @@
       "description" : "The type of replication starting position.",
       "type" : "string",
       "enum" : [ "LATEST", "EARLIEST" ]
+    },
+    "ReplicationTopicNameConfiguration" : {
+      "description" : "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "$ref" : "#/definitions/ReplicationTopicNameConfigurationType"
+        }
+      },
+      "required" : [ ]
+    },
+    "ReplicationTopicNameConfigurationType" : {
+      "description" : "The type of replicated topic name.",
+      "type" : "string",
+      "enum" : [ "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS", "IDENTICAL" ]
     },
     "ConsumerGroupReplication" : {
       "description" : "Configuration relating to consumer group replication.",
@@ -284,7 +305,7 @@
   "primaryIdentifier" : [ "/properties/ReplicatorArn" ],
   "additionalIdentifiers" : [ [ "/properties/ReplicatorName" ] ],
   "readOnlyProperties" : [ "/properties/ReplicatorArn" ],
-  "createOnlyProperties" : [ "/properties/ReplicatorName", "/properties/Description", "/properties/KafkaClusters", "/properties/ServiceExecutionRoleArn", "/properties/ReplicationInfoList/-/TopicReplication/StartingPosition/Type" ],
+  "createOnlyProperties" : [ "/properties/ReplicatorName", "/properties/Description", "/properties/KafkaClusters", "/properties/ServiceExecutionRoleArn" ],
   "handlers" : {
     "create" : {
       "permissions" : [ "ec2:CreateNetworkInterface", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "iam:CreateServiceLinkedRole", "iam:PassRole", "kafka:CreateReplicator", "kafka:CreateReplicatorReference", "kafka:DescribeClusterV2", "kafka:DescribeReplicator", "kafka:GetBootstrapBrokers", "kafka:ListTagsForResource", "kafka:TagResource" ]

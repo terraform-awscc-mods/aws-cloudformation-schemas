@@ -18,7 +18,7 @@
     },
     "ComputeType" : {
       "type" : "string",
-      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_2XLARGE" ]
+      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE" ]
     },
     "OverflowBehavior" : {
       "type" : "string",
