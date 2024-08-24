@@ -653,7 +653,6 @@
   "additionalProperties" : false,
   "primaryIdentifier" : [ "/properties/DetectorModelName" ],
   "createOnlyProperties" : [ "/properties/DetectorModelName", "/properties/Key" ],
-  "taggable" : true,
   "handlers" : {
     "create" : {
       "permissions" : [ "iotevents:CreateDetectorModel", "iotevents:UpdateInputRouting", "iotevents:DescribeDetectorModel", "iotevents:ListTagsForResource", "iotevents:TagResource", "iam:PassRole" ]
@@ -670,5 +669,13 @@
     "list" : {
       "permissions" : [ "iotevents:ListDetectorModels" ]
     }
+  },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotevents:UntagResource", "iotevents:TagResource", "iotevents:ListTagsForResource" ]
   }
 }

@@ -514,5 +514,13 @@
     "list" : {
       "permissions" : [ "iotevents:ListAlarmModels" ]
     }
+  },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotevents:UntagResource", "iotevents:TagResource", "iotevents:ListTagsForResource" ]
   }
 }

@@ -86,7 +86,6 @@
   "required" : [ "InputDefinition" ],
   "primaryIdentifier" : [ "/properties/InputName" ],
   "createOnlyProperties" : [ "/properties/InputName" ],
-  "taggable" : true,
   "handlers" : {
     "create" : {
       "permissions" : [ "iotevents:CreateInput", "iotevents:TagResource", "iotevents:DescribeInput", "iotevents:ListTagsForResource" ]
@@ -103,5 +102,13 @@
     "list" : {
       "permissions" : [ "iotevents:ListInputs" ]
     }
+  },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotevents:UntagResource", "iotevents:TagResource", "iotevents:ListTagsForResource" ]
   }
 }
