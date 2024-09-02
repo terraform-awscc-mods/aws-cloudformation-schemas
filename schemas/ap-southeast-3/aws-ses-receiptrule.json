@@ -76,6 +76,9 @@
         "BucketName" : {
           "type" : "string"
         },
+        "IamRoleArn" : {
+          "type" : "string"
+        },
         "KmsKeyArn" : {
           "type" : "string"
         },
