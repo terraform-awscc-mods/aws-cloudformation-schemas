@@ -72,8 +72,8 @@
   "primaryIdentifier" : [ "/properties/Id", "/properties/ClusterId" ],
   "tagging" : {
     "taggable" : true,
-    "tagOnCreate" : false,
-    "tagUpdatable" : false,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "medialive:CreateTags", "medialive:DeleteTags" ]
