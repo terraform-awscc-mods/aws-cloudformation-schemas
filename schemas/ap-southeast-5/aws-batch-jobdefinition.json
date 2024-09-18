@@ -708,6 +708,9 @@
         "EcsProperties" : {
           "$ref" : "#/definitions/EcsProperties"
         },
+        "EksProperties" : {
+          "$ref" : "#/definitions/EksProperties"
+        },
         "InstanceTypes" : {
           "type" : "array",
           "uniqueItems" : false,
