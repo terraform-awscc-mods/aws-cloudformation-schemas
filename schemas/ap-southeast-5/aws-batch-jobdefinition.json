@@ -435,6 +435,14 @@
             "$ref" : "#/definitions/EksVolume"
           }
         },
+        "ImagePullSecrets" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "insertionOrder" : false,
+          "items" : {
+            "$ref" : "#/definitions/ImagePullSecret"
+          }
+        },
         "Metadata" : {
           "$ref" : "#/definitions/EksMetadata"
         },
@@ -547,6 +555,9 @@
         "Privileged" : {
           "type" : "boolean"
         },
+        "AllowPrivilegeEscalation" : {
+          "type" : "boolean"
+        },
         "ReadOnlyRootFilesystem" : {
           "type" : "boolean"
         },
@@ -635,6 +646,15 @@
               "type" : "string"
             }
           }
+        }
+      }
+    },
+    "ImagePullSecret" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Name" : {
+          "type" : "string"
         }
       }
     },

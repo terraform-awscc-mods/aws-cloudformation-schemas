@@ -216,12 +216,7 @@
     }
   },
   "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "network-firewall:TagResource", "network-firewall:UntagResource", "network-firewall:ListTagsForResource" ]
+    "taggable" : true
   },
   "required" : [ "TLSInspectionConfigurationName", "TLSInspectionConfiguration" ],
   "readOnlyProperties" : [ "/properties/TLSInspectionConfigurationArn", "/properties/TLSInspectionConfigurationId" ],
