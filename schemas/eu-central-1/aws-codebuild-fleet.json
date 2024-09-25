@@ -45,6 +45,9 @@
     "ImageId" : {
       "type" : "string",
       "pattern" : "^((aws/codebuild/[A-Za-z-]+:[0-9]+(-[0-9._]+)?)|ami-[a-z0-9]{1,1020})$"
+    },
+    "ScalingConfiguration" : {
+      "$ref" : "#/definitions/ScalingConfigurationInput"
     }
   },
   "definitions" : {
@@ -91,6 +94,39 @@
           }
         }
       }
+    },
+    "ScalingConfigurationInput" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MaxCapacity" : {
+          "type" : "integer",
+          "minimum" : 1
+        },
+        "ScalingType" : {
+          "type" : "string",
+          "enum" : [ "TARGET_TRACKING_SCALING" ]
+        },
+        "TargetTrackingScalingConfigs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/TargetTrackingScalingConfiguration"
+          }
+        }
+      }
+    },
+    "TargetTrackingScalingConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MetricType" : {
+          "type" : "string",
+          "enum" : [ "FLEET_UTILIZATION_RATE" ]
+        },
+        "TargetValue" : {
+          "type" : "number"
+        }
+      }
     }
   },
   "primaryIdentifier" : [ "/properties/Arn" ],
@@ -100,7 +136,8 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "sqs:UntagQueue", "sqs:TagQueue", "sqs:ListQueueTags" ]
   },
   "handlers" : {
     "create" : {
