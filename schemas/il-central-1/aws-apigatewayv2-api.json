@@ -161,7 +161,7 @@
   "createOnlyProperties" : [ "/properties/ProtocolType" ],
   "primaryIdentifier" : [ "/properties/ApiId" ],
   "readOnlyProperties" : [ "/properties/ApiId", "/properties/ApiEndpoint" ],
-  "writeOnlyProperties" : [ "/properties/ApiKeySelectionExpression", "/properties/BasePath", "/properties/Body", "/properties/BodyS3Location", "/properties/BodyS3Location/Etag", "/properties/BodyS3Location/Bucket", "/properties/BodyS3Location/Version", "/properties/BodyS3Location/Key", "/properties/CredentialsArn", "/properties/FailOnWarnings", "/properties/RouteKey", "/properties/Target", "/properties/DisableSchemaValidation" ],
+  "writeOnlyProperties" : [ "/properties/BasePath", "/properties/Body", "/properties/BodyS3Location", "/properties/BodyS3Location/Etag", "/properties/BodyS3Location/Bucket", "/properties/BodyS3Location/Version", "/properties/BodyS3Location/Key", "/properties/CredentialsArn", "/properties/FailOnWarnings", "/properties/RouteKey", "/properties/Target", "/properties/DisableSchemaValidation" ],
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
