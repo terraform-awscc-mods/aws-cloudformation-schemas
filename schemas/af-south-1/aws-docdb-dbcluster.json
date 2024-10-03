@@ -27,9 +27,6 @@
     "Endpoint" : {
       "type" : "string"
     },
-    "RotateMasterUserPassword" : {
-      "type" : "boolean"
-    },
     "VpcSecurityGroupIds" : {
       "type" : "array",
       "uniqueItems" : false,
@@ -69,9 +66,6 @@
     "PreferredMaintenanceWindow" : {
       "type" : "string"
     },
-    "MasterUserSecretKmsKeyId" : {
-      "type" : "string"
-    },
     "DBSubnetGroupName" : {
       "type" : "string"
     },
@@ -79,9 +73,6 @@
       "type" : "boolean"
     },
     "UseLatestRestorableTime" : {
-      "type" : "boolean"
-    },
-    "ManageMasterUserPassword" : {
       "type" : "boolean"
     },
     "MasterUserPassword" : {
@@ -128,7 +119,7 @@
       "required" : [ "Value", "Key" ]
     }
   },
-  "createOnlyProperties" : [ "/properties/SnapshotIdentifier", "/properties/KmsKeyId", "/properties/MasterUsername", "/properties/SourceDBClusterIdentifier", "/properties/DBClusterIdentifier", "/properties/AvailabilityZones", "/properties/DBSubnetGroupName", "/properties/StorageEncrypted" ],
+  "createOnlyProperties" : [ "/properties/KmsKeyId", "/properties/SnapshotIdentifier", "/properties/MasterUsername", "/properties/SourceDBClusterIdentifier", "/properties/DBClusterIdentifier", "/properties/AvailabilityZones", "/properties/DBSubnetGroupName", "/properties/StorageEncrypted" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/ReadEndpoint", "/properties/Id", "/properties/Endpoint", "/properties/ClusterResourceId" ]
 }

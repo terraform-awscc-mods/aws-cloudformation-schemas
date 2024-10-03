@@ -524,7 +524,7 @@
     },
     "RateLimit" : {
       "type" : "integer",
-      "minimum" : 100,
+      "minimum" : 10,
       "maximum" : 2000000000
     },
     "EvaluationWindowSec" : {
@@ -1683,14 +1683,16 @@
   },
   "required" : [ "DefaultAction", "Scope", "VisibilityConfig" ],
   "primaryIdentifier" : [ "/properties/Name", "/properties/Id", "/properties/Scope" ],
-  "createOnlyProperties" : [ "/properties/Name", "/properties/Scope" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Scope", "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/Capacity", "/properties/Id", "/properties/LabelNamespace" ],
   "additionalProperties" : false,
   "tagging" : {
-    "cloudFormationSystemTags" : false,
-    "tagOnCreate" : false,
+    "cloudFormationSystemTags" : true,
+    "tagOnCreate" : true,
     "tagUpdatable" : false,
-    "taggable" : false
+    "taggable" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "wafv2:TagResource", "wafv2:UntagResource", "wafv2:ListTagsForResource" ]
   },
   "handlers" : {
     "create" : {
