@@ -6,6 +6,9 @@
     "ServiceToken" : {
       "type" : "string"
     },
+    "ServiceTimeout" : {
+      "type" : "integer"
+    },
     "Id" : {
       "type" : "string"
     }
