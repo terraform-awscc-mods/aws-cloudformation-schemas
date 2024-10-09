@@ -25,11 +25,7 @@
       "description" : ""
     }
   },
-  "tagging" : {
-    "taggable" : false,
-    "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags"
-  },
+  "taggable" : false,
   "required" : [ "Roles" ],
   "createOnlyProperties" : [ "/properties/InstanceProfileName", "/properties/Path" ],
   "primaryIdentifier" : [ "/properties/InstanceProfileName" ],
