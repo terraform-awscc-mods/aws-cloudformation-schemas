@@ -72,8 +72,7 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "config:TagResource", "config:UntagResource", "config:ListTagsForResource" ]
+    "tagProperty" : "/properties/Tags"
   },
   "createOnlyProperties" : [ "/properties/QueryName" ],
   "primaryIdentifier" : [ "/properties/QueryName" ],

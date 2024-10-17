@@ -165,7 +165,8 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "securitylake:TagResource", "securitylake:UntagResource", "securitylake:ListTagsForResource" ]
   },
   "required" : [ "AccessTypes", "DataLakeArn", "Sources", "SubscriberIdentity", "SubscriberName" ],
   "primaryIdentifier" : [ "/properties/SubscriberArn" ],
@@ -174,7 +175,7 @@
   "replacementStrategy" : "delete_then_create",
   "handlers" : {
     "create" : {
-      "permissions" : [ "securitylake:CreateSubscriber", "securitylake:CreateCustomLogSource", "securitylake:CreateDataLake", "securitylake:TagResource", "securitylake:GetSubscriber", "securitylake:ListTagsForResource", "iam:GetRole", "iam:GetRolePolicy", "iam:PutRolePolicy", "iam:CreateRole", "iam:CreateServiceLinkedRole", "glue:GetDatabase", "glue:GetTable", "lakeformation:RegisterResource", "lakeformation:GrantPermissions", "lakeformation:RevokePermissions", "lakeformation:ListPermissions", "ram:GetResourceShareAssociations", "ram:CreateResourceShare", "ram:UpdateResourceShare", "ram:GetResourceShares" ]
+      "permissions" : [ "securitylake:CreateSubscriber", "securitylake:CreateCustomLogSource", "securitylake:CreateDataLake", "securitylake:TagResource", "securitylake:GetSubscriber", "securitylake:ListSubscribers", "securitylake:ListTagsForResource", "iam:GetRole", "iam:GetRolePolicy", "iam:PutRolePolicy", "iam:CreateRole", "iam:CreateServiceLinkedRole", "glue:GetDatabase", "glue:GetTable", "lakeformation:RegisterResource", "lakeformation:GrantPermissions", "lakeformation:RevokePermissions", "lakeformation:ListPermissions", "ram:GetResourceShareAssociations", "ram:CreateResourceShare", "ram:UpdateResourceShare", "ram:GetResourceShares" ]
     },
     "read" : {
       "permissions" : [ "securitylake:GetSubscriber", "securitylake:ListTagsForResource" ]
