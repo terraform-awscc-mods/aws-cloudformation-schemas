@@ -1,148 +1,73 @@
 {
   "typeName" : "AWS::ApiGateway::Method",
-  "description" : "Resource Type definition for AWS::ApiGateway::Method",
-  "additionalProperties" : false,
-  "properties" : {
-    "Integration" : {
-      "$ref" : "#/definitions/Integration"
-    },
-    "OperationName" : {
-      "type" : "string"
-    },
-    "RequestModels" : {
-      "type" : "object",
-      "patternProperties" : {
-        "[a-zA-Z0-9]+" : {
-          "type" : "string"
-        }
-      }
-    },
-    "RestApiId" : {
-      "type" : "string"
-    },
-    "AuthorizationScopes" : {
-      "type" : "array",
-      "uniqueItems" : true,
-      "items" : {
-        "type" : "string"
-      }
-    },
-    "RequestValidatorId" : {
-      "type" : "string"
-    },
-    "RequestParameters" : {
-      "type" : "object",
-      "patternProperties" : {
-        "[a-zA-Z0-9]+" : {
-          "type" : "boolean"
-        }
-      }
-    },
-    "MethodResponses" : {
-      "type" : "array",
-      "uniqueItems" : true,
-      "items" : {
-        "$ref" : "#/definitions/MethodResponse"
-      }
-    },
-    "AuthorizerId" : {
-      "type" : "string"
-    },
-    "ResourceId" : {
-      "type" : "string"
-    },
-    "ApiKeyRequired" : {
-      "type" : "boolean"
-    },
-    "Id" : {
-      "type" : "string"
-    },
-    "AuthorizationType" : {
-      "type" : "string"
-    },
-    "HttpMethod" : {
-      "type" : "string"
-    }
-  },
+  "description" : "The ``AWS::ApiGateway::Method`` resource creates API Gateway methods that define the parameters and body that clients must send in their requests.",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway.git",
   "definitions" : {
-    "MethodResponse" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "StatusCode" : {
-          "type" : "string"
-        },
-        "ResponseParameters" : {
-          "type" : "object",
-          "patternProperties" : {
-            "[a-zA-Z0-9]+" : {
-              "type" : "boolean"
-            }
-          }
-        },
-        "ResponseModels" : {
-          "type" : "object",
-          "patternProperties" : {
-            "[a-zA-Z0-9]+" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
-      "required" : [ "StatusCode" ]
-    },
     "Integration" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "CacheNamespace" : {
-          "type" : "string"
-        },
-        "ConnectionType" : {
-          "type" : "string"
-        },
-        "IntegrationResponses" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/IntegrationResponse"
-          }
-        },
-        "IntegrationHttpMethod" : {
-          "type" : "string"
-        },
-        "Uri" : {
-          "type" : "string"
-        },
-        "PassthroughBehavior" : {
-          "type" : "string"
-        },
-        "RequestParameters" : {
-          "type" : "object",
-          "patternProperties" : {
-            "[a-zA-Z0-9]+" : {
-              "type" : "string"
-            }
-          }
-        },
-        "ConnectionId" : {
-          "type" : "string"
-        },
-        "Type" : {
-          "type" : "string"
-        },
         "CacheKeyParameters" : {
+          "description" : "",
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
             "type" : "string"
           }
         },
-        "ContentHandling" : {
+        "CacheNamespace" : {
+          "description" : "",
           "type" : "string"
         },
-        "RequestTemplates" : {
+        "ConnectionId" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "ConnectionType" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "INTERNET", "VPC_LINK" ]
+        },
+        "ContentHandling" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "CONVERT_TO_BINARY", "CONVERT_TO_TEXT" ]
+        },
+        "Credentials" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "IntegrationHttpMethod" : {
+          "description" : "",
+          "type" : "string"
+        },
+        "IntegrationResponses" : {
+          "description" : "",
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/IntegrationResponse"
+          }
+        },
+        "PassthroughBehavior" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "WHEN_NO_MATCH", "WHEN_NO_TEMPLATES", "NEVER" ]
+        },
+        "RequestParameters" : {
+          "description" : "",
           "type" : "object",
+          "additionalProperties" : false,
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "RequestTemplates" : {
+          "description" : "",
+          "type" : "object",
+          "additionalProperties" : false,
           "patternProperties" : {
             "[a-zA-Z0-9]+" : {
               "type" : "string"
@@ -150,19 +75,78 @@
           }
         },
         "TimeoutInMillis" : {
-          "type" : "integer"
+          "description" : "",
+          "type" : "integer",
+          "minimum" : 50
         },
-        "Credentials" : {
+        "Type" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "AWS", "AWS_PROXY", "HTTP", "HTTP_PROXY", "MOCK" ]
+        },
+        "Uri" : {
+          "description" : "",
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "Type" ],
+      "description" : "``Integration`` is a property of the [AWS::ApiGateway::Method](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html) resource that specifies information about the target backend that a method calls."
+    },
+    "MethodResponse" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResponseModels" : {
+          "description" : "",
+          "type" : "object",
+          "additionalProperties" : false,
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "ResponseParameters" : {
+          "description" : "",
+          "type" : "object",
+          "additionalProperties" : false,
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : [ "boolean", "string" ]
+            }
+          }
+        },
+        "StatusCode" : {
+          "description" : "",
+          "type" : "string"
+        }
+      },
+      "required" : [ "StatusCode" ],
+      "description" : ""
     },
     "IntegrationResponse" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "ResponseTemplates" : {
+        "ContentHandling" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "CONVERT_TO_BINARY", "CONVERT_TO_TEXT" ]
+        },
+        "ResponseParameters" : {
+          "description" : "",
           "type" : "object",
+          "additionalProperties" : false,
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "ResponseTemplates" : {
+          "description" : "",
+          "type" : "object",
+          "additionalProperties" : false,
           "patternProperties" : {
             "[a-zA-Z0-9]+" : {
               "type" : "string"
@@ -170,27 +154,113 @@
           }
         },
         "SelectionPattern" : {
+          "description" : "",
           "type" : "string"
         },
         "StatusCode" : {
+          "description" : "",
           "type" : "string"
-        },
-        "ContentHandling" : {
-          "type" : "string"
-        },
-        "ResponseParameters" : {
-          "type" : "object",
-          "patternProperties" : {
-            "[a-zA-Z0-9]+" : {
-              "type" : "string"
-            }
-          }
         }
       },
-      "required" : [ "StatusCode" ]
+      "required" : [ "StatusCode" ],
+      "description" : "``IntegrationResponse`` is a property of the [Amazon API Gateway Method Integration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html) property type that specifies the response that API Gateway sends after a method's backend finishes processing a request."
     }
   },
-  "required" : [ "ResourceId", "RestApiId", "HttpMethod" ],
-  "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id" ]
+  "properties" : {
+    "ApiKeyRequired" : {
+      "description" : "",
+      "type" : "boolean"
+    },
+    "AuthorizationScopes" : {
+      "description" : "",
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "AuthorizationType" : {
+      "description" : "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
+      "type" : "string"
+    },
+    "AuthorizerId" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "HttpMethod" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "Integration" : {
+      "description" : "",
+      "$ref" : "#/definitions/Integration"
+    },
+    "MethodResponses" : {
+      "description" : "",
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/MethodResponse"
+      }
+    },
+    "OperationName" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "RequestModels" : {
+      "description" : "",
+      "type" : "object",
+      "additionalProperties" : false,
+      "patternProperties" : {
+        "[a-zA-Z0-9]+" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RequestParameters" : {
+      "description" : "",
+      "type" : "object",
+      "additionalProperties" : false,
+      "patternProperties" : {
+        "[a-zA-Z0-9]+" : {
+          "type" : [ "boolean", "string" ]
+        }
+      }
+    },
+    "RequestValidatorId" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "ResourceId" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "RestApiId" : {
+      "description" : "",
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "RestApiId", "ResourceId", "HttpMethod" ],
+  "primaryIdentifier" : [ "/properties/RestApiId", "/properties/ResourceId", "/properties/HttpMethod" ],
+  "createOnlyProperties" : [ "/properties/RestApiId", "/properties/ResourceId", "/properties/HttpMethod" ],
+  "tagging" : {
+    "taggable" : false,
+    "tagOnCreate" : false,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "apigateway:PUT", "apigateway:GET", "iam:PassRole" ]
+    },
+    "read" : {
+      "permissions" : [ "apigateway:GET" ]
+    },
+    "update" : {
+      "permissions" : [ "apigateway:GET", "apigateway:DELETE", "apigateway:PUT", "iam:PassRole" ]
+    },
+    "delete" : {
+      "permissions" : [ "apigateway:DELETE" ]
+    }
+  }
 }
