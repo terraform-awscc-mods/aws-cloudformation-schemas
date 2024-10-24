@@ -289,13 +289,13 @@
       "permissions" : [ "appsync:GetGraphqlApi", "appsync:GetGraphqlApiEnvironmentVariables", "appsync:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "appsync:GetGraphqlApi", "appsync:UpdateGraphqlApiRequest", "appsync:TagResource", "appsync:UntagResource" ]
+      "permissions" : [ "appsync:GetGraphqlApi", "appsync:UpdateGraphqlApi", "appsync:TagResource", "appsync:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "appsync:DeleteGraphqlApi" ]
     },
     "list" : {
-      "permissions" : [ "appsync:ListApplications" ]
+      "permissions" : [ "appsync:ListGraphqlApis" ]
     }
   }
 }

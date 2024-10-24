@@ -99,6 +99,12 @@
       "pattern" : "^[a-zA-Z0-9]+$",
       "description" : "The name of an existing InfluxDB parameter group."
     },
+    "Port" : {
+      "type" : "integer",
+      "minimum" : 1024,
+      "maximum" : 65535,
+      "description" : "The port number on which InfluxDB accepts connections."
+    },
     "LogDeliveryConfiguration" : {
       "type" : "object",
       "description" : "Configuration for sending logs to customer account from the InfluxDB instance.",
@@ -142,7 +148,7 @@
       "type" : "string",
       "minLength" : 3,
       "maxLength" : 40,
-      "pattern" : "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
+      "pattern" : "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
       "description" : "The unique name that is associated with the InfluxDB instance."
     },
     "AvailabilityZone" : {
