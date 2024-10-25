@@ -154,6 +154,10 @@
       "description" : "The Amazon Resource Name (ARN) of the cluster.",
       "type" : "string"
     },
+    "Engine" : {
+      "description" : "The engine type used by the cluster.",
+      "type" : "string"
+    },
     "EngineVersion" : {
       "description" : "The Redis engine version used by the cluster.",
       "type" : "string"
