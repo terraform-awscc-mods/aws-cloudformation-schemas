@@ -97,8 +97,7 @@
     "tagOnCreate" : true,
     "tagUpdatable" : false,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "Batch:TagResource", "Batch:UntagResource" ]
+    "tagProperty" : "/properties/Tags"
   },
   "required" : [ "ComputeEnvironmentOrder", "Priority" ],
   "primaryIdentifier" : [ "/properties/JobQueueArn" ],

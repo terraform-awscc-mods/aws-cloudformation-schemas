@@ -267,16 +267,23 @@
   "required" : [ "Type", "DestinationName" ],
   "readOnlyProperties" : [ "/properties/ThingName", "/properties/Id", "/properties/Arn" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "taggable" : true,
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotwireless:TagResource", "iotwireless:UntagResource", "iotwireless:ListTagsForResource" ]
+  },
   "handlers" : {
     "create" : {
-      "permissions" : [ "iotwireless:CreateWirelessDevice", "iotwireless:TagResource", "iotwireless:ListTagsForResource" ]
+      "permissions" : [ "iotwireless:CreateWirelessDevice", "iotwireless:TagResource" ]
     },
     "read" : {
       "permissions" : [ "iotwireless:GetWirelessDevice", "iotwireless:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "iotwireless:UpdateWirelessDevice", "iotwireless:UntagResource", "iotwireless:ListTagsForResource", "iotwireless:AssociateWirelessDeviceWithThing" ]
+      "permissions" : [ "iotwireless:UpdateWirelessDevice", "iotwireless:GetWirelessDevice", "iotwireless:AssociateWirelessDeviceWithThing", "iotwireless:TagResource", "iotwireless:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "iotwireless:DeleteWirelessDevice", "iotwireless:DisassociateWirelessDeviceFromThing" ]
