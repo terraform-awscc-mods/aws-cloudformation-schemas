@@ -18,7 +18,7 @@
     },
     "ComputeType" : {
       "type" : "string",
-      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE" ]
+      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "ATTRIBUTE_BASED_COMPUTE" ]
     },
     "OverflowBehavior" : {
       "type" : "string",
@@ -30,6 +30,9 @@
     },
     "FleetVpcConfig" : {
       "$ref" : "#/definitions/VpcConfig"
+    },
+    "FleetProxyConfiguration" : {
+      "$ref" : "#/definitions/ProxyConfiguration"
     },
     "Tags" : {
       "type" : "array",
@@ -48,6 +51,9 @@
     },
     "ScalingConfiguration" : {
       "$ref" : "#/definitions/ScalingConfigurationInput"
+    },
+    "ComputeConfiguration" : {
+      "$ref" : "#/definitions/ComputeConfiguration"
     }
   },
   "definitions" : {
@@ -95,6 +101,44 @@
         }
       }
     },
+    "ProxyConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DefaultBehavior" : {
+          "type" : "string",
+          "enum" : [ "ALLOW_ALL", "DENY_ALL" ]
+        },
+        "OrderedProxyRules" : {
+          "type" : "array",
+          "insertionOrder" : true,
+          "items" : {
+            "$ref" : "#/definitions/FleetProxyRule"
+          }
+        }
+      }
+    },
+    "FleetProxyRule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "type" : "string",
+          "enum" : [ "DOMAIN", "IP" ]
+        },
+        "Effect" : {
+          "type" : "string",
+          "enum" : [ "ALLOW", "DENY" ]
+        },
+        "Entities" : {
+          "type" : "array",
+          "insertionOrder" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
     "ScalingConfigurationInput" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -127,6 +171,25 @@
           "type" : "number"
         }
       }
+    },
+    "ComputeConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "vCpu" : {
+          "type" : "integer"
+        },
+        "memory" : {
+          "type" : "integer"
+        },
+        "disk" : {
+          "type" : "integer"
+        },
+        "machineType" : {
+          "type" : "string",
+          "enum" : [ "GENERAL", "NVME" ]
+        }
+      }
     }
   },
   "primaryIdentifier" : [ "/properties/Arn" ],
@@ -136,8 +199,7 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "sqs:UntagQueue", "sqs:TagQueue", "sqs:ListQueueTags" ]
+    "tagProperty" : "/properties/Tags"
   },
   "handlers" : {
     "create" : {
