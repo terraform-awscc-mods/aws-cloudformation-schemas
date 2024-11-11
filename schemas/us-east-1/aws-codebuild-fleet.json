@@ -18,7 +18,7 @@
     },
     "ComputeType" : {
       "type" : "string",
-      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE" ]
+      "enum" : [ "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "ATTRIBUTE_BASED_COMPUTE" ]
     },
     "OverflowBehavior" : {
       "type" : "string",
@@ -51,6 +51,9 @@
     },
     "ScalingConfiguration" : {
       "$ref" : "#/definitions/ScalingConfigurationInput"
+    },
+    "ComputeConfiguration" : {
+      "$ref" : "#/definitions/ComputeConfiguration"
     }
   },
   "definitions" : {
@@ -166,6 +169,25 @@
         },
         "TargetValue" : {
           "type" : "number"
+        }
+      }
+    },
+    "ComputeConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "vCpu" : {
+          "type" : "integer"
+        },
+        "memory" : {
+          "type" : "integer"
+        },
+        "disk" : {
+          "type" : "integer"
+        },
+        "machineType" : {
+          "type" : "string",
+          "enum" : [ "GENERAL", "NVME" ]
         }
       }
     }
