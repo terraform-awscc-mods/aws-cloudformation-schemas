@@ -1,33 +1,8 @@
 {
-  "typeName" : "AWS::ApiGateway::Resource",
-  "description" : "The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.",
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway",
-  "additionalProperties" : false,
-  "properties" : {
-    "ResourceId" : {
-      "description" : "",
-      "type" : "string"
-    },
-    "RestApiId" : {
-      "description" : "",
-      "type" : "string"
-    },
-    "ParentId" : {
-      "description" : "",
-      "type" : "string"
-    },
-    "PathPart" : {
-      "description" : "",
-      "type" : "string"
-    }
-  },
-  "required" : [ "ParentId", "PathPart", "RestApiId" ],
   "tagging" : {
     "taggable" : false
   },
-  "createOnlyProperties" : [ "/properties/PathPart", "/properties/ParentId", "/properties/RestApiId" ],
-  "primaryIdentifier" : [ "/properties/RestApiId", "/properties/ResourceId" ],
-  "readOnlyProperties" : [ "/properties/ResourceId" ],
   "handlers" : {
     "read" : {
       "permissions" : [ "apigateway:GET" ]
@@ -38,10 +13,8 @@
     "update" : {
       "permissions" : [ "apigateway:GET", "apigateway:PATCH" ]
     },
-    "delete" : {
-      "permissions" : [ "apigateway:DELETE" ]
-    },
     "list" : {
+      "permissions" : [ "apigateway:GET" ],
       "handlerSchema" : {
         "properties" : {
           "RestApiId" : {
@@ -49,8 +22,35 @@
           }
         },
         "required" : [ "RestApiId" ]
-      },
-      "permissions" : [ "apigateway:GET" ]
+      }
+    },
+    "delete" : {
+      "permissions" : [ "apigateway:DELETE" ]
     }
-  }
+  },
+  "typeName" : "AWS::ApiGateway::Resource",
+  "readOnlyProperties" : [ "/properties/ResourceId" ],
+  "description" : "The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.",
+  "createOnlyProperties" : [ "/properties/PathPart", "/properties/ParentId", "/properties/RestApiId" ],
+  "additionalProperties" : false,
+  "primaryIdentifier" : [ "/properties/RestApiId", "/properties/ResourceId" ],
+  "properties" : {
+    "ParentId" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "PathPart" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "ResourceId" : {
+      "description" : "",
+      "type" : "string"
+    },
+    "RestApiId" : {
+      "description" : "",
+      "type" : "string"
+    }
+  },
+  "required" : [ "ParentId", "PathPart", "RestApiId" ]
 }
