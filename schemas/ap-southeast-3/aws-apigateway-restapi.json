@@ -50,6 +50,10 @@
           "description" : "",
           "type" : "array",
           "items" : {
+            "relationshipRef" : {
+              "typeName" : "AWS::EC2::VPCEndpoint",
+              "propertyPath" : "/properties/Id"
+            },
             "type" : "string"
           }
         }
@@ -75,6 +79,10 @@
       "type" : "object",
       "properties" : {
         "Bucket" : {
+          "relationshipRef" : {
+            "typeName" : "AWS::S3::Bucket",
+            "propertyPath" : "/properties/BucketName"
+          },
           "description" : "The name of the S3 bucket where the OpenAPI file is stored.",
           "type" : "string"
         },

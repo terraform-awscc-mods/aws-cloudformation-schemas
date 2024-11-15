@@ -281,6 +281,26 @@
       },
       "required" : [ "WriteCapacityUnits", "ReadCapacityUnits" ]
     },
+    "WarmThroughput" : {
+      "anyOf" : [ {
+        "required" : [ "ReadUnitsPerSecond" ]
+      }, {
+        "required" : [ "WriteUnitsPerSecond" ]
+      } ],
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ReadUnitsPerSecond" : {
+          "type" : "integer",
+          "minimum" : 1
+        },
+        "WriteUnitsPerSecond" : {
+          "type" : "integer",
+          "minimum" : 1
+        }
+      }
+    },
     "GlobalSecondaryIndex" : {
       "description" : "Represents the properties of a global secondary index.",
       "additionalProperties" : false,
@@ -313,6 +333,10 @@
           "items" : {
             "$ref" : "#/definitions/KeySchema"
           }
+        },
+        "WarmThroughput" : {
+          "description" : "",
+          "$ref" : "#/definitions/WarmThroughput"
         }
       },
       "required" : [ "IndexName", "Projection", "KeySchema" ]
@@ -459,6 +483,10 @@
     "ProvisionedThroughput" : {
       "description" : "Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). \n If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property.",
       "$ref" : "#/definitions/ProvisionedThroughput"
+    },
+    "WarmThroughput" : {
+      "description" : "",
+      "$ref" : "#/definitions/WarmThroughput"
     },
     "TableName" : {
       "description" : "A name for the table. If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the table name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",

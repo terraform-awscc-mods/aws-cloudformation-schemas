@@ -166,6 +166,37 @@
         },
         "Version" : {
           "type" : "string"
+        },
+        "Overrides" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "insertionOrder" : false,
+          "items" : {
+            "$ref" : "#/definitions/LaunchTemplateSpecificationOverride"
+          }
+        }
+      }
+    },
+    "LaunchTemplateSpecificationOverride" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LaunchTemplateId" : {
+          "type" : "string"
+        },
+        "LaunchTemplateName" : {
+          "type" : "string"
+        },
+        "Version" : {
+          "type" : "string"
+        },
+        "TargetInstanceTypes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "insertionOrder" : false,
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -204,7 +235,8 @@
     "tagOnCreate" : true,
     "tagUpdatable" : false,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "Batch:TagResource", "Batch:UntagResource" ]
   },
   "required" : [ "Type" ],
   "createOnlyProperties" : [ "/properties/ComputeResources/SpotIamFleetRole", "/properties/ComputeEnvironmentName", "/properties/Tags", "/properties/Type", "/properties/EksConfiguration" ],
