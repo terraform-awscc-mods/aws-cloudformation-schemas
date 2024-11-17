@@ -99,7 +99,7 @@
   },
   "additionalProperties" : false,
   "required" : [ "Name" ],
-  "createOnlyProperties" : [ "/properties/Name", "/properties/DestinationResourceArn" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/OutputFormat", "/properties/DestinationResourceArn" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/DeliveryDestinationType" ],
   "primaryIdentifier" : [ "/properties/Name" ],
   "handlers" : {
