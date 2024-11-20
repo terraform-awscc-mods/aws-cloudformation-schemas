@@ -280,7 +280,7 @@
       "permissions" : [ "synthetics:GetCanary", "synthetics:DescribeCanaries", "synthetics:ListTagsForResource", "iam:ListRoles", "s3:ListAllMyBuckets", "s3:GetBucketLocation" ]
     },
     "delete" : {
-      "permissions" : [ "synthetics:DeleteCanary", "synthetics:GetCanary" ]
+      "permissions" : [ "synthetics:DeleteCanary", "synthetics:GetCanary", "lambda:DeleteFunction", "lambda:DeleteLayerVersion" ]
     },
     "list" : {
       "permissions" : [ "synthetics:DescribeCanaries" ]
