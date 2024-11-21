@@ -108,6 +108,24 @@
         }
       }
     },
+    "MetricsConfig" : {
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Metrics" : {
+          "minItems" : 0,
+          "maxItems" : 1,
+          "uniqueItems" : true,
+          "description" : "Metric groups to enable.",
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "EventCount" ]
+          }
+        }
+      }
+    },
     "DocumentDBEventSourceConfig" : {
       "description" : "Specific configuration settings for a DocumentDB event source.",
       "additionalProperties" : false,
@@ -253,6 +271,10 @@
     "FilterCriteria" : {
       "description" : "An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).",
       "$ref" : "#/definitions/FilterCriteria"
+    },
+    "MetricsConfig" : {
+      "description" : "",
+      "$ref" : "#/definitions/MetricsConfig"
     },
     "FunctionName" : {
       "minLength" : 1,
