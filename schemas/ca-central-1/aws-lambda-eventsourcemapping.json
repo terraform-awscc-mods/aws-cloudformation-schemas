@@ -96,7 +96,7 @@
       "type" : "number"
     },
     "Tags" : {
-      "description" : "",
+      "description" : "A list of tags to add to the event source mapping.\n  You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update.",
       "type" : "array",
       "uniqueItems" : true,
       "insertionOrder" : false,
@@ -176,6 +176,14 @@
     "DocumentDBEventSourceConfig" : {
       "description" : "Specific configuration settings for a DocumentDB event source.",
       "$ref" : "#/definitions/DocumentDBEventSourceConfig"
+    },
+    "ProvisionedPollerConfig" : {
+      "description" : "",
+      "$ref" : "#/definitions/ProvisionedPollerConfig"
+    },
+    "MetricsConfig" : {
+      "description" : "",
+      "$ref" : "#/definitions/MetricsConfig"
     }
   },
   "definitions" : {
@@ -338,19 +346,19 @@
       "properties" : {
         "Key" : {
           "type" : "string",
-          "description" : "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "description" : "The key for this tag.",
           "minLength" : 1,
           "maxLength" : 128
         },
         "Value" : {
           "type" : "string",
-          "description" : "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "description" : "The value for this tag.",
           "minLength" : 0,
           "maxLength" : 256
         }
       },
       "required" : [ "Key" ],
-      "description" : ""
+      "description" : "A [tag](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the event source mapping."
     },
     "DocumentDBEventSourceConfig" : {
       "description" : "Specific configuration settings for a DocumentDB event source.",
@@ -373,6 +381,43 @@
           "description" : "Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes.",
           "type" : "string",
           "enum" : [ "UpdateLookup", "Default" ]
+        }
+      }
+    },
+    "ProvisionedPollerConfig" : {
+      "description" : "",
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MinimumPollers" : {
+          "description" : "The minimum number of event pollers this event source can scale down to.",
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 200
+        },
+        "MaximumPollers" : {
+          "description" : "The maximum number of event pollers this event source can scale up to.",
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 2000
+        }
+      }
+    },
+    "MetricsConfig" : {
+      "description" : "",
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Metrics" : {
+          "description" : "Metric groups to enable.",
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string",
+            "enum" : [ "EventCount" ]
+          },
+          "minItems" : 0,
+          "maxItems" : 1
         }
       }
     }
