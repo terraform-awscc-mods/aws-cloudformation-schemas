@@ -1,0 +1,29 @@
+{
+  "typeName" : "AWS::ApiGatewayV2::Model",
+  "description" : "Resource Type definition for AWS::ApiGatewayV2::Model",
+  "additionalProperties" : false,
+  "properties" : {
+    "Description" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "ContentType" : {
+      "type" : "string"
+    },
+    "ApiId" : {
+      "type" : "string"
+    },
+    "Schema" : {
+      "type" : "object"
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "Schema", "ApiId", "Name" ],
+  "createOnlyProperties" : [ "/properties/ApiId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}
