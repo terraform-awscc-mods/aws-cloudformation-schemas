@@ -135,9 +135,6 @@
         "Tooltip" : {
           "$ref" : "#/definitions/TooltipOptions"
         },
-        "Interactions" : {
-          "$ref" : "#/definitions/VisualInteractionOptions"
-        },
         "WindowOptions" : {
           "$ref" : "#/definitions/GeospatialWindowOptions"
         },
@@ -443,11 +440,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -556,11 +548,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -726,11 +713,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -889,38 +871,6 @@
         }
       }
     },
-    "LayerMapVisual" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Subtitle" : {
-          "$ref" : "#/definitions/VisualSubtitleLabelOptions"
-        },
-        "VisualId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "ChartConfiguration" : {
-          "$ref" : "#/definitions/GeospatialLayerMapConfiguration"
-        },
-        "DataSetIdentifier" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 2048
-        },
-        "Title" : {
-          "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        }
-      },
-      "required" : [ "DataSetIdentifier", "VisualId" ]
-    },
     "RelativeDateType" : {
       "type" : "string",
       "enum" : [ "PREVIOUS", "THIS", "LAST", "NOW", "NEXT" ]
@@ -990,11 +940,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -1256,48 +1201,9 @@
         }
       }
     },
-    "PluginVisual" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Subtitle" : {
-          "$ref" : "#/definitions/VisualSubtitleLabelOptions"
-        },
-        "PluginArn" : {
-          "type" : "string"
-        },
-        "VisualId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "ChartConfiguration" : {
-          "$ref" : "#/definitions/PluginVisualConfiguration"
-        },
-        "Title" : {
-          "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        }
-      },
-      "required" : [ "PluginArn", "VisualId" ]
-    },
     "BoxPlotFillStyle" : {
       "type" : "string",
       "enum" : [ "SOLID", "TRANSPARENT" ]
-    },
-    "ImageInteractionOptions" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ImageMenuOption" : {
-          "$ref" : "#/definitions/ImageMenuOption"
-        }
-      }
     },
     "DataLabelType" : {
       "additionalProperties" : false,
@@ -1430,15 +1336,6 @@
         }
       }
     },
-    "SheetImageSource" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "SheetImageStaticFileSource" : {
-          "$ref" : "#/definitions/SheetImageStaticFileSource"
-        }
-      }
-    },
     "FilterDateTimePickerControl" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -1475,39 +1372,6 @@
     "LegendPosition" : {
       "type" : "string",
       "enum" : [ "AUTO", "RIGHT", "BOTTOM", "TOP" ]
-    },
-    "PluginVisualFieldWell" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Unaggregated" : {
-          "minItems" : 0,
-          "maxItems" : 200,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/UnaggregatedField"
-          }
-        },
-        "AxisName" : {
-          "$ref" : "#/definitions/PluginVisualAxisName"
-        },
-        "Measures" : {
-          "minItems" : 0,
-          "maxItems" : 200,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/MeasureField"
-          }
-        },
-        "Dimensions" : {
-          "minItems" : 0,
-          "maxItems" : 200,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/DimensionField"
-          }
-        }
-      }
     },
     "KPIVisualLayoutOptions" : {
       "additionalProperties" : false,
@@ -1707,45 +1571,6 @@
         }
       }
     },
-    "GeospatialLayerItem" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "LayerId" : {
-          "type" : "string"
-        },
-        "JoinDefinition" : {
-          "$ref" : "#/definitions/GeospatialLayerJoinDefinition"
-        },
-        "Actions" : {
-          "minItems" : 0,
-          "maxItems" : 10,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/LayerCustomAction"
-          }
-        },
-        "LayerType" : {
-          "$ref" : "#/definitions/GeospatialLayerType"
-        },
-        "LayerDefinition" : {
-          "$ref" : "#/definitions/GeospatialLayerDefinition"
-        },
-        "Tooltip" : {
-          "$ref" : "#/definitions/TooltipOptions"
-        },
-        "Label" : {
-          "type" : "string"
-        },
-        "Visibility" : {
-          "$ref" : "#/definitions/Visibility"
-        },
-        "DataSource" : {
-          "$ref" : "#/definitions/GeospatialDataSourceItem"
-        }
-      },
-      "required" : [ "LayerId" ]
-    },
     "DataPathType" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -1818,10 +1643,6 @@
         }
       },
       "required" : [ "BackgroundColor" ]
-    },
-    "GeospatialLayerType" : {
-      "type" : "string",
-      "enum" : [ "POINT", "LINE", "POLYGON" ]
     },
     "GaugeChartArcConditionalFormatting" : {
       "additionalProperties" : false,
@@ -2359,10 +2180,6 @@
       "properties" : {
         "Relative" : {
           "$ref" : "#/definitions/RelativeFontSize"
-        },
-        "Absolute" : {
-          "description" : "String based length that is composed of value and unit in px",
-          "type" : "string"
         }
       }
     },
@@ -2422,18 +2239,6 @@
     "WidgetStatus" : {
       "type" : "string",
       "enum" : [ "ENABLED", "DISABLED" ]
-    },
-    "SheetImageTooltipConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Visibility" : {
-          "$ref" : "#/definitions/Visibility"
-        },
-        "TooltipText" : {
-          "$ref" : "#/definitions/SheetImageTooltipText"
-        }
-      }
     },
     "SheetControlSliderType" : {
       "type" : "string",
@@ -2876,24 +2681,6 @@
         }
       }
     },
-    "GeospatialCircleSymbolStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "FillColor" : {
-          "$ref" : "#/definitions/GeospatialColor"
-        },
-        "StrokeWidth" : {
-          "$ref" : "#/definitions/GeospatialLineWidth"
-        },
-        "StrokeColor" : {
-          "$ref" : "#/definitions/GeospatialColor"
-        },
-        "CircleRadius" : {
-          "$ref" : "#/definitions/GeospatialCircleRadius"
-        }
-      }
-    },
     "CustomContentType" : {
       "type" : "string",
       "enum" : [ "IMAGE", "OTHER_EMBEDDED_CONTENT" ]
@@ -3154,20 +2941,6 @@
         }
       }
     },
-    "GeospatialCategoricalDataColor" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "DataValue" : {
-          "type" : "string"
-        },
-        "Color" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
-        }
-      },
-      "required" : [ "Color", "DataValue" ]
-    },
     "HistogramVisual" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -3194,11 +2967,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "VisualId" ]
@@ -3245,24 +3013,9 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "VisualId" ]
-    },
-    "PluginVisualItemsLimitConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ItemsLimit" : {
-          "default" : null,
-          "type" : "number"
-        }
-      }
     },
     "GridLayoutElement" : {
       "additionalProperties" : false,
@@ -3609,11 +3362,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -3663,10 +3411,6 @@
           "$ref" : "#/definitions/Visibility"
         }
       }
-    },
-    "SheetImageScalingType" : {
-      "type" : "string",
-      "enum" : [ "SCALE_TO_WIDTH", "SCALE_TO_HEIGHT", "SCALE_TO_CONTAINER", "SCALE_NONE" ]
     },
     "BoxPlotFieldWells" : {
       "additionalProperties" : false,
@@ -3731,18 +3475,6 @@
       "properties" : {
         "HeatmapColor" : {
           "$ref" : "#/definitions/GeospatialHeatmapColorScale"
-        }
-      }
-    },
-    "StaticFile" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ImageStaticFile" : {
-          "$ref" : "#/definitions/ImageStaticFile"
-        },
-        "SpatialStaticFile" : {
-          "$ref" : "#/definitions/SpatialStaticFile"
         }
       }
     },
@@ -3844,15 +3576,6 @@
         }
       }
     },
-    "SheetImageScalingConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ScalingType" : {
-          "$ref" : "#/definitions/SheetImageScalingType"
-        }
-      }
-    },
     "FreeFormLayoutElementBorderStyle" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -3925,11 +3648,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -4070,22 +3788,6 @@
         }
       }
     },
-    "ImageStaticFile" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "StaticFileId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "Source" : {
-          "$ref" : "#/definitions/StaticFileSource"
-        }
-      },
-      "required" : [ "StaticFileId" ]
-    },
     "PivotFieldSortOptions" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -4100,15 +3802,6 @@
         }
       },
       "required" : [ "FieldId", "SortBy" ]
-    },
-    "GeospatialLineStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "LineSymbolStyle" : {
-          "$ref" : "#/definitions/GeospatialLineSymbolStyle"
-        }
-      }
     },
     "SimpleAttributeAggregationFunction" : {
       "type" : "string",
@@ -4159,24 +3852,6 @@
     "ConditionalFormattingIconDisplayOption" : {
       "type" : "string",
       "enum" : [ "ICON_ONLY" ]
-    },
-    "GeospatialPolygonStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "PolygonSymbolStyle" : {
-          "$ref" : "#/definitions/GeospatialPolygonSymbolStyle"
-        }
-      }
-    },
-    "GeospatialDataSourceItem" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "StaticFileDataSource" : {
-          "$ref" : "#/definitions/GeospatialStaticFileSource"
-        }
-      }
     },
     "KPIProgressBarConditionalFormatting" : {
       "additionalProperties" : false,
@@ -4340,26 +4015,6 @@
         }
       }
     },
-    "PluginVisualConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "SortConfiguration" : {
-          "$ref" : "#/definitions/PluginVisualSortConfiguration"
-        },
-        "VisualOptions" : {
-          "$ref" : "#/definitions/PluginVisualOptions"
-        },
-        "FieldWells" : {
-          "minItems" : 0,
-          "maxItems" : 10,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/PluginVisualFieldWell"
-          }
-        }
-      }
-    },
     "FilterCrossSheetControl" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -4433,60 +4088,9 @@
         }
       }
     },
-    "GeospatialPointStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "CircleSymbolStyle" : {
-          "$ref" : "#/definitions/GeospatialCircleSymbolStyle"
-        }
-      }
-    },
     "HorizontalTextAlignment" : {
       "type" : "string",
       "enum" : [ "LEFT", "CENTER", "RIGHT", "AUTO" ]
-    },
-    "LayerCustomActionOperation" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "NavigationOperation" : {
-          "$ref" : "#/definitions/CustomActionNavigationOperation"
-        },
-        "SetParametersOperation" : {
-          "$ref" : "#/definitions/CustomActionSetParametersOperation"
-        },
-        "FilterOperation" : {
-          "$ref" : "#/definitions/CustomActionFilterOperation"
-        },
-        "URLOperation" : {
-          "$ref" : "#/definitions/CustomActionURLOperation"
-        }
-      }
-    },
-    "GeospatialLayerMapConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Legend" : {
-          "$ref" : "#/definitions/LegendOptions"
-        },
-        "MapState" : {
-          "$ref" : "#/definitions/GeospatialMapState"
-        },
-        "MapStyle" : {
-          "$ref" : "#/definitions/GeospatialMapStyle"
-        },
-        "Interactions" : {
-          "$ref" : "#/definitions/VisualInteractionOptions"
-        },
-        "MapLayers" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GeospatialLayerItem"
-          }
-        }
-      }
     },
     "DecimalPlacesConfiguration" : {
       "additionalProperties" : false,
@@ -4512,21 +4116,6 @@
         },
         "PaperOrientation" : {
           "$ref" : "#/definitions/PaperOrientation"
-        }
-      }
-    },
-    "GeospatialLayerJoinDefinition" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ColorField" : {
-          "$ref" : "#/definitions/GeospatialLayerColorField"
-        },
-        "ShapeKeyField" : {
-          "type" : "string"
-        },
-        "DatasetKeyField" : {
-          "$ref" : "#/definitions/UnaggregatedField"
         }
       }
     },
@@ -4639,16 +4228,6 @@
       },
       "required" : [ "Column", "Configuration" ]
     },
-    "GeospatialLineWidth" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "LineWidth" : {
-          "type" : "number",
-          "minimum" : 0
-        }
-      }
-    },
     "PivotTableCellConditionalFormatting" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -4739,21 +4318,6 @@
         }
       }
     },
-    "GeospatialLayerDefinition" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "PointLayer" : {
-          "$ref" : "#/definitions/GeospatialPointLayer"
-        },
-        "PolygonLayer" : {
-          "$ref" : "#/definitions/GeospatialPolygonLayer"
-        },
-        "LineLayer" : {
-          "$ref" : "#/definitions/GeospatialLineLayer"
-        }
-      }
-    },
     "PieChartAggregatedFieldWells" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -4784,16 +4348,6 @@
         }
       }
     },
-    "GeospatialLineLayer" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Style" : {
-          "$ref" : "#/definitions/GeospatialLineStyle"
-        }
-      },
-      "required" : [ "Style" ]
-    },
     "LineChartVisual" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -4820,11 +4374,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -5290,16 +4839,6 @@
         }
       }
     },
-    "GeospatialPolygonLayer" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Style" : {
-          "$ref" : "#/definitions/GeospatialPolygonStyle"
-        }
-      },
-      "required" : [ "Style" ]
-    },
     "RelativeFontSize" : {
       "type" : "string",
       "enum" : [ "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE" ]
@@ -5315,18 +4854,6 @@
           "items" : {
             "$ref" : "#/definitions/CascadingControlSource"
           }
-        }
-      }
-    },
-    "StaticFileSource" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "UrlOptions" : {
-          "$ref" : "#/definitions/StaticFileUrlSourceOptions"
-        },
-        "S3Options" : {
-          "$ref" : "#/definitions/StaticFileS3SourceOptions"
         }
       }
     },
@@ -5439,23 +4966,6 @@
       },
       "required" : [ "ParameterControlId", "SourceParameterName", "Title" ]
     },
-    "PluginVisualTableQuerySort" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ItemsLimitConfiguration" : {
-          "$ref" : "#/definitions/PluginVisualItemsLimitConfiguration"
-        },
-        "RowSort" : {
-          "minItems" : 0,
-          "maxItems" : 100,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/FieldSortOptions"
-          }
-        }
-      }
-    },
     "ParameterDateTimePickerControl" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -5482,10 +4992,6 @@
         }
       },
       "required" : [ "ParameterControlId", "SourceParameterName", "Title" ]
-    },
-    "PluginVisualAxisName" : {
-      "type" : "string",
-      "enum" : [ "GROUP_BY", "VALUE" ]
     },
     "TreeMapSortConfiguration" : {
       "additionalProperties" : false,
@@ -5540,15 +5046,6 @@
         },
         "PaginationConfiguration" : {
           "$ref" : "#/definitions/PaginationConfiguration"
-        }
-      }
-    },
-    "ImageMenuOption" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "AvailabilityStatus" : {
-          "$ref" : "#/definitions/DashboardBehavior"
         }
       }
     },
@@ -5641,11 +5138,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -5709,11 +5201,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "VisualId" ]
@@ -6000,14 +5487,6 @@
           "type" : "string",
           "maxLength" : 512
         },
-        "Images" : {
-          "minItems" : 0,
-          "maxItems" : 10,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/SheetImage"
-          }
-        },
         "Name" : {
           "minLength" : 1,
           "description" : "<p>The name of a sheet. This name is displayed on the sheet's tab in the Amazon QuickSight\n            console.</p>",
@@ -6087,16 +5566,6 @@
         }
       }
     },
-    "GeospatialNullDataSettings" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "SymbolStyle" : {
-          "$ref" : "#/definitions/GeospatialNullSymbolStyle"
-        }
-      },
-      "required" : [ "SymbolStyle" ]
-    },
     "SingleAxisOptions" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -6157,11 +5626,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -6458,11 +5922,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -6695,19 +6154,6 @@
       "type" : "string",
       "enum" : [ "DISCRETE", "GRADIENT" ]
     },
-    "SheetImageStaticFileSource" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "StaticFileId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        }
-      },
-      "required" : [ "StaticFileId" ]
-    },
     "TableFieldCustomIconContent" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -6933,18 +6379,6 @@
       "type" : "string",
       "enum" : [ "AUTO", "INDEPENDENT", "SHARED" ]
     },
-    "GeospatialLineSymbolStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "FillColor" : {
-          "$ref" : "#/definitions/GeospatialColor"
-        },
-        "LineWidth" : {
-          "$ref" : "#/definitions/GeospatialLineWidth"
-        }
-      }
-    },
     "ConditionalFormattingCustomIconCondition" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -7034,11 +6468,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "DataSetIdentifier", "VisualId" ]
@@ -7250,21 +6679,6 @@
         }
       }
     },
-    "GeospatialSolidColor" : {
-      "description" : "Describes the properties for a solid color",
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "State" : {
-          "$ref" : "#/definitions/GeospatialColorState"
-        },
-        "Color" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
-        }
-      },
-      "required" : [ "Color" ]
-    },
     "NumericEqualityDrillDownFilter" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -7312,11 +6726,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "VisualId" ]
@@ -7386,9 +6795,6 @@
         "Position" : {
           "$ref" : "#/definitions/LegendPosition"
         },
-        "ValueFontConfiguration" : {
-          "$ref" : "#/definitions/FontConfiguration"
-        },
         "Title" : {
           "$ref" : "#/definitions/LabelOptions"
         },
@@ -7448,11 +6854,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -7490,16 +6891,6 @@
         }
       },
       "required" : [ "Color", "Expression" ]
-    },
-    "GeospatialCircleRadius" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Radius" : {
-          "type" : "number",
-          "minimum" : 0
-        }
-      }
     },
     "TableFieldCustomTextContent" : {
       "additionalProperties" : false,
@@ -7763,18 +7154,6 @@
         }
       }
     },
-    "GeospatialMapState" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Bounds" : {
-          "$ref" : "#/definitions/GeospatialCoordinateBounds"
-        },
-        "MapNavigation" : {
-          "$ref" : "#/definitions/GeospatialMapNavigation"
-        }
-      }
-    },
     "LoadingAnimation" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -7940,11 +7319,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -8129,30 +7503,6 @@
       },
       "required" : [ "Elements" ]
     },
-    "PluginVisualOptions" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "VisualProperties" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/PluginVisualProperty"
-          }
-        }
-      }
-    },
-    "PluginVisualProperty" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Value" : {
-          "type" : "string"
-        },
-        "Name" : {
-          "type" : "string"
-        }
-      }
-    },
     "HistogramBinOptions" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -8273,14 +7623,6 @@
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/FilterControl"
-          }
-        },
-        "Images" : {
-          "minItems" : 0,
-          "maxItems" : 10,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/SheetImage"
           }
         },
         "SheetControlLayouts" : {
@@ -8462,15 +7804,6 @@
         }
       },
       "required" : [ "EndDate", "StartDate", "Value" ]
-    },
-    "PluginVisualSortConfiguration" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "PluginVisualTableQuerySort" : {
-          "$ref" : "#/definitions/PluginVisualTableQuerySort"
-        }
-      }
     },
     "CategoricalMeasureField" : {
       "additionalProperties" : false,
@@ -8895,11 +8228,6 @@
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
         },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        },
         "ColumnHierarchies" : {
           "minItems" : 0,
           "maxItems" : 2,
@@ -8984,11 +8312,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "VisualId" ]
@@ -9020,44 +8343,6 @@
           }
         }
       }
-    },
-    "SheetImage" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Actions" : {
-          "minItems" : 0,
-          "maxItems" : 10,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ImageCustomAction"
-          }
-        },
-        "SheetImageId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "Tooltip" : {
-          "$ref" : "#/definitions/SheetImageTooltipConfiguration"
-        },
-        "Scaling" : {
-          "$ref" : "#/definitions/SheetImageScalingConfiguration"
-        },
-        "Interactions" : {
-          "$ref" : "#/definitions/ImageInteractionOptions"
-        },
-        "Source" : {
-          "$ref" : "#/definitions/SheetImageSource"
-        },
-        "ImageContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        }
-      },
-      "required" : [ "SheetImageId", "Source" ]
     },
     "TextAreaControlDisplayOptions" : {
       "additionalProperties" : false,
@@ -9125,38 +8410,6 @@
     "FilterVisualScope" : {
       "type" : "string",
       "enum" : [ "ALL_VISUALS", "SELECTED_VISUALS" ]
-    },
-    "ImageCustomAction" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "$ref" : "#/definitions/WidgetStatus"
-        },
-        "Trigger" : {
-          "$ref" : "#/definitions/ImageCustomActionTrigger"
-        },
-        "CustomActionId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "Name" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 256
-        },
-        "ActionOperations" : {
-          "minItems" : 1,
-          "maxItems" : 2,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ImageCustomActionOperation"
-          }
-        }
-      },
-      "required" : [ "ActionOperations", "CustomActionId", "Name", "Trigger" ]
     },
     "TopBottomMoversComputation" : {
       "additionalProperties" : false,
@@ -9288,22 +8541,6 @@
         }
       }
     },
-    "SpatialStaticFile" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "StaticFileId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "Source" : {
-          "$ref" : "#/definitions/StaticFileSource"
-        }
-      },
-      "required" : [ "StaticFileId" ]
-    },
     "AxisLogarithmicScale" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -9311,28 +8548,6 @@
         "Base" : {
           "default" : null,
           "type" : "number"
-        }
-      }
-    },
-    "GeospatialLayerColorField" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ColorValuesFields" : {
-          "minItems" : 0,
-          "maxItems" : 1,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/MeasureField"
-          }
-        },
-        "ColorDimensionsFields" : {
-          "minItems" : 0,
-          "maxItems" : 1,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/DimensionField"
-          }
         }
       }
     },
@@ -9439,38 +8654,6 @@
       },
       "required" : [ "FieldId" ]
     },
-    "LayerCustomAction" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "$ref" : "#/definitions/WidgetStatus"
-        },
-        "Trigger" : {
-          "$ref" : "#/definitions/LayerCustomActionTrigger"
-        },
-        "CustomActionId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        },
-        "Name" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 256
-        },
-        "ActionOperations" : {
-          "minItems" : 1,
-          "maxItems" : 2,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/LayerCustomActionOperation"
-          }
-        }
-      },
-      "required" : [ "ActionOperations", "CustomActionId", "Name", "Trigger" ]
-    },
     "SectionBasedLayoutConfiguration" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -9523,22 +8706,6 @@
       "properties" : {
         "ScreenCanvasSizeOptions" : {
           "$ref" : "#/definitions/FreeFormLayoutScreenCanvasSizeOptions"
-        }
-      }
-    },
-    "GeospatialMapStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "BaseMapStyle" : {
-          "$ref" : "#/definitions/BaseMapStyleType"
-        },
-        "BaseMapVisibility" : {
-          "$ref" : "#/definitions/Visibility"
-        },
-        "BackgroundColor" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
         }
       }
     },
@@ -9606,16 +8773,6 @@
           "$ref" : "#/definitions/CommitMode"
         }
       }
-    },
-    "GeospatialPointLayer" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Style" : {
-          "$ref" : "#/definitions/GeospatialPointStyle"
-        }
-      },
-      "required" : [ "Style" ]
     },
     "NumericalMeasureField" : {
       "additionalProperties" : false,
@@ -9774,32 +8931,6 @@
       },
       "required" : [ "ComputationId" ]
     },
-    "GeospatialGradientColor" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "DefaultOpacity" : {
-          "maximum" : 1,
-          "type" : "number",
-          "minimum" : 0
-        },
-        "StepColors" : {
-          "minItems" : 2,
-          "maxItems" : 3,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GeospatialGradientStepColor"
-          }
-        },
-        "NullDataVisibility" : {
-          "$ref" : "#/definitions/Visibility"
-        },
-        "NullDataSettings" : {
-          "$ref" : "#/definitions/GeospatialNullDataSettings"
-        }
-      },
-      "required" : [ "StepColors" ]
-    },
     "TableFieldLinkContentConfiguration" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -9836,10 +8967,6 @@
         }
       }
     },
-    "ImageCustomActionTrigger" : {
-      "type" : "string",
-      "enum" : [ "CLICK", "MENU" ]
-    },
     "ColumnTooltipItem" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -9861,21 +8988,6 @@
         }
       },
       "required" : [ "Column" ]
-    },
-    "GeospatialGradientStepColor" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "DataValue" : {
-          "default" : 0,
-          "type" : "number"
-        },
-        "Color" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
-        }
-      },
-      "required" : [ "Color", "DataValue" ]
     },
     "PivotTableFieldOptions" : {
       "additionalProperties" : false,
@@ -10119,27 +9231,6 @@
       },
       "required" : [ "Columns", "HierarchyId" ]
     },
-    "StaticFileUrlSourceOptions" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Url" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "Url" ]
-    },
-    "SheetImageTooltipText" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "PlainText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
-        }
-      }
-    },
     "TooltipOptions" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10243,10 +9334,6 @@
       "type" : "string",
       "enum" : [ "POINT", "CLUSTER", "HEATMAP" ]
     },
-    "LayerCustomActionTrigger" : {
-      "type" : "string",
-      "enum" : [ "DATA_POINT_CLICK", "DATA_POINT_MENU" ]
-    },
     "ComboChartVisual" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10273,11 +9360,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -10384,21 +9466,6 @@
         }
       }
     },
-    "ImageCustomActionOperation" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "NavigationOperation" : {
-          "$ref" : "#/definitions/CustomActionNavigationOperation"
-        },
-        "SetParametersOperation" : {
-          "$ref" : "#/definitions/CustomActionSetParametersOperation"
-        },
-        "URLOperation" : {
-          "$ref" : "#/definitions/CustomActionURLOperation"
-        }
-      }
-    },
     "AllSheetsFilterScopeConfiguration" : {
       "additionalProperties" : false,
       "type" : "object"
@@ -10411,30 +9478,6 @@
           "$ref" : "#/definitions/HistogramAggregatedFieldWells"
         }
       }
-    },
-    "GeospatialCategoricalColor" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "CategoryDataColors" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/GeospatialCategoricalDataColor"
-          }
-        },
-        "DefaultOpacity" : {
-          "maximum" : 1,
-          "type" : "number",
-          "minimum" : 0
-        },
-        "NullDataVisibility" : {
-          "$ref" : "#/definitions/Visibility"
-        },
-        "NullDataSettings" : {
-          "$ref" : "#/definitions/GeospatialNullDataSettings"
-        }
-      },
-      "required" : [ "CategoryDataColors" ]
     },
     "PieChartConfiguration" : {
       "additionalProperties" : false,
@@ -10569,26 +9612,6 @@
         }
       }
     },
-    "GeospatialPolygonSymbolStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "FillColor" : {
-          "$ref" : "#/definitions/GeospatialColor"
-        },
-        "StrokeWidth" : {
-          "$ref" : "#/definitions/GeospatialLineWidth"
-        },
-        "StrokeColor" : {
-          "$ref" : "#/definitions/GeospatialColor"
-        }
-      }
-    },
-    "GeospatialColorState" : {
-      "description" : "Defines view state of the color",
-      "type" : "string",
-      "enum" : [ "ENABLED", "DISABLED" ]
-    },
     "LineSeriesAxisDisplayOptions" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10632,11 +9655,6 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         },
         "ColumnHierarchies" : {
           "minItems" : 0,
@@ -10855,21 +9873,6 @@
         }
       }
     },
-    "GeospatialColor" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Gradient" : {
-          "$ref" : "#/definitions/GeospatialGradientColor"
-        },
-        "Categorical" : {
-          "$ref" : "#/definitions/GeospatialCategoricalColor"
-        },
-        "Solid" : {
-          "$ref" : "#/definitions/GeospatialSolidColor"
-        }
-      }
-    },
     "TableStyleTarget" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10928,19 +9931,6 @@
       "type" : "string",
       "enum" : [ "CIRCLE", "TRIANGLE", "SQUARE", "DIAMOND", "ROUNDED_SQUARE" ]
     },
-    "GeospatialStaticFileSource" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "StaticFileId" : {
-          "minLength" : 1,
-          "pattern" : "^[\\w\\-]+$",
-          "type" : "string",
-          "maxLength" : 512
-        }
-      },
-      "required" : [ "StaticFileId" ]
-    },
     "ArcAxisDisplayRange" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10980,35 +9970,11 @@
         "FunnelChartVisual" : {
           "$ref" : "#/definitions/FunnelChartVisual"
         },
-        "BoxPlotVisual" : {
-          "$ref" : "#/definitions/BoxPlotVisual"
-        },
-        "LayerMapVisual" : {
-          "$ref" : "#/definitions/LayerMapVisual"
-        },
-        "GeospatialMapVisual" : {
-          "$ref" : "#/definitions/GeospatialMapVisual"
-        },
-        "ScatterPlotVisual" : {
-          "$ref" : "#/definitions/ScatterPlotVisual"
-        },
-        "RadarChartVisual" : {
-          "$ref" : "#/definitions/RadarChartVisual"
-        },
-        "ComboChartVisual" : {
-          "$ref" : "#/definitions/ComboChartVisual"
-        },
-        "WordCloudVisual" : {
-          "$ref" : "#/definitions/WordCloudVisual"
-        },
-        "SankeyDiagramVisual" : {
-          "$ref" : "#/definitions/SankeyDiagramVisual"
-        },
-        "GaugeChartVisual" : {
-          "$ref" : "#/definitions/GaugeChartVisual"
-        },
         "FilledMapVisual" : {
           "$ref" : "#/definitions/FilledMapVisual"
+        },
+        "BoxPlotVisual" : {
+          "$ref" : "#/definitions/BoxPlotVisual"
         },
         "WaterfallVisual" : {
           "$ref" : "#/definitions/WaterfallVisual"
@@ -11025,17 +9991,23 @@
         "HistogramVisual" : {
           "$ref" : "#/definitions/HistogramVisual"
         },
-        "PluginVisual" : {
-          "$ref" : "#/definitions/PluginVisual"
-        },
         "TableVisual" : {
           "$ref" : "#/definitions/TableVisual"
         },
         "PivotTableVisual" : {
           "$ref" : "#/definitions/PivotTableVisual"
         },
+        "GeospatialMapVisual" : {
+          "$ref" : "#/definitions/GeospatialMapVisual"
+        },
         "BarChartVisual" : {
           "$ref" : "#/definitions/BarChartVisual"
+        },
+        "ScatterPlotVisual" : {
+          "$ref" : "#/definitions/ScatterPlotVisual"
+        },
+        "RadarChartVisual" : {
+          "$ref" : "#/definitions/RadarChartVisual"
         },
         "HeatMapVisual" : {
           "$ref" : "#/definitions/HeatMapVisual"
@@ -11043,8 +10015,20 @@
         "TreeMapVisual" : {
           "$ref" : "#/definitions/TreeMapVisual"
         },
+        "ComboChartVisual" : {
+          "$ref" : "#/definitions/ComboChartVisual"
+        },
+        "WordCloudVisual" : {
+          "$ref" : "#/definitions/WordCloudVisual"
+        },
         "InsightVisual" : {
           "$ref" : "#/definitions/InsightVisual"
+        },
+        "SankeyDiagramVisual" : {
+          "$ref" : "#/definitions/SankeyDiagramVisual"
+        },
+        "GaugeChartVisual" : {
+          "$ref" : "#/definitions/GaugeChartVisual"
         },
         "LineChartVisual" : {
           "$ref" : "#/definitions/LineChartVisual"
@@ -11103,18 +10087,9 @@
         },
         "Title" : {
           "$ref" : "#/definitions/VisualTitleLabelOptions"
-        },
-        "VisualContentAltText" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 1024
         }
       },
       "required" : [ "DataSetIdentifier", "VisualId" ]
-    },
-    "GeospatialMapNavigation" : {
-      "type" : "string",
-      "enum" : [ "ENABLED", "DISABLED" ]
     },
     "PanelConfiguration" : {
       "additionalProperties" : false,
@@ -11152,22 +10127,6 @@
           "type" : "string"
         }
       }
-    },
-    "StaticFileS3SourceOptions" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "BucketName" : {
-          "type" : "string"
-        },
-        "ObjectKey" : {
-          "type" : "string"
-        },
-        "Region" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "BucketName", "ObjectKey", "Region" ]
     },
     "SmallMultiplesOptions" : {
       "additionalProperties" : false,
@@ -11211,14 +10170,6 @@
         },
         "QueryExecutionOptions" : {
           "$ref" : "#/definitions/QueryExecutionOptions"
-        },
-        "StaticFiles" : {
-          "minItems" : 0,
-          "maxItems" : 200,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/StaticFile"
-          }
         },
         "CalculatedFields" : {
           "minItems" : 0,
@@ -11269,24 +10220,6 @@
     "PaperOrientation" : {
       "type" : "string",
       "enum" : [ "PORTRAIT", "LANDSCAPE" ]
-    },
-    "GeospatialNullSymbolStyle" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "FillColor" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
-        },
-        "StrokeWidth" : {
-          "type" : "number",
-          "minimum" : 0
-        },
-        "StrokeColor" : {
-          "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
-          "type" : "string"
-        }
-      }
     },
     "NumericSeparatorConfiguration" : {
       "additionalProperties" : false,
