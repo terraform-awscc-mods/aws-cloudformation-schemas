@@ -21,7 +21,7 @@
     },
     "ClientSideTimestampsEnabled" : {
       "type" : "boolean",
-      "description" : "Indicates whether client side timestamps are enabled (true) or disabled (false) on all the tables in keyspace. Must be True for Add Keyspace Region to a single region keyspace with at least one table is not enabled, once it is enabled it cannot be disabled again."
+      "description" : "Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can’t disable it again."
     }
   },
   "definitions" : {
@@ -80,7 +80,7 @@
   },
   "additionalProperties" : false,
   "required" : [ ],
-  "createOnlyProperties" : [ "/properties/ReplicationSpecification", "/properties/KeyspaceName" ],
+  "createOnlyProperties" : [ "/properties/KeyspaceName" ],
   "primaryIdentifier" : [ "/properties/KeyspaceName" ],
   "tagging" : {
     "taggable" : true,
