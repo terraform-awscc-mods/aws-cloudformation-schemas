@@ -40,14 +40,16 @@
   "additionalProperties" : false,
   "definitions" : {
     "AvailabilityZoneImpairmentPolicy" : {
-      "description" : "",
+      "description" : "Describes an Availability Zone impairment policy.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
         "ZonalShiftEnabled" : {
+          "description" : "If ``true``, enable zonal shift for your Auto Scaling group.",
           "type" : "boolean"
         },
         "ImpairedZoneHealthCheckBehavior" : {
+          "description" : "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
           "type" : "string",
           "enum" : [ "IgnoreUnhealthy", "ReplaceUnhealthy" ]
         }
@@ -186,6 +188,7 @@
       "type" : "object",
       "properties" : {
         "InstanceFamily" : {
+          "description" : "",
           "type" : "string"
         }
       }
@@ -240,6 +243,7 @@
       "type" : "object",
       "properties" : {
         "References" : {
+          "description" : "",
           "$ref" : "#/definitions/PerformanceFactorReferenceSetRequest"
         }
       }
@@ -259,6 +263,22 @@
         }
       },
       "required" : [ "LaunchTemplate" ]
+    },
+    "CapacityReservationIds" : {
+      "uniqueItems" : true,
+      "insertionOrder" : true,
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "CapacityReservationResourceGroupArns" : {
+      "uniqueItems" : true,
+      "insertionOrder" : true,
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
     },
     "TagProperty" : {
       "description" : "A structure that specifies a tag for the ``Tags`` property of [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For more information, see [Tag Auto Scaling groups and instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*. You can find a sample template snippet in the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.\n CloudFormation adds the following tags to all Auto Scaling groups and associated instances: \n  +  aws:cloudformation:stack-name\n  +  aws:cloudformation:stack-id\n  +  aws:cloudformation:logical-id",
@@ -347,11 +367,12 @@
       }
     },
     "AvailabilityZoneDistribution" : {
-      "description" : "",
+      "description" : "``AvailabilityZoneDistribution`` is a property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
         "CapacityDistributionStrategy" : {
+          "description" : "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
           "type" : "string",
           "enum" : [ "balanced-best-effort", "balanced-only" ]
         }
@@ -442,6 +463,7 @@
       "type" : "object",
       "properties" : {
         "Cpu" : {
+          "description" : "",
           "$ref" : "#/definitions/CpuPerformanceFactorRequest"
         }
       }
@@ -632,6 +654,33 @@
         }
       },
       "required" : [ "MemoryMiB", "VCpuCount" ]
+    },
+    "CapacityReservationTarget" : {
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "CapacityReservationIds" : {
+          "$ref" : "#/definitions/CapacityReservationIds"
+        },
+        "CapacityReservationResourceGroupArns" : {
+          "$ref" : "#/definitions/CapacityReservationResourceGroupArns"
+        }
+      }
+    },
+    "CapacityReservationSpecification" : {
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "CapacityReservationPreference" : {
+          "type" : "string"
+        },
+        "CapacityReservationTarget" : {
+          "$ref" : "#/definitions/CapacityReservationTarget"
+        }
+      },
+      "required" : [ "CapacityReservationPreference" ]
     }
   },
   "properties" : {
@@ -662,7 +711,7 @@
       "type" : "string"
     },
     "AvailabilityZoneImpairmentPolicy" : {
-      "description" : "",
+      "description" : "The Availability Zone impairment policy.",
       "$ref" : "#/definitions/AvailabilityZoneImpairmentPolicy"
     },
     "TargetGroupARNs" : {
@@ -759,7 +808,7 @@
       "$ref" : "#/definitions/NotificationConfiguration"
     },
     "AvailabilityZoneDistribution" : {
-      "description" : "",
+      "description" : "The instance capacity distribution across Availability Zones.",
       "$ref" : "#/definitions/AvailabilityZoneDistribution"
     },
     "MetricsCollection" : {
@@ -814,6 +863,10 @@
     "PlacementGroup" : {
       "description" : "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
       "type" : "string"
+    },
+    "CapacityReservationSpecification" : {
+      "description" : "",
+      "$ref" : "#/definitions/CapacityReservationSpecification"
     },
     "HealthCheckType" : {
       "description" : "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``EBS``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
