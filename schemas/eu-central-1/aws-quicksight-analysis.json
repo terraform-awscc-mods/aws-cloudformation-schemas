@@ -135,7 +135,9 @@
         "Tooltip" : {
           "$ref" : "#/definitions/TooltipOptions"
         },
-        "Interactions" : { },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "WindowOptions" : {
           "$ref" : "#/definitions/GeospatialWindowOptions"
         },
@@ -4475,7 +4477,9 @@
         "MapStyle" : {
           "$ref" : "#/definitions/GeospatialMapStyle"
         },
-        "Interactions" : { },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "MapLayers" : {
           "type" : "array",
           "items" : {
@@ -5543,7 +5547,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "AvailabilityStatus" : { }
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
       }
     },
     "CategoryDrillDownFilter" : {
