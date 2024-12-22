@@ -407,10 +407,32 @@
       "properties" : {
         "EFSFileSystemConfig" : {
           "$ref" : "#/definitions/EFSFileSystemConfig"
+        },
+        "FSxLustreFileSystemConfig" : {
+          "$ref" : "#/definitions/FSxLustreFileSystemConfig"
         }
       }
     },
     "EFSFileSystemConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FileSystemPath" : {
+          "type" : "string",
+          "pattern" : "^\\/\\S*$",
+          "minLength" : 1,
+          "maxLength" : 256
+        },
+        "FileSystemId" : {
+          "type" : "string",
+          "minLength" : 11,
+          "maxLength" : 21,
+          "pattern" : "^(fs-[0-9a-f]{8,})$"
+        }
+      },
+      "required" : [ "FileSystemId" ]
+    },
+    "FSxLustreFileSystemConfig" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
@@ -541,7 +563,7 @@
     },
     "MlTools" : {
       "type" : "string",
-      "enum" : [ "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization" ]
+      "enum" : [ "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization", "HyperPodClusters", "Comet", "DeepchecksLLMEvaluation", "Fiddler", "LakeraGuard" ]
     },
     "AppType" : {
       "type" : "string",

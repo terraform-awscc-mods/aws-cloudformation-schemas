@@ -111,7 +111,9 @@
         "Tooltip" : {
           "$ref" : "#/definitions/TooltipOptions"
         },
-        "Interactions" : { },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "WindowOptions" : {
           "$ref" : "#/definitions/GeospatialWindowOptions"
         },
@@ -2250,7 +2252,9 @@
         "VisualPublishOptions" : {
           "$ref" : "#/definitions/DashboardVisualPublishOptions"
         },
-        "VisualMenuOption" : { },
+        "VisualMenuOption" : {
+          "$ref" : "#/definitions/VisualMenuOption"
+        },
         "DataPointTooltipOption" : {
           "$ref" : "#/definitions/DataPointTooltipOption"
         },
@@ -4596,7 +4600,9 @@
         "MapStyle" : {
           "$ref" : "#/definitions/GeospatialMapStyle"
         },
-        "Interactions" : { },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "MapLayers" : {
           "type" : "array",
           "items" : {
