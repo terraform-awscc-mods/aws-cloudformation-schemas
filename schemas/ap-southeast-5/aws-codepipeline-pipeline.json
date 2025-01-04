@@ -71,43 +71,6 @@
     }
   },
   "definitions" : {
-    "BlockerDeclaration" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Type" : {
-          "type" : "string"
-        },
-        "Name" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "Type", "Name" ]
-    },
-    "GitConfiguration" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Push" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/GitPushFilter"
-          }
-        },
-        "SourceActionName" : {
-          "type" : "string"
-        },
-        "PullRequest" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/GitPullRequestFilter"
-          }
-        }
-      },
-      "required" : [ "SourceActionName" ]
-    },
     "ActionTypeId" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -166,40 +129,6 @@
       },
       "required" : [ "Type", "Id" ]
     },
-    "GitPullRequestFilter" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "FilePaths" : {
-          "$ref" : "#/definitions/GitFilePathFilterCriteria"
-        },
-        "Events" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "Branches" : {
-          "$ref" : "#/definitions/GitBranchFilterCriteria"
-        }
-      }
-    },
-    "GitPushFilter" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "FilePaths" : {
-          "$ref" : "#/definitions/GitFilePathFilterCriteria"
-        },
-        "Branches" : {
-          "$ref" : "#/definitions/GitBranchFilterCriteria"
-        },
-        "Tags" : {
-          "$ref" : "#/definitions/GitTagFilterCriteria"
-        }
-      }
-    },
     "ActionDeclaration" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -245,88 +174,35 @@
       },
       "required" : [ "ActionTypeId", "Name" ]
     },
-    "GitFilePathFilterCriteria" : {
+    "SuccessConditions" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "Includes" : {
+        "Conditions" : {
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
-            "type" : "string"
+            "$ref" : "#/definitions/Condition"
           }
-        },
-        "Excludes" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
-          }
-        }
-      }
-    },
-    "StageDeclaration" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Blockers" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/BlockerDeclaration"
-          }
-        },
-        "Actions" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "$ref" : "#/definitions/ActionDeclaration"
-          }
-        },
-        "Name" : {
-          "type" : "string"
-        },
-        "OnFailure" : {
-          "$ref" : "#/definitions/FailureConditions"
         }
       },
-      "required" : [ "Actions", "Name" ]
-    },
-    "InputArtifact" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Name" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "Name" ]
-    },
-    "ArtifactStore" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Type" : {
-          "type" : "string"
-        },
-        "EncryptionKey" : {
-          "$ref" : "#/definitions/EncryptionKey"
-        },
-        "Location" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "Type", "Location" ]
+      "required" : [ "Conditions" ]
     },
     "FailureConditions" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
+        "Conditions" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Condition"
+          }
+        },
         "Result" : {
           "type" : "string"
         }
-      },
-      "required" : [ "Result" ]
+      }
     },
     "VariableDeclaration" : {
       "type" : "object",
@@ -377,6 +253,216 @@
         }
       }
     },
+    "BeforeEntryConditions" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Conditions" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Condition"
+          }
+        }
+      },
+      "required" : [ "Conditions" ]
+    },
+    "OutputArtifact" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    },
+    "BlockerDeclaration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Type", "Name" ]
+    },
+    "Condition" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Rules" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/RuleDeclaration"
+          }
+        },
+        "Result" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Rules", "Result" ]
+    },
+    "GitConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Push" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GitPushFilter"
+          }
+        },
+        "SourceActionName" : {
+          "type" : "string"
+        },
+        "PullRequest" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GitPullRequestFilter"
+          }
+        }
+      },
+      "required" : [ "SourceActionName" ]
+    },
+    "RuleTypeId" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Owner" : {
+          "type" : "string"
+        },
+        "Category" : {
+          "type" : "string"
+        },
+        "Version" : {
+          "type" : "string"
+        },
+        "Provider" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Provider" ]
+    },
+    "GitPullRequestFilter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FilePaths" : {
+          "$ref" : "#/definitions/GitFilePathFilterCriteria"
+        },
+        "Events" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Branches" : {
+          "$ref" : "#/definitions/GitBranchFilterCriteria"
+        }
+      }
+    },
+    "GitPushFilter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FilePaths" : {
+          "$ref" : "#/definitions/GitFilePathFilterCriteria"
+        },
+        "Branches" : {
+          "$ref" : "#/definitions/GitBranchFilterCriteria"
+        },
+        "Tags" : {
+          "$ref" : "#/definitions/GitTagFilterCriteria"
+        }
+      }
+    },
+    "GitFilePathFilterCriteria" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Includes" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Excludes" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "StageDeclaration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Blockers" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/BlockerDeclaration"
+          }
+        },
+        "Actions" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/ActionDeclaration"
+          }
+        },
+        "BeforeEntry" : {
+          "$ref" : "#/definitions/BeforeEntryConditions"
+        },
+        "OnSuccess" : {
+          "$ref" : "#/definitions/SuccessConditions"
+        },
+        "Name" : {
+          "type" : "string"
+        },
+        "OnFailure" : {
+          "$ref" : "#/definitions/FailureConditions"
+        }
+      },
+      "required" : [ "Actions", "Name" ]
+    },
+    "InputArtifact" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    },
+    "ArtifactStore" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "type" : "string"
+        },
+        "EncryptionKey" : {
+          "$ref" : "#/definitions/EncryptionKey"
+        },
+        "Location" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Type", "Location" ]
+    },
     "Tag" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -410,15 +496,37 @@
         }
       }
     },
-    "OutputArtifact" : {
+    "RuleDeclaration" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
+        "Configuration" : {
+          "type" : "object"
+        },
+        "RuleTypeId" : {
+          "$ref" : "#/definitions/RuleTypeId"
+        },
+        "InputArtifacts" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InputArtifact"
+          }
+        },
+        "Region" : {
+          "type" : "string"
+        },
+        "RoleArn" : {
+          "type" : "string"
+        },
         "Name" : {
           "type" : "string"
+        },
+        "TimeoutInMinutes" : {
+          "type" : "integer"
         }
       },
-      "required" : [ "Name" ]
+      "required" : [ "RuleTypeId", "Name" ]
     }
   },
   "required" : [ "Stages", "RoleArn" ],

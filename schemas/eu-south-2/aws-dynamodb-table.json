@@ -263,7 +263,16 @@
         "PointInTimeRecoveryEnabled" : {
           "description" : "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.",
           "type" : "boolean"
+        },
+        "RecoveryPeriodInDays" : {
+          "maximum" : 35,
+          "description" : "",
+          "type" : "integer",
+          "minimum" : 1
         }
+      },
+      "dependencies" : {
+        "RecoveryPeriodInDays" : [ "PointInTimeRecoveryEnabled" ]
       }
     },
     "ProvisionedThroughput" : {
@@ -476,7 +485,7 @@
       "$ref" : "#/definitions/ContributorInsightsSpecification"
     },
     "ImportSourceSpecification" : {
-      "description" : "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
+      "description" : "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
       "$ref" : "#/definitions/ImportSourceSpecification"
     },
     "PointInTimeRecoverySpecification" : {
