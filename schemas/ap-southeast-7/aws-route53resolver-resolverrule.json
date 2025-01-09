@@ -1,0 +1,79 @@
+{
+  "typeName" : "AWS::Route53Resolver::ResolverRule",
+  "description" : "Resource Type definition for AWS::Route53Resolver::ResolverRule",
+  "additionalProperties" : false,
+  "properties" : {
+    "ResolverEndpointId" : {
+      "type" : "string"
+    },
+    "DomainName" : {
+      "type" : "string"
+    },
+    "ResolverRuleId" : {
+      "type" : "string"
+    },
+    "RuleType" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "TargetIps" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/TargetAddress"
+      }
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "TargetAddress" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Protocol" : {
+          "type" : "string"
+        },
+        "ServerNameIndication" : {
+          "type" : "string"
+        },
+        "Ipv6" : {
+          "type" : "string"
+        },
+        "Ip" : {
+          "type" : "string"
+        },
+        "Port" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "DomainName", "RuleType" ],
+  "createOnlyProperties" : [ "/properties/RuleType", "/properties/DomainName" ],
+  "primaryIdentifier" : [ "/properties/ResolverRuleId" ],
+  "readOnlyProperties" : [ "/properties/ResolverRuleId", "/properties/Arn" ]
+}
