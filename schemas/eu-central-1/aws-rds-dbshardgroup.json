@@ -6,7 +6,7 @@
     "cloudFormationSystemTags" : true,
     "permissions" : [ "rds:AddTagsToResource", "rds:RemoveTagsFromResource" ],
     "taggable" : true,
-    "tagOnCreate" : false,
+    "tagOnCreate" : true,
     "tagUpdatable" : true,
     "tagProperty" : "/properties/Tags"
   },
