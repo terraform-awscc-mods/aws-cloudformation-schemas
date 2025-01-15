@@ -1,0 +1,564 @@
+{
+  "typeName" : "AWS::KinesisFirehose::DeliveryStream",
+  "description" : "Resource Type definition for AWS::KinesisFirehose::DeliveryStream",
+  "additionalProperties" : false,
+  "properties" : {
+    "KinesisStreamSourceConfiguration" : {
+      "$ref" : "#/definitions/KinesisStreamSourceConfiguration"
+    },
+    "ElasticsearchDestinationConfiguration" : {
+      "$ref" : "#/definitions/ElasticsearchDestinationConfiguration"
+    },
+    "DeliveryStreamType" : {
+      "type" : "string"
+    },
+    "S3DestinationConfiguration" : {
+      "$ref" : "#/definitions/S3DestinationConfiguration"
+    },
+    "RedshiftDestinationConfiguration" : {
+      "$ref" : "#/definitions/RedshiftDestinationConfiguration"
+    },
+    "DeliveryStreamName" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "SplunkDestinationConfiguration" : {
+      "$ref" : "#/definitions/SplunkDestinationConfiguration"
+    },
+    "ExtendedS3DestinationConfiguration" : {
+      "$ref" : "#/definitions/ExtendedS3DestinationConfiguration"
+    }
+  },
+  "definitions" : {
+    "ElasticsearchBufferingHints" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SizeInMBs" : {
+          "type" : "integer"
+        },
+        "IntervalInSeconds" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "IntervalInSeconds", "SizeInMBs" ]
+    },
+    "Processor" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "type" : "string"
+        },
+        "Parameters" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/ProcessorParameter"
+          }
+        }
+      },
+      "required" : [ "Type", "Parameters" ]
+    },
+    "CopyCommand" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CopyOptions" : {
+          "type" : "string"
+        },
+        "DataTableColumns" : {
+          "type" : "string"
+        },
+        "DataTableName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "DataTableName" ]
+    },
+    "RedshiftDestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "S3Configuration" : {
+          "$ref" : "#/definitions/S3DestinationConfiguration"
+        },
+        "Username" : {
+          "type" : "string"
+        },
+        "CopyCommand" : {
+          "$ref" : "#/definitions/CopyCommand"
+        },
+        "ProcessingConfiguration" : {
+          "$ref" : "#/definitions/ProcessingConfiguration"
+        },
+        "CloudWatchLoggingOptions" : {
+          "$ref" : "#/definitions/CloudWatchLoggingOptions"
+        },
+        "ClusterJDBCURL" : {
+          "type" : "string"
+        },
+        "RoleARN" : {
+          "type" : "string"
+        },
+        "Password" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "S3Configuration", "Username", "CopyCommand", "ClusterJDBCURL", "RoleARN", "Password" ]
+    },
+    "SchemaConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VersionId" : {
+          "type" : "string"
+        },
+        "TableName" : {
+          "type" : "string"
+        },
+        "DatabaseName" : {
+          "type" : "string"
+        },
+        "Region" : {
+          "type" : "string"
+        },
+        "CatalogId" : {
+          "type" : "string"
+        },
+        "RoleARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "VersionId", "TableName", "DatabaseName", "Region", "CatalogId", "RoleARN" ]
+    },
+    "ParquetSerDe" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Compression" : {
+          "type" : "string"
+        },
+        "BlockSizeBytes" : {
+          "type" : "integer"
+        },
+        "EnableDictionaryCompression" : {
+          "type" : "boolean"
+        },
+        "PageSizeBytes" : {
+          "type" : "integer"
+        },
+        "MaxPaddingBytes" : {
+          "type" : "integer"
+        },
+        "WriterVersion" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ExtendedS3DestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ErrorOutputPrefix" : {
+          "type" : "string"
+        },
+        "S3BackupConfiguration" : {
+          "$ref" : "#/definitions/S3DestinationConfiguration"
+        },
+        "BucketARN" : {
+          "type" : "string"
+        },
+        "CompressionFormat" : {
+          "type" : "string"
+        },
+        "DataFormatConversionConfiguration" : {
+          "$ref" : "#/definitions/DataFormatConversionConfiguration"
+        },
+        "EncryptionConfiguration" : {
+          "$ref" : "#/definitions/EncryptionConfiguration"
+        },
+        "Prefix" : {
+          "type" : "string"
+        },
+        "ProcessingConfiguration" : {
+          "$ref" : "#/definitions/ProcessingConfiguration"
+        },
+        "RoleARN" : {
+          "type" : "string"
+        },
+        "S3BackupMode" : {
+          "type" : "string"
+        },
+        "BufferingHints" : {
+          "$ref" : "#/definitions/BufferingHints"
+        },
+        "CloudWatchLoggingOptions" : {
+          "$ref" : "#/definitions/CloudWatchLoggingOptions"
+        }
+      },
+      "required" : [ "BucketARN", "BufferingHints", "CompressionFormat", "RoleARN" ]
+    },
+    "KMSEncryptionConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AWSKMSKeyARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "AWSKMSKeyARN" ]
+    },
+    "OrcSerDe" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PaddingTolerance" : {
+          "type" : "number"
+        },
+        "Compression" : {
+          "type" : "string"
+        },
+        "StripeSizeBytes" : {
+          "type" : "integer"
+        },
+        "BloomFilterColumns" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "BloomFilterFalsePositiveProbability" : {
+          "type" : "number"
+        },
+        "EnablePadding" : {
+          "type" : "boolean"
+        },
+        "FormatVersion" : {
+          "type" : "string"
+        },
+        "RowIndexStride" : {
+          "type" : "integer"
+        },
+        "BlockSizeBytes" : {
+          "type" : "integer"
+        },
+        "DictionaryKeyThreshold" : {
+          "type" : "number"
+        }
+      }
+    },
+    "ProcessorParameter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ParameterValue" : {
+          "type" : "string"
+        },
+        "ParameterName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ParameterValue", "ParameterName" ]
+    },
+    "HiveJsonSerDe" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TimestampFormats" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "Serializer" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "OrcSerDe" : {
+          "$ref" : "#/definitions/OrcSerDe"
+        },
+        "ParquetSerDe" : {
+          "$ref" : "#/definitions/ParquetSerDe"
+        }
+      }
+    },
+    "KinesisStreamSourceConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RoleARN" : {
+          "type" : "string"
+        },
+        "KinesisStreamARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "KinesisStreamARN", "RoleARN" ]
+    },
+    "DataFormatConversionConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "InputFormatConfiguration" : {
+          "$ref" : "#/definitions/InputFormatConfiguration"
+        },
+        "Enabled" : {
+          "type" : "boolean"
+        },
+        "SchemaConfiguration" : {
+          "$ref" : "#/definitions/SchemaConfiguration"
+        },
+        "OutputFormatConfiguration" : {
+          "$ref" : "#/definitions/OutputFormatConfiguration"
+        }
+      },
+      "required" : [ "InputFormatConfiguration", "Enabled", "SchemaConfiguration", "OutputFormatConfiguration" ]
+    },
+    "EncryptionConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "NoEncryptionConfig" : {
+          "type" : "string"
+        },
+        "KMSEncryptionConfig" : {
+          "$ref" : "#/definitions/KMSEncryptionConfig"
+        }
+      }
+    },
+    "ElasticsearchRetryOptions" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DurationInSeconds" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "DurationInSeconds" ]
+    },
+    "SplunkDestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "HECEndpoint" : {
+          "type" : "string"
+        },
+        "S3Configuration" : {
+          "$ref" : "#/definitions/S3DestinationConfiguration"
+        },
+        "HECToken" : {
+          "type" : "string"
+        },
+        "RetryOptions" : {
+          "$ref" : "#/definitions/SplunkRetryOptions"
+        },
+        "HECEndpointType" : {
+          "type" : "string"
+        },
+        "HECAcknowledgmentTimeoutInSeconds" : {
+          "type" : "integer"
+        },
+        "ProcessingConfiguration" : {
+          "$ref" : "#/definitions/ProcessingConfiguration"
+        },
+        "CloudWatchLoggingOptions" : {
+          "$ref" : "#/definitions/CloudWatchLoggingOptions"
+        },
+        "S3BackupMode" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "HECEndpoint", "S3Configuration", "HECToken", "HECEndpointType" ]
+    },
+    "ProcessingConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Enabled" : {
+          "type" : "boolean"
+        },
+        "Processors" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Processor"
+          }
+        }
+      }
+    },
+    "ElasticsearchDestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IndexName" : {
+          "type" : "string"
+        },
+        "TypeName" : {
+          "type" : "string"
+        },
+        "S3Configuration" : {
+          "$ref" : "#/definitions/S3DestinationConfiguration"
+        },
+        "BufferingHints" : {
+          "$ref" : "#/definitions/ElasticsearchBufferingHints"
+        },
+        "IndexRotationPeriod" : {
+          "type" : "string"
+        },
+        "RetryOptions" : {
+          "$ref" : "#/definitions/ElasticsearchRetryOptions"
+        },
+        "ProcessingConfiguration" : {
+          "$ref" : "#/definitions/ProcessingConfiguration"
+        },
+        "CloudWatchLoggingOptions" : {
+          "$ref" : "#/definitions/CloudWatchLoggingOptions"
+        },
+        "DomainARN" : {
+          "type" : "string"
+        },
+        "RoleARN" : {
+          "type" : "string"
+        },
+        "S3BackupMode" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "IndexName", "TypeName", "S3Configuration", "BufferingHints", "IndexRotationPeriod", "RetryOptions", "DomainARN", "RoleARN", "S3BackupMode" ]
+    },
+    "BufferingHints" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SizeInMBs" : {
+          "type" : "integer"
+        },
+        "IntervalInSeconds" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "IntervalInSeconds", "SizeInMBs" ]
+    },
+    "Deserializer" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "OpenXJsonSerDe" : {
+          "$ref" : "#/definitions/OpenXJsonSerDe"
+        },
+        "HiveJsonSerDe" : {
+          "$ref" : "#/definitions/HiveJsonSerDe"
+        }
+      }
+    },
+    "S3DestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ErrorOutputPrefix" : {
+          "type" : "string"
+        },
+        "BucketARN" : {
+          "type" : "string"
+        },
+        "BufferingHints" : {
+          "$ref" : "#/definitions/BufferingHints"
+        },
+        "CompressionFormat" : {
+          "type" : "string"
+        },
+        "EncryptionConfiguration" : {
+          "$ref" : "#/definitions/EncryptionConfiguration"
+        },
+        "Prefix" : {
+          "type" : "string"
+        },
+        "CloudWatchLoggingOptions" : {
+          "$ref" : "#/definitions/CloudWatchLoggingOptions"
+        },
+        "RoleARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "BucketARN", "BufferingHints", "CompressionFormat", "RoleARN" ]
+    },
+    "SplunkRetryOptions" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DurationInSeconds" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "DurationInSeconds" ]
+    },
+    "InputFormatConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Deserializer" : {
+          "$ref" : "#/definitions/Deserializer"
+        }
+      },
+      "required" : [ "Deserializer" ]
+    },
+    "OpenXJsonSerDe" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ColumnToJsonKeyMappings" : {
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
+        },
+        "ConvertDotsInJsonKeysToUnderscores" : {
+          "type" : "boolean"
+        },
+        "CaseInsensitive" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "OutputFormatConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Serializer" : {
+          "$ref" : "#/definitions/Serializer"
+        }
+      },
+      "required" : [ "Serializer" ]
+    },
+    "CloudWatchLoggingOptions" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Enabled" : {
+          "type" : "boolean"
+        },
+        "LogGroupName" : {
+          "type" : "string"
+        },
+        "LogStreamName" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "createOnlyProperties" : [ "/properties/DeliveryStreamName", "/properties/DeliveryStreamType" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn" ]
+}
