@@ -37,6 +37,10 @@
       "description" : "The archive policy determines the number of days Amazon SNS retains messages. You can set a retention period from 1 to 365 days.",
       "type" : "object"
     },
+    "FifoThroughputScope" : {
+      "description" : "Specifies the throughput quota and deduplication behaviour to apply for the FIFO topic. Valid values are Topic or MessageGroup.",
+      "type" : "string"
+    },
     "Tags" : {
       "type" : "array",
       "uniqueItems" : false,
@@ -129,7 +133,8 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "sns:TagResource", "sns:UntagResource", "sns:ListTagsForResource" ]
   },
   "createOnlyProperties" : [ "/properties/TopicName", "/properties/FifoTopic" ],
   "primaryIdentifier" : [ "/properties/TopicArn" ],

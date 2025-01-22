@@ -120,7 +120,7 @@
   "required" : [ "Ec2Config" ],
   "readOnlyProperties" : [ "/properties/LocationArn", "/properties/LocationUri" ],
   "primaryIdentifier" : [ "/properties/LocationArn" ],
-  "createOnlyProperties" : [ "/properties/Ec2Config", "/properties/EfsFilesystemArn" ],
+  "createOnlyProperties" : [ "/properties/Ec2Config", "/properties/EfsFilesystemArn", "/properties/Subdirectory", "/properties/FileSystemAccessRoleArn", "/properties/InTransitEncryption", "/properties/AccessPointArn" ],
   "writeOnlyProperties" : [ "/properties/EfsFilesystemArn", "/properties/Subdirectory" ],
   "handlers" : {
     "create" : {
@@ -130,7 +130,7 @@
       "permissions" : [ "datasync:DescribeLocationEfs", "datasync:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "datasync:UpdateLocationEfs", "datasync:DescribeLocationEfs", "datasync:ListTagsForResource", "datasync:TagResource", "datasync:UntagResource", "elasticfilesystem:DescribeFileSystems", "elasticfilesystem:DescribeAccessPoints" ]
+      "permissions" : [ "datasync:DescribeLocationEfs", "datasync:ListTagsForResource", "datasync:TagResource", "datasync:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "datasync:DeleteLocation" ]
