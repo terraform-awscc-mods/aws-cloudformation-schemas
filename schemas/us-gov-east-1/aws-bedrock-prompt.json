@@ -1,7 +1,6 @@
 {
-  "typeName" : "AWS::Bedrock::PromptVersion",
-  "description" : "Definition of AWS::Bedrock::PromptVersion Resource Type",
-  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-bedrock-prompts",
+  "typeName" : "AWS::Bedrock::Prompt",
+  "description" : "Definition of AWS::Bedrock::Prompt Resource Type",
   "definitions" : {
     "PromptTemplateType" : {
       "type" : "string",
@@ -50,6 +49,9 @@
           "minLength" : 1,
           "description" : "Prompt content for String prompt template"
         },
+        "TextS3Location" : {
+          "$ref" : "#/definitions/TextS3Location"
+        },
         "InputVariables" : {
           "type" : "array",
           "items" : {
@@ -61,7 +63,7 @@
           "insertionOrder" : true
         }
       },
-      "required" : [ "Text" ],
+      "required" : [ ],
       "additionalProperties" : false
     },
     "ChatPromptTemplateConfiguration" : {
@@ -126,6 +128,33 @@
         "required" : [ "Chat" ],
         "additionalProperties" : false
       } ]
+    },
+    "TextS3Location" : {
+      "type" : "object",
+      "description" : "The identifier for the S3 resource.",
+      "properties" : {
+        "Bucket" : {
+          "type" : "string",
+          "maxLength" : 63,
+          "minLength" : 3,
+          "pattern" : "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+          "description" : "A bucket in S3"
+        },
+        "Key" : {
+          "type" : "string",
+          "maxLength" : 1024,
+          "minLength" : 1,
+          "description" : "A object key in S3"
+        },
+        "Version" : {
+          "type" : "string",
+          "maxLength" : 1024,
+          "minLength" : 1,
+          "description" : "The version of the the S3 object to use"
+        }
+      },
+      "required" : [ "Bucket", "Key" ],
+      "additionalProperties" : false
     },
     "ConversationRole" : {
       "type" : "string",
@@ -419,51 +448,17 @@
     }
   },
   "properties" : {
-    "PromptArn" : {
+    "Arn" : {
       "type" : "string",
       "maxLength" : 2048,
       "minLength" : 1,
       "pattern" : "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10})$",
       "description" : "ARN of a prompt resource possibly with a version"
     },
-    "Arn" : {
-      "type" : "string",
-      "maxLength" : 2048,
-      "minLength" : 1,
-      "pattern" : "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}:[0-9]{1,20})$",
-      "description" : "ARN of a prompt version resource"
-    },
     "CreatedAt" : {
       "type" : "string",
       "description" : "Time Stamp.",
       "format" : "date-time"
-    },
-    "PromptId" : {
-      "type" : "string",
-      "pattern" : "^[0-9a-zA-Z]{10}$",
-      "description" : "Identifier for a Prompt"
-    },
-    "UpdatedAt" : {
-      "type" : "string",
-      "description" : "Time Stamp.",
-      "format" : "date-time"
-    },
-    "Version" : {
-      "type" : "string",
-      "maxLength" : 5,
-      "minLength" : 1,
-      "pattern" : "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$",
-      "description" : "Version."
-    },
-    "Variants" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/PromptVariant"
-      },
-      "maxItems" : 1,
-      "minItems" : 1,
-      "description" : "List of prompt variants",
-      "insertionOrder" : true
     },
     "DefaultVariant" : {
       "type" : "string",
@@ -474,7 +469,35 @@
       "type" : "string",
       "maxLength" : 200,
       "minLength" : 1,
-      "description" : "Description for a prompt version resource."
+      "description" : "Name for a prompt resource."
+    },
+    "Id" : {
+      "type" : "string",
+      "pattern" : "^[0-9a-zA-Z]{10}$",
+      "description" : "Identifier for a Prompt"
+    },
+    "Name" : {
+      "type" : "string",
+      "pattern" : "^([0-9a-zA-Z][_-]?){1,100}$",
+      "description" : "Name for a prompt resource."
+    },
+    "UpdatedAt" : {
+      "type" : "string",
+      "description" : "Time Stamp.",
+      "format" : "date-time"
+    },
+    "Variants" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/PromptVariant"
+      },
+      "maxItems" : 1,
+      "minItems" : 0,
+      "description" : "List of prompt variants",
+      "insertionOrder" : true
+    },
+    "Tags" : {
+      "$ref" : "#/definitions/TagsMap"
     },
     "CustomerEncryptionKeyArn" : {
       "type" : "string",
@@ -483,48 +506,42 @@
       "pattern" : "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
       "description" : "A KMS key ARN"
     },
-    "Name" : {
+    "Version" : {
       "type" : "string",
-      "pattern" : "^([0-9a-zA-Z][_-]?){1,100}$",
-      "description" : "Name for a prompt resource."
-    },
-    "Tags" : {
-      "$ref" : "#/definitions/TagsMap"
+      "maxLength" : 5,
+      "minLength" : 5,
+      "pattern" : "^DRAFT$",
+      "description" : "Draft Version."
     }
   },
-  "required" : [ "PromptArn" ],
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/CreatedAt", "/properties/PromptId", "/properties/UpdatedAt", "/properties/Version", "/properties/Name", "/properties/DefaultVariant", "/properties/Variants", "/properties/CustomerEncryptionKeyArn" ],
+  "required" : [ "Name" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/CreatedAt", "/properties/Id", "/properties/UpdatedAt", "/properties/Version" ],
+  "writeOnlyProperties" : [ "/properties/Variants/*/TemplateConfiguration/Text/TextS3Location" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
-  "createOnlyProperties" : [ "/properties/PromptArn", "/properties/Description", "/properties/Tags" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "bedrock:CreatePromptVersion", "bedrock:GetPrompt", "bedrock:TagResource", "bedrock:ListTagsForResource", "kms:GenerateDataKey", "kms:Decrypt" ]
+      "permissions" : [ "bedrock:CreatePrompt", "bedrock:GetPrompt", "s3:GetObject", "s3:GetObjectVersion", "bedrock:TagResource", "bedrock:ListTagsForResource", "kms:GenerateDataKey", "kms:Decrypt" ]
     },
     "read" : {
       "permissions" : [ "bedrock:GetPrompt", "bedrock:ListTagsForResource", "kms:Decrypt" ]
+    },
+    "update" : {
+      "permissions" : [ "bedrock:UpdatePrompt", "bedrock:GetPrompt", "s3:GetObject", "s3:GetObjectVersion", "bedrock:TagResource", "bedrock:UntagResource", "bedrock:ListTagsForResource", "kms:GenerateDataKey", "kms:Decrypt" ]
     },
     "delete" : {
       "permissions" : [ "bedrock:DeletePrompt", "bedrock:GetPrompt" ]
     },
     "list" : {
-      "permissions" : [ "bedrock:ListPrompts" ],
-      "handlerSchema" : {
-        "properties" : {
-          "PromptArn" : {
-            "$ref" : "resource-schema.json#/properties/PromptArn"
-          }
-        },
-        "required" : [ "PromptArn" ]
-      }
+      "permissions" : [ "bedrock:ListPrompts" ]
     }
   },
   "tagging" : {
     "cloudFormationSystemTags" : false,
     "tagOnCreate" : true,
     "tagProperty" : "/properties/Tags",
-    "tagUpdatable" : false,
+    "tagUpdatable" : true,
     "taggable" : true,
-    "permissions" : [ "bedrock:TagResource", "bedrock:ListTagsForResource" ]
+    "permissions" : [ "bedrock:TagResource", "bedrock:UntagResource", "bedrock:ListTagsForResource" ]
   },
   "additionalProperties" : false
 }

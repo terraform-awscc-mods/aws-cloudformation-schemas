@@ -818,6 +818,14 @@
       "maxLength" : 256,
       "minLength" : 0
     },
+    "FolderArns" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      },
+      "maxItems" : 20,
+      "minItems" : 0
+    },
     "Name" : {
       "type" : "string",
       "maxLength" : 128,
@@ -834,7 +842,8 @@
     }
   },
   "readOnlyProperties" : [ "/properties/Arn" ],
-  "createOnlyProperties" : [ "/properties/AwsAccountId", "/properties/TopicId" ],
+  "writeOnlyProperties" : [ "/properties/FolderArns" ],
+  "createOnlyProperties" : [ "/properties/AwsAccountId", "/properties/FolderArns", "/properties/TopicId" ],
   "primaryIdentifier" : [ "/properties/AwsAccountId", "/properties/TopicId" ],
   "handlers" : {
     "create" : {
