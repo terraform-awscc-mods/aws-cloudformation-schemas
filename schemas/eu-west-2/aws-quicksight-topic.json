@@ -293,7 +293,7 @@
     },
     "NumberScale" : {
       "type" : "string",
-      "enum" : [ "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS" ]
+      "enum" : [ "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES" ]
     },
     "PropertyRole" : {
       "type" : "string",
@@ -573,6 +573,16 @@
       "required" : [ "ColumnName" ],
       "additionalProperties" : false
     },
+    "TopicConfigOptions" : {
+      "type" : "object",
+      "description" : "Model for configuration of a Topic",
+      "properties" : {
+        "QBusinessInsightsEnabled" : {
+          "type" : "boolean"
+        }
+      },
+      "additionalProperties" : false
+    },
     "TopicDateRangeFilter" : {
       "type" : "object",
       "properties" : {
@@ -607,6 +617,9 @@
           "items" : {
             "$ref" : "#/definitions/DatasetMetadata"
           }
+        },
+        "ConfigOptions" : {
+          "$ref" : "#/definitions/TopicConfigOptions"
         }
       },
       "additionalProperties" : false
@@ -806,6 +819,9 @@
       "maxLength" : 12,
       "minLength" : 12,
       "pattern" : "^[0-9]{12}$"
+    },
+    "ConfigOptions" : {
+      "$ref" : "#/definitions/TopicConfigOptions"
     },
     "DataSets" : {
       "type" : "array",
