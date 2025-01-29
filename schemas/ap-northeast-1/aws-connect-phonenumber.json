@@ -87,7 +87,7 @@
   "required" : [ "TargetArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "connect:ClaimPhoneNumber", "connect:SearchAvailablePhoneNumbers", "connect:DescribePhoneNumber", "connect:TagResource", "connect:ImportPhoneNumber", "sms-voice:DescribePhoneNumbers" ]
+      "permissions" : [ "connect:ClaimPhoneNumber", "connect:SearchAvailablePhoneNumbers", "connect:DescribePhoneNumber", "connect:TagResource", "connect:ImportPhoneNumber", "sms-voice:DescribePhoneNumbers", "social-messaging:GetLinkedWhatsAppBusinessAccountPhoneNumber", "social-messaging:TagResource" ]
     },
     "read" : {
       "permissions" : [ "connect:DescribePhoneNumber" ]
