@@ -94,13 +94,14 @@
   "required" : [ "MonitorName", "MonitorType" ],
   "createOnlyProperties" : [ "/properties/MonitorType", "/properties/MonitorDimension", "/properties/MonitorSpecification", "/properties/ResourceTags" ],
   "readOnlyProperties" : [ "/properties/MonitorArn", "/properties/CreationDate", "/properties/LastEvaluatedDate", "/properties/LastUpdatedDate", "/properties/DimensionalValueCount" ],
+  "writeOnlyProperties" : [ "/properties/ResourceTags" ],
   "primaryIdentifier" : [ "/properties/MonitorArn" ],
   "handlers" : {
     "create" : {
       "permissions" : [ "ce:CreateAnomalyMonitor", "ce:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "ce:GetAnomalyMonitors", "ce:ListTagsForResource" ]
+      "permissions" : [ "ce:GetAnomalyMonitors" ]
     },
     "update" : {
       "permissions" : [ "ce:UpdateAnomalyMonitor" ]
@@ -111,13 +112,5 @@
     "list" : {
       "permissions" : [ "ce:GetAnomalyMonitors" ]
     }
-  },
-  "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : false,
-    "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/ResourceTags",
-    "permissions" : [ "ce:ListTagsForResource" ]
   }
 }
