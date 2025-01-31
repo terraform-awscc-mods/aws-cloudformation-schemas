@@ -105,6 +105,11 @@
       "maximum" : 65535,
       "description" : "The port number on which InfluxDB accepts connections."
     },
+    "NetworkType" : {
+      "type" : "string",
+      "description" : "Network type of the InfluxDB Instance.",
+      "enum" : [ "IPV4", "DUAL" ]
+    },
     "LogDeliveryConfiguration" : {
       "type" : "object",
       "description" : "Configuration for sending logs to customer account from the InfluxDB instance.",
@@ -202,7 +207,7 @@
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "timestream-influxdb:TagResource", "timestream-influxdb:ListTagsForResource", "timestream-influxdb:UntagResource" ]
   },
-  "createOnlyProperties" : [ "/properties/Name", "/properties/Username", "/properties/Password", "/properties/Organization", "/properties/Bucket", "/properties/VpcSubnetIds", "/properties/VpcSecurityGroupIds", "/properties/PubliclyAccessible", "/properties/DbStorageType", "/properties/AllocatedStorage" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Username", "/properties/Password", "/properties/Organization", "/properties/Bucket", "/properties/VpcSubnetIds", "/properties/VpcSecurityGroupIds", "/properties/PubliclyAccessible", "/properties/DbStorageType", "/properties/AllocatedStorage", "/properties/NetworkType" ],
   "writeOnlyProperties" : [ "/properties/Username", "/properties/Password", "/properties/Organization", "/properties/Bucket" ],
   "readOnlyProperties" : [ "/properties/Status", "/properties/Arn", "/properties/Id", "/properties/AvailabilityZone", "/properties/Endpoint", "/properties/SecondaryAvailabilityZone", "/properties/InfluxAuthParametersSecretArn" ],
   "handlers" : {
