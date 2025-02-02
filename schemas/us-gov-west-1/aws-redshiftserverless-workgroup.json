@@ -56,6 +56,20 @@
       },
       "additionalProperties" : false
     },
+    "PerformanceTarget" : {
+      "type" : "object",
+      "properties" : {
+        "Status" : {
+          "$ref" : "#/definitions/PerformanceTargetStatus"
+        },
+        "Level" : {
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 100
+        }
+      },
+      "additionalProperties" : false
+    },
     "VpcEndpoint" : {
       "type" : "object",
       "properties" : {
@@ -144,6 +158,9 @@
         },
         "CreationDate" : {
           "type" : "string"
+        },
+        "PricePerformanceTarget" : {
+          "$ref" : "#/definitions/PerformanceTarget"
         }
       },
       "additionalProperties" : false
@@ -168,6 +185,10 @@
     "WorkgroupStatus" : {
       "type" : "string",
       "enum" : [ "CREATING", "AVAILABLE", "MODIFYING", "DELETING" ]
+    },
+    "PerformanceTargetStatus" : {
+      "type" : "string",
+      "enum" : [ "ENABLED", "DISABLED" ]
     }
   },
   "properties" : {
@@ -243,6 +264,11 @@
       "description" : "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
       "type" : "integer"
     },
+    "PricePerformanceTarget" : {
+      "description" : "A property that represents the price performance target settings for the workgroup.",
+      "type" : "object",
+      "$ref" : "#/definitions/PerformanceTarget"
+    },
     "Tags" : {
       "description" : "The map of the key-value pairs used to tag the workgroup.",
       "type" : "array",
@@ -259,29 +285,34 @@
     }
   },
   "tagging" : {
-    "taggable" : true
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "redshift-serverless:ListTagsForResource", "redshift-serverless:TagResource", "redshift-serverless:UntagResource" ]
   },
   "additionalProperties" : false,
   "required" : [ "WorkgroupName" ],
   "createOnlyProperties" : [ "/properties/WorkgroupName", "/properties/NamespaceName" ],
   "readOnlyProperties" : [ "/properties/Workgroup", "/properties/Workgroup/WorkgroupId", "/properties/Workgroup/WorkgroupArn", "/properties/Workgroup/WorkgroupName", "/properties/Workgroup/NamespaceName", "/properties/Workgroup/BaseCapacity", "/properties/Workgroup/MaxCapacity", "/properties/Workgroup/EnhancedVpcRouting", "/properties/Workgroup/ConfigParameters/*/ParameterKey", "/properties/Workgroup/ConfigParameters/*/ParameterValue", "/properties/Workgroup/SecurityGroupIds", "/properties/Workgroup/SubnetIds", "/properties/Workgroup/Status", "/properties/Workgroup/Endpoint/Address", "/properties/Workgroup/Endpoint/Port", "/properties/Workgroup/Endpoint/VpcEndpoints/*/VpcEndpointId", "/properties/Workgroup/Endpoint/VpcEndpoints/*/VpcId", "/properties/Workgroup/Endpoint/VpcEndpoints/*/NetworkInterfaces/*/NetworkInterfaceId", "/properties/Workgroup/Endpoint/VpcEndpoints/*/NetworkInterfaces/*/SubnetId", "/properties/Workgroup/Endpoint/VpcEndpoints/*/NetworkInterfaces/*/PrivateIpAddress", "/properties/Workgroup/Endpoint/VpcEndpoints/*/NetworkInterfaces/*/AvailabilityZone", "/properties/Workgroup/PubliclyAccessible", "/properties/Workgroup/CreationDate" ],
-  "writeOnlyProperties" : [ "/properties/BaseCapacity", "/properties/MaxCapacity", "/properties/ConfigParameters", "/properties/SecurityGroupIds", "/properties/SubnetIds", "/properties/Tags", "/properties/Tags/*/Key", "/properties/Tags/*/Value" ],
+  "writeOnlyProperties" : [ "/properties/BaseCapacity", "/properties/MaxCapacity", "/properties/ConfigParameters", "/properties/SecurityGroupIds", "/properties/SubnetIds" ],
   "primaryIdentifier" : [ "/properties/WorkgroupName" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:CreateNamespace", "redshift-serverless:CreateWorkgroup", "redshift-serverless:GetWorkgroup", "redshift-serverless:GetNamespace" ]
+      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:CreateNamespace", "redshift-serverless:CreateWorkgroup", "redshift-serverless:GetWorkgroup", "redshift-serverless:GetNamespace", "redshift-serverless:ListTagsForResource", "redshift-serverless:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:GetWorkgroup" ]
+      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:GetWorkgroup", "redshift-serverless:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:ListTagsForResource", "redshift-serverless:TagResource", "redshift-serverless:UntagResource", "redshift-serverless:GetWorkgroup", "redshift-serverless:UpdateWorkgroup" ]
+      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:ListTagsForResource", "redshift-serverless:TagResource", "redshift-serverless:UntagResource", "redshift-serverless:GetWorkgroup", "redshift-serverless:UpdateWorkgroup", "redshift-serverless:ListTagsForResource", "redshift-serverless:TagResource", "redshift-serverless:UntagResource" ]
     },
     "delete" : {
-      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:GetWorkgroup", "redshift-serverless:GetNamespace", "redshift-serverless:DeleteWorkgroup" ]
+      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:GetWorkgroup", "redshift-serverless:GetNamespace", "redshift-serverless:DeleteWorkgroup", "redshift-serverless:ListTagsForResource", "redshift-serverless:UntagResource" ]
     },
     "list" : {
-      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:ListWorkgroups" ]
+      "permissions" : [ "ec2:DescribeVpcAttribute", "ec2:DescribeSecurityGroups", "ec2:DescribeAddresses", "ec2:DescribeInternetGateways", "ec2:DescribeSubnets", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "redshift-serverless:ListWorkgroups", "redshift-serverless:ListTagsForResource" ]
     }
   }
 }
