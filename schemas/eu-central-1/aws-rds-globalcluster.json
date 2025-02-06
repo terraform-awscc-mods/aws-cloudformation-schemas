@@ -95,7 +95,6 @@
   "propertyTransform" : {
     "/properties/GlobalClusterIdentifier" : "$lowercase(GlobalClusterIdentifier)"
   },
-  "readOnlyProperties" : [ "/properties/GlobalEndpoint" ],
   "createOnlyProperties" : [ "/properties/GlobalClusterIdentifier", "/properties/SourceDBClusterIdentifier", "/properties/StorageEncrypted", "/properties/Engine" ],
   "primaryIdentifier" : [ "/properties/GlobalClusterIdentifier" ],
   "handlers" : {

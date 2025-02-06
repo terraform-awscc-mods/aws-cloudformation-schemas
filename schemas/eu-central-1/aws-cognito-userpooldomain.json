@@ -15,9 +15,6 @@
     "Domain" : {
       "type" : "string"
     },
-    "ManagedLoginVersion" : {
-      "type" : "integer"
-    },
     "CustomDomainConfig" : {
       "$ref" : "#/definitions/CustomDomainConfigType"
     }

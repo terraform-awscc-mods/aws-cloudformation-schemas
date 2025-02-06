@@ -126,7 +126,9 @@
   "required" : [ "SyncName" ],
   "createOnlyProperties" : [ "/properties/KMSKeyArn", "/properties/SyncFormat", "/properties/BucketPrefix", "/properties/SyncName", "/properties/BucketRegion", "/properties/BucketName", "/properties/S3Destination", "/properties/SyncType" ],
   "primaryIdentifier" : [ "/properties/SyncName" ],
-  "readOnlyProperties" : [ "/properties/SyncName" ],
+  "tagging" : {
+    "taggable" : false
+  },
   "handlers" : {
     "create" : {
       "permissions" : [ "ssm:CreateResourceDataSync", "ssm:ListResourceDataSync" ]
