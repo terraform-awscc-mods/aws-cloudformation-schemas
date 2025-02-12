@@ -45,8 +45,7 @@
   "required" : [ "ContactFlowId" ],
   "primaryIdentifier" : [ "/properties/ContactFlowVersionARN" ],
   "readOnlyProperties" : [ "/properties/ContactFlowVersionARN", "/properties/Version", "/properties/FlowContentSha256" ],
-  "createOnlyProperties" : [ "/properties/ContactFlowId" ],
-  "conditionalCreateOnlyProperties" : [ "/properties/VersionDescription" ],
+  "createOnlyProperties" : [ "/properties/ContactFlowId", "/properties/Description" ],
   "handlers" : {
     "create" : {
       "permissions" : [ "connect:CreateContactFlowVersion", "connect:DescribeContactFlow" ]
