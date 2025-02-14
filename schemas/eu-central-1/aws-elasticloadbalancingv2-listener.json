@@ -1,8 +1,10 @@
 {
   "tagging" : {
-    "taggable" : false,
-    "tagOnCreate" : false,
-    "tagUpdatable" : false,
+    "permissions" : [ "elasticloadbalancing:AddTags", "elasticloadbalancing:DescribeTags", "elasticloadbalancing:RemoveTags" ],
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "tagProperty" : "/properties/Tags",
     "cloudFormationSystemTags" : false
   },
   "typeName" : "AWS::ElasticLoadBalancingV2::Listener",
@@ -14,13 +16,13 @@
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-elasticloadbalancingv2.git",
   "handlers" : {
     "read" : {
-      "permissions" : [ "elasticloadbalancing:DescribeListeners", "elasticloadbalancing:DescribeListenerAttributes" ]
+      "permissions" : [ "elasticloadbalancing:DescribeListeners", "elasticloadbalancing:DescribeListenerAttributes", "elasticloadbalancing:DescribeTags" ]
     },
     "create" : {
-      "permissions" : [ "elasticloadbalancing:CreateListener", "elasticloadbalancing:DescribeListeners", "cognito-idp:DescribeUserPoolClient", "elasticloadbalancing:ModifyListenerAttributes" ]
+      "permissions" : [ "elasticloadbalancing:CreateListener", "elasticloadbalancing:DescribeListeners", "cognito-idp:DescribeUserPoolClient", "elasticloadbalancing:ModifyListenerAttributes", "elasticloadbalancing:AddTags" ]
     },
     "update" : {
-      "permissions" : [ "elasticloadbalancing:ModifyListener", "elasticloadbalancing:DescribeListeners", "cognito-idp:DescribeUserPoolClient", "elasticloadbalancing:ModifyListenerAttributes" ]
+      "permissions" : [ "elasticloadbalancing:ModifyListener", "elasticloadbalancing:DescribeListeners", "cognito-idp:DescribeUserPoolClient", "elasticloadbalancing:ModifyListenerAttributes", "elasticloadbalancing:AddTags", "elasticloadbalancing:RemoveTags" ]
     },
     "list" : {
       "permissions" : [ "elasticloadbalancing:DescribeListeners" ],
@@ -52,7 +54,7 @@
   "additionalProperties" : false,
   "definitions" : {
     "MutualAuthentication" : {
-      "description" : "Specifies the configuration information for mutual authentication.",
+      "description" : "The mutual authentication configuration information.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -61,7 +63,7 @@
           "type" : "boolean"
         },
         "Mode" : {
-          "description" : "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``.",
+          "description" : "The client certificate handling method. The possible values are ``off``, ``passthrough``, and ``verify``. The default value is ``off``.",
           "type" : "string"
         },
         "TrustStoreArn" : {
@@ -69,7 +71,7 @@
           "type" : "string"
         },
         "AdvertiseTrustStoreCaNames" : {
-          "description" : "",
+          "description" : "Indicates whether trust store CA certificate names are advertised. The default value is ``off``.",
           "type" : "string"
         }
       }
@@ -302,6 +304,20 @@
         }
       }
     },
+    "Tag" : {
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Key" ]
+    },
     "AuthenticateOidcConfig" : {
       "anyOf" : [ {
         "required" : [ "ClientSecret" ]
@@ -448,6 +464,15 @@
     "Protocol" : {
       "description" : "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
       "type" : "string"
+    },
+    "Tags" : {
+      "uniqueItems" : false,
+      "description" : "",
+      "insertionOrder" : false,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
     }
   }
 }

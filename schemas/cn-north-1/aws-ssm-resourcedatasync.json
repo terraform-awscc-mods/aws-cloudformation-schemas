@@ -7,31 +7,42 @@
       "$ref" : "#/definitions/S3Destination"
     },
     "KMSKeyArn" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 0,
+      "maxLength" : 512
     },
     "SyncSource" : {
       "$ref" : "#/definitions/SyncSource"
     },
     "BucketName" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 2048
     },
     "BucketRegion" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 64
     },
     "SyncFormat" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 0,
+      "maxLength" : 1024
     },
     "SyncName" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 64
     },
     "SyncType" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 64
     },
     "BucketPrefix" : {
-      "type" : "string"
-    },
-    "Id" : {
-      "type" : "string"
+      "type" : "string",
+      "minLength" : 0,
+      "maxLength" : 64
     }
   },
   "definitions" : {
@@ -40,19 +51,29 @@
       "additionalProperties" : false,
       "properties" : {
         "KMSKeyArn" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 512
         },
         "BucketPrefix" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 256
         },
         "BucketName" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 2048
         },
         "BucketRegion" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 64
         },
         "SyncFormat" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 1024
         }
       },
       "required" : [ "BucketName", "BucketRegion", "SyncFormat" ]
@@ -72,7 +93,9 @@
           }
         },
         "SourceType" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 64
         },
         "AwsOrganizationsSource" : {
           "$ref" : "#/definitions/AwsOrganizationsSource"
@@ -92,7 +115,9 @@
           }
         },
         "OrganizationSourceType" : {
-          "type" : "string"
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 64
         }
       },
       "required" : [ "OrganizationSourceType" ]
@@ -100,6 +125,25 @@
   },
   "required" : [ "SyncName" ],
   "createOnlyProperties" : [ "/properties/KMSKeyArn", "/properties/SyncFormat", "/properties/BucketPrefix", "/properties/SyncName", "/properties/BucketRegion", "/properties/BucketName", "/properties/S3Destination", "/properties/SyncType" ],
-  "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id" ]
+  "primaryIdentifier" : [ "/properties/SyncName" ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "ssm:CreateResourceDataSync", "ssm:ListResourceDataSync" ]
+    },
+    "delete" : {
+      "permissions" : [ "ssm:ListResourceDataSync", "ssm:DeleteResourceDataSync" ]
+    },
+    "update" : {
+      "permissions" : [ "ssm:ListResourceDataSync", "ssm:UpdateResourceDataSync" ]
+    },
+    "list" : {
+      "permissions" : [ "ssm:ListResourceDataSync" ]
+    },
+    "read" : {
+      "permissions" : [ "ssm:ListResourceDataSync" ]
+    }
+  }
 }
