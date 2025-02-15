@@ -37,32 +37,9 @@
     "IsDefault" : {
       "type" : "boolean",
       "description" : ""
-    },
-    "Tags" : {
-      "type" : "array",
-      "description" : "",
-      "uniqueItems" : false,
-      "insertionOrder" : false,
-      "items" : {
-        "$ref" : "#/definitions/Tag"
-      }
     }
   },
   "definitions" : {
-    "Tag" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Value" : {
-          "type" : "string"
-        },
-        "Key" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "Key" ],
-      "description" : ""
-    },
     "TargetGroupTuple" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -484,16 +461,14 @@
   "readOnlyProperties" : [ "/properties/RuleArn", "/properties/IsDefault" ],
   "writeOnlyProperties" : [ "/properties/Actions/*/AuthenticateOidcConfig/ClientSecret", "/properties/ListenerArn" ],
   "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "elasticloadbalancing:AddTags", "elasticloadbalancing:DescribeTags", "elasticloadbalancing:RemoveTags" ]
+    "taggable" : false,
+    "tagOnCreate" : false,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "elasticloadbalancing:CreateRule", "elasticloadbalancing:DescribeRules", "cognito-idp:DescribeUserPoolClient", "elasticloadbalancing:AddTags" ]
+      "permissions" : [ "elasticloadbalancing:CreateRule", "elasticloadbalancing:DescribeRules", "cognito-idp:DescribeUserPoolClient" ]
     },
     "delete" : {
       "permissions" : [ "elasticloadbalancing:DeleteRule", "elasticloadbalancing:DescribeRules" ]
@@ -522,10 +497,10 @@
       "permissions" : [ "elasticloadbalancing:DescribeRules" ]
     },
     "read" : {
-      "permissions" : [ "elasticloadbalancing:DescribeRules", "elasticloadbalancing:DescribeTags" ]
+      "permissions" : [ "elasticloadbalancing:DescribeRules" ]
     },
     "update" : {
-      "permissions" : [ "elasticloadbalancing:ModifyRule", "elasticloadbalancing:SetRulePriorities", "elasticloadbalancing:DescribeRules", "elasticloadbalancing:AddTags", "elasticloadbalancing:RemoveTags" ]
+      "permissions" : [ "elasticloadbalancing:ModifyRule", "elasticloadbalancing:SetRulePriorities", "elasticloadbalancing:DescribeRules" ]
     }
   }
 }
