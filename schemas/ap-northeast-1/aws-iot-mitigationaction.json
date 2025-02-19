@@ -177,6 +177,14 @@
   "additionalProperties" : false,
   "primaryIdentifier" : [ "/properties/ActionName" ],
   "required" : [ "RoleArn", "ActionParams" ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iot:TagResource", "iot:UntagResource", "iot:ListTagsForResource" ]
+  },
   "createOnlyProperties" : [ "/properties/ActionName" ],
   "readOnlyProperties" : [ "/properties/MitigationActionArn", "/properties/MitigationActionId" ],
   "handlers" : {
