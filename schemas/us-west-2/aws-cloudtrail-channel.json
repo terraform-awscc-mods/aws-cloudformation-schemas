@@ -102,6 +102,7 @@
     }
   },
   "required" : [ ],
+  "writeOnlyProperties" : [ "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/ChannelArn" ],
   "createOnlyProperties" : [ "/properties/Source" ],
   "primaryIdentifier" : [ "/properties/ChannelArn" ],
@@ -110,15 +111,14 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "CloudTrail:AddTags", "CloudTrail:RemoveTags", "CloudTrail:ListTags" ]
+    "tagProperty" : "/properties/Tags"
   },
   "handlers" : {
     "create" : {
       "permissions" : [ "CloudTrail:CreateChannel", "CloudTrail:AddTags" ]
     },
     "read" : {
-      "permissions" : [ "CloudTrail:GetChannel", "CloudTrail:ListChannels", "CloudTrail:ListTags" ]
+      "permissions" : [ "CloudTrail:GetChannel", "CloudTrail:ListChannels" ]
     },
     "update" : {
       "permissions" : [ "CloudTrail:UpdateChannel", "CloudTrail:GetChannel", "CloudTrail:AddTags", "CloudTrail:RemoveTags" ]
