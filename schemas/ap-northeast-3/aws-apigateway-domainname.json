@@ -1,54 +1,54 @@
 {
-  "typeName" : "AWS::ApiGateway::DomainName",
-  "description" : "Resource Type definition for AWS::ApiGateway::DomainName",
-  "additionalProperties" : false,
-  "properties" : {
-    "Id" : {
-      "type" : "string"
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "tagProperty" : "/properties/Tags",
+    "cloudFormationSystemTags" : true
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "apigateway:GET" ]
     },
-    "DistributionDomainName" : {
-      "type" : "string"
+    "create" : {
+      "permissions" : [ "apigateway:POST", "apigateway:PUT", "apigateway:GET" ]
     },
-    "DistributionHostedZoneId" : {
-      "type" : "string"
+    "update" : {
+      "permissions" : [ "apigateway:GET", "apigateway:PUT", "apigateway:PATCH" ]
     },
-    "RegionalDomainName" : {
-      "type" : "string"
+    "list" : {
+      "permissions" : [ "apigateway:GET" ]
     },
-    "RegionalHostedZoneId" : {
-      "type" : "string"
-    },
-    "CertificateArn" : {
-      "type" : "string"
-    },
-    "DomainName" : {
-      "type" : "string"
-    },
-    "EndpointConfiguration" : {
-      "$ref" : "#/definitions/EndpointConfiguration"
-    },
-    "RegionalCertificateArn" : {
-      "type" : "string"
-    },
-    "SecurityPolicy" : {
-      "type" : "string"
-    },
-    "Tags" : {
-      "type" : "array",
-      "uniqueItems" : false,
-      "items" : {
-        "$ref" : "#/definitions/Tag"
-      }
+    "delete" : {
+      "permissions" : [ "apigateway:GET", "apigateway:DELETE" ]
     }
   },
+  "typeName" : "AWS::ApiGateway::DomainName",
+  "readOnlyProperties" : [ "/properties/RegionalHostedZoneId", "/properties/DistributionDomainName", "/properties/RegionalDomainName", "/properties/DistributionHostedZoneId" ],
+  "description" : "Resource Type definition for AWS::ApiGateway::DomainName.",
+  "createOnlyProperties" : [ "/properties/DomainName" ],
+  "additionalProperties" : false,
+  "primaryIdentifier" : [ "/properties/DomainName" ],
   "definitions" : {
-    "EndpointConfiguration" : {
-      "type" : "object",
+    "MutualTlsAuthentication" : {
       "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "TruststoreVersion" : {
+          "type" : "string"
+        },
+        "TruststoreUri" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EndpointConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
       "properties" : {
         "Types" : {
           "type" : "array",
-          "uniqueItems" : true,
           "items" : {
             "type" : "string"
           }
@@ -56,21 +56,57 @@
       }
     },
     "Tag" : {
-      "type" : "object",
       "additionalProperties" : false,
+      "type" : "object",
       "properties" : {
-        "Key" : {
-          "type" : "string"
-        },
         "Value" : {
           "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
         }
-      },
-      "required" : [ "Value", "Key" ]
+      }
     }
   },
-  "required" : [ "DomainName" ],
-  "readOnlyProperties" : [ "/properties/DistributionDomainName", "/properties/RegionalDomainName", "/properties/DistributionHostedZoneId", "/properties/RegionalHostedZoneId", "/properties/Id" ],
-  "createOnlyProperties" : [ "/properties/DomainName" ],
-  "primaryIdentifier" : [ "/properties/Id" ]
+  "properties" : {
+    "MutualTlsAuthentication" : {
+      "$ref" : "#/definitions/MutualTlsAuthentication"
+    },
+    "OwnershipVerificationCertificateArn" : {
+      "type" : "string"
+    },
+    "RegionalHostedZoneId" : {
+      "type" : "string"
+    },
+    "RegionalDomainName" : {
+      "type" : "string"
+    },
+    "DomainName" : {
+      "type" : "string"
+    },
+    "SecurityPolicy" : {
+      "type" : "string"
+    },
+    "DistributionHostedZoneId" : {
+      "type" : "string"
+    },
+    "EndpointConfiguration" : {
+      "$ref" : "#/definitions/EndpointConfiguration"
+    },
+    "DistributionDomainName" : {
+      "type" : "string"
+    },
+    "RegionalCertificateArn" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "CertificateArn" : {
+      "type" : "string"
+    }
+  }
 }

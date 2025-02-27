@@ -56,15 +56,14 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "apigateway:PUT", "apigateway:DELETE", "apigateway:GET" ]
+    "tagProperty" : "/properties/Tags"
   },
   "handlers" : {
     "create" : {
       "permissions" : [ "apigateway:POST", "apigateway:PUT", "apigateway:GET", "ec2:CreateVpcEndpointServiceConfiguration", "ec2:DeleteVpcEndpointServiceConfigurations", "ec2:DescribeVpcEndpointServiceConfigurations", "ec2:ModifyVpcEndpointServicePermissions" ]
     },
     "update" : {
-      "permissions" : [ "apigateway:PATCH", "apigateway:GET", "apigateway:PUT", "apigateway:POST", "ec2:CreateVpcEndpointServiceConfiguration", "ec2:DeleteVpcEndpointServiceConfigurations", "ec2:DescribeVpcEndpointServiceConfigurations", "ec2:ModifyVpcEndpointServicePermissions" ]
+      "permissions" : [ "apigateway:PATCH", "apigateway:GET", "apigateway:PUT", "ec2:CreateVpcEndpointServiceConfiguration", "ec2:DeleteVpcEndpointServiceConfigurations", "ec2:DescribeVpcEndpointServiceConfigurations", "ec2:ModifyVpcEndpointServicePermissions" ]
     },
     "read" : {
       "permissions" : [ "apigateway:GET", "ec2:CreateVpcEndpointServiceConfiguration", "ec2:DeleteVpcEndpointServiceConfigurations", "ec2:DescribeVpcEndpointServiceConfigurations", "ec2:ModifyVpcEndpointServicePermissions" ]
