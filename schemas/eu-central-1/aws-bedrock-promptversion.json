@@ -61,7 +61,7 @@
           "items" : {
             "$ref" : "#/definitions/PromptInputVariable"
           },
-          "maxItems" : 5,
+          "maxItems" : 20,
           "minItems" : 0,
           "description" : "List of input variables",
           "insertionOrder" : true
@@ -103,7 +103,7 @@
           "items" : {
             "$ref" : "#/definitions/PromptInputVariable"
           },
-          "maxItems" : 5,
+          "maxItems" : 20,
           "minItems" : 0,
           "description" : "List of input variables",
           "insertionOrder" : true
