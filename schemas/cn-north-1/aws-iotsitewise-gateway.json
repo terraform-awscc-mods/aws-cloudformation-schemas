@@ -144,7 +144,7 @@
   "primaryIdentifier" : [ "/properties/GatewayId" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "iotsitewise:CreateGateway", "iotsitewise:DescribeGateway", "iotsitewise:DescribeGatewayCapabilityConfiguration", "iotsitewise:UpdateGatewayCapabilityConfiguration", "iam:PassRole", "iam:GetRole", "greengrass:GetCoreDevice", "iotsitewise:ListTagsForResource", "iotsitewise:TagResource", "iot:DescribeThing" ]
+      "permissions" : [ "iotsitewise:CreateGateway", "iotsitewise:DescribeGateway", "iotsitewise:DescribeGatewayCapabilityConfiguration", "iotsitewise:UpdateGatewayCapabilityConfiguration", "iam:PassRole", "iam:GetRole", "iotsitewise:ListTagsForResource", "iotsitewise:TagResource" ]
     },
     "read" : {
       "permissions" : [ "iotsitewise:DescribeGateway", "iotsitewise:DescribeGatewayCapabilityConfiguration", "iotsitewise:ListTagsForResource" ]

@@ -95,6 +95,8 @@
         "InfoIconLabelOptions" : {
           "$ref" : "#/definitions/SheetControlInfoIconLabelOptions"
         },
+        "HelperTextVisibility" : { },
+        "DateIconVisibility" : { },
         "DateTimeFormat" : {
           "minLength" : 1,
           "type" : "string",
@@ -136,7 +138,10 @@
         "Symbol" : {
           "$ref" : "#/definitions/NumericSeparatorSymbol"
         },
-        "Visibility" : { }
+        "Visibility" : { },
+        "GroupingStyle" : {
+          "$ref" : "#/definitions/DigitGroupingStyle"
+        }
       }
     },
     "PredefinedHierarchy" : {
@@ -743,6 +748,9 @@
         },
         "XAxisLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -1009,6 +1017,29 @@
       "type" : "string",
       "enum" : [ "DIMENSION", "MEASURE" ]
     },
+    "BodySectionDynamicCategoryDimensionConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Column" : {
+          "$ref" : "#/definitions/ColumnIdentifier"
+        },
+        "SortByMetrics" : {
+          "minItems" : 0,
+          "maxItems" : 100,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ColumnSort"
+          }
+        },
+        "Limit" : {
+          "maximum" : 1000,
+          "type" : "number",
+          "minimum" : 1
+        }
+      },
+      "required" : [ "Column" ]
+    },
     "NegativeValueConfiguration" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -1071,6 +1102,9 @@
           "pattern" : "^[\\w\\-]+$",
           "type" : "string",
           "maxLength" : 512
+        },
+        "RepeatConfiguration" : {
+          "$ref" : "#/definitions/BodySectionRepeatConfiguration"
         }
       },
       "required" : [ "Content", "SectionId" ]
@@ -1532,6 +1566,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "FontFamily" : {
+          "type" : "string"
+        },
         "FontStyle" : {
           "$ref" : "#/definitions/FontStyle"
         },
@@ -1988,6 +2025,9 @@
         },
         "SecondaryYAxisDisplayOptions" : {
           "$ref" : "#/definitions/AxisDisplayOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -2150,6 +2190,9 @@
         "ColorScale" : {
           "$ref" : "#/definitions/ColorScale"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "GroupLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
         }
@@ -2161,6 +2204,10 @@
       "properties" : {
         "Relative" : {
           "$ref" : "#/definitions/RelativeFontSize"
+        },
+        "Absolute" : {
+          "description" : "String based length that is composed of value and unit in px",
+          "type" : "string"
         }
       }
     },
@@ -2228,6 +2275,34 @@
         "Visibility" : { },
         "TooltipText" : {
           "$ref" : "#/definitions/SheetImageTooltipText"
+        }
+      }
+    },
+    "BodySectionRepeatConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "DimensionConfigurations" : {
+          "minItems" : 0,
+          "maxItems" : 3,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/BodySectionRepeatDimensionConfiguration"
+          }
+        },
+        "NonRepeatingVisuals" : {
+          "minItems" : 0,
+          "maxItems" : 20,
+          "type" : "array",
+          "items" : {
+            "minLength" : 1,
+            "pattern" : "^[\\w\\-]+$",
+            "type" : "string",
+            "maxLength" : 512
+          }
+        },
+        "PageBreakConfiguration" : {
+          "$ref" : "#/definitions/BodySectionRepeatPageBreakConfiguration"
         }
       }
     },
@@ -2634,6 +2709,9 @@
         "YAxisLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
         },
+        "SortConfiguration" : {
+          "$ref" : "#/definitions/ScatterPlotSortConfiguration"
+        },
         "Legend" : {
           "$ref" : "#/definitions/LegendOptions"
         },
@@ -2651,6 +2729,9 @@
         },
         "XAxisLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "VisualPalette" : {
           "$ref" : "#/definitions/VisualPalette"
@@ -2958,6 +3039,10 @@
           "$ref" : "#/definitions/ParameterDateTimePickerControl"
         }
       }
+    },
+    "DigitGroupingStyle" : {
+      "type" : "string",
+      "enum" : [ "DEFAULT", "LAKHS" ]
     },
     "ReferenceLineLabelConfiguration" : {
       "additionalProperties" : false,
@@ -4139,6 +4224,9 @@
         "Tooltip" : {
           "$ref" : "#/definitions/TooltipOptions"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "ValueLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
         },
@@ -4213,6 +4301,12 @@
         },
         "GaugeChartOptions" : {
           "$ref" : "#/definitions/GaugeChartOptions"
+        },
+        "ColorConfiguration" : {
+          "$ref" : "#/definitions/GaugeChartColorConfiguration"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "VisualPalette" : {
           "$ref" : "#/definitions/VisualPalette"
@@ -4725,11 +4819,23 @@
         "BoxPlotOptions" : {
           "$ref" : "#/definitions/BoxPlotOptions"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "PrimaryYAxisDisplayOptions" : {
           "$ref" : "#/definitions/AxisDisplayOptions"
         },
         "VisualPalette" : {
           "$ref" : "#/definitions/VisualPalette"
+        }
+      }
+    },
+    "ScatterPlotSortConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ScatterPlotLimitConfiguration" : {
+          "$ref" : "#/definitions/ItemsLimitConfiguration"
         }
       }
     },
@@ -5126,6 +5232,15 @@
       "type" : "string",
       "enum" : [ "HIDDEN", "VISIBLE" ]
     },
+    "VisualMenuOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
+    },
     "ComparisonMethod" : {
       "type" : "string",
       "enum" : [ "DIFFERENCE", "PERCENT_DIFFERENCE", "PERCENT" ]
@@ -5419,6 +5534,9 @@
         },
         "FieldWells" : {
           "$ref" : "#/definitions/SankeyDiagramFieldWells"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -5624,6 +5742,9 @@
         },
         "CustomNarrative" : {
           "$ref" : "#/definitions/CustomNarrativeOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -5696,6 +5817,15 @@
       },
       "required" : [ "Layout", "SectionId" ]
     },
+    "BodySectionRepeatPageBreakConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "After" : {
+          "$ref" : "#/definitions/SectionAfterPageBreak"
+        }
+      }
+    },
     "HeatMapConfiguration" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -5720,6 +5850,9 @@
         },
         "ColorScale" : {
           "$ref" : "#/definitions/ColorScale"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "RowLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
@@ -5915,6 +6048,20 @@
       },
       "required" : [ "Column", "FieldId" ]
     },
+    "GaugeChartColorConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ForegroundColor" : {
+          "pattern" : "^#[A-F0-9]{6}$",
+          "type" : "string"
+        },
+        "BackgroundColor" : {
+          "pattern" : "^#[A-F0-9]{6}$",
+          "type" : "string"
+        }
+      }
+    },
     "TooltipTitleType" : {
       "type" : "string",
       "enum" : [ "NONE", "PRIMARY_VALUE" ]
@@ -6019,6 +6166,9 @@
         "ColorConfiguration" : {
           "$ref" : "#/definitions/WaterfallChartColorConfiguration"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "CategoryAxisDisplayOptions" : {
           "$ref" : "#/definitions/AxisDisplayOptions"
         },
@@ -6105,6 +6255,9 @@
         "FieldOptions" : {
           "$ref" : "#/definitions/TableFieldOptions"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "TotalOptions" : {
           "$ref" : "#/definitions/TotalOptions"
         }
@@ -6131,6 +6284,9 @@
         },
         "XAxisLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "VisualPalette" : {
           "$ref" : "#/definitions/VisualPalette"
@@ -6404,6 +6560,29 @@
       },
       "required" : [ "ComputationId", "Type" ]
     },
+    "BodySectionDynamicNumericDimensionConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Column" : {
+          "$ref" : "#/definitions/ColumnIdentifier"
+        },
+        "SortByMetrics" : {
+          "minItems" : 0,
+          "maxItems" : 100,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ColumnSort"
+          }
+        },
+        "Limit" : {
+          "maximum" : 1000,
+          "type" : "number",
+          "minimum" : 1
+        }
+      },
+      "required" : [ "Column" ]
+    },
     "ParameterSliderControl" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -6664,6 +6843,9 @@
         },
         "ImageScaling" : {
           "$ref" : "#/definitions/CustomContentImageScalingConfiguration"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -6961,6 +7143,9 @@
         },
         "FieldWells" : {
           "$ref" : "#/definitions/KPIFieldWells"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -7089,6 +7274,9 @@
         },
         "Tooltip" : {
           "$ref" : "#/definitions/TooltipOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "WindowOptions" : {
           "$ref" : "#/definitions/GeospatialWindowOptions"
@@ -7491,6 +7679,9 @@
         },
         "FieldOptions" : {
           "$ref" : "#/definitions/PivotTableFieldOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         },
         "TotalOptions" : {
           "$ref" : "#/definitions/PivotTableTotalOptions"
@@ -8371,6 +8562,9 @@
         },
         "ValueAxis" : {
           "$ref" : "#/definitions/AxisDisplayOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -8552,7 +8746,8 @@
           "minLength" : 0,
           "type" : "string",
           "maxLength" : 150000
-        }
+        },
+        "Interactions" : { }
       },
       "required" : [ "SheetTextBoxId" ]
     },
@@ -10100,6 +10295,9 @@
         "SmallMultiplesOptions" : {
           "$ref" : "#/definitions/SmallMultiplesOptions"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "ValueLabelOptions" : {
           "$ref" : "#/definitions/ChartAxisLabelOptions"
         },
@@ -10407,6 +10605,9 @@
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
         },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
+        },
         "AlternateBandEvenColor" : {
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
@@ -10690,6 +10891,9 @@
         },
         "WordCloudOptions" : {
           "$ref" : "#/definitions/WordCloudOptions"
+        },
+        "Interactions" : {
+          "$ref" : "#/definitions/VisualInteractionOptions"
         }
       }
     },
@@ -10805,6 +11009,18 @@
         }
       }
     },
+    "BodySectionRepeatDimensionConfiguration" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "DynamicNumericDimensionConfiguration" : {
+          "$ref" : "#/definitions/BodySectionDynamicNumericDimensionConfiguration"
+        },
+        "DynamicCategoryDimensionConfiguration" : {
+          "$ref" : "#/definitions/BodySectionDynamicCategoryDimensionConfiguration"
+        }
+      }
+    },
     "PaperOrientation" : {
       "type" : "string",
       "enum" : [ "PORTRAIT", "LANDSCAPE" ]
@@ -10836,6 +11052,15 @@
         },
         "ThousandsSeparator" : {
           "$ref" : "#/definitions/ThousandSeparatorOptions"
+        }
+      }
+    },
+    "ContextMenuOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
         }
       }
     },
@@ -10940,8 +11165,12 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "ContextMenuOption" : { },
-        "VisualMenuOption" : { }
+        "ContextMenuOption" : {
+          "$ref" : "#/definitions/ContextMenuOption"
+        },
+        "VisualMenuOption" : {
+          "$ref" : "#/definitions/VisualMenuOption"
+        }
       }
     },
     "PivotTableFieldWells" : {
