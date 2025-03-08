@@ -14,7 +14,7 @@
       "permissions" : [ "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:DescribeLoadBalancerAttributes", "elasticloadbalancing:DescribeCapacityReservation", "elasticloadbalancing:DescribeTags" ]
     },
     "create" : {
-      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:AddTags" ],
+      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:AddTags", "ec2:DescribeIpamPools" ],
       "timeoutInMinutes" : 30
     },
     "update" : {
