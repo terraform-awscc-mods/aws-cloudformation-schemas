@@ -108,13 +108,13 @@
   "writeOnlyProperties" : [ "/properties/CredentialArn", "/properties/UpstreamRegistry", "/properties/CustomRoleArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "ecr:DescribePullThroughCacheRules", "ecr:CreatePullThroughCacheRule", "ecr:DeletePullThroughCacheRule", "iam:CreateServiceLinkedRole", "secretsmanager:GetSecretValue" ]
+      "permissions" : [ "ecr:DescribePullThroughCacheRules", "ecr:CreatePullThroughCacheRule", "ecr:DeletePullThroughCacheRule", "iam:CreateServiceLinkedRole", "secretsmanager:GetSecretValue", "iam:PassRole" ]
     },
     "read" : {
       "permissions" : [ "ecr:DescribePullThroughCacheRules" ]
     },
     "update" : {
-      "permissions" : [ "ecr:DescribePullThroughCacheRules", "ecr:CreatePullThroughCacheRule", "ecr:DeletePullThroughCacheRule", "iam:CreateServiceLinkedRole", "secretsmanager:GetSecretValue" ]
+      "permissions" : [ "ecr:DescribePullThroughCacheRules", "ecr:CreatePullThroughCacheRule", "ecr:DeletePullThroughCacheRule", "iam:CreateServiceLinkedRole", "secretsmanager:GetSecretValue", "iam:PassRole" ]
     },
     "delete" : {
       "permissions" : [ "ecr:DescribePullThroughCacheRules", "ecr:DeletePullThroughCacheRule" ]
