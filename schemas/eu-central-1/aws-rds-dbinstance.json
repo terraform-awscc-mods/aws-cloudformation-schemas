@@ -362,7 +362,7 @@
     },
     "PerformanceInsightsRetentionPeriod" : {
       "type" : "integer",
-      "description" : "The number of days to retain Performance Insights data.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error."
+      "description" : "The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error."
     },
     "Port" : {
       "type" : "string",
@@ -502,7 +502,7 @@
   "conditionalCreateOnlyProperties" : [ "/properties/AutoMinorVersionUpgrade", "/properties/AvailabilityZone", "/properties/BackupRetentionPeriod", "/properties/DBClusterSnapshotIdentifier", "/properties/DBParameterGroupName", "/properties/DBSnapshotIdentifier", "/properties/Engine", "/properties/MultiAZ", "/properties/PerformanceInsightsKMSKeyId", "/properties/PreferredMaintenanceWindow", "/properties/RestoreTime", "/properties/SourceDBClusterIdentifier", "/properties/SourceDBInstanceAutomatedBackupsArn", "/properties/SourceDBInstanceIdentifier", "/properties/SourceDbiResourceId", "/properties/StorageType", "/properties/UseLatestRestorableTime" ],
   "deprecatedProperties" : [ "/properties/TdeCredentialArn", "/properties/TdeCredentialPassword" ],
   "writeOnlyProperties" : [ "/properties/AllowMajorVersionUpgrade", "/properties/AutomaticBackupReplicationKmsKeyId", "/properties/CertificateRotationRestart", "/properties/DBSnapshotIdentifier", "/properties/DeleteAutomatedBackups", "/properties/MasterUserPassword", "/properties/RestoreTime", "/properties/SourceDBInstanceAutomatedBackupsArn", "/properties/SourceDBInstanceIdentifier", "/properties/SourceDbiResourceId", "/properties/SourceRegion", "/properties/TdeCredentialPassword", "/properties/UseDefaultProcessorFeatures", "/properties/UseLatestRestorableTime", "/properties/ApplyImmediately" ],
-  "readOnlyProperties" : [ "/properties/Endpoint/Address", "/properties/Endpoint/Port", "/properties/Endpoint/HostedZoneId", "/properties/DbiResourceId", "/properties/DBInstanceArn", "/properties/MasterUserSecret/SecretArn", "/properties/CertificateDetails/CAIdentifier", "/properties/CertificateDetails/ValidTill", "/properties/DatabaseInsightsMode" ],
+  "readOnlyProperties" : [ "/properties/Endpoint", "/properties/Endpoint/Address", "/properties/Endpoint/Port", "/properties/Endpoint/HostedZoneId", "/properties/DbiResourceId", "/properties/DBInstanceArn", "/properties/MasterUserSecret/SecretArn", "/properties/CertificateDetails", "/properties/CertificateDetails/CAIdentifier", "/properties/CertificateDetails/ValidTill", "/properties/DatabaseInsightsMode" ],
   "primaryIdentifier" : [ "/properties/DBInstanceIdentifier" ],
   "handlers" : {
     "create" : {
