@@ -182,16 +182,16 @@
   "primaryIdentifier" : [ "/properties/LicenseArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateLicense" ]
+      "permissions" : [ "license-manager:CreateLicense", "license-manager:GetLicense", "kms:CreateGrant" ]
     },
     "read" : {
       "permissions" : [ "license-manager:GetLicense" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateLicenseVersion" ]
+      "permissions" : [ "license-manager:CreateLicenseVersion", "license-manager:GetLicense" ]
     },
     "delete" : {
-      "permissions" : [ "license-manager:DeleteLicense" ]
+      "permissions" : [ "license-manager:DeleteLicense", "license-manager:GetLicense" ]
     },
     "list" : {
       "permissions" : [ "license-manager:ListLicenses" ]

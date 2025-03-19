@@ -54,16 +54,16 @@
   "primaryIdentifier" : [ "/properties/GrantArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateGrant" ]
+      "permissions" : [ "license-manager:CreateGrant", "license-manager:CreateGrantVersion", "license-manager:GetGrant" ]
     },
     "read" : {
       "permissions" : [ "license-manager:GetGrant" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateGrantVersion" ]
+      "permissions" : [ "license-manager:CreateGrantVersion", "license-manager:GetGrant" ]
     },
     "delete" : {
-      "permissions" : [ "license-manager:DeleteGrant" ]
+      "permissions" : [ "license-manager:DeleteGrant", "license-manager:GetGrant" ]
     },
     "list" : {
       "permissions" : [ "license-manager:ListDistributedGrants" ]
