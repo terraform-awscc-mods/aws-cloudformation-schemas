@@ -806,31 +806,24 @@
   },
   "required" : [ "AuthMode", "DefaultUserSettings", "DomainName", "SubnetIds", "VpcId" ],
   "createOnlyProperties" : [ "/properties/AuthMode", "/properties/DomainName", "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec", "/properties/KmsKeyId", "/properties/VpcId", "/properties/Tags" ],
+  "writeOnlyProperties" : [ "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/DomainId" ],
   "readOnlyProperties" : [ "/properties/DomainArn", "/properties/Url", "/properties/DomainId", "/properties/HomeEfsFileSystemId", "/properties/SecurityGroupIdForDomainBoundary", "/properties/SingleSignOnManagedApplicationInstanceId", "/properties/SingleSignOnApplicationArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "sagemaker:CreateApp", "sagemaker:CreateDomain", "sagemaker:DescribeDomain", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:CreateServiceLinkedRole", "iam:PassRole", "efs:CreateFileSystem", "kms:CreateGrant", "kms:Decrypt", "kms:DescribeKey", "kms:GenerateDataKeyWithoutPlainText", "sagemaker:ListTags", "sagemaker:AddTags" ]
+      "permissions" : [ "sagemaker:CreateApp", "sagemaker:CreateDomain", "sagemaker:DescribeDomain", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:CreateServiceLinkedRole", "iam:PassRole", "efs:CreateFileSystem", "kms:CreateGrant", "kms:Decrypt", "kms:DescribeKey", "kms:GenerateDataKeyWithoutPlainText" ]
     },
     "read" : {
-      "permissions" : [ "sagemaker:DescribeDomain", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:DescribeDomain" ]
     },
     "update" : {
-      "permissions" : [ "sagemaker:CreateApp", "sagemaker:UpdateDomain", "sagemaker:DescribeDomain", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole", "sagemaker:AddTags", "sagemaker:DeleteTags", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:CreateApp", "sagemaker:UpdateDomain", "sagemaker:DescribeDomain", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole" ]
     },
     "delete" : {
-      "permissions" : [ "sagemaker:DeleteApp", "sagemaker:DeleteDomain", "sagemaker:DescribeDomain", "sagemaker:DeleteTags" ]
+      "permissions" : [ "sagemaker:DeleteApp", "sagemaker:DeleteDomain", "sagemaker:DescribeDomain" ]
     },
     "list" : {
-      "permissions" : [ "sagemaker:ListDomains", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:ListDomains" ]
     }
-  },
-  "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : false,
-    "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "sagemaker:AddTags", "sagemaker:ListTags", "sagemaker:DeleteTags" ]
   }
 }

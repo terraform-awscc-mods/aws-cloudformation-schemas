@@ -240,7 +240,7 @@
           "description" : "A list of custom images available for use for JupyterLab apps",
           "uniqueItems" : false,
           "minItems" : 0,
-          "maxItems" : 200,
+          "maxItems" : 30,
           "items" : {
             "$ref" : "#/definitions/CustomImage"
           }
@@ -368,7 +368,7 @@
           "description" : "A list of custom images for use for CodeEditor apps.",
           "uniqueItems" : false,
           "minItems" : 0,
-          "maxItems" : 200,
+          "maxItems" : 30,
           "items" : {
             "$ref" : "#/definitions/CustomImage"
           }
@@ -572,31 +572,24 @@
   },
   "required" : [ "DomainId", "UserProfileName" ],
   "createOnlyProperties" : [ "/properties/DomainId", "/properties/UserProfileName", "/properties/SingleSignOnUserIdentifier", "/properties/SingleSignOnUserValue", "/properties/UserSettings/RStudioServerProAppSettings/AccessStatus", "/properties/UserSettings/RStudioServerProAppSettings/UserGroup", "/properties/Tags" ],
+  "writeOnlyProperties" : [ "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/UserProfileName", "/properties/DomainId" ],
   "readOnlyProperties" : [ "/properties/UserProfileArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "sagemaker:CreateUserProfile", "sagemaker:DescribeUserProfile", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole", "sagemaker:AddTags", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:CreateUserProfile", "sagemaker:DescribeUserProfile", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole" ]
     },
     "read" : {
-      "permissions" : [ "sagemaker:DescribeUserProfile", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:DescribeUserProfile" ]
     },
     "update" : {
-      "permissions" : [ "sagemaker:UpdateUserProfile", "sagemaker:DescribeUserProfile", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole", "sagemaker:AddTags", "sagemaker:DeleteTags", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:UpdateUserProfile", "sagemaker:DescribeUserProfile", "sagemaker:DescribeImage", "sagemaker:DescribeImageVersion", "iam:PassRole" ]
     },
     "delete" : {
-      "permissions" : [ "sagemaker:DeleteUserProfile", "sagemaker:DescribeUserProfile", "sagemaker:DeleteTags" ]
+      "permissions" : [ "sagemaker:DeleteUserProfile", "sagemaker:DescribeUserProfile" ]
     },
     "list" : {
-      "permissions" : [ "sagemaker:ListUserProfiles", "sagemaker:ListTags" ]
+      "permissions" : [ "sagemaker:ListUserProfiles" ]
     }
-  },
-  "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : false,
-    "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "sagemaker:AddTags", "sagemaker:ListTags", "sagemaker:DeleteTags" ]
   }
 }
