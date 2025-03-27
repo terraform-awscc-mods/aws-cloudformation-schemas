@@ -21,6 +21,9 @@
     "AllocatedCapacity" : {
       "type" : "number"
     },
+    "JobRunQueuingEnabled" : {
+      "type" : "boolean"
+    },
     "Name" : {
       "type" : "string"
     },
