@@ -2,14 +2,6 @@
   "typeName" : "AWS::GameLift::Alias",
   "description" : "The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameLift) fleet destination.",
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-gamelift.git",
-  "tagging" : {
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "permissions" : [ "gamelift:ListTagsForResource", "gamelift:TagResource", "gamelift:UntagResource" ]
-  },
   "definitions" : {
     "RoutingStrategy" : {
       "type" : "object",
@@ -36,26 +28,6 @@
       }, {
         "required" : [ "Message" ]
       } ]
-    },
-    "Tag" : {
-      "description" : "A key-value pair to associate with a resource.",
-      "type" : "object",
-      "properties" : {
-        "Key" : {
-          "type" : "string",
-          "description" : "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-          "minLength" : 1,
-          "maxLength" : 128
-        },
-        "Value" : {
-          "type" : "string",
-          "description" : "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-          "minLength" : 0,
-          "maxLength" : 256
-        }
-      },
-      "required" : [ "Key", "Value" ],
-      "additionalProperties" : false
     }
   },
   "properties" : {
@@ -79,36 +51,21 @@
     "AliasId" : {
       "description" : "Unique alias ID",
       "type" : "string"
-    },
-    "AliasArn" : {
-      "description" : "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Alias resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Alias ARN, the resource ID matches the AliasId value.",
-      "pattern" : "^arn:.*:alias\\/alias-\\S+",
-      "type" : "string"
-    },
-    "Tags" : {
-      "description" : "An array of key-value pairs to apply to this resource.",
-      "type" : "array",
-      "uniqueItems" : true,
-      "insertionOrder" : false,
-      "maxItems" : 200,
-      "items" : {
-        "$ref" : "#/definitions/Tag"
-      }
     }
   },
   "additionalProperties" : false,
   "required" : [ "Name", "RoutingStrategy" ],
-  "readOnlyProperties" : [ "/properties/AliasId", "/properties/AliasArn" ],
+  "readOnlyProperties" : [ "/properties/AliasId" ],
   "primaryIdentifier" : [ "/properties/AliasId" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "gamelift:CreateAlias", "gamelift:TagResource" ]
+      "permissions" : [ "gamelift:CreateAlias" ]
     },
     "read" : {
-      "permissions" : [ "gamelift:DescribeAlias", "gamelift:ListTagsForResource" ]
+      "permissions" : [ "gamelift:DescribeAlias" ]
     },
     "update" : {
-      "permissions" : [ "gamelift:UpdateAlias", "gamelift:DescribeAlias", "gamelift:ListTagsForResource", "gamelift:TagResource", "gamelift:UntagResource" ]
+      "permissions" : [ "gamelift:UpdateAlias" ]
     },
     "delete" : {
       "permissions" : [ "gamelift:DeleteAlias" ]
@@ -116,5 +73,6 @@
     "list" : {
       "permissions" : [ "gamelift:ListAliases" ]
     }
-  }
+  },
+  "taggable" : true
 }

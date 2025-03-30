@@ -6,10 +6,7 @@
   "tagging" : {
     "taggable" : true,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags",
-    "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "permissions" : [ "gamelift:ListTagsForResource", "gamelift:TagResource", "gamelift:UntagResource" ]
+    "tagProperty" : "/properties/Tags"
   },
   "definitions" : {
     "Tag" : {

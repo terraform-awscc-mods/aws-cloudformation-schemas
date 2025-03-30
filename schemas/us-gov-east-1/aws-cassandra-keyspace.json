@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::Cassandra::Keyspace",
-  "description" : "Resource schema for AWS::Cassandra::Keyspace",
+  "description" : "Resource Type definition for AWS::Cassandra::Keyspace",
   "properties" : {
     "KeyspaceName" : {
       "description" : "Name for Cassandra keyspace",
@@ -70,12 +70,12 @@
       "type" : "array",
       "items" : {
         "type" : "string",
-        "enum" : [ "ap-northeast-1", "ap-northeast-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ca-central-1", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "eu-west-3", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2" ]
+        "enum" : [ "af-south-1", "ap-northeast-1", "ap-northeast-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ca-central-1", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "eu-west-3", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2" ]
       },
       "uniqueItems" : true,
       "insertionOrder" : false,
       "minItems" : 2,
-      "maxItems" : 6
+      "maxItems" : 17
     }
   },
   "additionalProperties" : false,
