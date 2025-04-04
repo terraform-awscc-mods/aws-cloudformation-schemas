@@ -138,7 +138,7 @@
     "AutomaticBackupReplicationRetentionPeriod" : {
       "type" : "integer",
       "minimum" : 1,
-      "description" : ""
+      "description" : "The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. \n If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35."
     },
     "AvailabilityZone" : {
       "type" : "string",
@@ -155,7 +155,7 @@
     },
     "CertificateDetails" : {
       "$ref" : "#/definitions/CertificateDetails",
-      "description" : "The details of the DB instance's server certificate."
+      "description" : ""
     },
     "CertificateRotationRestart" : {
       "type" : "boolean",
@@ -288,7 +288,7 @@
     },
     "Endpoint" : {
       "$ref" : "#/definitions/Endpoint",
-      "description" : "The connection endpoint for the DB instance.\n  The endpoint might not be shown for instances with the status of ``creating``."
+      "description" : ""
     },
     "Engine" : {
       "type" : "string",
