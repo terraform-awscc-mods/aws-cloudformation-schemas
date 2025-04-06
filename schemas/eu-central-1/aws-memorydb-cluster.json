@@ -219,7 +219,8 @@
   "primaryIdentifier" : [ "/properties/ClusterName" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "kms:DescribeKey", "kms:CreateGrant", "memorydb:CreateCluster", "memorydb:DescribeClusters", "memorydb:TagResource", "memorydb:ListTags", "iam:CreateServiceLinkedRole" ]
+      "permissions" : [ "kms:DescribeKey", "kms:CreateGrant", "memorydb:CreateCluster", "memorydb:DescribeClusters", "memorydb:TagResource", "memorydb:ListTags", "iam:CreateServiceLinkedRole" ],
+      "timeoutInMinutes" : 720
     },
     "read" : {
       "permissions" : [ "memorydb:DescribeClusters", "memorydb:ListTags" ]
