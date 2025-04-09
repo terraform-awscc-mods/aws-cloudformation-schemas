@@ -185,7 +185,7 @@
           "description" : "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
           "uniqueItems" : false,
           "minItems" : 0,
-          "maxItems" : 5,
+          "maxItems" : 30,
           "items" : {
             "$ref" : "#/definitions/CustomImage"
           }
