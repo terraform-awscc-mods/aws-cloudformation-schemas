@@ -408,6 +408,10 @@
         }
       }
     },
+    "DataSetUseAs" : {
+      "type" : "string",
+      "enum" : [ "RLS_RULES" ]
+    },
     "StringDatasetParameterDefaultValues" : {
       "description" : "<p>The default values of a string parameter.</p>",
       "additionalProperties" : false,
@@ -848,7 +852,9 @@
             "$ref" : "#/definitions/InputColumn"
           }
         },
-        "UploadSettings" : { }
+        "UploadSettings" : {
+          "$ref" : "#/definitions/UploadSettings"
+        }
       },
       "required" : [ "DataSourceArn" ]
     },
@@ -1111,14 +1117,30 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "TagColumnOperation" : { },
-        "RenameColumnOperation" : { },
-        "UntagColumnOperation" : { },
-        "OverrideDatasetParameterOperation" : { },
-        "FilterOperation" : { },
-        "CastColumnTypeOperation" : { },
-        "CreateColumnsOperation" : { },
-        "ProjectOperation" : { }
+        "TagColumnOperation" : {
+          "$ref" : "#/definitions/TagColumnOperation"
+        },
+        "RenameColumnOperation" : {
+          "$ref" : "#/definitions/RenameColumnOperation"
+        },
+        "UntagColumnOperation" : {
+          "$ref" : "#/definitions/UntagColumnOperation"
+        },
+        "OverrideDatasetParameterOperation" : {
+          "$ref" : "#/definitions/OverrideDatasetParameterOperation"
+        },
+        "FilterOperation" : {
+          "$ref" : "#/definitions/FilterOperation"
+        },
+        "CastColumnTypeOperation" : {
+          "$ref" : "#/definitions/CastColumnTypeOperation"
+        },
+        "CreateColumnsOperation" : {
+          "$ref" : "#/definitions/CreateColumnsOperation"
+        },
+        "ProjectOperation" : {
+          "$ref" : "#/definitions/ProjectOperation"
+        }
       }
     },
     "InputColumnDataType" : {
@@ -1306,6 +1328,9 @@
       "items" : {
         "$ref" : "#/definitions/ResourcePermission"
       }
+    },
+    "UseAs" : {
+      "$ref" : "#/definitions/DataSetUseAs"
     },
     "Tags" : {
       "minItems" : 1,
