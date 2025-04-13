@@ -159,6 +159,12 @@
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
+        "Scope" : {
+          "type" : "string"
+        },
+        "Domain" : {
+          "type" : "string"
+        },
         "Name" : {
           "type" : "string"
         }
@@ -231,6 +237,9 @@
           }
         },
         "Type" : {
+          "type" : "string"
+        },
+        "CacheNamespace" : {
           "type" : "string"
         },
         "Location" : {
