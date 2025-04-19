@@ -183,6 +183,11 @@
       "type" : "string",
       "pattern" : "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$"
     },
+    "ArnForPolicy" : {
+      "description" : "The arn of the connection resource to be used in IAM policies.",
+      "type" : "string",
+      "pattern" : "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+$"
+    },
     "SecretArn" : {
       "description" : "The arn of the secrets manager secret created in the customer account.",
       "type" : "string",
@@ -210,11 +215,16 @@
       },
       "required" : [ "ResourceParameters" ],
       "additionalProperties" : false
+    },
+    "KmsKeyIdentifier" : {
+      "type" : "string",
+      "maxLength" : 2048,
+      "pattern" : "^[a-zA-Z0-9_\\-/:]*$"
     }
   },
   "additionalProperties" : false,
   "createOnlyProperties" : [ "/properties/Name" ],
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/SecretArn", "/properties/AuthParameters/ConnectivityParameters/ResourceParameters/ResourceAssociationArn", "/properties/InvocationConnectivityParameters/ResourceParameters/ResourceAssociationArn" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/ArnForPolicy", "/properties/SecretArn", "/properties/AuthParameters/ConnectivityParameters/ResourceParameters/ResourceAssociationArn", "/properties/InvocationConnectivityParameters/ResourceParameters/ResourceAssociationArn" ],
   "writeOnlyProperties" : [ "/properties/AuthParameters/BasicAuthParameters/Password", "/properties/AuthParameters/ApiKeyAuthParameters/ApiKeyValue", "/properties/AuthParameters/OAuthParameters/ClientParameters/ClientSecret", "/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/HeaderParameters", "/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/QueryStringParameters", "/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/BodyParameters", "/properties/AuthParameters/InvocationHttpParameters" ],
   "primaryIdentifier" : [ "/properties/Name" ],
   "tagging" : {
@@ -225,13 +235,13 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "events:CreateConnection", "events:DescribeConnection", "secretsmanager:CreateSecret", "secretsmanager:GetSecretValue", "secretsmanager:PutSecretValue", "iam:CreateServiceLinkedRole" ]
+      "permissions" : [ "events:CreateConnection", "events:DescribeConnection", "secretsmanager:CreateSecret", "secretsmanager:GetSecretValue", "secretsmanager:PutSecretValue", "iam:CreateServiceLinkedRole", "kms:DescribeKey", "kms:GenerateDataKey" ]
     },
     "read" : {
-      "permissions" : [ "events:DescribeConnection" ]
+      "permissions" : [ "events:DescribeConnection", "kms:Decrypt" ]
     },
     "update" : {
-      "permissions" : [ "events:UpdateConnection", "events:DescribeConnection", "secretsmanager:CreateSecret", "secretsmanager:UpdateSecret", "secretsmanager:GetSecretValue", "secretsmanager:PutSecretValue" ]
+      "permissions" : [ "events:UpdateConnection", "events:DescribeConnection", "secretsmanager:CreateSecret", "secretsmanager:UpdateSecret", "secretsmanager:GetSecretValue", "secretsmanager:PutSecretValue", "kms:Decrypt", "kms:DescribeKey", "kms:Encrypt", "kms:GenerateDataKey" ]
     },
     "delete" : {
       "permissions" : [ "events:DeleteConnection", "events:DescribeConnection" ]
