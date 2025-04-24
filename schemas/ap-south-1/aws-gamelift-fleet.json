@@ -424,6 +424,9 @@
   "readOnlyProperties" : [ "/properties/FleetId" ],
   "writeOnlyProperties" : [ "/properties/ApplyCapacity" ],
   "primaryIdentifier" : [ "/properties/FleetId" ],
+  "propertyTransform" : {
+    "/properties/AnywhereConfiguration/Cost" : "$contains(Cost, \".\") ? Cost : Cost & \".0\""
+  },
   "handlers" : {
     "create" : {
       "permissions" : [ "gamelift:CreateFleet", "gamelift:DescribeFleetAttributes", "gamelift:DescribeFleetLocationAttributes", "gamelift:UpdateFleetCapacity", "gamelift:DescribeFleetLocationCapacity", "gamelift:PutScalingPolicy", "gamelift:DescribeScalingPolicies" ]
