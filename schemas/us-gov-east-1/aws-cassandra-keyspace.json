@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::Cassandra::Keyspace",
-  "description" : "Resource Type definition for AWS::Cassandra::Keyspace",
+  "description" : "Resource schema for AWS::Cassandra::Keyspace",
   "properties" : {
     "KeyspaceName" : {
       "description" : "Name for Cassandra keyspace",
