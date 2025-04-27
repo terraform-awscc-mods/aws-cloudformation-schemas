@@ -81,13 +81,13 @@
     "tagOnCreate" : true,
     "tagUpdatable" : false,
     "cloudFormationSystemTags" : false,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "apprunner:TagResource", "apprunner:UntagResource", "apprunner:ListTagsForResource" ]
   },
   "additionalProperties" : false,
   "required" : [ "ServiceArn", "IngressVpcConfiguration" ],
-  "createOnlyProperties" : [ "/properties/VpcIngressConnectionName", "/properties/ServiceArn", "/properties/Tags" ],
+  "createOnlyProperties" : [ "/properties/VpcIngressConnectionName", "/properties/ServiceArn" ],
   "readOnlyProperties" : [ "/properties/VpcIngressConnectionArn", "/properties/DomainName", "/properties/Status" ],
-  "writeOnlyProperties" : [ "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/VpcIngressConnectionArn" ],
   "handlers" : {
     "create" : {
