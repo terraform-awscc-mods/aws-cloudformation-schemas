@@ -52,7 +52,7 @@
   "additionalProperties" : false,
   "definitions" : {
     "MutualAuthentication" : {
-      "description" : "Specifies the configuration information for mutual authentication.",
+      "description" : "The mutual authentication configuration information.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -69,7 +69,7 @@
           "type" : "string"
         },
         "AdvertiseTrustStoreCaNames" : {
-          "description" : "",
+          "description" : "Indicates whether trust store CA certificate names are advertised.",
           "type" : "string"
         }
       }

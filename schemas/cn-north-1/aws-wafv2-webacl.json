@@ -1,6 +1,7 @@
 {
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-wafv2.git",
   "tagging" : {
+    "permissions" : [ "wafv2:TagResource", "wafv2:UntagResource", "wafv2:ListTagsForResource" ],
     "tagOnCreate" : true,
     "taggable" : true,
     "tagUpdatable" : true,
@@ -12,7 +13,7 @@
       "permissions" : [ "wafv2:GetWebACL", "wafv2:ListTagsForResource" ]
     },
     "create" : {
-      "permissions" : [ "wafv2:CreateWebACL", "wafv2:GetWebACL", "wafv2:ListTagsForResource" ]
+      "permissions" : [ "wafv2:CreateWebACL", "wafv2:GetWebACL", "wafv2:ListTagsForResource", "wafv2:TagResource", "wafv2:UntagResource" ]
     },
     "update" : {
       "permissions" : [ "wafv2:UpdateWebACL", "wafv2:GetWebACL", "wafv2:ListTagsForResource", "wafv2:TagResource", "wafv2:UntagResource" ]
@@ -53,6 +54,25 @@
       "description" : "The inspection behavior to fall back to if the JSON in the request body is invalid.",
       "type" : "string",
       "enum" : [ "MATCH", "NO_MATCH", "EVALUATE_AS_STRING" ]
+    },
+    "DataProtect" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Field" : {
+          "$ref" : "#/definitions/FieldToProtect"
+        },
+        "Action" : {
+          "$ref" : "#/definitions/DataProtectionAction"
+        },
+        "ExcludeRateBasedDetails" : {
+          "type" : "boolean"
+        },
+        "ExcludeRuleMatchDetails" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "Field", "Action" ]
     },
     "ResponseStatusCode" : {
       "description" : "Custom response code.",
@@ -574,9 +594,6 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "JsonBody" : {
-          "$ref" : "#/definitions/JsonBody"
-        },
         "AllQueryArguments" : {
           "description" : "All query arguments of a web request.",
           "type" : "object"
@@ -595,10 +612,6 @@
           },
           "required" : [ "Name" ]
         },
-        "UriPath" : {
-          "description" : "The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg.",
-          "type" : "object"
-        },
         "QueryString" : {
           "description" : "The query string of a web request. This is the part of a URL that appears after a ? character, if any.",
           "type" : "object"
@@ -606,15 +619,25 @@
         "Headers" : {
           "$ref" : "#/definitions/Headers"
         },
+        "Method" : {
+          "description" : "The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform.",
+          "type" : "object"
+        },
+        "UriFragment" : {
+          "$ref" : "#/definitions/UriFragment"
+        },
+        "JsonBody" : {
+          "$ref" : "#/definitions/JsonBody"
+        },
+        "UriPath" : {
+          "description" : "The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg.",
+          "type" : "object"
+        },
         "Cookies" : {
           "$ref" : "#/definitions/Cookies"
         },
         "JA4Fingerprint" : {
           "$ref" : "#/definitions/JA4Fingerprint"
-        },
-        "Method" : {
-          "description" : "The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform.",
-          "type" : "object"
         },
         "Body" : {
           "$ref" : "#/definitions/Body"
@@ -885,6 +908,10 @@
         }
       }
     },
+    "DataProtectionAction" : {
+      "type" : "string",
+      "enum" : [ "SUBSTITUTION", "HASH" ]
+    },
     "Label" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -894,6 +921,27 @@
         }
       },
       "required" : [ "Name" ]
+    },
+    "DataProtectionConfig" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "DataProtections" : {
+          "$ref" : "#/definitions/DataProtections"
+        }
+      },
+      "required" : [ "DataProtections" ]
+    },
+    "UriFragment" : {
+      "description" : "The path component of the URI Fragment. This is the part of a web request that identifies a fragment uri, for example, /abcd#introduction",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "FallbackBehavior" : {
+          "type" : "string",
+          "enum" : [ "MATCH", "NO_MATCH" ]
+        }
+      }
     },
     "ResponseInspectionJson" : {
       "description" : "Response JSON that indicate success or failure of a login request",
@@ -930,6 +978,26 @@
         }
       },
       "required" : [ "Identifier", "SuccessValues", "FailureValues" ]
+    },
+    "FieldToProtect" : {
+      "description" : "Field in log to protect.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "FieldKeys" : {
+          "description" : "List of field keys to protect",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FieldToProtectKeyName"
+          }
+        },
+        "FieldType" : {
+          "description" : "Field type to protect",
+          "type" : "string",
+          "enum" : [ "SINGLE_HEADER", "SINGLE_COOKIE", "SINGLE_QUERY_ARGUMENT", "QUERY_STRING", "BODY" ]
+        }
+      },
+      "required" : [ "FieldType" ]
     },
     "ManagedRuleGroupConfig" : {
       "description" : "ManagedRuleGroupConfig.",
@@ -1127,6 +1195,12 @@
         }
       }
     },
+    "FieldToProtectKeyName" : {
+      "minLength" : 1,
+      "description" : "Key of the field to protect.",
+      "type" : "string",
+      "maxLength" : 64
+    },
     "CountAction" : {
       "description" : "Allow traffic towards application.",
       "additionalProperties" : false,
@@ -1182,6 +1256,13 @@
         }
       },
       "required" : [ "InsertHeaders" ]
+    },
+    "DataProtections" : {
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/DataProtect"
+      }
     },
     "OverrideAction" : {
       "description" : "Override a RuleGroup or ManagedRuleGroup behavior. This can only be applied to Rule that has RuleGroupReferenceStatement or ManagedRuleGroupReferenceStatement.",
@@ -1713,6 +1794,10 @@
     },
     "ChallengeConfig" : {
       "$ref" : "#/definitions/ChallengeConfig"
+    },
+    "DataProtectionConfig" : {
+      "description" : "Collection of dataProtects.",
+      "$ref" : "#/definitions/DataProtectionConfig"
     },
     "Rules" : {
       "description" : "Collection of Rules.",
