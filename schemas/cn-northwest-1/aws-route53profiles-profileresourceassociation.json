@@ -41,13 +41,13 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "route53profiles:AssociateResourceToProfile", "route53profiles:GetProfileResourceAssociation", "route53resolver:*", "route53:*" ]
+      "permissions" : [ "route53profiles:AssociateResourceToProfile", "route53profiles:GetProfileResourceAssociation", "route53resolver:GetFirewallRuleGroup" ]
     },
     "read" : {
-      "permissions" : [ "route53profiles:GetProfileResourceAssociation", "route53resolver:*", "route53:*" ]
+      "permissions" : [ "route53profiles:GetProfileResourceAssociation", "route53resolver:GetFirewallRuleGroup" ]
     },
     "delete" : {
-      "permissions" : [ "route53profiles:DisassociateResourceFromProfile", "route53profiles:GetProfileResourceAssociation", "route53resolver:*", "route53:*" ]
+      "permissions" : [ "route53profiles:DisassociateResourceFromProfile", "route53profiles:GetProfileResourceAssociation", "route53resolver:GetFirewallRuleGroup" ]
     },
     "list" : {
       "handlerSchema" : {
@@ -58,10 +58,10 @@
         },
         "required" : [ "ProfileId" ]
       },
-      "permissions" : [ "route53profiles:ListProfileResourceAssociations", "route53resolver:*", "route53:*" ]
+      "permissions" : [ "route53profiles:ListProfileResourceAssociations", "route53resolver:GetFirewallRuleGroup" ]
     },
     "update" : {
-      "permissions" : [ "route53profiles:UpdateProfileResourceAssociation", "route53profiles:GetProfileResourceAssociation", "route53resolver:*", "route53:*" ]
+      "permissions" : [ "route53profiles:UpdateProfileResourceAssociation", "route53profiles:GetProfileResourceAssociation", "route53resolver:GetFirewallRuleGroup" ]
     }
   }
 }
