@@ -331,13 +331,13 @@
   "primaryIdentifier" : [ "/properties/GameServerGroupArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "gamelift:CreateGameServerGroup", "gamelift:TagResource", "gamelift:DescribeGameServerGroup", "iam:assumeRole", "iam:PassRole", "iam:CreateServiceLinkedRole", "ec2:DescribeAvailabilityZones", "ec2:DescribeSubnets", "ec2:RunInstances", "ec2:CreateTags", "ec2:DescribeLaunchTemplateVersions", "autoscaling:CreateAutoScalingGroup", "autoscaling:DescribeLifecycleHooks", "autoscaling:DescribeNotificationConfigurations", "autoscaling:CreateAutoScalingGroup", "autoscaling:CreateOrUpdateTags", "autoscaling:DescribeAutoScalingGroups", "autoscaling:ExitStandby", "autoscaling:PutLifecycleHook", "autoscaling:PutScalingPolicy", "autoscaling:ResumeProcesses", "autoscaling:SetInstanceProtection", "autoscaling:UpdateAutoScalingGroup", "events:PutRule", "events:PutTargets" ]
+      "permissions" : [ "gamelift:CreateGameServerGroup", "gamelift:ListTagsForResource", "gamelift:TagResource", "gamelift:DescribeGameServerGroup", "iam:assumeRole", "iam:PassRole", "iam:CreateServiceLinkedRole", "ec2:DescribeAvailabilityZones", "ec2:DescribeSubnets", "ec2:RunInstances", "ec2:CreateTags", "ec2:DescribeLaunchTemplateVersions", "autoscaling:CreateAutoScalingGroup", "autoscaling:DescribeLifecycleHooks", "autoscaling:DescribeNotificationConfigurations", "autoscaling:CreateAutoScalingGroup", "autoscaling:CreateOrUpdateTags", "autoscaling:DescribeAutoScalingGroups", "autoscaling:ExitStandby", "autoscaling:PutLifecycleHook", "autoscaling:PutScalingPolicy", "autoscaling:ResumeProcesses", "autoscaling:SetInstanceProtection", "autoscaling:UpdateAutoScalingGroup", "events:PutRule", "events:PutTargets" ]
     },
     "read" : {
-      "permissions" : [ "gamelift:DescribeGameServerGroup" ]
+      "permissions" : [ "gamelift:DescribeGameServerGroup", "gamelift:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "gamelift:UpdateGameServerGroup", "iam:assumeRole", "iam:PassRole", "autoscaling:DescribeAutoScalingGroups", "autoscaling:UpdateAutoScalingGroup", "autoscaling:SetInstanceProtection" ]
+      "permissions" : [ "gamelift:UpdateGameServerGroup", "gamelift:TagResource", "gamelift:UntagResource", "gamelift:ListTagsForResource", "iam:assumeRole", "iam:PassRole", "autoscaling:DescribeAutoScalingGroups", "autoscaling:UpdateAutoScalingGroup", "autoscaling:SetInstanceProtection" ]
     },
     "delete" : {
       "permissions" : [ "gamelift:DeleteGameServerGroup", "gamelift:DescribeGameServerGroup", "iam:assumeRole", "iam:PassRole", "iam:CreateServiceLinkedRole", "ec2:DescribeAvailabilityZones", "ec2:DescribeSubnets", "ec2:DescribeLaunchTemplateVersions", "autoscaling:CreateAutoScalingGroup", "autoscaling:DescribeLifecycleHooks", "autoscaling:DescribeNotificationConfigurations", "autoscaling:DescribeAutoScalingGroups", "autoscaling:ExitStandby", "autoscaling:PutLifecycleHook", "autoscaling:PutScalingPolicy", "autoscaling:ResumeProcesses", "autoscaling:SetInstanceProtection", "autoscaling:UpdateAutoScalingGroup", "autoscaling:DeleteAutoScalingGroup", "events:PutRule", "events:PutTargets" ]
