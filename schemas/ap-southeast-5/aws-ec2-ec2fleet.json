@@ -633,5 +633,8 @@
     "update" : {
       "permissions" : [ "ec2:ModifyFleet", "ec2:DescribeFleets" ]
     }
+  },
+  "tagging" : {
+    "taggable" : false
   }
 }

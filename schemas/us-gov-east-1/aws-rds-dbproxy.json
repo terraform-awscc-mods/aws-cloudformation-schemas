@@ -129,6 +129,14 @@
   "required" : [ "Auth", "DBProxyName", "EngineFamily", "RoleArn", "VpcSubnetIds" ],
   "readOnlyProperties" : [ "/properties/DBProxyArn", "/properties/Endpoint", "/properties/VpcId" ],
   "createOnlyProperties" : [ "/properties/DBProxyName", "/properties/EngineFamily", "/properties/VpcSubnetIds" ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "rds:AddTagsToResource", "rds:RemoveTagsFromResource", "rds:ListTagsForResource" ]
+  },
   "primaryIdentifier" : [ "/properties/DBProxyName" ],
   "handlers" : {
     "create" : {

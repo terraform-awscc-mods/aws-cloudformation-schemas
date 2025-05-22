@@ -220,7 +220,7 @@
       }
     },
     "PredictiveScalingPredefinedLoadMetric" : {
-      "description" : "Describes a load metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.",
+      "description" : "Describes a load metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.\n The following predefined metrics are available for predictive scaling:\n  +   ``ECSServiceAverageCPUUtilization`` \n  +   ``ECSServiceAverageMemoryUtilization`` \n  +   ``ECSServiceCPUUtilization`` \n  +   ``ECSServiceMemoryUtilization`` \n  +   ``ECSServiceTotalCPUUtilization`` \n  +   ``ECSServiceTotalMemoryUtilization`` \n  +   ``ALBRequestCount`` \n  +   ``ALBRequestCountPerTarget`` \n  +   ``TotalALBRequestCount``",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -268,7 +268,7 @@
       "required" : [ "TargetValue" ]
     },
     "PredictiveScalingPredefinedMetricPair" : {
-      "description" : "Represents a metric pair for a predictive scaling policy.",
+      "description" : "Represents a metric pair for a predictive scaling policy. \n The following predefined metrics are available for predictive scaling:\n  +   ``ECSServiceAverageCPUUtilization`` \n  +   ``ECSServiceAverageMemoryUtilization`` \n  +   ``ECSServiceCPUUtilization`` \n  +   ``ECSServiceMemoryUtilization`` \n  +   ``ECSServiceTotalCPUUtilization`` \n  +   ``ECSServiceTotalMemoryUtilization`` \n  +   ``ALBRequestCount`` \n  +   ``ALBRequestCountPerTarget`` \n  +   ``TotalALBRequestCount``",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -369,7 +369,7 @@
       "required" : [ "MetricSpecifications" ]
     },
     "PredictiveScalingPredefinedScalingMetric" : {
-      "description" : "Describes a scaling metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.",
+      "description" : "Describes a scaling metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.\n The following predefined metrics are available for predictive scaling:\n  +   ``ECSServiceAverageCPUUtilization`` \n  +   ``ECSServiceAverageMemoryUtilization`` \n  +   ``ECSServiceCPUUtilization`` \n  +   ``ECSServiceMemoryUtilization`` \n  +   ``ECSServiceTotalCPUUtilization`` \n  +   ``ECSServiceTotalMemoryUtilization`` \n  +   ``ALBRequestCount`` \n  +   ``ALBRequestCountPerTarget`` \n  +   ``TotalALBRequestCount``",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
