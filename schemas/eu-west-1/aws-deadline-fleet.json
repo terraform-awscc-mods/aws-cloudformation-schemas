@@ -61,6 +61,9 @@
         "StorageProfileId" : {
           "type" : "string",
           "pattern" : "^sp-[0-9a-f]{32}$"
+        },
+        "TagPropagationMode" : {
+          "$ref" : "#/definitions/TagPropagationMode"
         }
       },
       "required" : [ "Mode", "WorkerCapabilities" ],
@@ -268,6 +271,24 @@
       "type" : "string",
       "enum" : [ "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED" ]
     },
+    "HostConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "ScriptBody" : {
+          "type" : "string",
+          "maxLength" : 15000,
+          "minLength" : 0
+        },
+        "ScriptTimeoutSeconds" : {
+          "type" : "integer",
+          "default" : 300,
+          "maximum" : 3600,
+          "minimum" : 300
+        }
+      },
+      "required" : [ "ScriptBody" ],
+      "additionalProperties" : false
+    },
     "MemoryMiBRange" : {
       "type" : "object",
       "properties" : {
@@ -371,6 +392,10 @@
       "type" : "string",
       "enum" : [ "LINUX", "WINDOWS" ]
     },
+    "TagPropagationMode" : {
+      "type" : "string",
+      "enum" : [ "NO_PROPAGATION", "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH" ]
+    },
     "Tag" : {
       "description" : "A key-value pair to associate with a resource.",
       "type" : "object",
@@ -434,6 +459,9 @@
     "FleetId" : {
       "type" : "string",
       "pattern" : "^fleet-[0-9a-f]{32}$"
+    },
+    "HostConfiguration" : {
+      "$ref" : "#/definitions/HostConfiguration"
     },
     "MaxWorkerCount" : {
       "type" : "integer",
