@@ -3,13 +3,16 @@
   "description" : "Resource Type definition for AWS::IoT::ThingPrincipalAttachment",
   "additionalProperties" : false,
   "properties" : {
-    "Principal" : {
-      "type" : "string"
-    },
     "ThingName" : {
       "type" : "string"
     },
     "Id" : {
+      "type" : "string"
+    },
+    "ThingPrincipalType" : {
+      "type" : "string"
+    },
+    "Principal" : {
       "type" : "string"
     }
   },
