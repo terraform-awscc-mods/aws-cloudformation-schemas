@@ -26,7 +26,7 @@
       "timeoutInMinutes" : 180
     },
     "update" : {
-      "permissions" : [ "ecs:DescribeServices", "ecs:ListTagsForResource", "ecs:TagResource", "ecs:UntagResource", "ecs:UpdateService" ],
+      "permissions" : [ "ecs:DescribeServiceDeployments", "ecs:DescribeServices", "ecs:ListServiceDeployments", "ecs:ListTagsForResource", "ecs:StopServiceDeployment", "ecs:TagResource", "ecs:UntagResource", "ecs:UpdateService" ],
       "timeoutInMinutes" : 180
     },
     "list" : {
