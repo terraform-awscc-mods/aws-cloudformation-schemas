@@ -5,20 +5,20 @@
   "properties" : {
     "NetworkServices" : {
       "type" : "array",
-      "uniqueItems" : false,
+      "uniqueItems" : true,
       "items" : {
         "type" : "string"
       }
     },
-    "Description" : {
+    "Id" : {
       "type" : "string"
     },
-    "Id" : {
+    "Description" : {
       "type" : "string"
     },
     "Tags" : {
       "type" : "array",
-      "uniqueItems" : false,
+      "uniqueItems" : true,
       "items" : {
         "$ref" : "#/definitions/Tag"
       }

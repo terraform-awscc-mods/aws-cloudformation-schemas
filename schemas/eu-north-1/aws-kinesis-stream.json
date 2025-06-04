@@ -138,21 +138,21 @@
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
-    "permissions" : [ "kinesis:AddTagsToStream", "kinesis:TagResource", "kinesis:RemoveTagsFromStream", "kinesis:UntagResource", "kinesis:ListTagsForStream", "kinesis:ListTagsForResource" ]
+    "permissions" : [ "kinesis:AddTagsToStream", "kinesis:RemoveTagsFromStream", "kinesis:ListTagsForStream" ]
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "kinesis:EnableEnhancedMonitoring", "kinesis:DescribeStreamSummary", "kinesis:CreateStream", "kinesis:IncreaseStreamRetentionPeriod", "kinesis:StartStreamEncryption", "kinesis:AddTagsToStream", "kinesis:ListTagsForStream", "kinesis:ListTagsForResource" ]
+      "permissions" : [ "kinesis:EnableEnhancedMonitoring", "kinesis:DescribeStreamSummary", "kinesis:CreateStream", "kinesis:IncreaseStreamRetentionPeriod", "kinesis:StartStreamEncryption", "kinesis:AddTagsToStream", "kinesis:ListTagsForStream" ]
     },
     "read" : {
-      "permissions" : [ "kinesis:DescribeStreamSummary", "kinesis:ListTagsForStream", "kinesis:ListTagsForResource" ]
+      "permissions" : [ "kinesis:DescribeStreamSummary", "kinesis:ListTagsForStream" ]
     },
     "update" : {
-      "permissions" : [ "kinesis:EnableEnhancedMonitoring", "kinesis:DisableEnhancedMonitoring", "kinesis:DescribeStreamSummary", "kinesis:UpdateShardCount", "kinesis:UpdateStreamMode", "kinesis:IncreaseStreamRetentionPeriod", "kinesis:DecreaseStreamRetentionPeriod", "kinesis:StartStreamEncryption", "kinesis:StopStreamEncryption", "kinesis:AddTagsToStream", "kinesis:TagResource", "kinesis:RemoveTagsFromStream", "kinesis:UntagResource", "kinesis:ListTagsForStream", "kinesis:ListTagsForResource" ],
+      "permissions" : [ "kinesis:EnableEnhancedMonitoring", "kinesis:DisableEnhancedMonitoring", "kinesis:DescribeStreamSummary", "kinesis:UpdateShardCount", "kinesis:UpdateStreamMode", "kinesis:IncreaseStreamRetentionPeriod", "kinesis:DecreaseStreamRetentionPeriod", "kinesis:StartStreamEncryption", "kinesis:StopStreamEncryption", "kinesis:AddTagsToStream", "kinesis:RemoveTagsFromStream", "kinesis:ListTagsForStream" ],
       "timeoutInMinutes" : 240
     },
     "delete" : {
-      "permissions" : [ "kinesis:DescribeStreamSummary", "kinesis:DeleteStream", "kinesis:RemoveTagsFromStream", "kinesis:UntagResource" ]
+      "permissions" : [ "kinesis:DescribeStreamSummary", "kinesis:DeleteStream", "kinesis:RemoveTagsFromStream" ]
     },
     "list" : {
       "permissions" : [ "kinesis:ListStreams" ]
