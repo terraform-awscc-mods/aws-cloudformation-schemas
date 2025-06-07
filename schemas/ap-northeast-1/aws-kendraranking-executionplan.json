@@ -70,9 +70,10 @@
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : false,
+    "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "kendra-ranking:UntagResource", "kendra-ranking:TagResource", "kendra-ranking:ListTagsForResource" ]
   },
   "properties" : {
     "Id" : {

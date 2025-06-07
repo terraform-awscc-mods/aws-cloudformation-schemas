@@ -1,0 +1,56 @@
+{
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-kinesis.git",
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "kinesis:DescribeStreamConsumer" ]
+    },
+    "create" : {
+      "permissions" : [ "kinesis:RegisterStreamConsumer", "kinesis:DescribeStreamConsumer" ]
+    },
+    "list" : {
+      "permissions" : [ "kinesis:ListStreamConsumers" ]
+    },
+    "delete" : {
+      "permissions" : [ "kinesis:DeregisterStreamConsumer", "kinesis:DescribeStreamConsumer" ]
+    }
+  },
+  "typeName" : "AWS::Kinesis::StreamConsumer",
+  "readOnlyProperties" : [ "/properties/ConsumerARN", "/properties/ConsumerStatus", "/properties/ConsumerCreationTimestamp" ],
+  "description" : "Resource Type definition for AWS::Kinesis::StreamConsumer",
+  "createOnlyProperties" : [ "/properties/ConsumerName", "/properties/StreamARN" ],
+  "additionalProperties" : false,
+  "primaryIdentifier" : [ "/properties/ConsumerARN" ],
+  "definitions" : { },
+  "properties" : {
+    "ConsumerCreationTimestamp" : {
+      "description" : "Timestamp when the consumer was created.",
+      "type" : "string"
+    },
+    "ConsumerName" : {
+      "minLength" : 1,
+      "pattern" : "^[a-zA-Z0-9_.-]+$",
+      "description" : "The name of the Kinesis Stream Consumer. For a given Kinesis data stream, each consumer must have a unique name. However, consumer names don't have to be unique across data streams.",
+      "type" : "string",
+      "maxLength" : 128
+    },
+    "ConsumerARN" : {
+      "description" : "The ARN returned by Kinesis Data Streams when you registered the consumer. If you don't know the ARN of the consumer that you want to deregister, you can use the ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its ARN.",
+      "type" : "string"
+    },
+    "ConsumerStatus" : {
+      "description" : "A consumer can't read data while in the CREATING or DELETING states. Valid Values: CREATING | DELETING | ACTIVE",
+      "type" : "string"
+    },
+    "StreamARN" : {
+      "minLength" : 1,
+      "pattern" : "^arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
+      "description" : "The Amazon resource name (ARN) of the Kinesis data stream that you want to register the consumer with.",
+      "type" : "string",
+      "maxLength" : 2048
+    }
+  },
+  "required" : [ "ConsumerName", "StreamARN" ]
+}
