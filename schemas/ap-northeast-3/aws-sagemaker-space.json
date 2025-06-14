@@ -103,6 +103,10 @@
           "$ref" : "#/definitions/SpaceStorageSettings",
           "description" : "Default storage settings for a space."
         },
+        "SpaceManagedResources" : {
+          "$ref" : "#/definitions/SpaceManagedResources",
+          "description" : "This is a flag used to indicate if space managed resources needs to be created."
+        },
         "AppType" : {
           "$ref" : "#/definitions/AppType"
         },
@@ -260,6 +264,11 @@
           "$ref" : "#/definitions/EbsStorageSettings"
         }
       }
+    },
+    "SpaceManagedResources" : {
+      "type" : "string",
+      "description" : "The flag to enable/disable creation of space managed resources",
+      "enum" : [ "ENABLED", "DISABLED" ]
     },
     "EbsStorageSettings" : {
       "type" : "object",
