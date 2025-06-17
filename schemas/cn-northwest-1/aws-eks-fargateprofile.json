@@ -102,6 +102,14 @@
       }
     }
   },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "eks:TagResource", "eks:UntagResource" ]
+  },
   "additionalProperties" : false,
   "required" : [ "ClusterName", "PodExecutionRoleArn", "Selectors" ],
   "createOnlyProperties" : [ "/properties/ClusterName", "/properties/FargateProfileName", "/properties/PodExecutionRoleArn", "/properties/Subnets", "/properties/Selectors" ],
@@ -118,10 +126,18 @@
       "permissions" : [ "eks:DeleteFargateProfile", "eks:DescribeFargateProfile" ]
     },
     "list" : {
+      "handlerSchema" : {
+        "properties" : {
+          "ClusterName" : {
+            "$ref" : "resource-schema.json#/properties/ClusterName"
+          }
+        },
+        "required" : [ "ClusterName" ]
+      },
       "permissions" : [ "eks:ListFargateProfiles" ]
     },
     "update" : {
-      "permissions" : [ "eks:DescribeFargateProfile", "eks:ListTagsForResource", "eks:TagResource", "eks:UntagResource" ]
+      "permissions" : [ "eks:DescribeFargateProfile", "eks:TagResource", "eks:UntagResource" ]
     }
   }
 }
