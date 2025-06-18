@@ -238,6 +238,9 @@
       "permissions" : [ "sagemaker:ListAppImageConfigs", "sagemaker:ListTags" ]
     }
   },
+  "propertyTransform" : {
+    "/properties/AppImageConfigName" : "$lowercase(AppImageConfigName) $OR AppImageConfigName"
+  },
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
