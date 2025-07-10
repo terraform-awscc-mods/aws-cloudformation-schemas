@@ -928,7 +928,7 @@
       }
     }
   },
-  "required" : [ "AuthMode", "DefaultUserSettings", "DomainName", "SubnetIds", "VpcId" ],
+  "required" : [ "AuthMode", "DefaultUserSettings", "DomainName" ],
   "createOnlyProperties" : [ "/properties/AuthMode", "/properties/DomainName", "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec", "/properties/KmsKeyId", "/properties/VpcId", "/properties/Tags" ],
   "writeOnlyProperties" : [ "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/DomainId" ],
