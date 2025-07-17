@@ -406,9 +406,6 @@
         "HookTargetArn" : {
           "type" : "string"
         },
-        "HookDetails" : {
-          "type" : [ "string", "object" ]
-        },
         "RoleArn" : {
           "type" : "string"
         }
