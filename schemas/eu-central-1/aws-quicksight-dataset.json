@@ -64,7 +64,7 @@
           "maxLength" : 10
         }
       },
-      "required" : [ "TagKey" ]
+      "required" : [ "ColumnName", "TagKey" ]
     },
     "FileFormat" : {
       "type" : "string",
@@ -135,7 +135,7 @@
           "type" : "string"
         },
         "InputColumns" : {
-          "minItems" : 0,
+          "minItems" : 1,
           "maxItems" : 2048,
           "description" : "<p>The column schema of the table.</p>",
           "type" : "array",
@@ -469,7 +469,8 @@
             "type" : "string"
           }
         }
-      }
+      },
+      "required" : [ "ProjectedColumns" ]
     },
     "IntegerDatasetParameter" : {
       "description" : "<p>An integer parameter for a dataset.</p>",
@@ -622,7 +623,8 @@
           "type" : "string",
           "maxLength" : 4096
         }
-      }
+      },
+      "required" : [ "ConditionExpression" ]
     },
     "ColumnLevelPermissionRule" : {
       "description" : "<p>A rule defined to grant access on one or more restricted columns.\n            Each dataset can have multiple rules.\n            To create a restricted column, you add it to one or more rules.\n            Each rule must contain at least one column and at least one user or group.\n            To be able to see a restricted column, a user or group needs to be added\n            to a rule for that column.</p>",
@@ -672,7 +674,7 @@
           "$ref" : "#/definitions/ColumnDataType"
         }
       },
-      "required" : [ "NewColumnType" ]
+      "required" : [ "ColumnName", "NewColumnType" ]
     },
     "TimeGranularity" : {
       "type" : "string",
@@ -713,7 +715,7 @@
       "properties" : {
         "Columns" : {
           "minItems" : 0,
-          "maxItems" : 256,
+          "maxItems" : 128,
           "description" : "<p>Calculated columns to create.</p>",
           "type" : "array",
           "items" : {
@@ -842,7 +844,7 @@
           "type" : "string"
         },
         "InputColumns" : {
-          "minItems" : 0,
+          "minItems" : 1,
           "maxItems" : 2048,
           "description" : "<p>A physical table type for an S3 data source.</p>\n         <note>\n            <p>For files that aren't JSON, only <code>STRING</code> data types are supported in input columns.</p>\n         </note>",
           "type" : "array",
@@ -1013,7 +1015,8 @@
           "type" : "string",
           "maxLength" : 127
         }
-      }
+      },
+      "required" : [ "ColumnName" ]
     },
     "FieldFolderMap" : {
       "patternProperties" : {
@@ -1158,7 +1161,8 @@
             "maxLength" : 127
           }
         }
-      }
+      },
+      "required" : [ "ColumnNames" ]
     },
     "GeoSpatialDataRole" : {
       "type" : "string",
@@ -1258,7 +1262,7 @@
           "maxLength" : 168000
         },
         "Columns" : {
-          "minItems" : 0,
+          "minItems" : 1,
           "maxItems" : 2048,
           "description" : "<p>The column schema from the SQL query result set.</p>",
           "type" : "array",
