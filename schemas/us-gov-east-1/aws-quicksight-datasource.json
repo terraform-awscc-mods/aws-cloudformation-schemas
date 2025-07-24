@@ -45,6 +45,9 @@
           "maxLength" : 2048,
           "minLength" : 20,
           "description" : "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>"
+        },
+        "IdentityCenterConfiguration" : {
+          "$ref" : "#/definitions/IdentityCenterConfiguration"
         }
       },
       "additionalProperties" : false
@@ -259,7 +262,7 @@
     },
     "DataSourceType" : {
       "type" : "string",
-      "enum" : [ "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "AMAZON_OPENSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "DATABRICKS", "DENODO", "DREMIO", "DYNAMODB", "SAPHANA", "DB2_AS400", "EXASOL", "FILE", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "S3_TABLES", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TIMESTREAM", "TWITTER", "BIGQUERY", "GOOGLE_ANALYTICS", "TRINO", "STARBURST", "MONGO", "MONGO_ATLAS", "DOCUMENTDB", "APPFLOW", "IMPALA", "GLUE" ]
+      "enum" : [ "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "AMAZON_OPENSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "DATABRICKS", "DENODO", "DREMIO", "DYNAMODB", "SAPHANA", "DB2_AS400", "EXASOL", "FILE", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "QBUSINESS", "REDSHIFT", "S3", "S3_TABLES", "S3_KNOWLEDGE_BASE", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SPICE", "SQLSERVER", "TERADATA", "TIMESTREAM", "TWITTER", "BIGQUERY", "GOOGLE_ANALYTICS", "TRINO", "STARBURST", "MONGO", "MONGO_ATLAS", "DOCUMENTDB", "APPFLOW", "IMPALA", "GLUE", "GOOGLE_DRIVE", "CONFLUENCE", "SHAREPOINT", "ONE_DRIVE", "WEB_CRAWLER" ]
     },
     "DatabricksParameters" : {
       "type" : "object",
@@ -421,6 +424,10 @@
           "maxLength" : 128,
           "minLength" : 1,
           "description" : "<p>The database.</p>"
+        },
+        "UseServiceName" : {
+          "type" : "boolean",
+          "default" : false
         }
       },
       "required" : [ "Database", "Host", "Port" ],
@@ -603,7 +610,7 @@
     },
     "ResourceStatus" : {
       "type" : "string",
-      "enum" : [ "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED" ]
+      "enum" : [ "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "PENDING_UPDATE", "DELETED" ]
     },
     "S3Parameters" : {
       "type" : "object",
