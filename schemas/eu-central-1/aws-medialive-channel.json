@@ -1442,9 +1442,6 @@
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "MediapackageV2GroupSettings" : {
-          "$ref" : "#/definitions/MediaPackageV2GroupSettings"
-        },
         "Destination" : {
           "$ref" : "#/definitions/OutputLocationRef"
         }
@@ -2308,6 +2305,10 @@
       "type" : "object",
       "additionalProperties" : false
     },
+    "Rec709Settings" : {
+      "type" : "object",
+      "additionalProperties" : false
+    },
     "ArchiveContainerSettings" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -2319,10 +2320,6 @@
           "$ref" : "#/definitions/RawSettings"
         }
       }
-    },
-    "Rec709Settings" : {
-      "type" : "object",
-      "additionalProperties" : false
     },
     "InputAttachment" : {
       "type" : "object",
@@ -2384,12 +2381,7 @@
     },
     "MediaPackageOutputSettings" : {
       "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "MediaPackageV2DestinationSettings" : {
-          "$ref" : "#/definitions/MediaPackageV2DestinationSettings"
-        }
-      }
+      "additionalProperties" : false
     },
     "Av1ColorSpaceSettings" : {
       "type" : "object",
@@ -2674,19 +2666,6 @@
         },
         "Position" : {
           "type" : "string"
-        }
-      }
-    },
-    "MediaPackageV2GroupSettings" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "CaptionLanguageMappings" : {
-          "type" : "array",
-          "uniqueItems" : false,
-          "items" : {
-            "$ref" : "#/definitions/CaptionLanguageMapping"
-          }
         }
       }
     },
@@ -3426,24 +3405,6 @@
           "$ref" : "#/definitions/VideoSelectorSettings"
         },
         "ColorSpace" : {
-          "type" : "string"
-        }
-      }
-    },
-    "MediaPackageV2DestinationSettings" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "HlsDefault" : {
-          "type" : "string"
-        },
-        "AudioRenditionSets" : {
-          "type" : "string"
-        },
-        "AudioGroupId" : {
-          "type" : "string"
-        },
-        "HlsAutoSelect" : {
           "type" : "string"
         }
       }
