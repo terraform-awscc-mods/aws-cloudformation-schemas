@@ -10,7 +10,7 @@
   },
   "handlers" : {
     "read" : {
-      "permissions" : [ "lambda:GetFunctionConfiguration", "lambda:GetProvisionedConcurrencyConfig", "lambda:GetRuntimeManagementConfig" ]
+      "permissions" : [ "lambda:GetFunctionConfiguration", "lambda:GetProvisionedConcurrencyConfig", "lambda:GetRuntimeManagementConfig", "lambda:GetFunctionScalingConfig" ]
     },
     "create" : {
       "permissions" : [ "lambda:PublishVersion", "lambda:GetFunctionConfiguration", "lambda:PutProvisionedConcurrencyConfig", "lambda:GetProvisionedConcurrencyConfig", "lambda:PutRuntimeManagementConfig", "lambda:GetRuntimeManagementConfig", "lambda:PutFunctionScalingConfig", "lambda:GetCapacityProvider" ],
