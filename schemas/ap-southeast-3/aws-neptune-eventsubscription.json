@@ -3,6 +3,9 @@
   "description" : "Resource Type definition for AWS::Neptune::EventSubscription",
   "additionalProperties" : false,
   "properties" : {
+    "SourceType" : {
+      "type" : "string"
+    },
     "Enabled" : {
       "type" : "boolean"
     },
@@ -12,6 +15,9 @@
       "items" : {
         "type" : "string"
       }
+    },
+    "SubscriptionName" : {
+      "type" : "string"
     },
     "SnsTopicArn" : {
       "type" : "string"
@@ -25,12 +31,10 @@
     },
     "Id" : {
       "type" : "string"
-    },
-    "SourceType" : {
-      "type" : "string"
     }
   },
-  "createOnlyProperties" : [ "/properties/SnsTopicArn" ],
+  "required" : [ "SnsTopicArn" ],
+  "createOnlyProperties" : [ "/properties/SubscriptionName", "/properties/SnsTopicArn" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id" ]
 }
