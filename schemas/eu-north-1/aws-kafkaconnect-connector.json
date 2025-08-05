@@ -277,7 +277,7 @@
           "type" : "integer"
         }
       },
-      "required" : [ "McuCount", "WorkerCount" ]
+      "required" : [ "WorkerCount" ]
     },
     "S3LogDelivery" : {
       "description" : "Details about delivering logs to Amazon S3.",
