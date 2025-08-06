@@ -8,7 +8,7 @@
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
-    "permissions" : [ "cloudWatch:TagResource", "cloudWatch:UntagResource", "cloudwatch:ListTagsForResource" ]
+    "permissions" : [ "cloudwatch:TagResource", "cloudwatch:UntagResource", "cloudwatch:ListTagsForResource" ]
   },
   "properties" : {
     "Arn" : {

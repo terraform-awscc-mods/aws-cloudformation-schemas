@@ -34,7 +34,7 @@
       }
     },
     "Period" : {
-      "description" : "The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 20, 30, 60, and any multiple of 60.\n For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.\n  *Minimum:* 10",
+      "description" : "The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 20, 30, 60, and any multiple of 60.\n For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.\n *Minimum:* 10",
       "type" : "integer"
     },
     "EvaluationPeriods" : {
@@ -126,7 +126,7 @@
   },
   "definitions" : {
     "MetricStat" : {
-      "description" : "This structure defines the metric to be returned, along with the statistics, period, and units.\n  ``MetricStat`` is a property of the [MetricDataQuery](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html) property type.",
+      "description" : "This structure defines the metric to be returned, along with the statistics, period, and units.\n ``MetricStat`` is a property of the [MetricDataQuery](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html) property type.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
