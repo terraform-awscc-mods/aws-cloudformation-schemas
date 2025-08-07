@@ -16,7 +16,7 @@
       "timeoutInMinutes" : 720
     },
     "update" : {
-      "permissions" : [ "sagemaker:UpdateCluster", "sagemaker:UpdateClusterSoftware", "sagemaker:DescribeCluster", "sagemaker:ListTags", "sagemaker:AddTags", "sagemaker:DeleteTags", "sagemaker:BatchAddClusterNodes", "sagemaker:BatchDeleteClusterNodes", "eks:DescribeAccessEntry", "eks:DescribeCluster", "eks:CreateAccessEntry", "eks:DeleteAccessEntry", "iam:PassRole" ],
+      "permissions" : [ "sagemaker:UpdateCluster", "sagemaker:UpdateClusterSoftware", "sagemaker:DescribeCluster", "sagemaker:ListTags", "sagemaker:AddTags", "sagemaker:DeleteTags", "sagemaker:BatchAddClusterNodes", "sagemaker:BatchDeleteClusterNodes", "eks:DescribeAccessEntry", "eks:DescribeCluster", "eks:CreateAccessEntry", "eks:DeleteAccessEntry", "iam:PassRole", "sagemaker:BatchAddClusterNodes", "sagemaker:BatchDeleteClusterNodes" ],
       "timeoutInMinutes" : 720
     },
     "list" : {
@@ -377,6 +377,11 @@
       "description" : "If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.",
       "type" : "string",
       "enum" : [ "Automatic", "None" ]
+    },
+    "NodeProvisioningMode" : {
+      "description" : "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
+      "type" : "string",
+      "enum" : [ "Continuous" ]
     },
     "CreationTime" : {
       "description" : "The time at which the HyperPod cluster was created.",
