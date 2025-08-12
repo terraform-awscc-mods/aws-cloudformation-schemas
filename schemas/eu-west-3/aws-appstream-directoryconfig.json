@@ -47,7 +47,7 @@
       }
     }
   },
-  "required" : [ "DirectoryName", "OrganizationalUnitDistinguishedNames" ],
+  "required" : [ "DirectoryName", "OrganizationalUnitDistinguishedNames", "ServiceAccountCredentials" ],
   "writeOnlyProperties" : [ "/properties/ServiceAccountCredentials/AccountPassword" ],
   "createOnlyProperties" : [ "/properties/DirectoryName" ],
   "primaryIdentifier" : [ "/properties/DirectoryName" ],
