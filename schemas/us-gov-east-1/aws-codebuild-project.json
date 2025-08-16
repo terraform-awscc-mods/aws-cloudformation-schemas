@@ -58,6 +58,9 @@
         "$ref" : "#/definitions/Tag"
       }
     },
+    "AutoRetryLimit" : {
+      "type" : "integer"
+    },
     "SourceVersion" : {
       "type" : "string"
     },
@@ -152,6 +155,22 @@
       },
       "required" : [ "Type" ]
     },
+    "ScopeConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Scope" : {
+          "type" : "string"
+        },
+        "Domain" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    },
     "RegistryCredential" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -206,6 +225,23 @@
       },
       "required" : [ "Type" ]
     },
+    "PullRequestBuildPolicy" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RequiresCommentApproval" : {
+          "type" : "string"
+        },
+        "ApproverRoles" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "required" : [ "RequiresCommentApproval" ]
+    },
     "ProjectCache" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -218,6 +254,9 @@
           }
         },
         "Type" : {
+          "type" : "string"
+        },
+        "CacheNamespace" : {
           "type" : "string"
         },
         "Location" : {
@@ -357,6 +396,9 @@
         "ComputeType" : {
           "type" : "string"
         },
+        "DockerServer" : {
+          "$ref" : "#/definitions/DockerServer"
+        },
         "Certificate" : {
           "type" : "string"
         }
@@ -430,6 +472,12 @@
         },
         "Webhook" : {
           "type" : "boolean"
+        },
+        "ScopeConfiguration" : {
+          "$ref" : "#/definitions/ScopeConfiguration"
+        },
+        "PullRequestBuildPolicy" : {
+          "$ref" : "#/definitions/PullRequestBuildPolicy"
         }
       }
     },
@@ -454,6 +502,23 @@
         }
       },
       "required" : [ "FetchSubmodules" ]
+    },
+    "DockerServer" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ComputeType" : {
+          "type" : "string"
+        },
+        "SecurityGroupIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "required" : [ "ComputeType" ]
     },
     "S3LogsConfig" : {
       "type" : "object",
