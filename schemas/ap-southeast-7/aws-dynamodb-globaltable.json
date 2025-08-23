@@ -279,10 +279,6 @@
           "enum" : [ "MICROSECOND", "MILLISECOND" ]
         },
         "StreamArn" : {
-          "relationshipRef" : {
-            "typeName" : "AWS::Kinesis::Stream",
-            "propertyPath" : "/properties/Arn"
-          },
           "type" : "string"
         }
       },

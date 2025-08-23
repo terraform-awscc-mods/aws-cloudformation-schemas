@@ -124,7 +124,7 @@
   },
   "tagging" : {
     "taggable" : true,
-    "tagOnCreate" : true,
+    "tagOnCreate" : false,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/HostedZoneTags",

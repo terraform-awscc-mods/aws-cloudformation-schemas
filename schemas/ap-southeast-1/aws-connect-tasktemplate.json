@@ -30,7 +30,6 @@
     "FieldOption" : {
       "description" : "Single select field identifier",
       "type" : "string",
-      "pattern" : "^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$",
       "minLength" : 1,
       "maxLength" : 100
     },

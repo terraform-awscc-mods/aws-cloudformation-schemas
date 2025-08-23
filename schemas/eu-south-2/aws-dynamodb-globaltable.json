@@ -279,10 +279,6 @@
           "enum" : [ "MICROSECOND", "MILLISECOND" ]
         },
         "StreamArn" : {
-          "relationshipRef" : {
-            "typeName" : "AWS::Kinesis::Stream",
-            "propertyPath" : "/properties/Arn"
-          },
           "type" : "string"
         }
       },
@@ -302,6 +298,10 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "Mode" : {
+          "type" : "string",
+          "enum" : [ "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS" ]
+        },
         "Enabled" : {
           "type" : "boolean"
         }
@@ -462,7 +462,6 @@
       "required" : [ "Enabled" ]
     }
   },
-  "required" : [ "KeySchema", "AttributeDefinitions", "Replicas" ],
   "properties" : {
     "MultiRegionConsistency" : {
       "type" : "string",
@@ -554,5 +553,6 @@
     "TimeToLiveSpecification" : {
       "$ref" : "#/definitions/TimeToLiveSpecification"
     }
-  }
+  },
+  "required" : [ "KeySchema", "AttributeDefinitions", "Replicas" ]
 }

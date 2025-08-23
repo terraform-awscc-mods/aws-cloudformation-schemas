@@ -128,10 +128,6 @@
           "enum" : [ "MICROSECOND", "MILLISECOND" ]
         },
         "StreamArn" : {
-          "relationshipRef" : {
-            "typeName" : "AWS::Kinesis::Stream",
-            "propertyPath" : "/properties/Arn"
-          },
           "description" : "The ARN for a specific Kinesis data stream.\n Length Constraints: Minimum length of 37. Maximum length of 1024.",
           "type" : "string"
         }
@@ -159,6 +155,11 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "Mode" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS" ]
+        },
         "Enabled" : {
           "description" : "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
           "type" : "boolean"
@@ -359,10 +360,6 @@
       "type" : "object",
       "properties" : {
         "S3Bucket" : {
-          "relationshipRef" : {
-            "typeName" : "AWS::S3::Bucket",
-            "propertyPath" : "/properties/BucketName"
-          },
           "description" : "The S3 bucket that is being imported from.",
           "type" : "string"
         },
