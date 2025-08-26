@@ -6,7 +6,7 @@
   "tagging" : {
     "permissions" : [ "route53:ChangeTagsForResource", "route53:ListTagsForResource" ],
     "taggable" : true,
-    "tagOnCreate" : true,
+    "tagOnCreate" : false,
     "tagUpdatable" : true,
     "tagProperty" : "/properties/HostedZoneTags",
     "cloudFormationSystemTags" : false
