@@ -80,6 +80,10 @@
       "description" : "The engine version of the Global Datastore.",
       "type" : "string"
     },
+    "Engine" : {
+      "description" : "The engine of the Global Datastore.",
+      "type" : "string"
+    },
     "CacheParameterGroupName" : {
       "description" : "Cache parameter group name to use for the new engine version. This parameter cannot be modified independently.",
       "type" : "string"
@@ -120,7 +124,7 @@
   },
   "additionalProperties" : false,
   "readOnlyProperties" : [ "/properties/GlobalReplicationGroupId", "/properties/Status" ],
-  "writeOnlyProperties" : [ "/properties/GlobalReplicationGroupIdSuffix", "/properties/AutomaticFailoverEnabled", "/properties/CacheNodeType", "/properties/EngineVersion", "/properties/GlobalNodeGroupCount", "/properties/GlobalReplicationGroupDescription", "/properties/RegionalConfigurations" ],
+  "writeOnlyProperties" : [ "/properties/GlobalReplicationGroupIdSuffix", "/properties/AutomaticFailoverEnabled", "/properties/CacheNodeType", "/properties/EngineVersion", "/properties/GlobalNodeGroupCount", "/properties/RegionalConfigurations" ],
   "required" : [ "Members" ],
   "primaryIdentifier" : [ "/properties/GlobalReplicationGroupId" ],
   "handlers" : {
