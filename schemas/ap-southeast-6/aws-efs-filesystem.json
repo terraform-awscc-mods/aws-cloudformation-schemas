@@ -1,0 +1,67 @@
+{
+  "typeName" : "AWS::EFS::FileSystem",
+  "description" : "Resource Type definition for AWS::EFS::FileSystem",
+  "additionalProperties" : false,
+  "properties" : {
+    "KmsKeyId" : {
+      "type" : "string"
+    },
+    "PerformanceMode" : {
+      "type" : "string"
+    },
+    "Encrypted" : {
+      "type" : "boolean"
+    },
+    "FileSystemTags" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/ElasticFileSystemTag"
+      }
+    },
+    "ProvisionedThroughputInMibps" : {
+      "type" : "number"
+    },
+    "LifecyclePolicies" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/LifecyclePolicy"
+      }
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "ThroughputMode" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "LifecyclePolicy" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TransitionToIA" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "TransitionToIA" ]
+    },
+    "ElasticFileSystemTag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "createOnlyProperties" : [ "/properties/KmsKeyId", "/properties/Encrypted", "/properties/PerformanceMode" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}
