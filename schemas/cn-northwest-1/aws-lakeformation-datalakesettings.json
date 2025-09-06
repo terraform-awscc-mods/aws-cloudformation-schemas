@@ -18,6 +18,9 @@
     "Parameters" : {
       "type" : "object"
     },
+    "AllowFullTableExternalDataAccess" : {
+      "type" : "boolean"
+    },
     "Admins" : {
       "$ref" : "#/definitions/Admins"
     },
