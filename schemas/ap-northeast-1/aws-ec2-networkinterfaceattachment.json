@@ -27,6 +27,10 @@
     "EnaSrdSpecification" : {
       "$ref" : "#/definitions/EnaSrdSpecification",
       "description" : "Configures ENA Express for the network interface that this action attaches to the instance."
+    },
+    "EnaQueueCount" : {
+      "description" : "",
+      "type" : "integer"
     }
   },
   "additionalProperties" : false,
