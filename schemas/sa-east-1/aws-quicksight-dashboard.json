@@ -261,7 +261,7 @@
     },
     "ResourceStatus" : {
       "type" : "string",
-      "enum" : [ "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED" ]
+      "enum" : [ "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "PENDING_UPDATE", "DELETED" ]
     },
     "CommitMode" : {
       "type" : "string",
@@ -506,6 +506,17 @@
         },
         "WeekStart" : {
           "$ref" : "#/definitions/DayOfTheWeek"
+        },
+        "QBusinessInsightsStatus" : {
+          "$ref" : "#/definitions/QBusinessInsightsStatus"
+        },
+        "ExcludedDataSetArns" : {
+          "minItems" : 0,
+          "maxItems" : 100,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -2290,12 +2301,6 @@
         "SheetControlsOption" : {
           "$ref" : "#/definitions/SheetControlsOption"
         },
-        "ExportToCSVOption" : {
-          "$ref" : "#/definitions/ExportToCSVOption"
-        },
-        "DataPointMenuLabelOption" : {
-          "$ref" : "#/definitions/DataPointMenuLabelOption"
-        },
         "DataPointDrillUpDownOption" : {
           "$ref" : "#/definitions/DataPointDrillUpDownOption"
         },
@@ -2305,17 +2310,26 @@
         "VisualPublishOptions" : {
           "$ref" : "#/definitions/DashboardVisualPublishOptions"
         },
+        "VisualAxisSortOption" : {
+          "$ref" : "#/definitions/VisualAxisSortOption"
+        },
+        "ExportWithHiddenFieldsOption" : {
+          "$ref" : "#/definitions/ExportWithHiddenFieldsOption"
+        },
+        "ExportToCSVOption" : {
+          "$ref" : "#/definitions/ExportToCSVOption"
+        },
+        "DataPointMenuLabelOption" : {
+          "$ref" : "#/definitions/DataPointMenuLabelOption"
+        },
         "VisualMenuOption" : {
           "$ref" : "#/definitions/VisualMenuOption"
         },
         "DataPointTooltipOption" : {
           "$ref" : "#/definitions/DataPointTooltipOption"
         },
-        "VisualAxisSortOption" : {
-          "$ref" : "#/definitions/VisualAxisSortOption"
-        },
-        "ExportWithHiddenFieldsOption" : {
-          "$ref" : "#/definitions/ExportWithHiddenFieldsOption"
+        "DataQAEnabledOption" : {
+          "$ref" : "#/definitions/DataQAEnabledOption"
         },
         "SheetLayoutElementMaximizationOption" : {
           "$ref" : "#/definitions/SheetLayoutElementMaximizationOption"
@@ -5495,6 +5509,10 @@
         }
       }
     },
+    "QBusinessInsightsStatus" : {
+      "type" : "string",
+      "enum" : [ "ENABLED", "DISABLED" ]
+    },
     "FunnelChartMeasureDataLabelStyle" : {
       "type" : "string",
       "enum" : [ "VALUE_ONLY", "PERCENTAGE_BY_FIRST_STAGE", "PERCENTAGE_BY_PREVIOUS_STAGE", "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE", "VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE" ]
@@ -6710,6 +6728,15 @@
         }
       },
       "required" : [ "DefaultNewSheetConfiguration" ]
+    },
+    "DataQAEnabledOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "NumericalDimensionField" : {
       "additionalProperties" : false,
@@ -8737,22 +8764,6 @@
             "$ref" : "#/definitions/ParameterControl"
           }
         },
-        "TextBoxes" : {
-          "minItems" : 0,
-          "maxItems" : 100,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/SheetTextBox"
-          }
-        },
-        "Layouts" : {
-          "minItems" : 1,
-          "maxItems" : 1,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Layout"
-          }
-        },
         "ContentType" : {
           "$ref" : "#/definitions/SheetContentType"
         },
@@ -8761,14 +8772,6 @@
           "pattern" : "^[\\w\\-]+$",
           "type" : "string",
           "maxLength" : 512
-        },
-        "FilterControls" : {
-          "minItems" : 0,
-          "maxItems" : 200,
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/FilterControl"
-          }
         },
         "Images" : {
           "minItems" : 0,
@@ -8791,6 +8794,35 @@
           "type" : "string",
           "maxLength" : 1024
         },
+        "Name" : {
+          "minLength" : 1,
+          "type" : "string",
+          "maxLength" : 2048
+        },
+        "TextBoxes" : {
+          "minItems" : 0,
+          "maxItems" : 100,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SheetTextBox"
+          }
+        },
+        "Layouts" : {
+          "minItems" : 1,
+          "maxItems" : 1,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Layout"
+          }
+        },
+        "FilterControls" : {
+          "minItems" : 0,
+          "maxItems" : 200,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FilterControl"
+          }
+        },
         "Visuals" : {
           "minItems" : 0,
           "maxItems" : 50,
@@ -8798,11 +8830,6 @@
           "items" : {
             "$ref" : "#/definitions/Visual"
           }
-        },
-        "Name" : {
-          "minLength" : 1,
-          "type" : "string",
-          "maxLength" : 2048
         }
       },
       "required" : [ "SheetId" ]
