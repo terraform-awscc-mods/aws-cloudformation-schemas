@@ -92,6 +92,24 @@
     "DryRunAndUpdate" : {
       "description" : "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
       "type" : "boolean"
+    },
+    "BrowserConfigs" : {
+      "description" : "List of browser configurations for the canary",
+      "type" : "array",
+      "minItems" : 1,
+      "maxItems" : 2,
+      "items" : {
+        "$ref" : "#/definitions/BrowserConfig"
+      }
+    },
+    "VisualReferences" : {
+      "description" : "List of visual references for the canary",
+      "type" : "array",
+      "minItems" : 1,
+      "maxItems" : 2,
+      "items" : {
+        "$ref" : "#/definitions/VisualReference"
+      }
     }
   },
   "definitions" : {
@@ -133,6 +151,14 @@
         },
         "SourceLocationArn" : {
           "type" : "string"
+        },
+        "Dependencies" : {
+          "type" : "array",
+          "description" : "List of Lambda layers to attach to the canary",
+          "maxItems" : 1,
+          "items" : {
+            "$ref" : "#/definitions/Dependency"
+          }
         }
       },
       "required" : [ "Handler" ],
@@ -141,6 +167,25 @@
       }, {
         "required" : [ "Script" ]
       } ]
+    },
+    "Dependency" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Type" : {
+          "type" : "string",
+          "enum" : [ "LambdaLayer" ],
+          "description" : "Type of dependency"
+        },
+        "Reference" : {
+          "type" : "string",
+          "description" : "ARN of the Lambda layer",
+          "pattern" : "arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+",
+          "minLength" : 1,
+          "maxLength" : 140
+        }
+      },
+      "required" : [ "Reference" ]
     },
     "Tag" : {
       "description" : "A key-value pair to associate with a resource.",
@@ -234,6 +279,9 @@
           "items" : {
             "$ref" : "#/definitions/BaseScreenshot"
           }
+        },
+        "BrowserType" : {
+          "$ref" : "#/definitions/BrowserType"
         }
       },
       "required" : [ "BaseCanaryRunId" ]
@@ -295,6 +343,20 @@
         }
       },
       "required" : [ "MaxRetries" ]
+    },
+    "BrowserConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "BrowserType" : {
+          "$ref" : "#/definitions/BrowserType"
+        }
+      },
+      "required" : [ "BrowserType" ]
+    },
+    "BrowserType" : {
+      "type" : "string",
+      "enum" : [ "CHROME", "FIREFOX" ]
     }
   },
   "required" : [ "Name", "Code", "ArtifactS3Location", "ExecutionRoleArn", "Schedule", "RuntimeVersion" ],
@@ -327,6 +389,6 @@
   "createOnlyProperties" : [ "/properties/Name" ],
   "primaryIdentifier" : [ "/properties/Name" ],
   "readOnlyProperties" : [ "/properties/Id", "/properties/State", "/properties/Code/SourceLocationArn" ],
-  "writeOnlyProperties" : [ "/properties/Code/S3Bucket", "/properties/Code/S3Key", "/properties/Code/S3ObjectVersion", "/properties/Code/Script", "/properties/DeleteLambdaResourcesOnCanaryDeletion", "/properties/StartCanaryAfterCreation", "/properties/ResourcesToReplicateTags", "/properties/RunConfig/EnvironmentVariables", "/properties/VisualReference", "/properties/DryRunAndUpdate" ],
-  "deprecatedProperties" : [ "/properties/DeleteLambdaResourcesOnCanaryDeletion" ]
+  "writeOnlyProperties" : [ "/properties/Code/S3Bucket", "/properties/Code/S3Key", "/properties/Code/S3ObjectVersion", "/properties/Code/Script", "/properties/DeleteLambdaResourcesOnCanaryDeletion", "/properties/StartCanaryAfterCreation", "/properties/ResourcesToReplicateTags", "/properties/RunConfig/EnvironmentVariables", "/properties/VisualReference", "/properties/VisualReferences", "/properties/DryRunAndUpdate" ],
+  "deprecatedProperties" : [ "/properties/DeleteLambdaResourcesOnCanaryDeletion", "/properties/VisualReference" ]
 }
