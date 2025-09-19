@@ -31,8 +31,7 @@
           "Arn" : {
             "$ref" : "resource-schema.json#/properties/Arn"
           }
-        },
-        "required" : [ "Arn" ]
+        }
       }
     },
     "delete" : {
