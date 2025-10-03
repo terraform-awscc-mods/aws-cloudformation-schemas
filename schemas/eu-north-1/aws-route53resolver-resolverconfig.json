@@ -34,21 +34,26 @@
   "required" : [ "ResourceId", "AutodefinedReverseFlag" ],
   "readOnlyProperties" : [ "/properties/OwnerId", "/properties/Id", "/properties/AutodefinedReverse" ],
   "createOnlyProperties" : [ "/properties/ResourceId", "/properties/AutodefinedReverseFlag" ],
-  "primaryIdentifier" : [ "/properties/Id" ],
-  "taggable" : false,
+  "primaryIdentifier" : [ "/properties/ResourceId" ],
+  "tagging" : {
+    "taggable" : false
+  },
   "additionalProperties" : false,
+  "propertyTransform" : {
+    "/properties/AutodefinedReverseFlag" : "$join([AutodefinedReverseFlag, \"D\"])"
+  },
   "handlers" : {
     "create" : {
-      "permissions" : [ "route53resolver:UpdateResolverConfig" ]
+      "permissions" : [ "route53resolver:UpdateResolverConfig", "route53resolver:GetResolverConfig", "ec2:DescribeVpcs" ]
     },
     "read" : {
-      "permissions" : [ "route53resolver:GetResolverConfig" ]
+      "permissions" : [ "route53resolver:GetResolverConfig", "ec2:DescribeVpcs" ]
     },
     "delete" : {
-      "permissions" : [ "route53resolver:UpdateResolverConfig" ]
+      "permissions" : [ "route53resolver:UpdateResolverConfig", "route53resolver:ListResolverConfigs", "ec2:DescribeVpcs" ]
     },
     "list" : {
-      "permissions" : [ "route53resolver:ListResolverConfigs" ]
+      "permissions" : [ "route53resolver:ListResolverConfigs", "ec2:DescribeVpcs" ]
     }
   }
 }
