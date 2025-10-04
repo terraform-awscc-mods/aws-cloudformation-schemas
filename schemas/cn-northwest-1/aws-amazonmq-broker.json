@@ -3,15 +3,15 @@
   "description" : "Resource Type definition for AWS::AmazonMQ::Broker",
   "additionalProperties" : false,
   "properties" : {
+    "DataReplicationPrimaryBrokerArn" : {
+      "type" : "string"
+    },
     "SecurityGroups" : {
       "type" : "array",
       "uniqueItems" : false,
       "items" : {
         "type" : "string"
       }
-    },
-    "DataReplicationPrimaryBrokerArn" : {
-      "type" : "string"
     },
     "Configuration" : {
       "$ref" : "#/definitions/ConfigurationId"
@@ -71,12 +71,12 @@
       }
     },
     "ConfigurationRevision" : {
-      "type" : "integer"
-    },
-    "StorageType" : {
       "type" : "string"
     },
     "EngineVersion" : {
+      "type" : "string"
+    },
+    "StorageType" : {
       "type" : "string"
     },
     "MaintenanceWindowStartTime" : {
@@ -102,6 +102,9 @@
       "type" : "string"
     },
     "DataReplicationMode" : {
+      "type" : "string"
+    },
+    "EngineVersionCurrent" : {
       "type" : "string"
     },
     "BrokerName" : {
@@ -131,11 +134,11 @@
     "LdapServerMetadata" : {
       "$ref" : "#/definitions/LdapServerMetadata"
     },
-    "PubliclyAccessible" : {
-      "type" : "boolean"
-    },
     "Id" : {
       "type" : "string"
+    },
+    "PubliclyAccessible" : {
+      "type" : "boolean"
     },
     "Arn" : {
       "type" : "string"
@@ -196,7 +199,7 @@
           "type" : "boolean"
         }
       },
-      "required" : [ "Hosts", "UserSearchMatching", "UserBase", "RoleSearchMatching", "ServiceAccountUsername", "RoleBase", "ServiceAccountPassword" ]
+      "required" : [ "Hosts", "UserSearchMatching", "UserBase", "RoleSearchMatching", "ServiceAccountUsername", "RoleBase" ]
     },
     "User" : {
       "type" : "object",
@@ -280,8 +283,8 @@
       "required" : [ "Revision", "Id" ]
     }
   },
-  "required" : [ "DeploymentMode", "HostInstanceType", "EngineType", "Users", "PubliclyAccessible", "BrokerName" ],
+  "required" : [ "DeploymentMode", "HostInstanceType", "EngineType", "PubliclyAccessible", "BrokerName" ],
   "createOnlyProperties" : [ "/properties/BrokerName", "/properties/StorageType", "/properties/DeploymentMode", "/properties/EngineType", "/properties/SubnetIds", "/properties/AuthenticationStrategy", "/properties/EncryptionOptions", "/properties/PubliclyAccessible" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/IpAddresses", "/properties/ConsoleURLs", "/properties/Id", "/properties/MqttEndpoints", "/properties/OpenWireEndpoints", "/properties/ConfigurationId", "/properties/ConfigurationRevision", "/properties/StompEndpoints", "/properties/WssEndpoints", "/properties/AmqpEndpoints", "/properties/Arn" ]
+  "readOnlyProperties" : [ "/properties/IpAddresses", "/properties/ConsoleURLs", "/properties/Id", "/properties/MqttEndpoints", "/properties/OpenWireEndpoints", "/properties/ConfigurationId", "/properties/ConfigurationRevision", "/properties/StompEndpoints", "/properties/WssEndpoints", "/properties/AmqpEndpoints", "/properties/Arn", "/properties/EngineVersionCurrent" ]
 }

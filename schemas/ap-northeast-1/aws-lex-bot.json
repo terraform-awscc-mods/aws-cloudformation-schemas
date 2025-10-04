@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::Lex::Bot",
-  "description" : "Amazon Lex conversational bot performing automated tasks such as ordering a pizza, booking a hotel, and so on.",
+  "description" : "Resource Type definition for an Amazon Lex conversational bot performing automated tasks such as ordering a pizza, booking a hotel, and so on.",
   "sourceUrl" : "https://docs.aws.amazon.com/lexv2/latest/dg/build-create.html",
   "definitions" : {
     "ReplicaRegion" : {
@@ -1227,7 +1227,7 @@
           "$ref" : "#/definitions/Name"
         },
         "Description" : {
-          "description" : "Description of thr intent.",
+          "description" : "Resource Type definition for the intent.",
           "$ref" : "#/definitions/Description"
         },
         "ParentIntentSignature" : {
@@ -1453,9 +1453,17 @@
         },
         "SlotTypeId" : {
           "$ref" : "#/definitions/SlotTypeId"
+        },
+        "SlotTypeName" : {
+          "$ref" : "#/definitions/SlotTypeName"
         }
       },
-      "required" : [ "Name", "SlotTypeId" ],
+      "required" : [ "Name" ],
+      "oneOf" : [ {
+        "required" : [ "SlotTypeId" ]
+      }, {
+        "required" : [ "SlotTypeName" ]
+      } ],
       "additionalProperties" : false
     },
     "SubSlotSetting" : {
@@ -1487,11 +1495,19 @@
         "SlotTypeId" : {
           "$ref" : "#/definitions/SlotTypeId"
         },
+        "SlotTypeName" : {
+          "$ref" : "#/definitions/SlotTypeName"
+        },
         "ValueElicitationSetting" : {
           "$ref" : "#/definitions/SubSlotValueElicitationSetting"
         }
       },
-      "required" : [ "SlotTypeId", "ValueElicitationSetting" ],
+      "required" : [ "ValueElicitationSetting" ],
+      "oneOf" : [ {
+        "required" : [ "SlotTypeId" ]
+      }, {
+        "required" : [ "SlotTypeName" ]
+      } ],
       "additionalProperties" : false
     },
     "SlotTypeId" : {
@@ -2171,27 +2187,30 @@
       "$ref" : "#/definitions/Replication"
     }
   },
-  "taggable" : true,
   "additionalProperties" : false,
   "required" : [ "Name", "RoleArn", "DataPrivacy", "IdleSessionTTLInSeconds" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id", "/properties/Arn" ],
-  "writeOnlyProperties" : [ "/properties/BotLocales", "/properties/BotFileS3Location", "/properties/AutoBuildBotLocales", "/properties/BotTags", "/properties/TestBotAliasTags", "/properties/Replication" ],
+  "writeOnlyProperties" : [ "/properties/BotLocales", "/properties/BotFileS3Location", "/properties/AutoBuildBotLocales", "/properties/BotTags", "/properties/TestBotAliasTags", "/properties/Replication", "/properties/TestBotAliasSettings" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "iam:PassRole", "lex:DescribeBot", "lex:CreateUploadUrl", "lex:StartImport", "lex:DescribeImport", "lex:ListTagsForResource", "lex:TagResource", "lex:CreateBot", "lex:CreateBotLocale", "lex:CreateIntent", "lex:CreateSlot", "lex:CreateSlotType", "lex:UpdateBot", "lex:UpdateBotLocale", "lex:UpdateIntent", "lex:UpdateSlot", "lex:UpdateSlotType", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlot", "lex:DeleteSlotType", "lex:DescribeBotLocale", "lex:BuildBotLocale", "lex:ListBots", "lex:ListBotLocales", "lex:CreateCustomVocabulary", "lex:UpdateCustomVocabulary", "lex:DeleteCustomVocabulary", "s3:GetObject", "lex:UpdateBotAlias", "iam:CreateServiceLinkedRole", "iam:GetRole", "lex:CreateBotReplica", "lex:DescribeBotReplica", "lex:DeleteBotReplica" ]
+      "permissions" : [ "iam:PassRole", "lex:DescribeBot", "lex:CreateUploadUrl", "lex:StartImport", "lex:DescribeImport", "lex:ListTagsForResource", "lex:TagResource", "lex:UntagResource", "lex:CreateBot", "lex:CreateBotLocale", "lex:CreateIntent", "lex:CreateSlot", "lex:CreateSlotType", "lex:UpdateBot", "lex:UpdateBotLocale", "lex:UpdateIntent", "lex:UpdateSlot", "lex:UpdateSlotType", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlot", "lex:DeleteSlotType", "lex:DescribeBotLocale", "lex:BuildBotLocale", "lex:ListBots", "lex:ListBotLocales", "lex:CreateCustomVocabulary", "lex:UpdateCustomVocabulary", "lex:DeleteCustomVocabulary", "s3:GetObject", "lex:UpdateBotAlias", "iam:CreateServiceLinkedRole", "iam:GetRole", "lex:CreateBotReplica", "lex:DescribeBotReplica", "lex:DeleteBotReplica", "lex:CreateBotAlias", "lex:DescribeBotAlias", "lex:ListBotAliases", "lex:BuildBotLocale", "s3:PutObject", "kms:GenerateDataKey", "kms:Decrypt", "cloudwatch:PutMetricData", "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents" ]
     },
     "read" : {
-      "permissions" : [ "lex:DescribeBot", "lex:ListTagsForResource", "lex:DescribeBotReplica" ]
+      "permissions" : [ "lex:DescribeBot", "lex:ListTagsForResource", "lex:DescribeBotReplica", "lex:ListBotAliases", "lex:ListBotLocales", "lex:ListIntents", "lex:ListSlots", "lex:ListSlotTypes", "lex:ListCustomVocabularies", "lex:DescribeBotAlias", "lex:GetBotAlias" ]
     },
     "update" : {
-      "permissions" : [ "iam:PassRole", "lex:DescribeBot", "lex:CreateUploadUrl", "lex:StartImport", "lex:DescribeImport", "lex:ListTagsForResource", "lex:TagResource", "lex:UntagResource", "lex:CreateBot", "lex:CreateBotLocale", "lex:CreateIntent", "lex:CreateSlot", "lex:CreateSlotType", "lex:UpdateBot", "lex:UpdateBotLocale", "lex:UpdateIntent", "lex:UpdateSlot", "lex:UpdateSlotType", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlot", "lex:DeleteSlotType", "lex:DescribeBotLocale", "lex:BuildBotLocale", "lex:ListBots", "lex:ListBotLocales", "lex:CreateCustomVocabulary", "lex:UpdateCustomVocabulary", "lex:DeleteCustomVocabulary", "s3:GetObject", "lex:UpdateBotAlias", "lex:CreateBotReplica", "lex:DescribeBotReplica", "lex:DeleteBotReplica" ]
+      "permissions" : [ "iam:PassRole", "lex:DescribeBot", "lex:CreateUploadUrl", "lex:StartImport", "lex:DescribeImport", "lex:ListTagsForResource", "lex:TagResource", "lex:UntagResource", "lex:CreateBot", "lex:CreateBotLocale", "lex:CreateIntent", "lex:CreateSlot", "lex:CreateSlotType", "lex:UpdateBot", "lex:UpdateBotLocale", "lex:UpdateIntent", "lex:UpdateSlot", "lex:UpdateSlotType", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlot", "lex:DeleteSlotType", "lex:DescribeBotLocale", "lex:BuildBotLocale", "lex:ListBots", "lex:ListBotLocales", "lex:CreateCustomVocabulary", "lex:UpdateCustomVocabulary", "lex:DeleteCustomVocabulary", "s3:GetObject", "lex:UpdateBotAlias", "lex:CreateBotReplica", "lex:DescribeBotReplica", "lex:DeleteBotReplica", "lex:CreateBotAlias", "lex:DescribeBotAlias", "lex:ListBotAliases", "lex:UpdateBotAlias", "s3:PutObject" ]
     },
     "delete" : {
-      "permissions" : [ "lex:DeleteBot", "lex:DescribeBot", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlotType", "lex:DeleteSlot", "lex:DeleteBotVersion", "lex:DeleteBotChannel", "lex:DeleteBotAlias", "lex:DeleteCustomVocabulary", "lex:DeleteBotReplica" ]
+      "permissions" : [ "lex:DeleteBot", "lex:BatchDeleteCustomVocabularyItem", "lex:DescribeBot", "lex:DescribeBotAlias", "lex:DeleteBotLocale", "lex:DeleteIntent", "lex:DeleteSlotType", "lex:DeleteSlot", "lex:DeleteBotVersion", "lex:DeleteBotChannel", "lex:DeleteBotAlias", "lex:DeleteCustomVocabulary", "lex:DeleteBotReplica", "lex:DeleteExport", "lex:DeleteUtterances", "lex:DeleteImport", "lex:DeleteSession", "lex:DeleteTestSet", "lex:DeleteResourcePolicyStatement", "lex:DeleteResourcePolicy", "lex:UntagResource" ]
     },
     "list" : {
-      "permissions" : [ "lex:ListBots", "lex:ListBotReplicas" ]
+      "permissions" : [ "lex:ListBots", "lex:ListBotReplicas", "lex:ListBotAliases", "lex:ListBotLocales", "lex:ListIntents", "lex:ListSlots", "lex:ListSlotTypes", "lex:ListCustomVocabularies", "lex:ListTagsForResource" ]
     }
+  },
+  "tagging" : {
+    "taggable" : false,
+    "tagProperty" : "/properties/BotTags"
   }
 }
