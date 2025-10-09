@@ -2310,11 +2310,20 @@
         "VisualPublishOptions" : {
           "$ref" : "#/definitions/DashboardVisualPublishOptions"
         },
+        "DataStoriesSharingOption" : {
+          "$ref" : "#/definitions/DataStoriesSharingOption"
+        },
         "VisualAxisSortOption" : {
           "$ref" : "#/definitions/VisualAxisSortOption"
         },
         "ExportWithHiddenFieldsOption" : {
           "$ref" : "#/definitions/ExportWithHiddenFieldsOption"
+        },
+        "QuickSuiteActionsOption" : {
+          "$ref" : "#/definitions/QuickSuiteActionsOption"
+        },
+        "ExecutiveSummaryOption" : {
+          "$ref" : "#/definitions/ExecutiveSummaryOption"
         },
         "ExportToCSVOption" : {
           "$ref" : "#/definitions/ExportToCSVOption"
@@ -2860,6 +2869,15 @@
     "AxisDisplayDataDrivenRange" : {
       "additionalProperties" : false,
       "type" : "object"
+    },
+    "DataStoriesSharingOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "FilterGroup" : {
       "additionalProperties" : false,
@@ -5871,6 +5889,15 @@
         }
       }
     },
+    "ExecutiveSummaryOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
+    },
     "RadarChartSeriesSettings" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -7999,6 +8026,15 @@
         }
       },
       "required" : [ "Color", "Expression" ]
+    },
+    "QuickSuiteActionsOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "GeospatialCircleRadius" : {
       "additionalProperties" : false,

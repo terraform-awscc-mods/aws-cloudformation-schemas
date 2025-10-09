@@ -506,6 +506,17 @@
         },
         "WeekStart" : {
           "$ref" : "#/definitions/DayOfTheWeek"
+        },
+        "QBusinessInsightsStatus" : {
+          "$ref" : "#/definitions/QBusinessInsightsStatus"
+        },
+        "ExcludedDataSetArns" : {
+          "minItems" : 0,
+          "maxItems" : 100,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
         }
       }
     },
@@ -2299,11 +2310,20 @@
         "VisualPublishOptions" : {
           "$ref" : "#/definitions/DashboardVisualPublishOptions"
         },
+        "DataStoriesSharingOption" : {
+          "$ref" : "#/definitions/DataStoriesSharingOption"
+        },
         "VisualAxisSortOption" : {
           "$ref" : "#/definitions/VisualAxisSortOption"
         },
         "ExportWithHiddenFieldsOption" : {
           "$ref" : "#/definitions/ExportWithHiddenFieldsOption"
+        },
+        "QuickSuiteActionsOption" : {
+          "$ref" : "#/definitions/QuickSuiteActionsOption"
+        },
+        "ExecutiveSummaryOption" : {
+          "$ref" : "#/definitions/ExecutiveSummaryOption"
         },
         "ExportToCSVOption" : {
           "$ref" : "#/definitions/ExportToCSVOption"
@@ -2316,6 +2336,9 @@
         },
         "DataPointTooltipOption" : {
           "$ref" : "#/definitions/DataPointTooltipOption"
+        },
+        "DataQAEnabledOption" : {
+          "$ref" : "#/definitions/DataQAEnabledOption"
         },
         "SheetLayoutElementMaximizationOption" : {
           "$ref" : "#/definitions/SheetLayoutElementMaximizationOption"
@@ -2846,6 +2869,15 @@
     "AxisDisplayDataDrivenRange" : {
       "additionalProperties" : false,
       "type" : "object"
+    },
+    "DataStoriesSharingOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "FilterGroup" : {
       "additionalProperties" : false,
@@ -5495,6 +5527,10 @@
         }
       }
     },
+    "QBusinessInsightsStatus" : {
+      "type" : "string",
+      "enum" : [ "ENABLED", "DISABLED" ]
+    },
     "FunnelChartMeasureDataLabelStyle" : {
       "type" : "string",
       "enum" : [ "VALUE_ONLY", "PERCENTAGE_BY_FIRST_STAGE", "PERCENTAGE_BY_PREVIOUS_STAGE", "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE", "VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE" ]
@@ -5850,6 +5886,15 @@
       "properties" : {
         "LineChartAggregatedFieldWells" : {
           "$ref" : "#/definitions/LineChartAggregatedFieldWells"
+        }
+      }
+    },
+    "ExecutiveSummaryOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
         }
       }
     },
@@ -6710,6 +6755,15 @@
         }
       },
       "required" : [ "DefaultNewSheetConfiguration" ]
+    },
+    "DataQAEnabledOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "NumericalDimensionField" : {
       "additionalProperties" : false,
@@ -7972,6 +8026,15 @@
         }
       },
       "required" : [ "Color", "Expression" ]
+    },
+    "QuickSuiteActionsOption" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "AvailabilityStatus" : {
+          "$ref" : "#/definitions/DashboardBehavior"
+        }
+      }
     },
     "GeospatialCircleRadius" : {
       "additionalProperties" : false,
