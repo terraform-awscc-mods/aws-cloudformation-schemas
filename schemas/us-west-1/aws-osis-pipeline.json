@@ -97,6 +97,28 @@
             "maxLength" : 24,
             "pattern" : "subnet-\\w{8}(\\w{9})?"
           }
+        },
+        "VpcEndpointManagement" : {
+          "description" : "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+          "type" : "string",
+          "enum" : [ "CUSTOMER", "SERVICE" ]
+        },
+        "VpcAttachmentOptions" : {
+          "type" : "object",
+          "description" : "Options for attaching a VPC to the pipeline.",
+          "properties" : {
+            "AttachToVpc" : {
+              "type" : "boolean",
+              "description" : "Whether the pipeline should be attached to the provided VPC"
+            },
+            "CidrBlock" : {
+              "type" : "string",
+              "description" : "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+              "pattern" : "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"
+            }
+          },
+          "required" : [ "AttachToVpc", "CidrBlock" ],
+          "additionalProperties" : false
         }
       },
       "required" : [ "SubnetIds" ],
@@ -119,6 +141,16 @@
         }
       },
       "additionalProperties" : false
+    },
+    "ResourcePolicy" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Policy" : {
+          "type" : "object"
+        }
+      },
+      "required" : [ "Policy" ]
     }
   },
   "properties" : {
@@ -147,7 +179,7 @@
       "description" : "The Data Prepper pipeline configuration.",
       "type" : "string",
       "minLength" : 1,
-      "maxLength" : 24000
+      "maxLength" : 100000
     },
     "PipelineName" : {
       "description" : "Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.",
@@ -176,12 +208,25 @@
         "$ref" : "#/definitions/VpcEndpoint"
       }
     },
+    "VpcEndpointService" : {
+      "description" : "The VPC endpoint service name for the pipeline.",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 128
+    },
     "PipelineArn" : {
       "description" : "The Amazon Resource Name (ARN) of the pipeline.",
       "type" : "string",
       "minLength" : 46,
-      "maxLength" : 76,
+      "maxLength" : 78,
       "pattern" : "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$"
+    },
+    "PipelineRoleArn" : {
+      "description" : "The Pipeline Role (ARN) for the pipeline.",
+      "type" : "string",
+      "minLength" : 20,
+      "maxLength" : 2048,
+      "pattern" : "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$"
     },
     "IngestEndpointUrls" : {
       "type" : "array",
@@ -190,11 +235,14 @@
       "items" : {
         "type" : "string"
       }
+    },
+    "ResourcePolicy" : {
+      "$ref" : "#/definitions/ResourcePolicy"
     }
   },
   "additionalProperties" : false,
   "required" : [ "MaxUnits", "MinUnits", "PipelineConfigurationBody", "PipelineName" ],
-  "readOnlyProperties" : [ "/properties/PipelineArn", "/properties/IngestEndpointUrls", "/properties/VpcEndpoints" ],
+  "readOnlyProperties" : [ "/properties/PipelineArn", "/properties/IngestEndpointUrls", "/properties/VpcEndpoints", "/properties/VpcEndpointService" ],
   "writeOnlyProperties" : [ "/properties/VpcOptions" ],
   "createOnlyProperties" : [ "/properties/PipelineName" ],
   "primaryIdentifier" : [ "/properties/PipelineArn" ],
@@ -203,17 +251,18 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
-    "tagProperty" : "/properties/Tags"
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "osis:TagResource", "osis:UntagResource", "osis:ListTagsForResource" ]
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "osis:CreatePipeline", "osis:GetPipeline", "osis:TagResource", "osis:ListTagsForResource", "iam:PassRole", "iam:CreateServiceLinkedRole", "logs:CreateLogDelivery", "kms:DescribeKey" ]
+      "permissions" : [ "osis:CreatePipeline", "osis:GetPipeline", "osis:TagResource", "osis:ListTagsForResource", "osis:GetResourcePolicy", "osis:PutResourcePolicy", "iam:PassRole", "iam:CreateServiceLinkedRole", "logs:CreateLogDelivery", "kms:DescribeKey" ]
     },
     "read" : {
-      "permissions" : [ "osis:GetPipeline", "osis:ListTagsForResource" ]
+      "permissions" : [ "osis:GetPipeline", "osis:ListTagsForResource", "osis:GetResourcePolicy" ]
     },
     "update" : {
-      "permissions" : [ "osis:UpdatePipeline", "osis:GetPipeline", "osis:ListTagsForResource", "osis:TagResource", "osis:UntagResource", "iam:PassRole", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "kms:DescribeKey" ]
+      "permissions" : [ "osis:UpdatePipeline", "osis:GetPipeline", "osis:ListTagsForResource", "osis:TagResource", "osis:UntagResource", "osis:GetResourcePolicy", "osis:PutResourcePolicy", "osis:DeleteResourcePolicy", "iam:PassRole", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "kms:DescribeKey" ]
     },
     "delete" : {
       "permissions" : [ "osis:DeletePipeline", "osis:GetPipeline", "logs:GetLogDelivery", "logs:DeleteLogDelivery", "logs:ListLogDeliveries" ]
