@@ -75,6 +75,7 @@
   "additionalProperties" : false,
   "required" : [ ],
   "createOnlyProperties" : [ "/properties/ObservabilityConfigurationName", "/properties/TraceConfiguration", "/properties/Tags" ],
+  "writeOnlyProperties" : [ "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/ObservabilityConfigurationArn", "/properties/ObservabilityConfigurationRevision", "/properties/Latest" ],
   "primaryIdentifier" : [ "/properties/ObservabilityConfigurationArn" ],
   "handlers" : {

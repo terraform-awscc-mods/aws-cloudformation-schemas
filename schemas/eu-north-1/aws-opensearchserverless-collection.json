@@ -9,7 +9,7 @@
   "typeName" : "AWS::OpenSearchServerless::Collection",
   "readOnlyProperties" : [ "/properties/Id", "/properties/Arn", "/properties/CollectionEndpoint", "/properties/DashboardEndpoint", "/properties/KmsKeyArn" ],
   "description" : "Amazon OpenSearchServerless collection resource",
-  "createOnlyProperties" : [ "/properties/Name", "/properties/Tags", "/properties/Type" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Tags", "/properties/Type", "/properties/StandbyReplicas" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "required" : [ "Name" ],
   "handlers" : {

@@ -86,7 +86,8 @@
   },
   "additionalProperties" : false,
   "required" : [ "ServiceArn", "IngressVpcConfiguration" ],
-  "createOnlyProperties" : [ "/properties/VpcIngressConnectionName", "/properties/ServiceArn" ],
+  "createOnlyProperties" : [ "/properties/VpcIngressConnectionName", "/properties/ServiceArn", "/properties/Tags" ],
+  "writeOnlyProperties" : [ "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/VpcIngressConnectionArn", "/properties/DomainName", "/properties/Status" ],
   "primaryIdentifier" : [ "/properties/VpcIngressConnectionArn" ],
   "handlers" : {
@@ -97,7 +98,7 @@
       "permissions" : [ "apprunner:DescribeVpcIngressConnection" ]
     },
     "update" : {
-      "permissions" : [ "apprunner:UpdateVpcIngressConnection", "apprunner:DescribeVpcIngressConnection", "ec2:DescribeVpcs", "ec2:DescribeVpcEndpoints", "ec2:DescribeSubnets", "apprunner:TagResource" ]
+      "permissions" : [ "apprunner:UpdateVpcIngressConnection", "apprunner:DescribeVpcIngressConnection", "ec2:DescribeVpcs", "ec2:DescribeVpcEndpoints", "ec2:DescribeSubnets" ]
     },
     "delete" : {
       "permissions" : [ "apprunner:DeleteVpcIngressConnection", "apprunner:DescribeVpcIngressConnection" ]

@@ -218,7 +218,8 @@
         "CloudWatchLogsRoleArn" : {
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "CloudWatchLogsRoleArn", "FieldLogLevel" ]
     }
   },
   "required" : [ "Name", "AuthenticationType" ],
