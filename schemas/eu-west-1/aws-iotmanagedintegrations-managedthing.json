@@ -261,6 +261,13 @@
       "description" : "Timestamp the managed thing was first created",
       "format" : "date-time"
     },
+    "CertificatePem" : {
+      "type" : "string",
+      "maxLength" : 65536,
+      "minLength" : 1,
+      "pattern" : "^[\\s\\S]*$",
+      "description" : "The certificate data, in PEM format."
+    },
     "CredentialLockerId" : {
       "type" : "string",
       "maxLength" : 64,
@@ -366,7 +373,7 @@
     }
   },
   "required" : [ "Role" ],
-  "readOnlyProperties" : [ "/properties/ActivatedAt", "/properties/AdvertisedProductId", "/properties/Arn", "/properties/ConnectorDeviceId", "/properties/ConnectorPolicyId", "/properties/CreatedAt", "/properties/DeviceSpecificKey", "/properties/HubNetworkMode", "/properties/Id", "/properties/Identifier", "/properties/InternationalArticleNumber", "/properties/MacAddress", "/properties/ParentControllerId", "/properties/ProvisioningStatus", "/properties/UniversalProductCode", "/properties/UpdatedAt" ],
+  "readOnlyProperties" : [ "/properties/ActivatedAt", "/properties/AdvertisedProductId", "/properties/Arn", "/properties/CertificatePem", "/properties/ConnectorDeviceId", "/properties/ConnectorPolicyId", "/properties/CreatedAt", "/properties/DeviceSpecificKey", "/properties/HubNetworkMode", "/properties/Id", "/properties/Identifier", "/properties/InternationalArticleNumber", "/properties/MacAddress", "/properties/ParentControllerId", "/properties/ProvisioningStatus", "/properties/UniversalProductCode", "/properties/UpdatedAt" ],
   "writeOnlyProperties" : [ "/properties/AuthenticationMaterial", "/properties/AuthenticationMaterialType" ],
   "createOnlyProperties" : [ "/properties/AuthenticationMaterial", "/properties/AuthenticationMaterialType", "/properties/Role", "/properties/Tags", "/properties/SerialNumber" ],
   "primaryIdentifier" : [ "/properties/Identifier" ],
@@ -376,7 +383,7 @@
       "permissions" : [ "iotmanagedintegrations:CreateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
     },
     "read" : {
-      "permissions" : [ "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:GetManagedThingCertificate", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
     },
     "update" : {
       "permissions" : [ "iotmanagedintegrations:UpdateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]

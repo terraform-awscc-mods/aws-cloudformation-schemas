@@ -34,6 +34,9 @@
     "TaskInvocationParameters" : {
       "$ref" : "#/definitions/TaskInvocationParameters"
     },
+    "WindowTaskId" : {
+      "type" : "string"
+    },
     "WindowId" : {
       "type" : "string"
     },
@@ -219,5 +222,5 @@
   "required" : [ "WindowId", "Priority", "TaskType", "TaskArn" ],
   "createOnlyProperties" : [ "/properties/WindowId", "/properties/TaskType" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id" ]
+  "readOnlyProperties" : [ "/properties/Id", "/properties/WindowTaskId" ]
 }
