@@ -89,6 +89,16 @@
       "description" : "Defines the configuration for attaching additional storage to the instances in the SageMaker HyperPod cluster instance group.",
       "type" : "object"
     },
+    "ClusterKubernetesLabels" : {
+      "patternProperties" : {
+        "^.+$" : {
+          "type" : "string"
+        }
+      },
+      "description" : "A map of Kubernetes labels to apply to cluster nodes.",
+      "additionalProperties" : false,
+      "type" : "object"
+    },
     "VpcConfig" : {
       "description" : "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
       "additionalProperties" : false,
@@ -120,6 +130,27 @@
         }
       },
       "required" : [ "SecurityGroupIds", "Subnets" ]
+    },
+    "ClusterKubernetesTaint" : {
+      "description" : "A Kubernetes taint to apply to cluster nodes.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Value" : {
+          "description" : "The value of the taint.",
+          "type" : "string"
+        },
+        "Effect" : {
+          "description" : "The effect of the taint.",
+          "type" : "string",
+          "enum" : [ "NoSchedule", "PreferNoSchedule", "NoExecute" ]
+        },
+        "Key" : {
+          "description" : "The key of the taint.",
+          "type" : "string"
+        }
+      },
+      "required" : [ "Key", "Effect" ]
     },
     "ClusterRestrictedInstanceGroup" : {
       "description" : "Details of a restricted instance group in a SageMaker HyperPod cluster.",
@@ -257,6 +288,19 @@
         "$ref" : "#/definitions/ClusterRestrictedInstanceGroup"
       }
     },
+    "ClusterKubernetesConfig" : {
+      "description" : "Kubernetes configuration for cluster nodes including labels and taints.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Labels" : {
+          "$ref" : "#/definitions/ClusterKubernetesLabels"
+        },
+        "Taints" : {
+          "$ref" : "#/definitions/ClusterKubernetesTaints"
+        }
+      }
+    },
     "Orchestrator" : {
       "description" : "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
       "additionalProperties" : false,
@@ -319,6 +363,15 @@
         "$ref" : "#/definitions/DeepHealthCheckType"
       }
     },
+    "ClusterKubernetesTaints" : {
+      "maxItems" : 50,
+      "description" : "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+      "insertionOrder" : false,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ClusterKubernetesTaint"
+      }
+    },
     "ClusterInstanceGroup" : {
       "description" : "Details of an instance group in a SageMaker HyperPod cluster.",
       "additionalProperties" : false,
@@ -329,6 +382,9 @@
         },
         "InstanceStorageConfigs" : {
           "$ref" : "#/definitions/ClusterInstanceStorageConfigs"
+        },
+        "KubernetesConfig" : {
+          "$ref" : "#/definitions/ClusterKubernetesConfig"
         },
         "LifeCycleConfig" : {
           "$ref" : "#/definitions/ClusterLifeCycleConfig"
