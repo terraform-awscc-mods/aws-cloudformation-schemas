@@ -18,6 +18,9 @@
     "FleetType" : {
       "type" : "string"
     },
+    "RootVolumeConfig" : {
+      "$ref" : "#/definitions/VolumeConfig"
+    },
     "EnableDefaultInternetAccess" : {
       "type" : "boolean"
     },
@@ -151,6 +154,15 @@
         }
       },
       "required" : [ "S3Bucket", "S3Key" ]
+    },
+    "VolumeConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VolumeSizeInGb" : {
+          "type" : "integer"
+        }
+      }
     }
   },
   "required" : [ "InstanceType", "Name" ],
