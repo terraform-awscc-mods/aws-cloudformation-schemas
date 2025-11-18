@@ -575,7 +575,7 @@
         "ComputeArn" : {
           "type" : "string",
           "maxLength" : 2048,
-          "pattern" : "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*"
+          "pattern" : "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"
         },
         "InstanceProfileArn" : {
           "type" : "string",
@@ -606,6 +606,10 @@
           "type" : "string",
           "maxLength" : 2048,
           "pattern" : "^s3://.+$"
+        },
+        "ManagedEndpointArn" : {
+          "type" : "string",
+          "maxLength" : 2048
         }
       },
       "additionalProperties" : false
