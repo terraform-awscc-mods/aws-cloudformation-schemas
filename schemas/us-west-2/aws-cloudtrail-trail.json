@@ -60,6 +60,11 @@
       },
       "required" : [ "FieldSelectors" ]
     },
+    "SourceEventCategory" : {
+      "description" : "Event category for an insight selector.",
+      "type" : "string",
+      "enum" : [ "Management", "Data" ]
+    },
     "InsightSelector" : {
       "description" : "A string that contains insight types that are logged on a trail.",
       "additionalProperties" : false,
@@ -68,6 +73,15 @@
         "InsightType" : {
           "description" : "The type of insight to log on a trail.",
           "type" : "string"
+        },
+        "EventCategories" : {
+          "uniqueItems" : true,
+          "description" : "The categories of events for which to log insights. By default, insights are logged for management events only.",
+          "insertionOrder" : false,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SourceEventCategory"
+          }
         }
       }
     },
