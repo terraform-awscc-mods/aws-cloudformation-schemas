@@ -186,7 +186,7 @@
       "$ref" : "#/definitions/MetricsConfig"
     },
     "LoggingConfig" : {
-      "description" : "",
+      "description" : "The function's Amazon CloudWatch Logs configuration settings.",
       "$ref" : "#/definitions/LoggingConfig"
     }
   },
@@ -509,12 +509,12 @@
       }
     },
     "LoggingConfig" : {
-      "description" : "",
+      "description" : "The function's Amazon CloudWatch Logs configuration settings.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
         "SystemLogLevel" : {
-          "description" : "Event source mapping log granularity level override",
+          "description" : "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
           "type" : "string",
           "enum" : [ "DEBUG", "INFO", "WARN" ]
         }

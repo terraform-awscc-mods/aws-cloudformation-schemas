@@ -99,6 +99,10 @@
         }
       }
     },
+    "Endpoint" : {
+      "description" : "The DSQL cluster endpoint.",
+      "type" : "string"
+    },
     "PolicyVersion" : {
       "description" : "The version number of the cluster's resource based policy",
       "type" : "string"
@@ -119,7 +123,7 @@
     "permissions" : [ "dsql:UntagResource", "dsql:TagResource", "dsql:ListTagsForResource" ]
   },
   "primaryIdentifier" : [ "/properties/Identifier" ],
-  "readOnlyProperties" : [ "/properties/ResourceArn", "/properties/Identifier", "/properties/CreationTime", "/properties/Status", "/properties/VpcEndpointServiceName", "/properties/EncryptionDetails", "/properties/PolicyVersion" ],
+  "readOnlyProperties" : [ "/properties/ResourceArn", "/properties/Identifier", "/properties/CreationTime", "/properties/Status", "/properties/VpcEndpointServiceName", "/properties/EncryptionDetails", "/properties/PolicyVersion", "/properties/Endpoint" ],
   "writeOnlyProperties" : [ "/properties/KmsEncryptionKey" ],
   "handlers" : {
     "create" : {
