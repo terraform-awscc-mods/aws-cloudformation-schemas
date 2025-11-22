@@ -212,12 +212,30 @@
         "$ref" : "#/definitions/AlarmDetails"
       }
     },
+    "ClusterCapacityRequirements" : {
+      "description" : "Specifies the capacity requirements configuration for an instance group",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Spot" : {
+          "$ref" : "#/definitions/ClusterSpotOptions"
+        },
+        "OnDemand" : {
+          "$ref" : "#/definitions/ClusterOnDemandOptions"
+        }
+      }
+    },
     "ImageId" : {
       "minLength" : 7,
       "pattern" : "^ami-[0-9a-fA-F]{8,17}|default$",
       "description" : "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
       "type" : "string",
       "maxLength" : 21
+    },
+    "ClusterSpotOptions" : {
+      "description" : "Options for Spot capacity",
+      "additionalProperties" : false,
+      "type" : "object"
     },
     "CapacitySizeConfig" : {
       "description" : "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
@@ -269,6 +287,11 @@
       "description" : "The name of the instance group of a SageMaker HyperPod cluster.",
       "type" : "string",
       "maxLength" : 63
+    },
+    "ClusterOnDemandOptions" : {
+      "description" : "Options for OnDemand capacity",
+      "additionalProperties" : false,
+      "type" : "object"
     },
     "ClusterInstanceGroupsList" : {
       "minItems" : 1,
@@ -377,6 +400,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "CapacityRequirements" : {
+          "$ref" : "#/definitions/ClusterCapacityRequirements"
+        },
         "InstanceGroupName" : {
           "$ref" : "#/definitions/InstanceGroupName"
         },
