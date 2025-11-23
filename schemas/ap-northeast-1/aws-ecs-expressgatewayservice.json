@@ -10,7 +10,7 @@
   "typeName" : "AWS::ECS::ExpressGatewayService",
   "readOnlyProperties" : [ "/properties/ServiceArn", "/properties/ActiveConfigurations", "/properties/Status", "/properties/CreatedAt", "/properties/UpdatedAt" ],
   "description" : "Resource Type definition for AWS::ECS::ExpressGatewayService",
-  "createOnlyProperties" : [ "/properties/ServiceName", "/properties/Cluster", "/properties/InfrastructureRoleArn", "/properties/Tags" ],
+  "createOnlyProperties" : [ "/properties/ServiceName", "/properties/Cluster", "/properties/InfrastructureRoleArn", "/properties/Tags", "/properties/ScalingTarget" ],
   "primaryIdentifier" : [ "/properties/ServiceArn" ],
   "required" : [ "ExecutionRoleArn", "InfrastructureRoleArn", "PrimaryContainer" ],
   "propertyTransform" : {

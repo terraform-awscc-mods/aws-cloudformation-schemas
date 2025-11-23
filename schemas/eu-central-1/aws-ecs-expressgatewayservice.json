@@ -10,7 +10,7 @@
   "typeName" : "AWS::ECS::ExpressGatewayService",
   "readOnlyProperties" : [ "/properties/ServiceArn", "/properties/ActiveConfigurations", "/properties/Status", "/properties/CreatedAt", "/properties/UpdatedAt" ],
   "description" : "Resource Type definition for AWS::ECS::ExpressGatewayService",
-  "createOnlyProperties" : [ "/properties/ServiceName", "/properties/Cluster", "/properties/InfrastructureRoleArn", "/properties/Tags" ],
+  "createOnlyProperties" : [ "/properties/ServiceName", "/properties/Cluster", "/properties/InfrastructureRoleArn", "/properties/Tags", "/properties/ScalingTarget" ],
   "primaryIdentifier" : [ "/properties/ServiceArn" ],
   "required" : [ "ExecutionRoleArn", "InfrastructureRoleArn", "PrimaryContainer" ],
   "propertyTransform" : {
@@ -21,13 +21,16 @@
       "permissions" : [ "ecs:DescribeExpressGatewayService" ]
     },
     "create" : {
-      "permissions" : [ "ecs:CreateExpressGatewayService", "ecs:CreateCluster", "ecs:DescribeExpressGatewayService", "ecs:DescribeServiceDeployments", "ecs:ListServiceDeployments", "ecs:RegisterTaskDefinition", "ecs:TagResource", "iam:PassRole" ]
+      "permissions" : [ "ecs:CreateExpressGatewayService", "ecs:CreateCluster", "ecs:DescribeExpressGatewayService", "ecs:DescribeServiceDeployments", "ecs:ListServiceDeployments", "ecs:RegisterTaskDefinition", "ecs:TagResource", "iam:PassRole" ],
+      "timeoutInMinutes" : 180
     },
     "update" : {
-      "permissions" : [ "ecs:UpdateExpressGatewayService", "ecs:DescribeExpressGatewayService", "ecs:DescribeServiceDeployments", "ecs:ListServiceDeployments", "ecs:RegisterTaskDefinition", "iam:PassRole" ]
+      "permissions" : [ "ecs:UpdateExpressGatewayService", "ecs:DescribeExpressGatewayService", "ecs:DescribeServiceDeployments", "ecs:ListServiceDeployments", "ecs:RegisterTaskDefinition", "iam:PassRole" ],
+      "timeoutInMinutes" : 180
     },
     "delete" : {
-      "permissions" : [ "ecs:DeleteExpressGatewayService", "ecs:DescribeExpressGatewayService", "ecs:DescribeServices" ]
+      "permissions" : [ "ecs:DeleteExpressGatewayService", "ecs:DescribeExpressGatewayService", "ecs:DescribeServices" ],
+      "timeoutInMinutes" : 30
     }
   },
   "writeOnlyProperties" : [ "/properties/ExecutionRoleArn", "/properties/TaskRoleArn", "/properties/HealthCheckPath", "/properties/PrimaryContainer", "/properties/NetworkConfiguration", "/properties/Cpu", "/properties/Memory", "/properties/ScalingTarget" ],
