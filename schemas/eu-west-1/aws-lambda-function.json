@@ -15,7 +15,7 @@
   "required" : [ "Code", "Role" ],
   "handlers" : {
     "read" : {
-      "permissions" : [ "lambda:GetFunction", "lambda:GetFunctionCodeSigningConfig", "lambda:GetFunctionRecursionConfig" ]
+      "permissions" : [ "lambda:GetFunction", "lambda:GetFunctionCodeSigningConfig", "lambda:GetFunctionRecursionConfig", "lambda:GetRuntimeManagementConfig" ]
     },
     "create" : {
       "permissions" : [ "lambda:CreateFunction", "lambda:GetFunction", "lambda:PutFunctionConcurrency", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "elasticfilesystem:DescribeMountTargets", "kms:CreateGrant", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "lambda:GetCodeSigningConfig", "lambda:GetFunctionCodeSigningConfig", "lambda:GetLayerVersion", "lambda:GetRuntimeManagementConfig", "lambda:PutRuntimeManagementConfig", "lambda:TagResource", "lambda:PutFunctionRecursionConfig", "lambda:GetFunctionRecursionConfig" ]
