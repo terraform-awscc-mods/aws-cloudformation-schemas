@@ -34,7 +34,7 @@
     },
     "AvailabilityZoneId" : {
       "type" : "string",
-      "description" : ""
+      "description" : "The ID of the Availability Zone for the volume."
     },
     "Throughput" : {
       "type" : "integer",
@@ -50,7 +50,7 @@
     },
     "SourceVolumeId" : {
       "type" : "string",
-      "description" : ""
+      "description" : "The ID of the source volume from which the volume copy was created. Only for volume copies."
     },
     "VolumeType" : {
       "type" : "string",
