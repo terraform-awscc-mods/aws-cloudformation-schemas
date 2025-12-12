@@ -1,0 +1,94 @@
+{
+  "typeName" : "AWS::IoTManagedIntegrations::ProvisioningProfile",
+  "description" : "Resource Type definition for AWS::IoTManagedIntegrations::ProvisioningProfile",
+  "definitions" : {
+    "ProvisioningType" : {
+      "type" : "string",
+      "enum" : [ "FLEET_PROVISIONING", "JITR" ]
+    },
+    "TagsMap" : {
+      "type" : "object",
+      "maxProperties" : 50,
+      "minProperties" : 1,
+      "patternProperties" : {
+        ".+" : {
+          "type" : "string",
+          "maxLength" : 256,
+          "minLength" : 0
+        }
+      },
+      "additionalProperties" : false
+    },
+    "Unit" : {
+      "type" : "object",
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "Arn" : {
+      "type" : "string",
+      "maxLength" : 1011,
+      "minLength" : 32,
+      "pattern" : "^arn:[^:]+:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:provisioning-profile/[0-9a-zA-Z:_-]+$"
+    },
+    "CaCertificate" : {
+      "type" : "string",
+      "pattern" : "^-----BEGIN CERTIFICATE-----.*(.|\\\n)*-----END CERTIFICATE-----\\n?$"
+    },
+    "ClaimCertificate" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string",
+      "maxLength" : 64,
+      "minLength" : 1,
+      "pattern" : "^[A-Za-z0-9-_]+$"
+    },
+    "Identifier" : {
+      "type" : "string",
+      "maxLength" : 64,
+      "minLength" : 1,
+      "pattern" : "^[A-Za-z0-9-_]+$"
+    },
+    "Name" : {
+      "type" : "string",
+      "maxLength" : 36,
+      "minLength" : 1,
+      "pattern" : "^[0-9A-Za-z_-]+$"
+    },
+    "ProvisioningType" : {
+      "$ref" : "#/definitions/ProvisioningType"
+    },
+    "Tags" : {
+      "$ref" : "#/definitions/TagsMap"
+    }
+  },
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/ClaimCertificate", "/properties/Id", "/properties/Identifier" ],
+  "createOnlyProperties" : [ "/properties/CaCertificate", "/properties/ProvisioningType", "/properties/Tags", "/properties/Name" ],
+  "primaryIdentifier" : [ "/properties/Identifier" ],
+  "writeOnlyProperties" : [ "/properties/CaCertificate" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:CreateProvisioningProfile", "iotmanagedintegrations:RegisterCustomEndpoint", "iotmanagedintegrations:TagResource" ]
+    },
+    "read" : {
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:TagResource" ]
+    },
+    "delete" : {
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:DeleteProvisioningProfile" ]
+    },
+    "list" : {
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:ListProvisioningProfiles" ]
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "ProvisioningType" ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource" ]
+  }
+}

@@ -4,14 +4,17 @@
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
   "definitions" : {
     "Tag" : {
+      "description" : "An object that defines the tags (keys and values) that you want to associate with the tenant.",
       "type" : "object",
       "properties" : {
         "Key" : {
+          "description" : "The key of the key-value tag.",
           "type" : "string",
           "minLength" : 1,
           "maxLength" : 128
         },
         "Value" : {
+          "description" : "The value of the key-value tag.",
           "type" : "string",
           "minLength" : 0,
           "maxLength" : 256
@@ -21,9 +24,11 @@
       "additionalProperties" : false
     },
     "ResourceAssociation" : {
+      "description" : "The resource to associate with the tenant",
       "type" : "object",
       "properties" : {
         "ResourceArn" : {
+          "description" : "The ARN of the resource to associate with the tenant",
           "type" : "string",
           "minLength" : 1
         }
