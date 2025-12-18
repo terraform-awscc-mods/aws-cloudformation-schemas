@@ -6212,7 +6212,7 @@
         },
         "ParameterDeclarations" : {
           "minItems" : 0,
-          "maxItems" : 200,
+          "maxItems" : 400,
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/ParameterDeclaration"

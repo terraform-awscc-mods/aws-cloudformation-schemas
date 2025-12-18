@@ -324,7 +324,6 @@
   "readOnlyProperties" : [ "/properties/BotAliasId", "/properties/Arn", "/properties/BotAliasStatus" ],
   "primaryIdentifier" : [ "/properties/BotAliasId", "/properties/BotId" ],
   "createOnlyProperties" : [ "/properties/BotId" ],
-  "writeOnlyProperties" : [ "/properties/BotAliasTags" ],
   "handlers" : {
     "create" : {
       "permissions" : [ "lex:CreateBotAlias", "lex:DescribeBot", "lex:DescribeBotAlias", "lex:TagResource", "lex:ListTagsForResource" ]
@@ -343,6 +342,11 @@
     }
   },
   "tagging" : {
-    "taggable" : false
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "permissions" : [ "lex:ListTagsForResource", "lex:TagResource", "lex:UntagResource" ],
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/BotAliasTags",
+    "tagUpdatable" : true
   }
 }
