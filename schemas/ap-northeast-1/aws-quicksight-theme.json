@@ -6,10 +6,20 @@
       "type" : "object",
       "description" : "<p>The display options for tile borders for visuals.</p>",
       "properties" : {
+        "Color" : {
+          "type" : "string",
+          "description" : "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)"
+        },
         "Show" : {
           "type" : "boolean",
           "default" : null,
           "description" : "<p>The option to enable display of borders for visuals.</p>"
+        },
+        "Width" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "minLength" : 0,
+          "description" : "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)"
         }
       },
       "additionalProperties" : false
@@ -55,6 +65,65 @@
       },
       "additionalProperties" : false
     },
+    "FontConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "FontSize" : {
+          "$ref" : "#/definitions/FontSize"
+        },
+        "FontDecoration" : {
+          "$ref" : "#/definitions/FontDecoration"
+        },
+        "FontColor" : {
+          "type" : "string",
+          "pattern" : "^#[A-F0-9]{6}$"
+        },
+        "FontWeight" : {
+          "$ref" : "#/definitions/FontWeight"
+        },
+        "FontStyle" : {
+          "$ref" : "#/definitions/FontStyle"
+        },
+        "FontFamily" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "FontDecoration" : {
+      "type" : "string",
+      "enum" : [ "UNDERLINE", "NONE" ]
+    },
+    "FontSize" : {
+      "type" : "object",
+      "properties" : {
+        "Relative" : {
+          "$ref" : "#/definitions/RelativeFontSize"
+        },
+        "Absolute" : {
+          "type" : "string",
+          "description" : "String based length that is composed of value and unit in px"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "FontStyle" : {
+      "type" : "string",
+      "enum" : [ "NORMAL", "ITALIC" ]
+    },
+    "FontWeight" : {
+      "type" : "object",
+      "properties" : {
+        "Name" : {
+          "$ref" : "#/definitions/FontWeightName"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "FontWeightName" : {
+      "type" : "string",
+      "enum" : [ "NORMAL", "BOLD" ]
+    },
     "GutterStyle" : {
       "type" : "object",
       "description" : "<p>The display options for gutter spacing between tiles on a sheet.</p>",
@@ -67,6 +136,10 @@
       },
       "additionalProperties" : false
     },
+    "HorizontalTextAlignment" : {
+      "type" : "string",
+      "enum" : [ "LEFT", "CENTER", "RIGHT", "AUTO" ]
+    },
     "MarginStyle" : {
       "type" : "object",
       "description" : "<p>The display options for margins around the outside edge of sheets.</p>",
@@ -78,6 +151,10 @@
         }
       },
       "additionalProperties" : false
+    },
+    "RelativeFontSize" : {
+      "type" : "string",
+      "enum" : [ "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE" ]
     },
     "ResourcePermission" : {
       "type" : "object",
@@ -106,6 +183,19 @@
       "type" : "string",
       "enum" : [ "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "PENDING_UPDATE", "DELETED" ]
     },
+    "SheetBackgroundStyle" : {
+      "type" : "object",
+      "properties" : {
+        "Color" : {
+          "type" : "string",
+          "description" : "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)"
+        },
+        "Gradient" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
     "SheetStyle" : {
       "type" : "object",
       "description" : "<p>The theme display options for sheets. </p>",
@@ -115,6 +205,9 @@
         },
         "TileLayout" : {
           "$ref" : "#/definitions/TileLayoutStyle"
+        },
+        "Background" : {
+          "$ref" : "#/definitions/SheetBackgroundStyle"
         }
       },
       "additionalProperties" : false
@@ -138,6 +231,10 @@
       },
       "required" : [ "Key", "Value" ],
       "additionalProperties" : false
+    },
+    "TextTransform" : {
+      "type" : "string",
+      "enum" : [ "CAPITALIZE" ]
     },
     "ThemeConfiguration" : {
       "type" : "object",
@@ -246,8 +343,22 @@
       "type" : "object",
       "description" : "<p>Display options related to tiles on a sheet.</p>",
       "properties" : {
+        "BackgroundColor" : {
+          "type" : "string",
+          "description" : "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)"
+        },
         "Border" : {
           "$ref" : "#/definitions/BorderStyle"
+        },
+        "BorderRadius" : {
+          "type" : "string",
+          "maxLength" : 50,
+          "minLength" : 0
+        },
+        "Padding" : {
+          "type" : "string",
+          "maxLength" : 200,
+          "minLength" : 0
         }
       },
       "additionalProperties" : false
@@ -262,6 +373,27 @@
           },
           "maxItems" : 5,
           "minItems" : 0
+        },
+        "AxisTitleFontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "AxisLabelFontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "LegendTitleFontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "LegendValueFontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "DataLabelFontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "VisualTitleFontConfiguration" : {
+          "$ref" : "#/definitions/VisualTitleFontConfiguration"
+        },
+        "VisualSubtitleFontConfiguration" : {
+          "$ref" : "#/definitions/VisualSubtitleFontConfiguration"
         }
       },
       "additionalProperties" : false
@@ -349,6 +481,36 @@
           "type" : "string",
           "pattern" : "^#[A-F0-9]{6}$",
           "description" : "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "VisualSubtitleFontConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "FontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "TextAlignment" : {
+          "$ref" : "#/definitions/HorizontalTextAlignment"
+        },
+        "TextTransform" : {
+          "$ref" : "#/definitions/TextTransform"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "VisualTitleFontConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "FontConfiguration" : {
+          "$ref" : "#/definitions/FontConfiguration"
+        },
+        "TextAlignment" : {
+          "$ref" : "#/definitions/HorizontalTextAlignment"
+        },
+        "TextTransform" : {
+          "$ref" : "#/definitions/TextTransform"
         }
       },
       "additionalProperties" : false

@@ -2814,7 +2814,7 @@
         },
         "ParameterDeclarations" : {
           "minItems" : 0,
-          "maxItems" : 200,
+          "maxItems" : 400,
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/ParameterDeclaration"
@@ -3211,11 +3211,6 @@
         "BorderStyle" : {
           "$ref" : "#/definitions/FreeFormLayoutElementBorderStyle"
         },
-        "Height" : {
-          "description" : "String based length that is composed of value and unit in px",
-          "type" : "string"
-        },
-        "Visibility" : { },
         "RenderingRules" : {
           "minItems" : 0,
           "maxItems" : 10000,
@@ -3228,25 +3223,28 @@
           "description" : "String based length that is composed of value and unit in px with Integer.MAX_VALUE as maximum value",
           "type" : "string"
         },
-        "LoadingAnimation" : {
-          "$ref" : "#/definitions/LoadingAnimation"
+        "BackgroundStyle" : {
+          "$ref" : "#/definitions/FreeFormLayoutElementBackgroundStyle"
         },
-        "Width" : {
+        "XAxisLocation" : {
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "BackgroundStyle" : {
-          "$ref" : "#/definitions/FreeFormLayoutElementBackgroundStyle"
+        "Height" : {
+          "description" : "String based length that is composed of value and unit in px",
+          "type" : "string"
+        },
+        "Visibility" : { },
+        "LoadingAnimation" : { },
+        "Width" : {
+          "description" : "String based length that is composed of value and unit in px",
+          "type" : "string"
         },
         "ElementId" : {
           "minLength" : 1,
           "pattern" : "^[\\w\\-]+$",
           "type" : "string",
           "maxLength" : 512
-        },
-        "XAxisLocation" : {
-          "description" : "String based length that is composed of value and unit in px",
-          "type" : "string"
         },
         "SelectedBorderStyle" : {
           "$ref" : "#/definitions/FreeFormLayoutElementBorderStyle"
