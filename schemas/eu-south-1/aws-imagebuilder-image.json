@@ -20,6 +20,8 @@
     "required" : [ "ImageRecipeArn", "InfrastructureConfigurationArn" ]
   }, {
     "required" : [ "ImagePipelineExecutionSettings" ]
+  }, {
+    "required" : [ "ImportDiskImageSettings" ]
   } ],
   "handlers" : {
     "read" : {
