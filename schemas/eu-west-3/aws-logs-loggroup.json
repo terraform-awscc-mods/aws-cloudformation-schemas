@@ -81,7 +81,7 @@
       "type" : "object"
     },
     "DeletionProtectionEnabled" : {
-      "description" : "",
+      "description" : "Indicates whether deletion protection is enabled for this log group. When enabled, deletion protection blocks all deletion operations until it is explicitly disabled.",
       "type" : "boolean",
       "default" : false
     }
