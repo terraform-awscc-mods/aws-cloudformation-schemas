@@ -371,7 +371,7 @@
       "type" : "string"
     },
     "VpnConcentratorId" : {
-      "description" : "The ID of the VPN connection.",
+      "description" : "The ID of the VPN concentrator to associate with the VPN connection.",
       "type" : "string"
     },
     "PreSharedKeyStorage" : {
