@@ -40,13 +40,13 @@
           "type" : "string",
           "maxLength" : 128,
           "minLength" : 1,
-          "pattern" : "^[a-zA-Z0-9 _.:/=+\\-@]{1,128}\\Z"
+          "pattern" : "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
         },
         "Value" : {
           "type" : "string",
           "maxLength" : 256,
           "minLength" : 0,
-          "pattern" : "^[a-zA-Z0-9 _.:/=+\\-@]{0,256}\\Z"
+          "pattern" : "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
         }
       },
       "required" : [ "Key", "Value" ],
