@@ -2,9 +2,10 @@
   "typeName" : "AWS::DynamoDB::GlobalTable",
   "readOnlyProperties" : [ "/properties/Arn", "/properties/StreamArn", "/properties/TableId" ],
   "description" : "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
-  "createOnlyProperties" : [ "/properties/LocalSecondaryIndexes", "/properties/TableName", "/properties/KeySchema" ],
+  "createOnlyProperties" : [ "/properties/TableName" ],
   "primaryIdentifier" : [ "/properties/TableName" ],
-  "required" : [ "KeySchema", "AttributeDefinitions", "Replicas" ],
+  "required" : [ "Replicas" ],
+  "conditionalCreateOnlyProperties" : [ "/properties/LocalSecondaryIndexes", "/properties/KeySchema" ],
   "propertyTransform" : {
     "/properties/Replicas/*/GlobalTableSettingsReplicationMode" : "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")"
   },
@@ -86,9 +87,7 @@
         "ResourcePolicy" : {
           "$ref" : "#/definitions/ResourcePolicy"
         },
-        "ReadProvisionedThroughputSettings" : {
-          "$ref" : "#/definitions/ReadProvisionedThroughputSettings"
-        },
+        "ReadProvisionedThroughputSettings" : { },
         "TableClass" : {
           "type" : "string"
         },
@@ -103,9 +102,7 @@
             "$ref" : "#/definitions/Tag"
           }
         },
-        "ReadOnDemandThroughputSettings" : {
-          "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
-        }
+        "ReadOnDemandThroughputSettings" : { }
       },
       "required" : [ "Region" ]
     },
@@ -171,12 +168,8 @@
         "ContributorInsightsSpecification" : {
           "$ref" : "#/definitions/ContributorInsightsSpecification"
         },
-        "ReadProvisionedThroughputSettings" : {
-          "$ref" : "#/definitions/ReadProvisionedThroughputSettings"
-        },
-        "ReadOnDemandThroughputSettings" : {
-          "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
-        }
+        "ReadProvisionedThroughputSettings" : { },
+        "ReadOnDemandThroughputSettings" : { }
       },
       "required" : [ "IndexName" ]
     },
@@ -464,6 +457,16 @@
         }
       },
       "required" : [ "Enabled" ]
+    },
+    "GlobalReadProvisionedThroughputSettings" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ReadCapacityUnits" : {
+          "type" : "integer",
+          "minimum" : 1
+        }
+      }
     }
   },
   "properties" : {
