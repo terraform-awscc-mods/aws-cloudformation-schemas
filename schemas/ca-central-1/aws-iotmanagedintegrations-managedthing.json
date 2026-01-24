@@ -194,6 +194,26 @@
     "Unit" : {
       "type" : "object",
       "additionalProperties" : false
+    },
+    "WiFiSimpleSetupConfiguration" : {
+      "type" : "object",
+      "description" : "The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.",
+      "properties" : {
+        "EnableAsProvisionee" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the device can act as a provisionee in Wi-Fi Simple Setup, allowing it to be configured by other devices."
+        },
+        "EnableAsProvisioner" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the device can act as a provisioner in Wi-Fi Simple Setup, allowing it to configure other devices."
+        },
+        "TimeoutInMinutes" : {
+          "type" : "integer",
+          "minimum" : 5,
+          "maximum" : 15
+        }
+      },
+      "additionalProperties" : false
     }
   },
   "properties" : {
@@ -370,6 +390,9 @@
       "type" : "string",
       "description" : "Timestamp the managed thing was last updated",
       "format" : "date-time"
+    },
+    "WiFiSimpleSetupConfiguration" : {
+      "$ref" : "#/definitions/WiFiSimpleSetupConfiguration"
     }
   },
   "required" : [ "Role" ],
