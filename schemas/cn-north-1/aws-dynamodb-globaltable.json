@@ -2,10 +2,9 @@
   "typeName" : "AWS::DynamoDB::GlobalTable",
   "readOnlyProperties" : [ "/properties/Arn", "/properties/StreamArn", "/properties/TableId" ],
   "description" : "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
-  "createOnlyProperties" : [ "/properties/TableName" ],
+  "createOnlyProperties" : [ "/properties/LocalSecondaryIndexes", "/properties/TableName", "/properties/KeySchema" ],
   "primaryIdentifier" : [ "/properties/TableName" ],
-  "required" : [ "Replicas" ],
-  "conditionalCreateOnlyProperties" : [ "/properties/LocalSecondaryIndexes", "/properties/KeySchema" ],
+  "required" : [ "KeySchema", "AttributeDefinitions", "Replicas" ],
   "propertyTransform" : {
     "/properties/Replicas/*/GlobalTableSettingsReplicationMode" : "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")"
   },
@@ -465,16 +464,6 @@
         }
       },
       "required" : [ "Enabled" ]
-    },
-    "GlobalReadProvisionedThroughputSettings" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "ReadCapacityUnits" : {
-          "type" : "integer",
-          "minimum" : 1
-        }
-      }
     }
   },
   "properties" : {
@@ -490,9 +479,6 @@
     },
     "StreamSpecification" : {
       "$ref" : "#/definitions/StreamSpecification"
-    },
-    "GlobalTableReadOnDemandThroughputSettings" : {
-      "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
     },
     "WarmThroughput" : {
       "$ref" : "#/definitions/WarmThroughput"
@@ -533,9 +519,6 @@
       "items" : {
         "$ref" : "#/definitions/AttributeDefinition"
       }
-    },
-    "GlobalTableReadProvisionedThroughputSettings" : {
-      "$ref" : "#/definitions/GlobalReadProvisionedThroughputSettings"
     },
     "BillingMode" : {
       "type" : "string"
