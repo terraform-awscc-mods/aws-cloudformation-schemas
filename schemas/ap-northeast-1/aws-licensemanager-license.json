@@ -115,6 +115,22 @@
     "Arn" : {
       "type" : "string",
       "maxLength" : 2048
+    },
+    "Tag" : {
+      "description" : "A key-value pair to associate with a resource.",
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The key name of the tag."
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The value for the tag."
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
     }
   },
   "properties" : {
@@ -173,22 +189,31 @@
     "Version" : {
       "description" : "The version of the license.",
       "type" : "string"
+    },
+    "Tags" : {
+      "description" : "A list of tags to attach.",
+      "type" : "array",
+      "uniqueItems" : false,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties" : false,
-  "required" : [ "LicenseName", "ProductName", "Issuer", "HomeRegion", "Validity", "ConsumptionConfiguration", "Entitlements" ],
-  "writeOnlyProperties" : [ "/properties/Status" ],
+  "required" : [ "LicenseName", "ProductName", "Issuer", "HomeRegion", "Validity", "ConsumptionConfiguration", "Entitlements", "Beneficiary", "ProductSKU" ],
+  "writeOnlyProperties" : [ "/properties/Status", "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/LicenseArn", "/properties/Version" ],
   "primaryIdentifier" : [ "/properties/LicenseArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateLicense", "license-manager:GetLicense", "kms:CreateGrant" ]
+      "permissions" : [ "license-manager:CreateLicense", "license-manager:GetLicense", "license-manager:TagResource", "kms:CreateGrant" ]
     },
     "read" : {
-      "permissions" : [ "license-manager:GetLicense" ]
+      "permissions" : [ "license-manager:GetLicense", "license-manager:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateLicenseVersion", "license-manager:GetLicense" ]
+      "permissions" : [ "license-manager:CreateLicenseVersion", "license-manager:GetLicense", "license-manager:TagResource", "license-manager:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "license-manager:DeleteLicense", "license-manager:GetLicense" ]

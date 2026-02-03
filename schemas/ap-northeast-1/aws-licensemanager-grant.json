@@ -6,6 +6,22 @@
     "Arn" : {
       "type" : "string",
       "maxLength" : 2048
+    },
+    "Tag" : {
+      "description" : "A key-value pair to associate with a resource.",
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The key name of the tag."
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The value for the tag."
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
     }
   },
   "properties" : {
@@ -45,22 +61,31 @@
     },
     "Status" : {
       "type" : "string"
+    },
+    "Tags" : {
+      "description" : "A list of tags to attach.",
+      "type" : "array",
+      "uniqueItems" : false,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties" : false,
   "required" : [ ],
   "readOnlyProperties" : [ "/properties/GrantArn", "/properties/Version" ],
-  "writeOnlyProperties" : [ "/properties/Principals", "/properties/AllowedOperations", "/properties/Status" ],
+  "writeOnlyProperties" : [ "/properties/Principals", "/properties/AllowedOperations", "/properties/Status", "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/GrantArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateGrant", "license-manager:CreateGrantVersion", "license-manager:GetGrant" ]
+      "permissions" : [ "license-manager:CreateGrant", "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "license-manager:GetGrant" ]
+      "permissions" : [ "license-manager:GetGrant", "license-manager:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateGrantVersion", "license-manager:GetGrant" ]
+      "permissions" : [ "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource", "license-manager:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "license-manager:DeleteGrant", "license-manager:GetGrant" ]
