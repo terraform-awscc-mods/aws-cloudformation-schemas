@@ -202,24 +202,31 @@
   },
   "additionalProperties" : false,
   "required" : [ "LicenseName", "ProductName", "Issuer", "HomeRegion", "Validity", "ConsumptionConfiguration", "Entitlements", "Beneficiary", "ProductSKU" ],
-  "writeOnlyProperties" : [ "/properties/Status", "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/LicenseArn", "/properties/Version" ],
   "primaryIdentifier" : [ "/properties/LicenseArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateLicense", "license-manager:GetLicense", "license-manager:TagResource", "kms:CreateGrant" ]
+      "permissions" : [ "license-manager:CreateLicense", "license-manager:GetLicense", "license-manager:TagResource", "license-manager:ListTagsForResource", "kms:CreateGrant" ]
     },
     "read" : {
       "permissions" : [ "license-manager:GetLicense", "license-manager:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateLicenseVersion", "license-manager:GetLicense", "license-manager:TagResource", "license-manager:UntagResource" ]
+      "permissions" : [ "license-manager:CreateLicenseVersion", "license-manager:GetLicense", "license-manager:TagResource", "license-manager:UntagResource", "license-manager:ListTagsForResource" ]
     },
     "delete" : {
-      "permissions" : [ "license-manager:DeleteLicense", "license-manager:GetLicense" ]
+      "permissions" : [ "license-manager:DeleteLicense", "license-manager:GetLicense", "license-manager:ListTagsForResource" ]
     },
     "list" : {
       "permissions" : [ "license-manager:ListLicenses" ]
     }
+  },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "license-manager:TagResource", "license-manager:UntagResource", "license-manager:ListTagsForResource" ]
   }
 }

@@ -75,23 +75,31 @@
   "additionalProperties" : false,
   "required" : [ ],
   "readOnlyProperties" : [ "/properties/GrantArn", "/properties/Version" ],
-  "writeOnlyProperties" : [ "/properties/Principals", "/properties/AllowedOperations", "/properties/Status", "/properties/Tags" ],
+  "writeOnlyProperties" : [ "/properties/Principals", "/properties/AllowedOperations", "/properties/Status" ],
   "primaryIdentifier" : [ "/properties/GrantArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "license-manager:CreateGrant", "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource" ]
+      "permissions" : [ "license-manager:CreateGrant", "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource", "license-manager:ListTagsForResource" ]
     },
     "read" : {
       "permissions" : [ "license-manager:GetGrant", "license-manager:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource", "license-manager:UntagResource" ]
+      "permissions" : [ "license-manager:CreateGrantVersion", "license-manager:GetGrant", "license-manager:TagResource", "license-manager:UntagResource", "license-manager:ListTagsForResource" ]
     },
     "delete" : {
-      "permissions" : [ "license-manager:DeleteGrant", "license-manager:GetGrant" ]
+      "permissions" : [ "license-manager:DeleteGrant", "license-manager:GetGrant", "license-manager:ListTagsForResource" ]
     },
     "list" : {
       "permissions" : [ "license-manager:ListDistributedGrants" ]
     }
+  },
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "license-manager:TagResource", "license-manager:UntagResource", "license-manager:ListTagsForResource" ]
   }
 }
