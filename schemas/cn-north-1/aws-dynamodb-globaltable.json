@@ -194,12 +194,6 @@
           "type" : "string",
           "maxLength" : 255
         },
-        "GlobalTableReadProvisionedThroughputSettings" : {
-          "$ref" : "#/definitions/GlobalReadProvisionedThroughputSettings"
-        },
-        "GlobalTableReadOnDemandThroughputSettings" : {
-          "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
-        },
         "Projection" : {
           "$ref" : "#/definitions/Projection"
         },
@@ -215,8 +209,14 @@
         "WarmThroughput" : {
           "$ref" : "#/definitions/WarmThroughput"
         },
+        "ReadProvisionedThroughputSettings" : {
+          "$ref" : "#/definitions/GlobalReadProvisionedThroughputSettings"
+        },
         "WriteProvisionedThroughputSettings" : {
           "$ref" : "#/definitions/WriteProvisionedThroughputSettings"
+        },
+        "ReadOnDemandThroughputSettings" : {
+          "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
         },
         "WriteOnDemandThroughputSettings" : {
           "$ref" : "#/definitions/WriteOnDemandThroughputSettings"
@@ -501,9 +501,6 @@
     "StreamSpecification" : {
       "$ref" : "#/definitions/StreamSpecification"
     },
-    "GlobalTableReadOnDemandThroughputSettings" : {
-      "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
-    },
     "WarmThroughput" : {
       "$ref" : "#/definitions/WarmThroughput"
     },
@@ -547,9 +544,6 @@
         "$ref" : "#/definitions/AttributeDefinition"
       }
     },
-    "GlobalTableReadProvisionedThroughputSettings" : {
-      "$ref" : "#/definitions/GlobalReadProvisionedThroughputSettings"
-    },
     "BillingMode" : {
       "type" : "string"
     },
@@ -583,6 +577,12 @@
     },
     "StreamArn" : {
       "type" : "string"
+    },
+    "ReadProvisionedThroughputSettings" : {
+      "$ref" : "#/definitions/GlobalReadProvisionedThroughputSettings"
+    },
+    "ReadOnDemandThroughputSettings" : {
+      "$ref" : "#/definitions/ReadOnDemandThroughputSettings"
     },
     "TimeToLiveSpecification" : {
       "$ref" : "#/definitions/TimeToLiveSpecification"
