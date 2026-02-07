@@ -744,7 +744,7 @@
   "additionalProperties" : false,
   "createOnlyProperties" : [ "/properties/Name", "/properties/AvailabilityZone", "/properties/Source/Name" ],
   "readOnlyProperties" : [ "/properties/FlowArn", "/properties/FlowAvailabilityZone", "/properties/Source/SourceArn", "/properties/Source/IngestIp", "/properties/Source/SourceIngestPort", "/properties/VpcInterfaces/*/NetworkInterfaceIds", "/properties/MediaStreams/*/Fmt", "/properties/EgressIp", "/properties/FlowNdiMachineName" ],
-  "deprecatedProperties" : [ "/properties/Source/EntitlementArn", "/properties/Source/SenderIpAddress", "/properties/Source/SenderControlPort", "/properties/Source/Decryption/ResourceId", "/properties/Source/Decryption/ConstantInitializationVector", "/properties/Source/Decryption/DeviceId", "/properties/Source/Decryption/Region", "/properties/Source/Decryption/Url" ],
+  "deprecatedProperties" : [ "/properties/Source/SenderIpAddress", "/properties/Source/SenderControlPort", "/properties/Source/Decryption/ResourceId", "/properties/Source/Decryption/ConstantInitializationVector", "/properties/Source/Decryption/DeviceId", "/properties/Source/Decryption/Region", "/properties/Source/Decryption/Url" ],
   "primaryIdentifier" : [ "/properties/FlowArn" ],
   "resourceLink" : {
     "templateUri" : "/mediaconnect/home?region=${awsRegion}#/flows/${flowArn}",
