@@ -65,6 +65,14 @@
     "FlowNdiMachineName" : {
       "type" : "string",
       "description" : "A prefix for the names of the NDI sources that the flow creates.(ReadOnly)"
+    },
+    "Tags" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      },
+      "description" : "Key-value pairs that can be used to tag this flow.",
+      "insertionOrder" : false
     }
   },
   "definitions" : {
@@ -170,6 +178,14 @@
         },
         "RouterIntegrationTransitDecryption" : {
           "$ref" : "#/definitions/FlowTransitEncryption"
+        },
+        "Tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          },
+          "description" : "Key-value pairs that can be used to tag this source.",
+          "insertionOrder" : false
         }
       },
       "additionalProperties" : false
@@ -314,6 +330,14 @@
           "items" : {
             "type" : "string"
           }
+        },
+        "Tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          },
+          "description" : "Key-value pairs that can be used to tag this VPC interface.",
+          "insertionOrder" : false
         }
       },
       "additionalProperties" : false,
@@ -373,6 +397,14 @@
         "Fmt" : {
           "type" : "integer",
           "description" : "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver."
+        },
+        "Tags" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          },
+          "description" : "Key-value pairs that can be used to tag this media stream.",
+          "insertionOrder" : false
         }
       },
       "additionalProperties" : false,
@@ -623,8 +655,7 @@
         },
         "DiscoveryServerPort" : {
           "type" : "integer",
-          "description" : "The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified.",
-          "format" : "int32"
+          "description" : "The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified."
         }
       },
       "additionalProperties" : false,
@@ -694,12 +725,26 @@
       "type" : "object",
       "description" : "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
       "additionalProperties" : false
+    },
+    "Tag" : {
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
     }
   },
   "required" : [ "Name", "Source" ],
   "additionalProperties" : false,
   "createOnlyProperties" : [ "/properties/Name", "/properties/AvailabilityZone", "/properties/Source/Name" ],
   "readOnlyProperties" : [ "/properties/FlowArn", "/properties/FlowAvailabilityZone", "/properties/Source/SourceArn", "/properties/Source/IngestIp", "/properties/Source/SourceIngestPort", "/properties/VpcInterfaces/*/NetworkInterfaceIds", "/properties/MediaStreams/*/Fmt", "/properties/EgressIp", "/properties/FlowNdiMachineName" ],
+  "deprecatedProperties" : [ "/properties/Source/SenderIpAddress", "/properties/Source/SenderControlPort", "/properties/Source/Decryption/ResourceId", "/properties/Source/Decryption/ConstantInitializationVector", "/properties/Source/Decryption/DeviceId", "/properties/Source/Decryption/Region", "/properties/Source/Decryption/Url" ],
   "primaryIdentifier" : [ "/properties/FlowArn" ],
   "resourceLink" : {
     "templateUri" : "/mediaconnect/home?region=${awsRegion}#/flows/${flowArn}",
@@ -709,13 +754,13 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "mediaconnect:CreateFlow", "mediaconnect:AddFlowMediaStreams", "mediaconnect:AddFlowSources", "mediaconnect:AddFlowVpcInterfaces", "iam:PassRole" ]
+      "permissions" : [ "mediaconnect:CreateFlow", "mediaconnect:AddFlowMediaStreams", "mediaconnect:AddFlowSources", "mediaconnect:AddFlowVpcInterfaces", "mediaconnect:DescribeFlow", "mediaconnect:TagResource", "mediaconnect:ListTagsForResource", "iam:PassRole" ]
     },
     "read" : {
-      "permissions" : [ "mediaconnect:DescribeFlow" ]
+      "permissions" : [ "mediaconnect:DescribeFlow", "mediaconnect:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "mediaconnect:DescribeFlow", "mediaconnect:UpdateFlow", "mediaconnect:UpdateFlowSource", "mediaconnect:UpdateFlowMediaStream", "mediaconnect:AddFlowMediaStreams", "mediaconnect:RemoveFlowMediaStream", "mediaconnect:AddFlowVpcInterfaces", "mediaconnect:RemoveFlowVpcInterface" ]
+      "permissions" : [ "mediaconnect:DescribeFlow", "mediaconnect:UpdateFlow", "mediaconnect:UpdateFlowSource", "mediaconnect:UpdateFlowMediaStream", "mediaconnect:AddFlowMediaStreams", "mediaconnect:RemoveFlowMediaStream", "mediaconnect:AddFlowVpcInterfaces", "mediaconnect:RemoveFlowVpcInterface", "mediaconnect:TagResource", "mediaconnect:UntagResource", "mediaconnect:ListTagsForResource" ]
     },
     "delete" : {
       "permissions" : [ "mediaconnect:DescribeFlow", "mediaconnect:DeleteFlow", "mediaconnect:RemoveFlowMediaStream", "mediaconnect:RemoveFlowOutput", "mediaconnect:RemoveFlowSource", "mediaconnect:RemoveFlowVpcInterface", "mediaconnect:RevokeFlowEntitlement" ]
@@ -723,5 +768,13 @@
     "list" : {
       "permissions" : [ "mediaconnect:ListFlows" ]
     }
+  },
+  "tagging" : {
+    "cloudFormationSystemTags" : true,
+    "permissions" : [ "mediaconnect:ListTagsForResource", "mediaconnect:TagResource", "mediaconnect:UntagResource" ],
+    "tagOnCreate" : true,
+    "tagProperty" : "/properties/Tags",
+    "tagUpdatable" : true,
+    "taggable" : true
   }
 }
