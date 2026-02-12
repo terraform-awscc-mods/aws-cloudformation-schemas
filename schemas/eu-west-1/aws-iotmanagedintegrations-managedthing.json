@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::IoTManagedIntegrations::ManagedThing",
-  "description" : "Definition of AWS::IoTManagedIntegrations::ManagedThing Resource Type",
+  "description" : "Resource Type definition for AWS::IoTManagedIntegrations::ManagedThing Resource Type",
   "definitions" : {
     "AuthMaterialType" : {
       "type" : "string",
@@ -233,7 +233,7 @@
       "type" : "string",
       "maxLength" : 1011,
       "minLength" : 32,
-      "pattern" : "^arn:[^:]+:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:managed-thing/([0-9a-zA-Z:_-])+$",
+      "pattern" : "^arn:aws(-[^:]+)?:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:managed-thing/([0-9a-zA-Z:_-])+$",
       "description" : "ARN of a managed thing"
     },
     "AuthenticationMaterial" : {
@@ -398,31 +398,31 @@
   "required" : [ "Role" ],
   "readOnlyProperties" : [ "/properties/ActivatedAt", "/properties/AdvertisedProductId", "/properties/Arn", "/properties/CertificatePem", "/properties/ConnectorDeviceId", "/properties/ConnectorPolicyId", "/properties/CreatedAt", "/properties/DeviceSpecificKey", "/properties/HubNetworkMode", "/properties/Id", "/properties/Identifier", "/properties/InternationalArticleNumber", "/properties/MacAddress", "/properties/ParentControllerId", "/properties/ProvisioningStatus", "/properties/UniversalProductCode", "/properties/UpdatedAt" ],
   "writeOnlyProperties" : [ "/properties/AuthenticationMaterial", "/properties/AuthenticationMaterialType" ],
-  "createOnlyProperties" : [ "/properties/AuthenticationMaterial", "/properties/AuthenticationMaterialType", "/properties/Role", "/properties/Tags", "/properties/SerialNumber" ],
+  "createOnlyProperties" : [ "/properties/AuthenticationMaterial", "/properties/AuthenticationMaterialType", "/properties/Role", "/properties/SerialNumber" ],
   "primaryIdentifier" : [ "/properties/Identifier" ],
   "deprecatedProperties" : [ "/properties/ActivatedAt", "/properties/AdvertisedProductId", "/properties/ConnectorDeviceId", "/properties/ConnectorPolicyId", "/properties/DeviceSpecificKey", "/properties/InternationalArticleNumber", "/properties/MacAddress", "/properties/ParentControllerId", "/properties/HubNetworkMode" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "iotmanagedintegrations:CreateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:CreateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:GetManagedThingCertificate", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:GetManagedThingCertificate", "iotmanagedintegrations:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "iotmanagedintegrations:UpdateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:UpdateManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource", "iotmanagedintegrations:UntagResource" ]
     },
     "delete" : {
-      "permissions" : [ "iotmanagedintegrations:DeleteManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:DeleteManagedThing", "iotmanagedintegrations:GetManagedThing", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData" ]
     },
     "list" : {
-      "permissions" : [ "iotmanagedintegrations:ListManagedThings", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource" ]
+      "permissions" : [ "iotmanagedintegrations:ListManagedThings", "iotmanagedintegrations:GetManagedThingCapabilities", "iotmanagedintegrations:GetManagedThingMetaData" ]
     }
   },
   "additionalProperties" : false,
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : false,
+    "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource", "iotmanagedintegrations:UntagResource" ]

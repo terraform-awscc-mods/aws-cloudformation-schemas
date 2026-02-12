@@ -29,7 +29,7 @@
       "type" : "string",
       "maxLength" : 1011,
       "minLength" : 32,
-      "pattern" : "^arn:[^:]+:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:provisioning-profile/[0-9a-zA-Z:_-]+$"
+      "pattern" : "^arn:aws(-[^:]+)?:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:provisioning-profile/[0-9a-zA-Z:_-]+$"
     },
     "CaCertificate" : {
       "type" : "string",
@@ -72,7 +72,7 @@
       "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:CreateProvisioningProfile", "iotmanagedintegrations:RegisterCustomEndpoint", "iotmanagedintegrations:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:TagResource" ]
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:ListTagsForResource" ]
     },
     "delete" : {
       "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:DeleteProvisioningProfile" ]
