@@ -55,10 +55,6 @@
       "description" : "The attachment to move from one network function group to another.",
       "$ref" : "#/definitions/ProposedNetworkFunctionGroupChange"
     },
-    "RoutingPolicyLabel" : {
-      "description" : "Routing policy label",
-      "type" : "string"
-    },
     "Tags" : {
       "description" : "Tags for the attachment.",
       "type" : "array",
@@ -179,8 +175,7 @@
     "permissions" : [ "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:ListTagsForResource" ]
   },
   "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/ResourceArn", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/LastModificationErrors" ],
-  "createOnlyProperties" : [ "/properties/CoreNetworkId", "/properties/EdgeLocation", "/properties/TransportAttachmentId", "/properties/Options", "/properties/RoutingPolicyLabel" ],
-  "writeOnlyProperties" : [ "/properties/RoutingPolicyLabel" ],
+  "createOnlyProperties" : [ "/properties/CoreNetworkId", "/properties/EdgeLocation", "/properties/TransportAttachmentId", "/properties/Options" ],
   "primaryIdentifier" : [ "/properties/AttachmentId" ],
   "required" : [ "CoreNetworkId", "EdgeLocation", "TransportAttachmentId", "Options" ],
   "handlers" : {
