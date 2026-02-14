@@ -108,10 +108,10 @@
     "VisibleToAllUsers" : {
       "type" : "boolean"
     },
-    "Id" : {
+    "SecurityConfiguration" : {
       "type" : "string"
     },
-    "SecurityConfiguration" : {
+    "Id" : {
       "type" : "string"
     }
   },
@@ -378,6 +378,12 @@
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
+        "UtilizationPerformanceIndex" : {
+          "type" : "integer"
+        },
+        "ScalingStrategy" : {
+          "type" : "string"
+        },
         "ComputeLimits" : {
           "$ref" : "#/definitions/ComputeLimits"
         }
@@ -821,7 +827,7 @@
     }
   },
   "required" : [ "Instances", "ServiceRole", "JobFlowRole", "Name" ],
-  "createOnlyProperties" : [ "/properties/Steps", "/properties/EbsRootVolumeSize", "/properties/SecurityConfiguration", "/properties/ScaleDownBehavior", "/properties/Configurations", "/properties/ReleaseLabel", "/properties/BootstrapActions", "/properties/KerberosAttributes", "/properties/EbsRootVolumeIops", "/properties/ServiceRole", "/properties/LogEncryptionKmsKeyId", "/properties/Name", "/properties/EbsRootVolumeThroughput", "/properties/JobFlowRole", "/properties/LogUri", "/properties/AdditionalInfo", "/properties/PlacementGroupConfigs", "/properties/CustomAmiId", "/properties/OSReleaseLabel", "/properties/AutoScalingRole", "/properties/Applications" ],
+  "createOnlyProperties" : [ "/properties/Steps", "/properties/EbsRootVolumeSize", "/properties/SecurityConfiguration", "/properties/ScaleDownBehavior", "/properties/Configurations", "/properties/ReleaseLabel", "/properties/BootstrapActions", "/properties/EbsRootVolumeIops", "/properties/KerberosAttributes", "/properties/ServiceRole", "/properties/LogEncryptionKmsKeyId", "/properties/Name", "/properties/EbsRootVolumeThroughput", "/properties/JobFlowRole", "/properties/AdditionalInfo", "/properties/LogUri", "/properties/CustomAmiId", "/properties/PlacementGroupConfigs", "/properties/OSReleaseLabel", "/properties/AutoScalingRole", "/properties/Applications" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id", "/properties/MasterPublicDNS" ]
 }
