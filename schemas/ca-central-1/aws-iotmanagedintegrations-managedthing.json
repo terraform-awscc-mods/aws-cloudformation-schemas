@@ -180,7 +180,7 @@
     "TagsMap" : {
       "type" : "object",
       "maxProperties" : 50,
-      "minProperties" : 1,
+      "minProperties" : 0,
       "description" : "Tags associated with the resource",
       "patternProperties" : {
         ".+" : {

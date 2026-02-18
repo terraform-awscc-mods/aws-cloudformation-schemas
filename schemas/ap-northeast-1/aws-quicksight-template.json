@@ -69,7 +69,9 @@
         "TotalCellStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
-        "TotalsVisibility" : { },
+        "TotalsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "MetricHeaderCellStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         }
@@ -95,8 +97,12 @@
         "InfoIconLabelOptions" : {
           "$ref" : "#/definitions/SheetControlInfoIconLabelOptions"
         },
-        "HelperTextVisibility" : { },
-        "DateIconVisibility" : { },
+        "HelperTextVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "DateIconVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "DateTimeFormat" : {
           "minLength" : 1,
           "type" : "string",
@@ -138,7 +144,9 @@
         "Symbol" : {
           "$ref" : "#/definitions/NumericSeparatorSymbol"
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "GroupingStyle" : {
           "$ref" : "#/definitions/DigitGroupingStyle"
         }
@@ -294,7 +302,9 @@
         "LineStyle" : {
           "$ref" : "#/definitions/LineChartLineStyle"
         },
-        "LineVisibility" : { },
+        "LineVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "LineWidth" : {
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
@@ -455,7 +465,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "MissingDateVisibility" : { }
+        "MissingDateVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "KPIActualValueConditionalFormatting" : {
@@ -541,8 +553,12 @@
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "AxisLineVisibility" : { },
-        "GridLineVisibility" : { },
+        "AxisLineVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "GridLineVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "ScrollbarOptions" : {
           "$ref" : "#/definitions/ScrollBarOptions"
         }
@@ -557,7 +573,9 @@
           "type" : "string",
           "maxLength" : 512
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FieldValue" : {
           "minLength" : 0,
           "type" : "string",
@@ -1280,7 +1298,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "TooltipTarget" : {
@@ -1475,7 +1495,9 @@
           "type" : "string",
           "maxLength" : 1024
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "WordCloudOptions" : {
@@ -1560,7 +1582,9 @@
           "type" : "string",
           "maxLength" : 512
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Width" : {
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
@@ -1631,7 +1655,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FormatText" : {
           "$ref" : "#/definitions/LongFormatText"
         }
@@ -2191,19 +2217,27 @@
             "$ref" : "#/definitions/DataLabelType"
           }
         },
-        "MeasureLabelVisibility" : { },
+        "MeasureLabelVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Position" : {
           "$ref" : "#/definitions/DataLabelPosition"
         },
         "LabelContent" : {
           "$ref" : "#/definitions/DataLabelContent"
         },
-        "Visibility" : { },
-        "TotalsVisibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "TotalsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Overlap" : {
           "$ref" : "#/definitions/DataLabelOverlap"
         },
-        "CategoryLabelVisibility" : { },
+        "CategoryLabelVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "LabelColor" : {
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
@@ -2260,7 +2294,9 @@
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
         },
-        "DecalVisibility" : { },
+        "DecalVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "DecalPatternType" : {
           "$ref" : "#/definitions/DecalPatternType"
         },
@@ -2345,7 +2381,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "TooltipText" : {
           "$ref" : "#/definitions/SheetImageTooltipText"
         }
@@ -2444,8 +2482,12 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "OverflowColumnHeaderVisibility" : { },
-        "VerticalOverflowVisibility" : { }
+        "OverflowColumnHeaderVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "VerticalOverflowVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "ComboChartDefaultSeriesSettings" : {
@@ -2503,8 +2545,12 @@
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
         },
-        "TooltipVisibility" : { },
-        "Visibility" : { }
+        "TooltipVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       },
       "required" : [ "Type" ]
     },
@@ -2619,7 +2665,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "AxisDisplayDataDrivenRange" : {
@@ -2749,7 +2797,9 @@
         "VisibleRange" : {
           "$ref" : "#/definitions/VisibleRangeOptions"
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "ConditionalFormattingCustomIconOptions" : {
@@ -3328,8 +3378,12 @@
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "Visibility" : { },
-        "LoadingAnimation" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "LoadingAnimation" : {
+          "$ref" : "#/definitions/LoadingAnimation"
+        },
         "Width" : {
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
@@ -3681,7 +3735,9 @@
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "SheetImageScalingType" : {
@@ -3716,7 +3772,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "ValidationStrategy" : {
@@ -3768,7 +3826,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FontConfiguration" : {
           "$ref" : "#/definitions/FontConfiguration"
         },
@@ -3877,7 +3937,9 @@
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "CategoryFilter" : {
@@ -4571,14 +4633,18 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "DonutCenterOptions" : {
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "LabelVisibility" : { }
+        "LabelVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "BodySectionContent" : {
@@ -5093,7 +5159,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "NumericFilterSelectAllOptions" : {
@@ -5108,7 +5176,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "SheetControlLayoutConfiguration" : {
@@ -5174,7 +5244,9 @@
         "TotalCellStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
-        "TotalsVisibility" : { },
+        "TotalsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FieldLevel" : {
           "$ref" : "#/definitions/PivotTableSubtotalLevel"
         },
@@ -5195,8 +5267,12 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "OverflowColumnHeaderVisibility" : { },
-        "VerticalOverflowVisibility" : { }
+        "OverflowColumnHeaderVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "VerticalOverflowVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "TableOrientation" : {
@@ -5274,7 +5350,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "BorderVisibility" : { },
+        "BorderVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "BorderColor" : {
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
@@ -5928,12 +6006,18 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "MeasureLabelVisibility" : { },
+        "MeasureLabelVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Position" : {
           "$ref" : "#/definitions/DataLabelPosition"
         },
-        "Visibility" : { },
-        "CategoryLabelVisibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "CategoryLabelVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "LabelColor" : {
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
@@ -5954,7 +6038,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "HeaderFooterSectionConfiguration" : {
@@ -6285,8 +6371,12 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
-        "SortIconVisibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "SortIconVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "AxisLabelOptions" : {
           "minItems" : 0,
           "maxItems" : 100,
@@ -6617,7 +6707,9 @@
         "RowHeaderStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
-        "CollapsedRowDimensionsVisibility" : { },
+        "CollapsedRowDimensionsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "RowsLayout" : {
           "$ref" : "#/definitions/PivotTableRowsLayout"
         },
@@ -6628,15 +6720,21 @@
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "ColumnNamesVisibility" : { },
+        "ColumnNamesVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "RowsLabelOptions" : {
           "$ref" : "#/definitions/PivotTableRowsLabelOptions"
         },
-        "SingleMetricVisibility" : { },
+        "SingleMetricVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "ColumnHeaderStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
-        "ToggleButtonsVisibility" : { },
+        "ToggleButtonsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "CellStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
@@ -6851,7 +6949,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "InfoIconText" : {
           "minLength" : 1,
           "type" : "string",
@@ -7340,7 +7440,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "CategoryFilterConfiguration" : {
@@ -7495,7 +7597,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "LegendOptions" : {
@@ -7511,7 +7615,9 @@
         "Title" : {
           "$ref" : "#/definitions/LabelOptions"
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Height" : {
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
@@ -7753,7 +7859,9 @@
         "VerticalTextAlignment" : {
           "$ref" : "#/definitions/VerticalTextAlignment"
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "Height" : {
           "maximum" : 500,
           "type" : "number",
@@ -7875,7 +7983,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "TotalOptions" : {
@@ -7902,7 +8012,9 @@
         "TotalCellStyle" : {
           "$ref" : "#/definitions/TableCellStyle"
         },
-        "TotalsVisibility" : { }
+        "TotalsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "ForecastScenario" : {
@@ -7967,7 +8079,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "DonutOptions" : {
@@ -8638,7 +8752,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "UniqueValuesComputation" : {
@@ -8701,7 +8817,9 @@
         "CustomLabel" : {
           "type" : "string"
         },
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FontConfiguration" : {
           "$ref" : "#/definitions/FontConfiguration"
         }
@@ -8818,7 +8936,9 @@
         "Label" : {
           "type" : "string"
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       },
       "required" : [ "FieldId" ]
     },
@@ -8857,7 +8977,9 @@
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "MarkerVisibility" : { },
+        "MarkerVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "MarkerColor" : {
           "pattern" : "^#[A-F0-9]{6}$",
           "type" : "string"
@@ -9456,7 +9578,9 @@
           "type" : "string",
           "maxLength" : 512
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "SpatialStaticFile" : {
@@ -9567,7 +9691,9 @@
           "type" : "string",
           "maxLength" : 512
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       },
       "required" : [ "FieldId" ]
     },
@@ -9966,7 +10092,9 @@
         "Label" : {
           "type" : "string"
         },
-        "Visibility" : { }
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       },
       "required" : [ "Column" ]
     },
@@ -10240,7 +10368,9 @@
         "SelectedTooltipType" : {
           "$ref" : "#/definitions/SelectedTooltipType"
         },
-        "TooltipVisibility" : { },
+        "TooltipVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FieldBasedTooltip" : {
           "$ref" : "#/definitions/FieldBasedTooltip"
         }
@@ -10258,7 +10388,9 @@
             "$ref" : "#/definitions/TooltipItem"
           }
         },
-        "AggregationVisibility" : { },
+        "AggregationVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "TooltipTitleType" : {
           "$ref" : "#/definitions/TooltipTitleType"
         }
@@ -10828,7 +10960,9 @@
         "VisualPalette" : {
           "$ref" : "#/definitions/VisualPalette"
         },
-        "AlternateBandColorsVisibility" : { },
+        "AlternateBandColorsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "StartAngle" : {
           "maximum" : 360,
           "type" : "number",
@@ -10860,7 +10994,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
-        "Visibility" : { },
+        "Visibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "FormatText" : {
           "$ref" : "#/definitions/ShortFormatText"
         }
@@ -11194,8 +11330,12 @@
           "description" : "String based length that is composed of value and unit in px",
           "type" : "string"
         },
-        "BackgroundVisibility" : { },
-        "BorderVisibility" : { },
+        "BackgroundVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "BorderVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "BorderColor" : {
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
@@ -11203,7 +11343,9 @@
         "Title" : {
           "$ref" : "#/definitions/PanelTitleOptions"
         },
-        "GutterVisibility" : { },
+        "GutterVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
         "BackgroundColor" : {
           "pattern" : "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$",
           "type" : "string"
@@ -11368,8 +11510,12 @@
         "StyleOptions" : {
           "$ref" : "#/definitions/BoxPlotStyleOptions"
         },
-        "OutlierVisibility" : { },
-        "AllDataPointsVisibility" : { }
+        "OutlierVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        },
+        "AllDataPointsVisibility" : {
+          "$ref" : "#/definitions/Visibility"
+        }
       }
     },
     "KPIPrimaryValueConditionalFormatting" : {
