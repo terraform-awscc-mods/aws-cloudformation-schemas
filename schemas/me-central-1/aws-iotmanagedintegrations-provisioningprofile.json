@@ -9,7 +9,7 @@
     "TagsMap" : {
       "type" : "object",
       "maxProperties" : 50,
-      "minProperties" : 1,
+      "minProperties" : 0,
       "patternProperties" : {
         ".+" : {
           "type" : "string",
@@ -64,12 +64,15 @@
     }
   },
   "readOnlyProperties" : [ "/properties/Arn", "/properties/ClaimCertificate", "/properties/Id", "/properties/Identifier" ],
-  "createOnlyProperties" : [ "/properties/CaCertificate", "/properties/ProvisioningType", "/properties/Tags", "/properties/Name" ],
+  "createOnlyProperties" : [ "/properties/CaCertificate", "/properties/ProvisioningType", "/properties/Name" ],
   "primaryIdentifier" : [ "/properties/Identifier" ],
   "writeOnlyProperties" : [ "/properties/CaCertificate" ],
   "handlers" : {
     "create" : {
       "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:CreateProvisioningProfile", "iotmanagedintegrations:RegisterCustomEndpoint", "iotmanagedintegrations:TagResource" ]
+    },
+    "update" : {
+      "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource", "iotmanagedintegrations:UntagResource" ]
     },
     "read" : {
       "permissions" : [ "iotmanagedintegrations:GetProvisioningProfile", "iotmanagedintegrations:ListTagsForResource" ]
@@ -86,7 +89,7 @@
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : false,
+    "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource" ]

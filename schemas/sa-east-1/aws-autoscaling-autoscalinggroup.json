@@ -861,7 +861,7 @@
       }
     },
     "DeletionProtection" : {
-      "description" : "",
+      "description" : "The deletion protection setting for the Auto Scaling group.",
       "type" : "string"
     },
     "InstanceMaintenancePolicy" : {
