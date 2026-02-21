@@ -17,28 +17,28 @@
         "MaxSearchCapacityInOcu" : {
           "type" : "number",
           "multipleOf" : 0.5,
-          "description" : "The max search capacity in OCU units"
+          "description" : "The maximum search capacity for collections in the group."
         },
         "MaxIndexingCapacityInOcu" : {
           "type" : "number",
           "multipleOf" : 0.5,
-          "description" : "The max indexing capacity in OCU units"
+          "description" : "The maximum indexing capacity for collections in the group."
         },
         "MinSearchCapacityInOcu" : {
           "type" : "number",
           "multipleOf" : 0.5,
-          "description" : "The min search capacity in OCU units"
+          "description" : "The minimum search capacity for collections in the group."
         },
         "MinIndexingCapacityInOcu" : {
           "type" : "number",
           "multipleOf" : 0.5,
-          "description" : "The min indexing capacity in OCU units"
+          "description" : "The minimum indexing capacity for collections in the group."
         }
       },
       "additionalProperties" : false
     },
     "Tag" : {
-      "description" : "A key-value pair to associate with a resource.",
+      "description" : "A map of key-value pairs associated with the collection group.",
       "type" : "object",
       "properties" : {
         "Key" : {
@@ -64,13 +64,13 @@
       "maxLength" : 32,
       "minLength" : 3,
       "pattern" : "^[a-z][a-z0-9-]{2,31}$",
-      "description" : "The name of the collection group.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 32 characters\n"
+      "description" : "The name of the collection group."
     },
     "Id" : {
       "type" : "string",
       "maxLength" : 40,
       "minLength" : 3,
-      "description" : "The identifier of the collection group"
+      "description" : "The unique identifier of the collection group."
     },
     "Arn" : {
       "description" : "The Amazon Resource Name (ARN) of the collection group.",
@@ -79,11 +79,11 @@
     "Description" : {
       "type" : "string",
       "maxLength" : 1000,
-      "description" : "The description of the collection group"
+      "description" : "The description of the collection group."
     },
     "StandbyReplicas" : {
       "type" : "string",
-      "description" : "The possible standby replicas for the collection",
+      "description" : "Indicates whether standby replicas are used for the collection group.",
       "enum" : [ "ENABLED", "DISABLED" ]
     },
     "CapacityLimits" : {
