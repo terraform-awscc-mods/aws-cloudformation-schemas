@@ -3,52 +3,56 @@
   "description" : "Definition of AWS::SSMGuiConnect::Preferences Resource Type",
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm-guiconnect.git",
   "definitions" : {
-    "IdleConnectionTimeout" : {
+    "BucketOwner" : {
+      "description" : "The AWS account number that owns the S3 bucket.",
+      "type" : "string",
+      "pattern" : "^[0-9]{12}$"
+    },
+    "BucketName" : {
+      "description" : "The name of the S3 bucket where RDP connection recordings are stored.",
+      "type" : "string",
+      "pattern" : "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)"
+    },
+    "S3Bucket" : {
+      "description" : "The S3 bucket where RDP connection recordings are stored.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "Type" : {
-          "type" : "string",
-          "enum" : [ "MINUTES" ]
+        "BucketOwner" : {
+          "$ref" : "#/definitions/BucketOwner"
         },
-        "Value" : {
-          "type" : "integer",
-          "default" : 10,
-          "minimum" : 1,
-          "maximum" : 60
+        "BucketName" : {
+          "$ref" : "#/definitions/BucketName"
         }
       },
-      "required" : [ "Value" ]
+      "required" : [ "BucketOwner", "BucketName" ]
     },
-    "IdleConnectionAlert" : {
+    "S3Buckets" : {
+      "description" : "The S3 bucket where RDP connection recordings are stored.",
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/S3Bucket"
+      },
+      "minItems" : 1,
+      "maxItems" : 1
+    },
+    "RecordingDestinations" : {
+      "description" : "Determines where recordings of RDP connections are stored.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "Type" : {
-          "type" : "string",
-          "enum" : [ "MINUTES" ]
-        },
-        "Value" : {
-          "type" : "integer",
-          "default" : 1,
-          "minimum" : 0,
-          "maximum" : 60
+        "S3Buckets" : {
+          "$ref" : "#/definitions/S3Buckets"
         }
       },
-      "required" : [ "Value" ]
+      "required" : [ "S3Buckets" ]
     },
-    "IdleConnectionPreferences" : {
-      "description" : "Idle Connection Preferences",
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Timeout" : {
-          "$ref" : "#/definitions/IdleConnectionTimeout"
-        },
-        "Alert" : {
-          "$ref" : "#/definitions/IdleConnectionAlert"
-        }
-      }
+    "KMSKeyArn" : {
+      "description" : "The ARN of a AWS KMS key that is used to encrypt data while it is being processed by the service. This key must exist in the same AWS Region as the node you start an RDP connection to.",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 2048
     }
   },
   "properties" : {
@@ -57,15 +61,19 @@
       "type" : "string",
       "pattern" : "\\d{12}"
     },
-    "IdleConnection" : {
-      "description" : "A map for Idle Connection Preferences",
-      "type" : "array",
-      "uniqueItems" : true,
-      "items" : {
-        "$ref" : "#/definitions/IdleConnectionPreferences"
+    "ConnectionRecordingPreferences" : {
+      "description" : "The set of preferences used for recording RDP connections in the requesting AWS account and AWS Region. This includes details such as which S3 bucket recordings are stored in.",
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RecordingDestinations" : {
+          "$ref" : "#/definitions/RecordingDestinations"
+        },
+        "KMSKeyArn" : {
+          "$ref" : "#/definitions/KMSKeyArn"
+        }
       },
-      "minItems" : 1,
-      "maxItems" : 1
+      "required" : [ "RecordingDestinations", "KMSKeyArn" ]
     }
   },
   "tagging" : {
@@ -76,19 +84,19 @@
   "primaryIdentifier" : [ "/properties/AccountId" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "ssm-guiconnect:UpdatePreferences", "ssm-guiconnect:GetPreferences" ]
+      "permissions" : [ "kms:CreateGrant", "ssm-guiconnect:UpdateConnectionRecordingPreferences", "ssm-guiconnect:GetConnectionRecordingPreferences" ]
     },
     "read" : {
-      "permissions" : [ "ssm-guiconnect:GetPreferences" ]
+      "permissions" : [ "ssm-guiconnect:GetConnectionRecordingPreferences" ]
     },
     "update" : {
-      "permissions" : [ "ssm-guiconnect:UpdatePreferences", "ssm-guiconnect:GetPreferences", "ssm-guiconnect:DeletePreferences" ]
+      "permissions" : [ "kms:CreateGrant", "ssm-guiconnect:UpdateConnectionRecordingPreferences", "ssm-guiconnect:GetConnectionRecordingPreferences", "ssm-guiconnect:DeleteConnectionRecordingPreferences" ]
     },
     "delete" : {
-      "permissions" : [ "ssm-guiconnect:GetPreferences", "ssm-guiconnect:DeletePreferences" ]
+      "permissions" : [ "ssm-guiconnect:GetConnectionRecordingPreferences", "ssm-guiconnect:DeleteConnectionRecordingPreferences" ]
     },
     "list" : {
-      "permissions" : [ "ssm-guiconnect:GetPreferences" ]
+      "permissions" : [ "ssm-guiconnect:GetConnectionRecordingPreferences" ]
     }
   }
 }
