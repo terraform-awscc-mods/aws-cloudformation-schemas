@@ -7903,6 +7903,27 @@
       },
       "required" : [ "VisualId" ]
     },
+    "SheetLayoutGroup" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Id" : {
+          "minLength" : 1,
+          "pattern" : "^[\\w\\-]+$",
+          "type" : "string",
+          "maxLength" : 512
+        },
+        "Members" : {
+          "minItems" : 2,
+          "maxItems" : 430,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SheetLayoutGroupMember"
+          }
+        }
+      },
+      "required" : [ "Id", "Members" ]
+    },
     "GridLayoutElementBackgroundStyle" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -10256,6 +10277,14 @@
         "CanvasSizeOptions" : {
           "$ref" : "#/definitions/FreeFormLayoutCanvasSizeOptions"
         },
+        "Groups" : {
+          "minItems" : 0,
+          "maxItems" : 215,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SheetLayoutGroup"
+          }
+        },
         "Elements" : {
           "minItems" : 0,
           "maxItems" : 430,
@@ -11308,6 +11337,20 @@
           "type" : "string"
         }
       }
+    },
+    "SheetLayoutGroupMember" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Type" : { },
+        "Id" : {
+          "minLength" : 1,
+          "pattern" : "^[\\w\\-]+$",
+          "type" : "string",
+          "maxLength" : 512
+        }
+      },
+      "required" : [ "Id", "Type" ]
     },
     "VisualTitleLabelOptions" : {
       "additionalProperties" : false,
