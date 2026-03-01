@@ -767,13 +767,13 @@
       "timeoutInMinutes" : 45
     },
     "read" : {
-      "permissions" : [ "bedrock-agentcore:GetMemory", "bedrock-agentcore:ListTagsForResource", "kms:Decrypt", "kms:DescribeKey", "kms:GenerateDataKey" ]
+      "permissions" : [ "bedrock-agentcore:GetMemory", "bedrock-agentcore:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "bedrock-agentcore:UpdateMemory", "bedrock-agentcore:GetMemory", "iam:PassRole", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource", "kms:DescribeKey", "kms:Decrypt", "kms:GenerateDataKeyWithoutPlaintext", "kms:ReEncryptTo", "kms:ReEncryptFrom", "kms:GenerateDataKey" ]
+      "permissions" : [ "bedrock-agentcore:UpdateMemory", "bedrock-agentcore:GetMemory", "iam:PassRole", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource" ]
     },
     "delete" : {
-      "permissions" : [ "bedrock-agentcore:DeleteMemory", "bedrock-agentcore:GetMemory", "kms:Decrypt", "kms:DescribeKey", "kms:GenerateDataKey" ]
+      "permissions" : [ "bedrock-agentcore:DeleteMemory", "bedrock-agentcore:GetMemory" ]
     },
     "list" : {
       "permissions" : [ "bedrock-agentcore:ListMemories" ]
