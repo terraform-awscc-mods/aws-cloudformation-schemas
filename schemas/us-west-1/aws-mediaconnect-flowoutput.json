@@ -247,7 +247,7 @@
     },
     "Protocol" : {
       "type" : "string",
-      "enum" : [ "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener", "srt-caller", "st2110-jpegxs", "fujitsu-qos", "cdi", "ndi-speed-hq" ],
+      "enum" : [ "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener", "srt-caller", "st2110-jpegxs", "cdi", "ndi-speed-hq" ],
       "description" : "The protocol that is used by the source or output."
     },
     "RemoteId" : {
