@@ -194,9 +194,9 @@
   "readOnlyProperties" : [ "/properties/LoadBalancerArns", "/properties/TargetGroupArn", "/properties/TargetGroupName", "/properties/TargetGroupFullName" ],
   "tagging" : {
     "taggable" : true,
-    "tagOnCreate" : true,
+    "tagOnCreate" : false,
     "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
+    "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "elasticloadbalancing:AddTags", "elasticloadbalancing:DescribeTags", "elasticloadbalancing:RemoveTags" ]
   },
