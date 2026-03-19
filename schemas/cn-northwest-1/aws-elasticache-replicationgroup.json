@@ -314,7 +314,7 @@
         "ReplicaAvailabilityZones" : {
           "description" : "A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.",
           "type" : "array",
-          "uniqueItems" : true,
+          "uniqueItems" : false,
           "items" : {
             "type" : "string"
           }
@@ -376,16 +376,19 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "elasticache:CreateReplicationGroup", "elasticache:DescribeReplicationGroups", "elasticache:ModifyReplicationGroup", "elasticache:AddTagsToResource", "logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "firehose:PutRecord", "firehose:PutRecordBatch", "firehose:TagDeliveryStream", "iam:CreateServiceLinkedRole", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "kms:CreateGrant", "kms:DescribeKey", "s3:GetObject" ]
+      "permissions" : [ "elasticache:CreateReplicationGroup", "elasticache:DescribeReplicationGroups", "elasticache:ModifyReplicationGroup", "elasticache:AddTagsToResource", "logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "firehose:PutRecord", "firehose:PutRecordBatch", "firehose:TagDeliveryStream", "iam:CreateServiceLinkedRole", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "kms:CreateGrant", "kms:DescribeKey", "s3:GetObject" ],
+      "timeoutInMinutes" : 300
     },
     "read" : {
       "permissions" : [ "elasticache:DescribeReplicationGroups", "elasticache:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "elasticache:ModifyReplicationGroup", "elasticache:ModifyReplicationGroupShardConfiguration", "elasticache:DescribeReplicationGroups", "elasticache:ListTagsForResource", "elasticache:AddTagsToResource", "elasticache:RemoveTagsFromResource", "elasticache:CreateCacheCluster", "elasticache:DeleteCacheCluster", "elasticache:DescribeCacheClusters", "logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "firehose:PutRecord", "firehose:PutRecordBatch", "s3:GetObject", "firehose:TagDeliveryStream", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "kms:CreateGrant", "kms:DescribeKey", "iam:CreateServiceLinkedRole" ]
+      "permissions" : [ "elasticache:ModifyReplicationGroup", "elasticache:ModifyReplicationGroupShardConfiguration", "elasticache:DescribeReplicationGroups", "elasticache:ListTagsForResource", "elasticache:AddTagsToResource", "elasticache:RemoveTagsFromResource", "elasticache:CreateCacheCluster", "elasticache:DeleteCacheCluster", "elasticache:DescribeCacheClusters", "logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "firehose:PutRecord", "firehose:PutRecordBatch", "s3:GetObject", "firehose:TagDeliveryStream", "kms:Decrypt", "kms:Encrypt", "kms:GenerateDataKey", "kms:CreateGrant", "kms:DescribeKey", "iam:CreateServiceLinkedRole" ],
+      "timeoutInMinutes" : 1440
     },
     "delete" : {
-      "permissions" : [ "elasticache:DeleteReplicationGroup", "elasticache:DescribeReplicationGroups" ]
+      "permissions" : [ "elasticache:DeleteReplicationGroup", "elasticache:DescribeReplicationGroups" ],
+      "timeoutInMinutes" : 300
     },
     "list" : {
       "permissions" : [ "elasticache:DescribeReplicationGroups" ]
