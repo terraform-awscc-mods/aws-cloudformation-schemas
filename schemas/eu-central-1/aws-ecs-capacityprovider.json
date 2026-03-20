@@ -402,7 +402,6 @@
         "CapacityReservations" : {
           "$ref" : "#/definitions/CapacityReservationRequest"
         },
-        "LocalStorageConfiguration" : { },
         "Monitoring" : {
           "$ref" : "#/definitions/ManagedInstancesMonitoringOptions"
         }
