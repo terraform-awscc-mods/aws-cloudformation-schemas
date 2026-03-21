@@ -9,6 +9,12 @@
     "VpcConfig" : {
       "$ref" : "#/definitions/VpcConfig"
     },
+    "DisableIMDSV1" : {
+      "type" : "boolean"
+    },
+    "RootVolumeConfig" : {
+      "$ref" : "#/definitions/VolumeConfig"
+    },
     "EnableDefaultInternetAccess" : {
       "type" : "boolean"
     },
@@ -18,6 +24,13 @@
     "AppstreamAgentVersion" : {
       "type" : "string"
     },
+    "SoftwaresToUninstall" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
     "Name" : {
       "type" : "string"
     },
@@ -26,6 +39,13 @@
     },
     "DisplayName" : {
       "type" : "string"
+    },
+    "SoftwaresToInstall" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
     },
     "IamRoleArn" : {
       "type" : "string"
@@ -115,6 +135,15 @@
         }
       },
       "required" : [ "EndpointType", "VpceId" ]
+    },
+    "VolumeConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VolumeSizeInGb" : {
+          "type" : "integer"
+        }
+      }
     }
   },
   "required" : [ "InstanceType", "Name" ],
