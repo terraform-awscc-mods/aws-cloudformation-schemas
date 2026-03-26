@@ -16,7 +16,12 @@
       "$ref" : "#/definitions/DnsConfig"
     },
     "ServiceAttributes" : {
-      "type" : "object"
+      "type" : "object",
+      "patternProperties" : {
+        "[a-zA-Z0-9]+" : {
+          "type" : "string"
+        }
+      }
     },
     "Id" : {
       "type" : "string"
