@@ -1,6 +1,12 @@
 {
   "typeName" : "AWS::Glue::SchemaVersionMetadata",
   "description" : "This resource adds Key-Value metadata to a Schema version of Glue Schema Registry.",
+  "tagging" : {
+    "taggable" : false,
+    "tagOnCreate" : false,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false
+  },
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-glue.git",
   "properties" : {
     "SchemaVersionId" : {

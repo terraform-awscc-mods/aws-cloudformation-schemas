@@ -57,6 +57,16 @@
       },
       "required" : [ "Host", "Port", "SqlEndpointPath" ]
     },
+    "S3TablesParameters" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "TableBucketArn" : {
+          "pattern" : "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-zA-Z0-9-_]{3,63})$",
+          "type" : "string"
+        }
+      }
+    },
     "AuroraPostgreSqlParameters" : {
       "description" : "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
       "additionalProperties" : false,
@@ -656,6 +666,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "S3TablesParameters" : {
+          "$ref" : "#/definitions/S3TablesParameters"
+        },
         "AuroraPostgreSqlParameters" : {
           "$ref" : "#/definitions/AuroraPostgreSqlParameters"
         },
