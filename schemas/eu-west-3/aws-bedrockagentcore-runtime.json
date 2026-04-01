@@ -107,7 +107,7 @@
     },
     "ProtocolConfiguration" : {
       "type" : "string",
-      "enum" : [ "MCP", "HTTP", "A2A" ]
+      "enum" : [ "MCP", "HTTP", "A2A", "AGUI" ]
     },
     "AuthorizerConfiguration" : {
       "type" : "object",
