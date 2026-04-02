@@ -21,6 +21,12 @@
     "CodeReviewSettings" : {
       "$ref" : "#/definitions/CodeReviewSettings"
     },
+    "KmsKeyId" : {
+      "type" : "string",
+      "description" : "Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias name, or alias ARN. If not specified, an AWS managed key is used.",
+      "minLength" : 1,
+      "maxLength" : 2048
+    },
     "IntegratedResources" : {
       "$ref" : "#/definitions/IntegratedResources"
     },
@@ -264,19 +270,20 @@
     "permissions" : [ "securityagent:TagResource", "securityagent:UntagResource", "securityagent:ListTagsForResource" ]
   },
   "primaryIdentifier" : [ "/properties/AgentSpaceId" ],
+  "createOnlyProperties" : [ "/properties/KmsKeyId" ],
   "readOnlyProperties" : [ "/properties/AgentSpaceId", "/properties/CreatedAt", "/properties/UpdatedAt" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "securityagent:CreateAgentSpace", "securityagent:BatchGetAgentSpaces", "securityagent:TagResource", "securityagent:ListTagsForResource", "securityagent:UpdateIntegratedResources", "securityagent:ListIntegratedResources", "iam:PassRole" ]
+      "permissions" : [ "securityagent:CreateAgentSpace", "securityagent:BatchGetAgentSpaces", "securityagent:TagResource", "securityagent:ListTagsForResource", "securityagent:UpdateIntegratedResources", "securityagent:ListIntegratedResources", "iam:PassRole", "kms:DescribeKey", "kms:GenerateDataKeyWithoutPlaintext", "kms:Decrypt", "kms:ReEncryptFrom", "kms:ReEncryptTo" ]
     },
     "read" : {
-      "permissions" : [ "securityagent:BatchGetAgentSpaces", "securityagent:ListTagsForResource", "securityagent:ListIntegratedResources" ]
+      "permissions" : [ "securityagent:BatchGetAgentSpaces", "securityagent:ListTagsForResource", "kms:Decrypt", "securityagent:ListIntegratedResources" ]
     },
     "update" : {
-      "permissions" : [ "securityagent:UpdateAgentSpace", "securityagent:BatchGetAgentSpaces", "securityagent:TagResource", "securityagent:UntagResource", "securityagent:ListTagsForResource", "securityagent:UpdateIntegratedResources", "securityagent:ListIntegratedResources", "iam:PassRole" ]
+      "permissions" : [ "securityagent:UpdateAgentSpace", "securityagent:BatchGetAgentSpaces", "securityagent:TagResource", "securityagent:UntagResource", "securityagent:ListTagsForResource", "securityagent:UpdateIntegratedResources", "securityagent:ListIntegratedResources", "iam:PassRole", "kms:Decrypt" ]
     },
     "delete" : {
-      "permissions" : [ "securityagent:DeleteAgentSpace", "securityagent:BatchGetAgentSpaces" ]
+      "permissions" : [ "securityagent:DeleteAgentSpace", "securityagent:BatchGetAgentSpaces", "kms:Decrypt" ]
     },
     "list" : {
       "permissions" : [ "securityagent:ListAgentSpaces" ]

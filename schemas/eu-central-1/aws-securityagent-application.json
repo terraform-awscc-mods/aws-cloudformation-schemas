@@ -18,6 +18,12 @@
     "RoleArn" : {
       "type" : "string"
     },
+    "DefaultKmsKeyId" : {
+      "type" : "string",
+      "description" : "Identifier of a KMS key. Can be a key ID, key ARN, alias name, or alias ARN.",
+      "minLength" : 0,
+      "maxLength" : 2048
+    },
     "Tags" : {
       "type" : "array",
       "description" : "Tags for the application",
@@ -76,13 +82,13 @@
   "readOnlyProperties" : [ "/properties/ApplicationName", "/properties/ApplicationId", "/properties/Domain", "/properties/IdCConfiguration/IdCApplicationArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "securityagent:CreateApplication", "securityagent:GetApplication", "securityagent:TagResource", "securityagent:ListTagsForResource", "iam:PassRole", "sso:DescribeInstance", "sso:CreateApplication", "sso:PutApplicationGrant", "sso:PutApplicationAuthenticationMethod", "sso:PutApplicationAccessScope" ]
+      "permissions" : [ "securityagent:CreateApplication", "securityagent:GetApplication", "securityagent:TagResource", "securityagent:ListTagsForResource", "iam:PassRole", "sso:DescribeInstance", "sso:CreateApplication", "sso:PutApplicationGrant", "sso:PutApplicationAuthenticationMethod", "sso:PutApplicationAccessScope", "kms:DescribeKey" ]
     },
     "read" : {
       "permissions" : [ "securityagent:GetApplication", "securityagent:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "securityagent:UpdateApplication", "securityagent:GetApplication", "securityagent:TagResource", "securityagent:ListTagsForResource", "securityagent:UntagResource", "iam:PassRole" ]
+      "permissions" : [ "securityagent:UpdateApplication", "securityagent:GetApplication", "securityagent:TagResource", "securityagent:ListTagsForResource", "securityagent:UntagResource", "iam:PassRole", "kms:DescribeKey" ]
     },
     "delete" : {
       "permissions" : [ "securityagent:GetApplication", "securityagent:DeleteApplication", "sso:DeleteApplication" ]

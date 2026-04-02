@@ -44,6 +44,9 @@
         "Namespaces" : {
           "$ref" : "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
         "StrategyId" : {
           "type" : "string",
           "minLength" : 12,
@@ -84,6 +87,9 @@
           "$ref" : "#/definitions/Description"
         },
         "Namespaces" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates" : {
           "$ref" : "#/definitions/NamespacesList"
         },
         "StrategyId" : {
@@ -128,6 +134,9 @@
         "Namespaces" : {
           "$ref" : "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
         "StrategyId" : {
           "type" : "string",
           "minLength" : 12,
@@ -168,6 +177,9 @@
           "$ref" : "#/definitions/Description"
         },
         "Namespaces" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates" : {
           "$ref" : "#/definitions/NamespacesList"
         },
         "Configuration" : {
@@ -213,6 +225,9 @@
           "$ref" : "#/definitions/Description"
         },
         "Namespaces" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates" : {
           "$ref" : "#/definitions/NamespacesList"
         },
         "ReflectionConfiguration" : {
@@ -401,9 +416,11 @@
       "properties" : {
         "Namespaces" : {
           "$ref" : "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates" : {
+          "$ref" : "#/definitions/NamespacesList"
         }
       },
-      "required" : [ "Namespaces" ],
       "additionalProperties" : false
     },
     "Namespace" : {
@@ -687,6 +704,9 @@
           "type" : "string"
         },
         "Namespaces" : {
+          "$ref" : "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates" : {
           "$ref" : "#/definitions/NamespacesList"
         }
       },

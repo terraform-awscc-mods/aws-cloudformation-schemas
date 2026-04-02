@@ -6,7 +6,7 @@
     "AgentRuntimeArn" : {
       "type" : "string",
       "maxLength" : 2048,
-      "pattern" : "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"
+      "pattern" : "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"
     },
     "AgentRuntimeId" : {
       "type" : "string",
@@ -354,7 +354,7 @@
     "AgentManagedRuntimeType" : {
       "type" : "string",
       "description" : "Managed runtime types",
-      "enum" : [ "PYTHON_3_10", "PYTHON_3_11", "PYTHON_3_12", "PYTHON_3_13" ]
+      "enum" : [ "PYTHON_3_10", "PYTHON_3_11", "PYTHON_3_12", "PYTHON_3_13", "PYTHON_3_14" ]
     },
     "EntryPoints" : {
       "type" : "array",
