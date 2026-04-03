@@ -114,7 +114,7 @@
       "permissions" : [ "apigateway:POST", "apigateway:GET", "apigateway:PUT" ]
     },
     "update" : {
-      "permissions" : [ "apigateway:PATCH", "apigateway:GET", "apigateway:PUT", "apigateway:POST", "apigateway:DELETE" ]
+      "permissions" : [ "apigateway:PATCH", "apigateway:GET", "apigateway:PUT" ]
     },
     "read" : {
       "permissions" : [ "apigateway:GET" ]
