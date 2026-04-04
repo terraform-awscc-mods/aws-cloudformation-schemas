@@ -15,29 +15,14 @@
     "VpcConfig" : {
       "$ref" : "#/definitions/VpcConfig"
     },
-    "FleetType" : {
-      "type" : "string"
-    },
     "RootVolumeConfig" : {
       "$ref" : "#/definitions/VolumeConfig"
-    },
-    "EnableDefaultInternetAccess" : {
-      "type" : "boolean"
-    },
-    "DomainJoinInfo" : {
-      "$ref" : "#/definitions/DomainJoinInfo"
     },
     "SessionScriptS3Location" : {
       "$ref" : "#/definitions/S3Location"
     },
     "Name" : {
       "type" : "string"
-    },
-    "ImageName" : {
-      "type" : "string"
-    },
-    "MaxUserDurationInSeconds" : {
-      "type" : "integer"
     },
     "IdleDisconnectTimeoutInSeconds" : {
       "type" : "integer"
@@ -55,17 +40,11 @@
     "DisplayName" : {
       "type" : "string"
     },
-    "StreamView" : {
-      "type" : "string"
-    },
     "IamRoleArn" : {
       "type" : "string"
     },
     "MaxSessionsPerInstance" : {
       "type" : "integer"
-    },
-    "Id" : {
-      "type" : "string"
     },
     "InstanceType" : {
       "type" : "string"
@@ -79,6 +58,30 @@
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
+    },
+    "FleetType" : {
+      "type" : "string"
+    },
+    "DisableIMDSV1" : {
+      "type" : "boolean"
+    },
+    "EnableDefaultInternetAccess" : {
+      "type" : "boolean"
+    },
+    "DomainJoinInfo" : {
+      "$ref" : "#/definitions/DomainJoinInfo"
+    },
+    "ImageName" : {
+      "type" : "string"
+    },
+    "MaxUserDurationInSeconds" : {
+      "type" : "integer"
+    },
+    "StreamView" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
     },
     "ImageArn" : {
       "type" : "string"
