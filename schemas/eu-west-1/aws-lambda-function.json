@@ -275,6 +275,11 @@
           "type" : "string",
           "maxLength" : 1024
         },
+        "S3ObjectStorageMode" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "COPY", "REFERENCE" ]
+        },
         "ImageUri" : {
           "description" : "URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry.",
           "type" : "string"
