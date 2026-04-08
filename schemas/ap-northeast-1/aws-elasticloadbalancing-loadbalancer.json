@@ -25,10 +25,13 @@
     },
     "AvailabilityZones" : {
       "type" : "array",
-      "uniqueItems" : true,
+      "uniqueItems" : false,
       "items" : {
         "type" : "string"
       }
+    },
+    "SourceSecurityGroup" : {
+      "$ref" : "#/definitions/SourceSecurityGroup"
     },
     "SourceSecurityGroupOwnerAlias" : {
       "type" : "string"
@@ -50,7 +53,7 @@
     },
     "Instances" : {
       "type" : "array",
-      "uniqueItems" : true,
+      "uniqueItems" : false,
       "items" : {
         "type" : "string"
       }
@@ -60,7 +63,7 @@
     },
     "Listeners" : {
       "type" : "array",
-      "uniqueItems" : true,
+      "uniqueItems" : false,
       "items" : {
         "$ref" : "#/definitions/Listeners"
       }
@@ -77,14 +80,14 @@
     },
     "AppCookieStickinessPolicy" : {
       "type" : "array",
-      "uniqueItems" : true,
+      "uniqueItems" : false,
       "items" : {
         "$ref" : "#/definitions/AppCookieStickinessPolicy"
       }
     },
     "LBCookieStickinessPolicy" : {
       "type" : "array",
-      "uniqueItems" : true,
+      "uniqueItems" : false,
       "items" : {
         "$ref" : "#/definitions/LBCookieStickinessPolicy"
       }
@@ -157,7 +160,7 @@
           "type" : "array",
           "uniqueItems" : true,
           "items" : {
-            "type" : "object"
+            "$ref" : "#/definitions/PolicyItem"
           }
         },
         "PolicyType" : {
@@ -195,6 +198,18 @@
         }
       },
       "required" : [ "PolicyName", "CookieName" ]
+    },
+    "SourceSecurityGroup" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "GroupName" : {
+          "type" : "string"
+        },
+        "OwnerAlias" : {
+          "type" : "string"
+        }
+      }
     },
     "LBCookieStickinessPolicy" : {
       "type" : "object",
@@ -262,6 +277,18 @@
       },
       "required" : [ "Enabled", "S3BucketName" ]
     },
+    "PolicyItem" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
     "ConnectionSettings" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -276,5 +303,5 @@
   "required" : [ "Listeners" ],
   "createOnlyProperties" : [ "/properties/LoadBalancerName", "/properties/Scheme" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id", "/properties/CanonicalHostedZoneName", "/properties/CanonicalHostedZoneNameID", "/properties/SourceSecurityGroup.GroupName", "/properties/DNSName", "/properties/SourceSecurityGroup.OwnerAlias" ]
+  "readOnlyProperties" : [ "/properties/SourceSecurityGroup", "/properties/Id", "/properties/CanonicalHostedZoneName", "/properties/CanonicalHostedZoneNameID", "/properties/SourceSecurityGroup.GroupName", "/properties/DNSName", "/properties/SourceSecurityGroup.OwnerAlias" ]
 }
