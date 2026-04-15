@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::Deadline::Monitor",
-  "description" : "Definition of AWS::Deadline::Monitor Resource Type",
+  "description" : "Resource Type definition for AWS::Deadline::Monitor",
   "definitions" : {
     "Tag" : {
       "description" : "A key-value pair to associate with a resource.",
