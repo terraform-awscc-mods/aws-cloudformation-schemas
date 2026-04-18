@@ -19,7 +19,7 @@
       "type" : "string"
     }
   },
-  "required" : [ "ClientVpnEndpointId", "TargetVpcSubnetId", "DestinationCidrBlock" ],
+  "required" : [ "ClientVpnEndpointId", "DestinationCidrBlock" ],
   "createOnlyProperties" : [ "/properties/ClientVpnEndpointId", "/properties/DestinationCidrBlock", "/properties/Description", "/properties/TargetVpcSubnetId" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id" ]

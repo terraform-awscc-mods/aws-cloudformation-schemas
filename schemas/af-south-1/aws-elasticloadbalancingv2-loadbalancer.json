@@ -197,7 +197,7 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:AddTags", "elasticloadbalancing:SetSecurityGroups", "ec2:DescribeIpamPools" ],
+      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:ModifyCapacityReservation", "elasticloadbalancing:AddTags", "elasticloadbalancing:SetSecurityGroups", "ec2:DescribeIpamPools" ],
       "timeoutInMinutes" : 2160
     },
     "delete" : {
