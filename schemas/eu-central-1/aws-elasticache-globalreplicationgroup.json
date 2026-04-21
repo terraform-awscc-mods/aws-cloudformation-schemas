@@ -122,6 +122,9 @@
       }
     }
   },
+  "tagging" : {
+    "taggable" : false
+  },
   "additionalProperties" : false,
   "readOnlyProperties" : [ "/properties/GlobalReplicationGroupId", "/properties/Status" ],
   "writeOnlyProperties" : [ "/properties/GlobalReplicationGroupIdSuffix", "/properties/AutomaticFailoverEnabled", "/properties/CacheNodeType", "/properties/EngineVersion", "/properties/GlobalNodeGroupCount", "/properties/RegionalConfigurations" ],
