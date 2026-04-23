@@ -255,7 +255,7 @@
           "insertionOrder" : true,
           "items" : {
             "type" : "string",
-            "enum" : [ "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "EncryptionStatus", "BucketKeyStatus", "ChecksumAlgorithm", "LifecycleExpirationDate", "ObjectOwner" ]
+            "enum" : [ "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "EncryptionStatus", "BucketKeyStatus", "ChecksumAlgorithm", "LifecycleExpirationDate" ]
           }
         },
         "Prefix" : {
