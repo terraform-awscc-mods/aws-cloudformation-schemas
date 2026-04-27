@@ -86,6 +86,11 @@
       "additionalProperties" : false
     }
   },
+  "oneOf" : [ {
+    "required" : [ "FairsharePolicy" ]
+  }, {
+    "required" : [ "QuotaSharePolicy" ]
+  } ],
   "additionalProperties" : false,
   "tagging" : {
     "taggable" : true,
