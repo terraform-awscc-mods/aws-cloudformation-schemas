@@ -20,7 +20,7 @@
     "AppType" : {
       "type" : "string",
       "description" : "The type of app.",
-      "enum" : [ "JupyterServer", "KernelGateway", "RStudioServerPro", "RSessionGateway", "Canvas" ]
+      "enum" : [ "JupyterServer", "KernelGateway", "RStudioServerPro", "RSessionGateway", "Canvas", "CodeEditor", "JupyterLab", "DetailedProfiler", "TensorBoard" ]
     },
     "DomainId" : {
       "type" : "string",
@@ -44,7 +44,14 @@
     },
     "UserProfileName" : {
       "type" : "string",
-      "description" : "The user profile name.",
+      "description" : "The user profile name. If this value is not set, then SpaceName must be set.",
+      "minLength" : 1,
+      "maxLength" : 63,
+      "pattern" : "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "SpaceName" : {
+      "type" : "string",
+      "description" : "The name of the space. If this value is not set, then UserProfileName must be set.",
       "minLength" : 1,
       "maxLength" : 63,
       "pattern" : "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
@@ -110,8 +117,8 @@
       "required" : [ "Key", "Value" ]
     }
   },
-  "required" : [ "AppName", "AppType", "DomainId", "UserProfileName" ],
-  "createOnlyProperties" : [ "/properties/AppName", "/properties/AppType", "/properties/DomainId", "/properties/UserProfileName", "/properties/ResourceSpec" ],
+  "required" : [ "AppName", "AppType", "DomainId" ],
+  "createOnlyProperties" : [ "/properties/AppName", "/properties/AppType", "/properties/DomainId", "/properties/UserProfileName", "/properties/SpaceName", "/properties/ResourceSpec" ],
   "primaryIdentifier" : [ "/properties/AppName", "/properties/AppType", "/properties/DomainId", "/properties/UserProfileName" ],
   "readOnlyProperties" : [ "/properties/AppArn", "/properties/BuiltInLifecycleConfigArn" ],
   "handlers" : {
