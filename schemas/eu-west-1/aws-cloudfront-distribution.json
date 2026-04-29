@@ -1107,7 +1107,7 @@
       "permissions" : [ "cloudfront:ListTagsForResource", "cloudfront:ListDistributions" ]
     },
     "read" : {
-      "permissions" : [ "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig", "cloudfront:ListTagsForResource" ]
+      "permissions" : [ "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig" ]
     },
     "update" : {
       "permissions" : [ "cloudfront:CreateConnectionGroup", "cloudfront:GetConnectionGroup", "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig", "cloudfront:GetVpcOrigin", "cloudfront:UpdateDistribution", "cloudfront:UpdateDistributionWithStagingConfig", "cloudfront:ListTagsForResource", "cloudfront:TagResource", "cloudfront:UntagResource" ],
