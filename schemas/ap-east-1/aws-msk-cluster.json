@@ -65,9 +65,6 @@
     },
     "Rebalancing" : {
       "$ref" : "#/definitions/Rebalancing"
-    },
-    "ZookeeperAccess" : {
-      "$ref" : "#/definitions/ZookeeperAccess"
     }
   },
   "definitions" : {
@@ -479,22 +476,12 @@
           "enum" : [ "TLS", "TLS_PLAINTEXT", "PLAINTEXT" ]
         }
       }
-    },
-    "ZookeeperAccess" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Enabled" : {
-          "type" : "boolean"
-        }
-      }
     }
   },
   "required" : [ "BrokerNodeGroupInfo", "KafkaVersion", "NumberOfBrokerNodes", "ClusterName" ],
   "createOnlyProperties" : [ "/properties/BrokerNodeGroupInfo/BrokerAZDistribution", "/properties/BrokerNodeGroupInfo/ClientSubnets", "/properties/BrokerNodeGroupInfo/SecurityGroups", "/properties/EncryptionInfo/EncryptionAtRest", "/properties/EncryptionInfo/EncryptionInTransit/InCluster", "/properties/ClusterName" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/CurrentVersion" ],
-  "writeOnlyProperties" : [ "/properties/ZookeeperAccess" ],
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
