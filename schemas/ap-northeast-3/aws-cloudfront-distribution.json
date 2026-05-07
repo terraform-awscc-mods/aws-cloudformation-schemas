@@ -1063,7 +1063,7 @@
       "description" : "A viewer mTLS configuration."
     },
     "ViewerMtlsMode" : {
-      "enum" : [ "required", "optional" ],
+      "enum" : [ "required", "optional", "passthrough" ],
       "type" : "string"
     },
     "VpcOriginConfig" : {
@@ -1107,7 +1107,7 @@
       "permissions" : [ "cloudfront:ListTagsForResource", "cloudfront:ListDistributions" ]
     },
     "read" : {
-      "permissions" : [ "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig" ]
+      "permissions" : [ "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig", "cloudfront:ListTagsForResource" ]
     },
     "update" : {
       "permissions" : [ "cloudfront:CreateConnectionGroup", "cloudfront:GetConnectionGroup", "cloudfront:GetDistribution", "cloudfront:GetDistributionConfig", "cloudfront:GetVpcOrigin", "cloudfront:UpdateDistribution", "cloudfront:UpdateDistributionWithStagingConfig", "cloudfront:ListTagsForResource", "cloudfront:TagResource", "cloudfront:UntagResource" ],
