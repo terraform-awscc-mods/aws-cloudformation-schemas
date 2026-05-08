@@ -387,7 +387,7 @@
       "timeoutInMinutes" : 1440
     },
     "delete" : {
-      "permissions" : [ "elasticache:DeleteReplicationGroup", "elasticache:DescribeReplicationGroups", "elasticache:CreateSnapshot" ],
+      "permissions" : [ "elasticache:DeleteReplicationGroup", "elasticache:DescribeReplicationGroups" ],
       "timeoutInMinutes" : 300
     },
     "list" : {
