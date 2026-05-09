@@ -33,7 +33,7 @@
     "IntegrationType" : {
       "description" : "Specifies the integration type to be associated with the instance",
       "type" : "string",
-      "enum" : [ "LEX_BOT", "LAMBDA_FUNCTION", "APPLICATION", "CASES_DOMAIN", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES" ]
+      "enum" : [ "LEX_BOT", "LAMBDA_FUNCTION", "APPLICATION", "CASES_DOMAIN", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "FILE_SCANNER", "MESSAGE_PROCESSOR", "Q_MESSAGE_TEMPLATES", "SES_IDENTITY" ]
     },
     "InstanceId" : {
       "description" : "Amazon Connect instance identifier",
@@ -85,7 +85,7 @@
   "primaryIdentifier" : [ "/properties/InstanceId", "/properties/IntegrationType", "/properties/IntegrationArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "connect:DescribeInstance", "ds:DescribeDirectories", "app-integrations:CreateEventIntegrationAssociation", "mobiletargeting:GetApp", "cases:GetDomain", "wisdom:GetAssistant", "wisdom:GetKnowledgeBase", "wisdom:GetQuickResponse", "wisdom:TagResource", "voiceid:DescribeDomain", "events:PutTargets", "events:PutRule", "connect:AssociateBot", "connect:AssociateLambdaFunction", "connect:CreateIntegrationAssociation", "connect:TagResource", "connect:ListBots", "connect:ListLambdaFunctions", "connect:ListIntegrationAssociations", "lambda:addPermission", "lex:GetBot", "lex:DescribeBotAlias", "lex:CreateResourcePolicy", "lex:UpdateResourcePolicy", "lex:CreateResourcePolicyStatement", "lambda:AddPermission", "app-integrations:GetApplication", "app-integrations:CreateApplicationAssociation", "iam:AttachRolePolicy", "iam:CreateServiceLinkedRole", "iam:GetRolePolicy", "iam:PutRolePolicy" ]
+      "permissions" : [ "connect:DescribeInstance", "ds:DescribeDirectories", "app-integrations:CreateEventIntegrationAssociation", "mobiletargeting:GetApp", "cases:GetDomain", "wisdom:GetAssistant", "wisdom:GetKnowledgeBase", "wisdom:GetQuickResponse", "wisdom:GetMessageTemplate", "wisdom:TagResource", "voiceid:DescribeDomain", "events:PutTargets", "ses:GetIdentityVerificationAttributes", "events:PutRule", "connect:AssociateBot", "connect:AssociateLambdaFunction", "connect:CreateIntegrationAssociation", "connect:TagResource", "connect:ListBots", "connect:ListLambdaFunctions", "connect:ListIntegrationAssociations", "lambda:addPermission", "lex:GetBot", "lex:DescribeBotAlias", "lex:CreateResourcePolicy", "lex:UpdateResourcePolicy", "lex:CreateResourcePolicyStatement", "lambda:AddPermission", "app-integrations:GetApplication", "app-integrations:CreateApplicationAssociation", "iam:AttachRolePolicy", "iam:CreateServiceLinkedRole", "iam:GetRolePolicy", "iam:PutRolePolicy" ]
     },
     "read" : {
       "permissions" : [ "connect:ListBots", "connect:ListLambdaFunctions", "connect:ListIntegrationAssociations", "connect:ListTagsForResource" ]
