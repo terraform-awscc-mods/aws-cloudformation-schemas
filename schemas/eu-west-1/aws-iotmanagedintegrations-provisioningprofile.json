@@ -6,6 +6,10 @@
       "type" : "string",
       "enum" : [ "FLEET_PROVISIONING", "JITR" ]
     },
+    "Status" : {
+      "type" : "string",
+      "enum" : [ "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED" ]
+    },
     "TagsMap" : {
       "type" : "object",
       "maxProperties" : 50,
@@ -59,12 +63,15 @@
     "ProvisioningType" : {
       "$ref" : "#/definitions/ProvisioningType"
     },
+    "Status" : {
+      "$ref" : "#/definitions/Status"
+    },
     "Tags" : {
       "$ref" : "#/definitions/TagsMap"
     }
   },
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/ClaimCertificate", "/properties/Id", "/properties/Identifier" ],
-  "createOnlyProperties" : [ "/properties/CaCertificate", "/properties/ProvisioningType", "/properties/Name" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/Id", "/properties/Identifier", "/properties/Status" ],
+  "createOnlyProperties" : [ "/properties/CaCertificate", "/properties/ClaimCertificate", "/properties/ProvisioningType", "/properties/Name" ],
   "primaryIdentifier" : [ "/properties/Identifier" ],
   "writeOnlyProperties" : [ "/properties/CaCertificate" ],
   "handlers" : {
