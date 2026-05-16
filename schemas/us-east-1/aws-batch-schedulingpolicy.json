@@ -90,13 +90,13 @@
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "Batch:TagResource", "Batch:UntagResource" ]
   },
   "primaryIdentifier" : [ "/properties/Arn" ],
-  "createOnlyProperties" : [ "/properties/Name" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Tags" ],
   "readOnlyProperties" : [ "/properties/Arn" ],
   "handlers" : {
     "create" : {
@@ -106,7 +106,7 @@
       "permissions" : [ "Batch:DescribeSchedulingPolicies" ]
     },
     "update" : {
-      "permissions" : [ "Batch:UpdateSchedulingPolicy", "Batch:TagResource", "Batch:UntagResource" ]
+      "permissions" : [ "Batch:UpdateSchedulingPolicy", "Batch:TagResource", "Batch:UnTagResource" ]
     },
     "delete" : {
       "permissions" : [ "Batch:DescribeSchedulingPolicies", "Batch:DeleteSchedulingPolicy" ]
