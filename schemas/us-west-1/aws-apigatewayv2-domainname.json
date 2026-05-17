@@ -104,8 +104,8 @@
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "apigateway:PUT", "apigateway:PATCH", "apigateway:GET", "apigateway:DELETE" ]
   },
