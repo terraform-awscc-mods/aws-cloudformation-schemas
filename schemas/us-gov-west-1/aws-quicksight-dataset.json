@@ -163,7 +163,7 @@
       "type" : "object",
       "properties" : {
         "UniqueKey" : {
-          "description" : "<p>A value that indicates that a row in a table is uniquely identified by the columns in\n            a join key. This is used by Quick Suite to optimize query performance.</p>",
+          "description" : "<p>A value that indicates that a row in a table is uniquely identified by the columns in\n            a join key. This is used by Amazon QuickSight to optimize query performance.</p>",
           "type" : "boolean"
         }
       }
@@ -200,6 +200,17 @@
       "additionalProperties" : false,
       "type" : "object",
       "minProperties" : 0
+    },
+    "AdditionalNotes" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Text" : {
+          "minLength" : 0,
+          "type" : "string",
+          "maxLength" : 2000
+        }
+      }
     },
     "DataPrepSimpleAggregationFunction" : {
       "additionalProperties" : false,
@@ -280,6 +291,32 @@
         }
       }
     },
+    "TableSemanticMetadata" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ColumnMetadata" : {
+          "minItems" : 1,
+          "maxItems" : 2000,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SharedColumnSemanticMetadata"
+          }
+        }
+      }
+    },
+    "DataSetSemanticDescription" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Text" : {
+          "minLength" : 1,
+          "type" : "string",
+          "maxLength" : 500
+        }
+      },
+      "required" : [ "Text" ]
+    },
     "InputColumn" : {
       "description" : "<p>Metadata for a column that is used as the input of a transform operation.</p>",
       "additionalProperties" : false,
@@ -294,7 +331,7 @@
         "Id" : {
           "minLength" : 1,
           "type" : "string",
-          "maxLength" : 64
+          "maxLength" : 256
         },
         "Name" : {
           "minLength" : 1,
@@ -311,10 +348,19 @@
           "$ref" : "#/definitions/LogicalTable"
         }
       },
-      "maxProperties" : 64,
+      "maxProperties" : 256,
       "additionalProperties" : false,
       "type" : "object",
       "minProperties" : 1
+    },
+    "CustomInstruction" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "InlineCustomInstruction" : {
+          "$ref" : "#/definitions/InlineCustomInstruction"
+        }
+      }
     },
     "DateTimeDatasetParameterDefaultValues" : {
       "description" : "<p>The default values of a date time parameter.</p>",
@@ -393,7 +439,7 @@
         "SourceColumnId" : {
           "minLength" : 1,
           "type" : "string",
-          "maxLength" : 64
+          "maxLength" : 256
         },
         "TargetColumnId" : {
           "minLength" : 1,
@@ -1179,7 +1225,7 @@
         "Principals" : {
           "minItems" : 1,
           "maxItems" : 100,
-          "description" : "<p>An array of Amazon Resource Names (ARNs) for Quick Suite users or groups.</p>",
+          "description" : "<p>An array of Amazon Resource Names (ARNs) for Amazon QuickSight users or groups.</p>",
           "type" : "array",
           "items" : {
             "type" : "string"
@@ -1203,7 +1249,7 @@
         },
         "Format" : {
           "minLength" : 0,
-          "description" : "<p>When casting a column from string to datetime type, you can supply a string in a\n            format supported by Amazon Quick Suite to denote the source data format.</p>",
+          "description" : "<p>When casting a column from string to datetime type, you can supply a string in a\n            format supported by Amazon QuickSight to denote the source data format.</p>",
           "type" : "string",
           "maxLength" : 32
         },
@@ -1281,7 +1327,7 @@
       "properties" : {
         "Actions" : {
           "minItems" : 1,
-          "maxItems" : 20,
+          "maxItems" : 30,
           "description" : "<p>The IAM action to grant or revoke permissions on.</p>",
           "type" : "array",
           "items" : {
@@ -1290,7 +1336,7 @@
         },
         "Principal" : {
           "minLength" : 1,
-          "description" : "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon Quick Suite user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Quick Suite user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+          "description" : "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
           "type" : "string",
           "maxLength" : 256
         }
@@ -1397,6 +1443,14 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "SemanticMetadata" : {
+          "minItems" : 1,
+          "maxItems" : 1,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DataSetSemanticMetadata"
+          }
+        },
         "TableMap" : {
           "$ref" : "#/definitions/SemanticTableMap"
         }
@@ -1420,7 +1474,7 @@
       "properties" : {
         "ColumnId" : {
           "minLength" : 1,
-          "description" : "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon Quick Suite\n            preserves the existing calculated column.</p>",
+          "description" : "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
           "type" : "string",
           "maxLength" : 64
         },
@@ -1449,6 +1503,23 @@
         },
         "FailureConfiguration" : {
           "$ref" : "#/definitions/RefreshFailureConfiguration"
+        }
+      }
+    },
+    "DataSetSemanticMetadata" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "CustomInstructions" : {
+          "minItems" : 1,
+          "maxItems" : 2,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CustomInstruction"
+          }
+        },
+        "Description" : {
+          "$ref" : "#/definitions/DataSetSemanticDescription"
         }
       }
     },
@@ -1506,6 +1577,17 @@
           "minLength" : 0,
           "type" : "string",
           "maxLength" : 512
+        }
+      }
+    },
+    "UploadedDocumentMetadata" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Name" : {
+          "minLength" : 1,
+          "type" : "string",
+          "maxLength" : 127
         }
       }
     },
@@ -1634,7 +1716,7 @@
       "required" : [ "OutputColumnNameOverrides" ]
     },
     "RowLevelPermissionDataSet" : {
-      "description" : "<p>Information about a dataset that contains permissions for row-level security (RLS).\n            The permissions dataset maps fields to users or groups. For more information, see\n            <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon Quick Suite User\n                Guide</i>.</p>\n         <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is\n            not supported for new RLS datasets.</p>",
+      "description" : "<p>Information about a dataset that contains permissions for row-level security (RLS).\n            The permissions dataset maps fields to users or groups. For more information, see\n            <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User\n                Guide</i>.</p>\n         <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is\n            not supported for new RLS datasets.</p>",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -1725,6 +1807,28 @@
       },
       "required" : [ "TransformOperationId" ]
     },
+    "SharedColumnSemanticMetadata" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "ColumnNames" : {
+          "minItems" : 1,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "ColumnProperties" : {
+          "minItems" : 1,
+          "maxItems" : 3,
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ColumnSemanticProperty"
+          }
+        }
+      },
+      "required" : [ "ColumnProperties" ]
+    },
     "FieldFolderMap" : {
       "patternProperties" : {
         ".+" : {
@@ -1805,6 +1909,21 @@
       "type" : "string",
       "enum" : [ "STRING", "INTEGER", "DECIMAL", "DATETIME" ]
     },
+    "ColumnSemanticProperty" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "SemanticType" : {
+          "$ref" : "#/definitions/ColumnSemanticType"
+        },
+        "Description" : {
+          "$ref" : "#/definitions/ColumnDescription"
+        },
+        "AdditionalNotes" : {
+          "$ref" : "#/definitions/AdditionalNotes"
+        }
+      }
+    },
     "DataSetNumericFilterValue" : {
       "additionalProperties" : false,
       "type" : "object",
@@ -1856,6 +1975,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "SemanticMetadata" : {
+          "$ref" : "#/definitions/TableSemanticMetadata"
+        },
         "Alias" : {
           "minLength" : 1,
           "type" : "string",
@@ -1872,6 +1994,21 @@
         }
       },
       "required" : [ "Alias", "DestinationTableId" ]
+    },
+    "InlineCustomInstruction" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "InstructionText" : {
+          "minLength" : 0,
+          "type" : "string",
+          "maxLength" : 50000
+        },
+        "UploadedDocumentMetadata" : {
+          "$ref" : "#/definitions/UploadedDocumentMetadata"
+        }
+      },
+      "required" : [ "InstructionText" ]
     },
     "JoinType" : {
       "type" : "string",
@@ -1996,6 +2133,15 @@
         }
       },
       "required" : [ "DataSetArn", "InputColumns" ]
+    },
+    "ColumnSemanticType" : {
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "GeographicalRole" : {
+          "$ref" : "#/definitions/GeoSpatialDataRole"
+        }
+      }
     },
     "JoinOperation" : {
       "additionalProperties" : false,
@@ -2184,7 +2330,7 @@
       "required" : [ "DestinationTableMap", "SourceTableMap", "TransformStepMap" ]
     },
     "ColumnGroup" : {
-      "description" : "<p>Groupings of columns that work together in certain Amazon Quick Suite features. This is\n            a variant type structure. For this structure to be valid, only one of the attributes can\n            be non-null.</p>",
+      "description" : "<p>Groupings of columns that work together in certain Amazon QuickSight features. This is\n            a variant type structure. For this structure to be valid, only one of the attributes can\n            be non-null.</p>",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
@@ -2298,7 +2444,7 @@
     "FolderArns" : {
       "minItems" : 0,
       "maxItems" : 10,
-      "description" : "<p>When you create the dataset, Quick Suite adds the dataset to these folders.</p>",
+      "description" : "<p>When you create the dataset, Amazon QuickSight adds the dataset to these folders.</p>",
       "type" : "array",
       "items" : {
         "type" : "string"
@@ -2379,7 +2525,7 @@
     "ColumnGroups" : {
       "minItems" : 1,
       "maxItems" : 8,
-      "description" : "<p>Groupings of columns that work together in certain Quick Suite features. Currently, only geospatial hierarchy is supported.</p>",
+      "description" : "<p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>",
       "type" : "array",
       "items" : {
         "$ref" : "#/definitions/ColumnGroup"
