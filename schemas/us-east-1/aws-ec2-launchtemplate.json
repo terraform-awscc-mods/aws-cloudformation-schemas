@@ -3,7 +3,7 @@
     "permissions" : [ "ec2:CreateTags", "ec2:DeleteTags" ],
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : true,
+    "tagUpdatable" : false,
     "tagProperty" : "/properties/TagSpecifications/*/Tags",
     "cloudFormationSystemTags" : true
   },

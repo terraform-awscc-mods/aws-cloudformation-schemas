@@ -235,6 +235,22 @@
       },
       "required" : [ "Enable", "Rollback" ]
     },
+    "HookTimeoutConfig" : {
+      "description" : "",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Action" : {
+          "type" : "string",
+          "enum" : [ "ROLLBACK", "CONTINUE" ]
+        },
+        "TimeoutInMinutes" : {
+          "maximum" : 20160,
+          "type" : "integer",
+          "minimum" : 1
+        }
+      }
+    },
     "EBSTagSpecification" : {
       "description" : "The tag specifications of an Amazon EBS volume.",
       "additionalProperties" : false,
@@ -486,7 +502,8 @@
       "type" : "object",
       "properties" : {
         "TimeoutConfiguration" : {
-          "description" : ""
+          "description" : "",
+          "$ref" : "#/definitions/HookTimeoutConfig"
         },
         "LifecycleStages" : {
           "minItems" : 1,
@@ -496,6 +513,11 @@
             "type" : "string",
             "enum" : [ "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT" ]
           }
+        },
+        "TargetType" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "AWS_LAMBDA", "PAUSE" ]
         },
         "HookTargetArn" : {
           "description" : "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
