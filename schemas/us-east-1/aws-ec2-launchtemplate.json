@@ -1,11 +1,9 @@
 {
   "tagging" : {
-    "permissions" : [ "ec2:CreateTags", "ec2:DeleteTags" ],
-    "taggable" : true,
-    "tagOnCreate" : true,
+    "taggable" : false,
+    "tagOnCreate" : false,
     "tagUpdatable" : false,
-    "tagProperty" : "/properties/TagSpecifications/*/Tags",
-    "cloudFormationSystemTags" : true
+    "cloudFormationSystemTags" : false
   },
   "handlers" : {
     "read" : {
@@ -538,7 +536,7 @@
           "enum" : [ "enabled", "disabled" ]
         },
         "NestedVirtualization" : {
-          "description" : "",
+          "description" : "Indicates whether the instance is enabled for nested virtualization.",
           "type" : "string",
           "enum" : [ "enabled", "disabled" ]
         },
