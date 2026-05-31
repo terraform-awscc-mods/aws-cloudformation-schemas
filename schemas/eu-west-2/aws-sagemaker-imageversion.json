@@ -164,7 +164,7 @@
       "permissions" : [ "sagemaker:DeleteImageVersion", "sagemaker:DescribeImageVersion" ]
     },
     "list" : {
-      "permissions" : [ "sagemaker:ListImageVersions" ],
+      "permissions" : [ "sagemaker:ListImageVersions", "sagemaker:DescribeImage" ],
       "handlerSchema" : {
         "properties" : {
           "ImageName" : {
