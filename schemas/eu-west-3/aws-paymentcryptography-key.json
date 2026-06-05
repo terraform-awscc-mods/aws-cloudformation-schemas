@@ -170,7 +170,8 @@
       "type" : "string",
       "maxLength" : 20480,
       "minLength" : 1,
-      "pattern" : "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
+      "pattern" : "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$",
+      "description" : "The resource-based policy attached to the key, in JSON format."
     },
     "ReplicationRegions" : {
       "type" : "array",
