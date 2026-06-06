@@ -84,6 +84,32 @@
       },
       "required" : [ "Fields", "OrderId" ]
     },
+    "ViewDefinition" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Definer" : {
+          "type" : "string"
+        },
+        "SubObjects" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Representations" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/ViewRepresentation"
+          }
+        },
+        "IsProtected" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "IcebergPartitionSpec" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -229,11 +255,20 @@
         "Parameters" : {
           "type" : "object"
         },
-        "ViewExpandedText" : {
-          "type" : "string"
+        "ViewDefinition" : {
+          "$ref" : "#/definitions/ViewDefinition"
         },
         "StorageDescriptor" : {
           "$ref" : "#/definitions/StorageDescriptor"
+        },
+        "Retention" : {
+          "type" : "integer"
+        },
+        "Name" : {
+          "type" : "string"
+        },
+        "ViewExpandedText" : {
+          "type" : "string"
         },
         "TargetTable" : {
           "$ref" : "#/definitions/TableIdentifier"
@@ -244,12 +279,6 @@
           "items" : {
             "$ref" : "#/definitions/Column"
           }
-        },
-        "Retention" : {
-          "type" : "integer"
-        },
-        "Name" : {
-          "type" : "string"
         }
       }
     },
@@ -279,6 +308,27 @@
         }
       },
       "required" : [ "Fields" ]
+    },
+    "ViewRepresentation" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Dialect" : {
+          "type" : "string"
+        },
+        "ViewOriginalText" : {
+          "type" : "string"
+        },
+        "DialectVersion" : {
+          "type" : "string"
+        },
+        "ViewExpandedText" : {
+          "type" : "string"
+        },
+        "ValidationConnection" : {
+          "type" : "string"
+        }
+      }
     },
     "SkewedInfo" : {
       "type" : "object",
