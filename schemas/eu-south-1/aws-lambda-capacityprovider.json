@@ -147,10 +147,11 @@
       "additionalProperties" : false,
       "properties" : {
         "Mode" : {
-          "$ref" : "#/definitions/PropagateTagsMode"
+          "$ref" : "#/definitions/PropagateTagsMode",
+          "description" : ""
         },
         "ExplicitTags" : {
-          "description" : "A list of tags to explicitly propagate to managed resources.",
+          "description" : "",
           "type" : "array",
           "uniqueItems" : true,
           "insertionOrder" : false,
