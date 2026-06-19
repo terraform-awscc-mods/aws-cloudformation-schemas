@@ -1615,7 +1615,7 @@
         },
         "Role" : {
           "type" : "string",
-          "description" : "The ARN of the IAM role that S3 assumes to create your annotation table."
+          "description" : "The ARN of the IAM role that grants Amazon S3 Metadata permission to read annotations from your bucket."
         }
       },
       "required" : [ "ConfigurationState" ],
