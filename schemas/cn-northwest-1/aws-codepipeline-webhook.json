@@ -133,7 +133,7 @@
   "required" : [ "AuthenticationConfiguration", "Filters", "Authentication", "TargetPipeline", "TargetAction" ],
   "createOnlyProperties" : [ "/properties/Name" ],
   "readOnlyProperties" : [ "/properties/Id", "/properties/Url" ],
-  "writeOnlyProperties" : [ "/properties/TargetPipelineVersion", "/properties/RegisterWithThirdParty" ],
+  "writeOnlyProperties" : [ "/properties/TargetPipelineVersion", "/properties/RegisterWithThirdParty", "/properties/AuthenticationConfiguration/SecretToken" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "tagging" : {
     "taggable" : true,

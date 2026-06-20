@@ -288,7 +288,7 @@
       "$ref" : "#/definitions/CapacityProviderVpcConfig"
     },
     "PropagateTags" : {
-      "description" : "",
+      "description" : "Configuration for tag propagation to managed resources launched by the capacity provider.",
       "$ref" : "#/definitions/PropagateTagsConfig"
     },
     "TelemetryConfig" : {
