@@ -249,7 +249,7 @@
   "required" : [ "InstanceArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "connect:CreateTaskTemplate", "connect:TagResource" ]
+      "permissions" : [ "connect:CreateTaskTemplate", "connect:DeleteTaskTemplate", "connect:ListTaskTemplates", "connect:TagResource" ]
     },
     "read" : {
       "permissions" : [ "connect:GetTaskTemplate" ]
