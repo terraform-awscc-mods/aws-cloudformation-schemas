@@ -801,6 +801,26 @@
         },
         "Git" : {
           "$ref" : "#/definitions/HarnessSkillGitSource"
+        },
+        "AwsSkills" : {
+          "$ref" : "#/definitions/HarnessSkillAwsSkillsSource"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "HarnessSkillAwsSkillsSource" : {
+      "type" : "object",
+      "description" : "AWS Skills baked into the Harness's underlying Runtime.",
+      "properties" : {
+        "Paths" : {
+          "type" : "array",
+          "description" : "Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].",
+          "items" : {
+            "type" : "string",
+            "minLength" : 1,
+            "maxLength" : 4096,
+            "pattern" : "^([^*?\\[\\]]|\\*)+$"
+          }
         }
       },
       "additionalProperties" : false
@@ -862,8 +882,52 @@
       "properties" : {
         "AgentCoreMemoryConfiguration" : {
           "$ref" : "#/definitions/HarnessAgentCoreMemoryConfiguration"
+        },
+        "ManagedMemoryConfiguration" : {
+          "$ref" : "#/definitions/HarnessManagedMemoryConfiguration"
+        },
+        "Disabled" : {
+          "$ref" : "#/definitions/HarnessDisabledMemoryConfiguration"
         }
       },
+      "additionalProperties" : false
+    },
+    "HarnessManagedMemoryConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for managed memory. The harness creates and manages a memory resource in the customer's account.",
+      "properties" : {
+        "Arn" : {
+          "type" : "string",
+          "description" : "The ARN of the managed memory resource. Read-only, populated by the service.",
+          "pattern" : "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+        },
+        "Strategies" : {
+          "type" : "array",
+          "description" : "Strategy types to enable. Defaults to [SEMANTIC, SUMMARIZATION].",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC" ]
+          },
+          "minItems" : 1,
+          "maxItems" : 4,
+          "uniqueItems" : true
+        },
+        "EventExpiryDuration" : {
+          "type" : "integer",
+          "description" : "Event retention in days. Defaults to 30.",
+          "minimum" : 3,
+          "maximum" : 365
+        },
+        "EncryptionKeyArn" : {
+          "type" : "string",
+          "description" : "Customer-managed KMS key ARN. Defaults to AWS-owned key. Not updatable after creation."
+        }
+      },
+      "additionalProperties" : false
+    },
+    "HarnessDisabledMemoryConfiguration" : {
+      "type" : "object",
+      "description" : "Explicitly opt out of memory.",
       "additionalProperties" : false
     },
     "HarnessAgentCoreMemoryConfiguration" : {
@@ -999,6 +1063,13 @@
       "$ref" : "#/definitions/HarnessStatus",
       "description" : "The current status of the harness."
     },
+    "Version" : {
+      "type" : "string",
+      "description" : "The version of the harness. Incremented on every successful update.",
+      "pattern" : "^([1-9][0-9]{0,4})$",
+      "minLength" : 1,
+      "maxLength" : 5
+    },
     "ExecutionRoleArn" : {
       "type" : "string",
       "description" : "The ARN of the IAM role that the harness assumes when running.",
@@ -1108,8 +1179,8 @@
   },
   "additionalProperties" : false,
   "required" : [ "HarnessName", "ExecutionRoleArn", "Model" ],
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/HarnessId", "/properties/Status", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeArn", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeName", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeId" ],
-  "createOnlyProperties" : [ "/properties/HarnessName" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/HarnessId", "/properties/Status", "/properties/Version", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/Memory/ManagedMemoryConfiguration/Arn", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeArn", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeName", "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeId" ],
+  "createOnlyProperties" : [ "/properties/HarnessName", "/properties/Memory/ManagedMemoryConfiguration/EncryptionKeyArn" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "additionalIdentifiers" : [ [ "/properties/HarnessId" ] ],
   "tagging" : {
@@ -1122,16 +1193,16 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateHarness", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:TagResource", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "iam:CreateServiceLinkedRole", "iam:PassRole" ]
+      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateHarness", "bedrock-agentcore:CreateMemory", "bedrock-agentcore:GetMemory", "bedrock-agentcore:DeleteMemory", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:TagResource", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "iam:CreateServiceLinkedRole", "iam:PassRole" ]
     },
     "read" : {
       "permissions" : [ "bedrock-agentcore:GetHarness", "bedrock-agentcore:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:UpdateHarness", "iam:CreateServiceLinkedRole", "iam:PassRole" ]
+      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateMemory", "bedrock-agentcore:GetMemory", "bedrock-agentcore:UpdateMemory", "bedrock-agentcore:DeleteMemory", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:UpdateHarness", "iam:CreateServiceLinkedRole", "iam:PassRole" ]
     },
     "delete" : {
-      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteHarness", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint" ]
+      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteHarness", "bedrock-agentcore:DeleteMemory", "bedrock-agentcore:GetMemory", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:GetHarness", "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint" ]
     },
     "list" : {
       "permissions" : [ "bedrock-agentcore:ListHarnesses" ]
