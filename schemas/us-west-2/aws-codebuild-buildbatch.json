@@ -1,0 +1,75 @@
+{
+  "typeName" : "AWS::CodeBuild::BuildBatch",
+  "description" : "Represents an AWS CodeBuild build batch, which is a single execution of a batch build for a project.",
+  "properties" : {
+    "Arn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the batch build.",
+      "minLength" : 1
+    },
+    "Id" : {
+      "type" : "string",
+      "description" : "The unique ID for the batch build.",
+      "minLength" : 1
+    },
+    "ProjectName" : {
+      "type" : "string",
+      "description" : "The name of the CodeBuild build project.",
+      "minLength" : 1
+    },
+    "BuildBatchNumber" : {
+      "type" : "integer",
+      "description" : "The number of the batch build."
+    },
+    "BuildBatchStatus" : {
+      "type" : "string",
+      "description" : "The current status of the batch build.",
+      "enum" : [ "SUCCEEDED", "FAILED", "FAULT", "TIMED_OUT", "IN_PROGRESS", "STOPPED" ]
+    },
+    "Complete" : {
+      "type" : "boolean",
+      "description" : "Whether the batch build is complete."
+    },
+    "CurrentPhase" : {
+      "type" : "string",
+      "description" : "The current build phase of the batch build."
+    },
+    "StartTime" : {
+      "type" : "string",
+      "description" : "When the batch build started, in ISO 8601 format."
+    },
+    "EncryptionKey" : {
+      "type" : "string",
+      "description" : "The KMS key used to encrypt the batch build output artifacts.",
+      "minLength" : 1
+    },
+    "BuildTimeoutInMinutes" : {
+      "type" : "integer",
+      "description" : "How long, in minutes, for CodeBuild to wait before timing out the batch build."
+    },
+    "QueuedTimeoutInMinutes" : {
+      "type" : "integer",
+      "description" : "The number of minutes a batch build is allowed to be queued before it times out."
+    },
+    "Initiator" : {
+      "type" : "string",
+      "description" : "The entity that started the batch build."
+    }
+  },
+  "additionalProperties" : false,
+  "createOnlyProperties" : [ "/properties/ProjectName" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/Id", "/properties/BuildBatchNumber", "/properties/BuildBatchStatus", "/properties/Complete", "/properties/CurrentPhase", "/properties/StartTime", "/properties/EncryptionKey", "/properties/BuildTimeoutInMinutes", "/properties/QueuedTimeoutInMinutes", "/properties/Initiator" ],
+  "primaryIdentifier" : [ "/properties/Arn" ],
+  "additionalIdentifiers" : [ [ "/properties/Id" ] ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "codebuild:BatchGetBuildBatches" ]
+    },
+    "list" : {
+      "permissions" : [ "codebuild:ListBuildBatches", "codebuild:BatchGetBuildBatches" ]
+    }
+  }
+}

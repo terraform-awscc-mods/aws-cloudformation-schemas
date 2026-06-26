@@ -1,0 +1,71 @@
+{
+  "typeName" : "AWS::PartnerCentral::ConnectionPreferences",
+  "description" : "Represents the connection preferences for a partner account in AWS Partner Central, including access settings and exclusions.",
+  "properties" : {
+    "Arn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the connection preferences.",
+      "minLength" : 1,
+      "maxLength" : 200,
+      "pattern" : "^arn:[a-zA-Z0-9-]+:partnercentral:[a-z0-9\\-]*::catalog/[a-zA-Z]+/connection-preferences$"
+    },
+    "Catalog" : {
+      "type" : "string",
+      "description" : "The catalog identifier for the partner account.",
+      "minLength" : 1,
+      "maxLength" : 64,
+      "pattern" : "^[a-zA-Z0-9-]+$"
+    },
+    "AccessType" : {
+      "type" : "string",
+      "description" : "The access type setting for connections.",
+      "enum" : [ "ALLOW_ALL", "DENY_ALL", "ALLOW_BY_DEFAULT_DENY_SOME" ]
+    },
+    "ExcludedParticipantIds" : {
+      "type" : "array",
+      "description" : "A list of participant IDs that are excluded from connection requests or interactions.",
+      "uniqueItems" : true,
+      "items" : {
+        "type" : "string",
+        "minLength" : 1,
+        "maxLength" : 100,
+        "pattern" : "^[a-zA-Z0-9-]+$"
+      }
+    },
+    "Revision" : {
+      "type" : "integer",
+      "description" : "The revision number of the connection preferences for optimistic locking."
+    },
+    "UpdatedAt" : {
+      "type" : "string",
+      "description" : "The timestamp when the connection preferences were last updated."
+    }
+  },
+  "additionalProperties" : false,
+  "createOnlyProperties" : [ "/properties/Catalog" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/Revision", "/properties/UpdatedAt", "/properties/AccessType", "/properties/ExcludedParticipantIds" ],
+  "primaryIdentifier" : [ "/properties/Arn" ],
+  "additionalIdentifiers" : [ [ "/properties/Catalog" ] ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "partnercentral:GetConnectionPreferences" ]
+    },
+    "list" : {
+      "handlerSchema" : {
+        "properties" : {
+          "Catalog" : {
+            "type" : "string",
+            "minLength" : 1,
+            "maxLength" : 64,
+            "pattern" : "^[a-zA-Z0-9-]+$"
+          }
+        },
+        "required" : [ "Catalog" ]
+      },
+      "permissions" : [ "partnercentral:GetConnectionPreferences" ]
+    }
+  }
+}

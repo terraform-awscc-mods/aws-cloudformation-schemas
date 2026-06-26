@@ -1,0 +1,123 @@
+{
+  "typeName" : "AWS::SavingsPlans::SavingsPlan",
+  "description" : "Resource type definition for a Savings Plan.",
+  "definitions" : {
+    "Tag" : {
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "SavingsPlanArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the Savings Plan."
+    },
+    "SavingsPlanId" : {
+      "type" : "string",
+      "description" : "The ID of the Savings Plan."
+    },
+    "SavingsPlanOfferingId" : {
+      "type" : "string",
+      "description" : "The ID of the offering."
+    },
+    "Commitment" : {
+      "type" : "string",
+      "description" : "The hourly commitment amount in the specified currency."
+    },
+    "UpfrontPaymentAmount" : {
+      "type" : "string",
+      "description" : "The up-front payment amount."
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "One or more tags.",
+      "uniqueItems" : true,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "State" : {
+      "type" : "string",
+      "description" : "The current state of the Savings Plan.",
+      "enum" : [ "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned" ]
+    },
+    "SavingsPlanType" : {
+      "type" : "string",
+      "description" : "The plan type.",
+      "enum" : [ "Compute", "EC2Instance", "SageMaker", "Database" ]
+    },
+    "PaymentOption" : {
+      "type" : "string",
+      "description" : "The payment option.",
+      "enum" : [ "All Upfront", "Partial Upfront", "No Upfront" ]
+    },
+    "ProductTypes" : {
+      "type" : "array",
+      "description" : "The product types.",
+      "insertionOrder" : false,
+      "items" : {
+        "type" : "string",
+        "enum" : [ "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch" ]
+      }
+    },
+    "Currency" : {
+      "type" : "string",
+      "description" : "The currency.",
+      "enum" : [ "CNY", "USD", "EUR" ]
+    },
+    "Description" : {
+      "type" : "string",
+      "description" : "The description."
+    },
+    "Start" : {
+      "type" : "string",
+      "description" : "The start time."
+    },
+    "End" : {
+      "type" : "string",
+      "description" : "The end time."
+    },
+    "RecurringPaymentAmount" : {
+      "type" : "string",
+      "description" : "The recurring payment amount."
+    },
+    "TermDurationInSeconds" : {
+      "type" : "integer",
+      "description" : "The duration of the term, in seconds."
+    }
+  },
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/SavingsPlanArn", "/properties/SavingsPlanId", "/properties/SavingsPlanOfferingId", "/properties/Commitment", "/properties/UpfrontPaymentAmount", "/properties/Tags", "/properties/State", "/properties/SavingsPlanType", "/properties/PaymentOption", "/properties/ProductTypes", "/properties/Currency", "/properties/Description", "/properties/Start", "/properties/End", "/properties/RecurringPaymentAmount", "/properties/TermDurationInSeconds" ],
+  "primaryIdentifier" : [ "/properties/SavingsPlanArn" ],
+  "additionalIdentifiers" : [ [ "/properties/SavingsPlanId" ] ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : false,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "savingsplans:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "savingsplans:DescribeSavingsPlans", "savingsplans:ListTagsForResource" ]
+    },
+    "list" : {
+      "permissions" : [ "savingsplans:DescribeSavingsPlans" ]
+    }
+  }
+}
