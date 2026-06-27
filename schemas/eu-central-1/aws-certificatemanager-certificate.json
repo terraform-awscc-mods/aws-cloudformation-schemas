@@ -11,7 +11,7 @@
     },
     "DomainValidationOptions" : {
       "type" : "array",
-      "uniqueItems" : false,
+      "uniqueItems" : true,
       "items" : {
         "$ref" : "#/definitions/DomainValidationOption"
       }
@@ -27,7 +27,7 @@
     },
     "SubjectAlternativeNames" : {
       "type" : "array",
-      "uniqueItems" : false,
+      "uniqueItems" : true,
       "items" : {
         "type" : "string"
       }
@@ -41,9 +41,6 @@
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
-    },
-    "CertificateArn" : {
-      "type" : "string"
     },
     "KeyAlgorithm" : {
       "type" : "string"
@@ -63,7 +60,8 @@
         "HostedZoneId" : {
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "DomainName" ]
     },
     "Tag" : {
       "type" : "object",
@@ -80,7 +78,7 @@
     }
   },
   "required" : [ "DomainName" ],
-  "createOnlyProperties" : [ "/properties/SubjectAlternativeNames", "/properties/DomainValidationOptions", "/properties/ValidationMethod", "/properties/KeyAlgorithm", "/properties/CertificateExport", "/properties/DomainName", "/properties/CertificateAuthorityArn" ],
+  "createOnlyProperties" : [ "/properties/SubjectAlternativeNames", "/properties/DomainValidationOptions", "/properties/ValidationMethod", "/properties/KeyAlgorithm", "/properties/DomainName", "/properties/CertificateAuthorityArn" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id", "/properties/CertificateArn" ]
+  "readOnlyProperties" : [ "/properties/Id" ]
 }
