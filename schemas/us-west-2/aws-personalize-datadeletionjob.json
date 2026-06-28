@@ -1,80 +1,48 @@
 {
   "typeName" : "AWS::Personalize::DataDeletionJob",
   "description" : "Resource Type definition for AWS::Personalize::DataDeletionJob",
-  "definitions" : {
-    "DataSource" : {
-      "type" : "object",
-      "description" : "The Amazon S3 bucket that contains the list of userIds to delete.",
-      "properties" : {
-        "DataLocation" : {
-          "type" : "string",
-          "description" : "The path to the Amazon S3 bucket where the data is stored.",
-          "maxLength" : 256,
-          "pattern" : "^(s3|http|https)://.+$"
-        }
-      },
-      "additionalProperties" : false
-    }
-  },
+  "additionalProperties" : false,
   "properties" : {
-    "JobName" : {
-      "type" : "string",
-      "description" : "The name for the data deletion job.",
-      "minLength" : 1,
-      "maxLength" : 63,
-      "pattern" : "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+    "Status" : {
+      "type" : "string"
     },
     "DataDeletionJobArn" : {
-      "type" : "string",
-      "description" : "The Amazon Resource Name (ARN) of the data deletion job.",
-      "maxLength" : 256,
-      "pattern" : "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+      "type" : "string"
+    },
+    "CreationDateTime" : {
+      "type" : "string"
     },
     "DatasetGroupArn" : {
-      "type" : "string",
-      "description" : "The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.",
-      "maxLength" : 256,
-      "pattern" : "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+      "type" : "string"
+    },
+    "JobName" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "RoleArn" : {
+      "type" : "string"
+    },
+    "LastUpdatedDateTime" : {
+      "type" : "string"
     },
     "DataSource" : {
       "$ref" : "#/definitions/DataSource"
-    },
-    "RoleArn" : {
-      "type" : "string",
-      "description" : "The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.",
-      "maxLength" : 256,
-      "pattern" : "^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
-    },
-    "Status" : {
-      "type" : "string",
-      "description" : "The status of the data deletion job.",
-      "maxLength" : 256
-    },
-    "CreationDateTime" : {
-      "type" : "string",
-      "description" : "The creation date and time of the data deletion job.",
-      "format" : "date-time"
-    },
-    "LastUpdatedDateTime" : {
-      "type" : "string",
-      "description" : "The date and time the data deletion job was last updated.",
-      "format" : "date-time"
     }
   },
-  "additionalProperties" : false,
-  "createOnlyProperties" : [ "/properties/DataSource", "/properties/DatasetGroupArn", "/properties/JobName", "/properties/RoleArn" ],
-  "readOnlyProperties" : [ "/properties/DataDeletionJobArn", "/properties/Status", "/properties/CreationDateTime", "/properties/LastUpdatedDateTime" ],
-  "primaryIdentifier" : [ "/properties/DataDeletionJobArn" ],
-  "additionalIdentifiers" : [ [ "/properties/JobName" ] ],
-  "tagging" : {
-    "taggable" : false
-  },
-  "handlers" : {
-    "read" : {
-      "permissions" : [ "personalize:DescribeDataDeletionJob" ]
-    },
-    "list" : {
-      "permissions" : [ "personalize:ListDataDeletionJobs" ]
+  "definitions" : {
+    "DataSource" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DataLocation" : {
+          "type" : "string"
+        }
+      }
     }
-  }
+  },
+  "createOnlyProperties" : [ "/properties/RoleArn", "/properties/DataSource", "/properties/JobName", "/properties/DatasetGroupArn" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/DataDeletionJobArn", "/properties/LastUpdatedDateTime", "/properties/Id", "/properties/Status", "/properties/CreationDateTime" ]
 }

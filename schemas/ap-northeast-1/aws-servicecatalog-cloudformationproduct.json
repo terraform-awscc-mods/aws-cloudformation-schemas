@@ -103,7 +103,7 @@
           "type" : "string"
         },
         "Info" : {
-          "type" : "object"
+          "$ref" : "#/definitions/Info"
         },
         "DisableTemplateValidation" : {
           "type" : "boolean"
@@ -126,6 +126,18 @@
         }
       },
       "required" : [ "Value", "Key" ]
+    },
+    "Info" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LoadTemplateFromURL" : {
+          "type" : "string"
+        },
+        "ImportFromPhysicalId" : {
+          "type" : "string"
+        }
+      }
     },
     "SourceConnection" : {
       "type" : "object",

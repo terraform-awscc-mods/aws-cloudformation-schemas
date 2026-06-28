@@ -1,97 +1,55 @@
 {
   "typeName" : "AWS::QuickSight::AssetBundleImportJob",
-  "description" : "Represents a QuickSight asset bundle import job.",
+  "description" : "Resource Type definition for AWS::QuickSight::AssetBundleImportJob",
+  "additionalProperties" : false,
   "properties" : {
-    "Arn" : {
-      "type" : "string",
-      "description" : "The Amazon Resource Name (ARN) for the import job."
-    },
-    "AssetBundleImportJobId" : {
-      "type" : "string",
-      "description" : "The ID of the import job.",
-      "minLength" : 1,
-      "maxLength" : 512,
-      "pattern" : "^[\\w\\-]+$"
-    },
-    "AwsAccountId" : {
-      "type" : "string",
-      "description" : "The ID of the Amazon Web Services account to import assets into.",
-      "minLength" : 12,
-      "maxLength" : 12,
-      "pattern" : "^[0-9]{12}$"
-    },
-    "AssetBundleImportSource" : {
-      "$ref" : "#/definitions/AssetBundleImportSourceDescription",
-      "description" : "The source of the asset bundle zip file."
+    "JobStatus" : {
+      "type" : "string"
     },
     "FailureAction" : {
-      "type" : "string",
-      "description" : "The failure action for the import job.",
-      "enum" : [ "DO_NOTHING", "ROLLBACK" ]
-    },
-    "JobStatus" : {
-      "type" : "string",
-      "description" : "Indicates the status of the import job.",
-      "enum" : [ "QUEUED_FOR_IMMEDIATE_EXECUTION", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "FAILED_ROLLBACK_IN_PROGRESS", "FAILED_ROLLBACK_COMPLETED", "FAILED_ROLLBACK_ERROR" ]
+      "type" : "string"
     },
     "CreatedTime" : {
-      "type" : "string",
-      "description" : "The time that the import job was created.",
-      "format" : "date-time"
+      "type" : "string"
+    },
+    "AssetBundleImportSource" : {
+      "$ref" : "#/definitions/AssetBundleImportSourceDescription"
+    },
+    "AwsAccountId" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "AssetBundleImportJobId" : {
+      "type" : "string"
     },
     "OverrideValidationStrategy" : {
-      "$ref" : "#/definitions/AssetBundleImportJobOverrideValidationStrategy",
-      "description" : "An optional validation strategy override for all analyses and dashboards."
+      "$ref" : "#/definitions/AssetBundleImportJobOverrideValidationStrategy"
     }
   },
   "definitions" : {
-    "AssetBundleImportSourceDescription" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "S3Uri" : {
-          "type" : "string",
-          "description" : "The Amazon S3 URI for the asset bundle import file.",
-          "pattern" : "^(https|s3)://([^/]+)/?(.*)$"
-        }
-      }
-    },
     "AssetBundleImportJobOverrideValidationStrategy" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
         "StrictModeForAllResources" : {
-          "type" : "boolean",
-          "description" : "A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode."
+          "type" : "boolean"
         }
       }
     },
-    "AssetBundleImportJobResourceIdOverrideConfiguration" : {
+    "AssetBundleImportSourceDescription" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
-        "PrefixForAllResources" : {
-          "type" : "string",
-          "description" : "An option to request a prefix to be prepended to each resource's ID before import."
+        "S3Uri" : {
+          "type" : "string"
         }
       }
     }
   },
   "required" : [ "AssetBundleImportJobId" ],
-  "additionalProperties" : false,
-  "createOnlyProperties" : [ "/properties/AssetBundleImportJobId", "/properties/AssetBundleImportSource", "/properties/AwsAccountId", "/properties/FailureAction", "/properties/OverrideValidationStrategy" ],
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/JobStatus", "/properties/CreatedTime" ],
-  "primaryIdentifier" : [ "/properties/Arn" ],
-  "additionalIdentifiers" : [ [ "/properties/AssetBundleImportJobId" ] ],
-  "tagging" : {
-    "taggable" : false
-  },
-  "handlers" : {
-    "read" : {
-      "permissions" : [ "quicksight:DescribeAssetBundleImportJob" ]
-    },
-    "list" : {
-      "permissions" : [ "quicksight:ListAssetBundleImportJobs" ]
-    }
-  }
+  "createOnlyProperties" : [ "/properties/FailureAction", "/properties/AwsAccountId", "/properties/AssetBundleImportJobId", "/properties/AssetBundleImportSource", "/properties/OverrideValidationStrategy" ],
+  "primaryIdentifier" : [ "/properties/AssetBundleImportJobId" ],
+  "readOnlyProperties" : [ "/properties/AssetBundleImportJobId", "/properties/JobStatus", "/properties/CreatedTime", "/properties/Arn" ]
 }
