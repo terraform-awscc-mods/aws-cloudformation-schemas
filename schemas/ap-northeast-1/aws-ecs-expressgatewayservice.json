@@ -33,7 +33,7 @@
       "timeoutInMinutes" : 30
     }
   },
-  "writeOnlyProperties" : [ "/properties/ExecutionRoleArn", "/properties/TaskRoleArn", "/properties/HealthCheckPath", "/properties/PrimaryContainer", "/properties/NetworkConfiguration", "/properties/Cpu", "/properties/Memory", "/properties/ScalingTarget" ],
+  "writeOnlyProperties" : [ "/properties/ExecutionRoleArn", "/properties/TaskRoleArn", "/properties/TaskDefinitionArn", "/properties/HealthCheckPath", "/properties/PrimaryContainer", "/properties/NetworkConfiguration", "/properties/Cpu", "/properties/Memory", "/properties/ScalingTarget" ],
   "additionalProperties" : false,
   "definitions" : {
     "IngressPathSummary" : {
@@ -401,6 +401,9 @@
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
+    },
+    "TaskDefinitionArn" : {
+      "type" : "string"
     }
   }
 }

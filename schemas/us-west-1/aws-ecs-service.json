@@ -181,11 +181,12 @@
       "required" : [ "Port" ]
     },
     "MetricConfiguration" : {
-      "description" : "",
+      "description" : "The configuration for a specific set of metrics to collect for a service.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
         "ResolutionSeconds" : {
+          "description" : "The resolution, in seconds, at which to collect the metrics. The valid values are ``20`` and ``60``.",
           "type" : "integer",
           "enum" : [ 20, 60 ]
         },
@@ -193,6 +194,7 @@
           "minItems" : 1,
           "maxItems" : 2,
           "uniqueItems" : true,
+          "description" : "The list of metric names to configure. The supported metric names are ``CPUUtilization`` and ``MemoryUtilization``.",
           "type" : "array",
           "items" : {
             "type" : "string",
@@ -443,13 +445,14 @@
       "required" : [ "Format" ]
     },
     "MonitoringConfiguration" : {
-      "description" : "",
+      "description" : "The optional monitoring configuration for a service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds.",
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
         "MetricConfigurations" : {
           "minItems" : 1,
           "maxItems" : 2,
+          "description" : "The list of metric configurations for the service monitoring.",
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/MetricConfiguration"
@@ -900,7 +903,7 @@
       }
     },
     "Monitoring" : {
-      "description" : "",
+      "description" : "The optional monitoring configuration for the service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds.",
       "$ref" : "#/definitions/MonitoringConfiguration"
     },
     "ForceNewDeployment" : {
