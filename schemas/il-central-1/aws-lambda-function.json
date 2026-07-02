@@ -31,7 +31,7 @@
       "permissions" : [ "lambda:DeleteFunction", "lambda:GetFunction", "ec2:DescribeNetworkInterfaces" ]
     }
   },
-  "writeOnlyProperties" : [ "/properties/SnapStart", "/properties/SnapStart/ApplyOn", "/properties/Code/ImageUri", "/properties/Code/S3Bucket", "/properties/Code/S3Key", "/properties/Code/S3ObjectVersion", "/properties/Code/ZipFile", "/properties/Code/SourceKMSKeyArn", "/properties/PublishToLatestPublished" ],
+  "writeOnlyProperties" : [ "/properties/SnapStart", "/properties/SnapStart/ApplyOn", "/properties/Code/ImageUri", "/properties/Code/S3Bucket", "/properties/Code/S3Key", "/properties/Code/S3ObjectVersion", "/properties/Code/ZipFile", "/properties/Code/SourceKMSKeyArn", "/properties/Code/S3ObjectStorageMode", "/properties/PublishToLatestPublished" ],
   "additionalProperties" : false,
   "definitions" : {
     "ImageConfig" : {
@@ -274,6 +274,11 @@
           "description" : "The Amazon S3 key of the deployment package.",
           "type" : "string",
           "maxLength" : 1024
+        },
+        "S3ObjectStorageMode" : {
+          "description" : "",
+          "type" : "string",
+          "enum" : [ "COPY", "REFERENCE" ]
         },
         "ImageUri" : {
           "description" : "URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry.",
