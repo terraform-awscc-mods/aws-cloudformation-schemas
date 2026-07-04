@@ -229,7 +229,10 @@
   "required" : [ "Name", "Version", "ParentImage" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/LatestVersion", "/properties/LatestVersion/Arn", "/properties/LatestVersion/Major", "/properties/LatestVersion/Minor", "/properties/LatestVersion/Patch" ],
-  "createOnlyProperties" : [ "/properties/Name", "/properties/Version", "/properties/Components", "/properties/ParentImage", "/properties/Description", "/properties/BlockDeviceMappings", "/properties/WorkingDirectory" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Version", "/properties/Components", "/properties/ParentImage", "/properties/Description", "/properties/BlockDeviceMappings", "/properties/WorkingDirectory", "/properties/AdditionalInstanceConfiguration", "/properties/AmiTags" ],
+  "propertyTransform" : {
+    "/properties/Version" : "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
