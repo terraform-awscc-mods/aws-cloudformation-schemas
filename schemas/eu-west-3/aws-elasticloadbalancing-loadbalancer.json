@@ -320,7 +320,7 @@
           "type" : "string"
         }
       },
-      "required" : [ "Enabled", "S3BucketName" ]
+      "required" : [ "Enabled" ]
     },
     "ConnectionSettings" : {
       "description" : "If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.",
