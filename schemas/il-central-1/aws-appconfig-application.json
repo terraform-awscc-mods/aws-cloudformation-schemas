@@ -51,7 +51,6 @@
   "required" : [ "Name" ],
   "readOnlyProperties" : [ "/properties/ApplicationId" ],
   "primaryIdentifier" : [ "/properties/ApplicationId" ],
-  "additionalIdentifiers" : [ [ "/properties/Name" ] ],
   "handlers" : {
     "create" : {
       "permissions" : [ "appconfig:CreateApplication", "appconfig:GetApplication", "appconfig:ListTagsForResource", "appconfig:TagResource" ]
