@@ -34,42 +34,42 @@
       "maximum" : 100
     },
     "QuestionPointsConfiguration" : {
-      "description" : "",
+      "description" : "Information about the points configuration for a question.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
         "MaxPointValue" : {
-          "description" : "The maximum point value for the question.",
+          "description" : "The maximum point value.",
           "$ref" : "#/definitions/PointValue"
         },
         "MinPointValue" : {
-          "description" : "The minimum point value for the question.",
+          "description" : "The minimum point value.",
           "$ref" : "#/definitions/PointValue"
         },
         "IsBonus" : {
-          "description" : "Whether the question is a bonus question.",
+          "description" : "The flag to mark the question as a bonus question.",
           "type" : "boolean"
         }
       }
     },
     "QuestionOptionPointsConfiguration" : {
-      "description" : "",
+      "description" : "Information about the points configuration for an answer option.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
         "PointValue" : {
-          "description" : "The point value assigned to this option.",
+          "description" : "The point value assigned to the answer option.",
           "$ref" : "#/definitions/PointValue"
         },
         "IsBonus" : {
-          "description" : "Whether this option is a bonus. Note: Bonus options are not supported for multi-select questions. This property should only be set to true for single-select and numeric question options.",
+          "description" : "The flag to mark the option as a bonus option.",
           "type" : "boolean"
         }
       },
       "required" : [ "PointValue" ]
     },
     "EvaluationFormScoreThreshold" : {
-      "description" : "",
+      "description" : "Information about a score threshold for a performance category.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
@@ -79,13 +79,13 @@
           "enum" : [ "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS" ]
         },
         "MinScorePercentage" : {
-          "description" : "The minimum score percentage for this threshold.",
+          "description" : "The minimum score percentage for the performance category.",
           "type" : "number",
           "minimum" : 0,
           "maximum" : 100
         },
         "MaxScorePercentage" : {
-          "description" : "The maximum score percentage for this threshold.",
+          "description" : "The maximum score percentage for the performance category.",
           "type" : "number",
           "minimum" : 0,
           "maximum" : 100
@@ -94,20 +94,20 @@
       "required" : [ "PerformanceCategory" ]
     },
     "EvaluationFormQuestionScoringConfiguration" : {
-      "description" : "",
+      "description" : "Scoring configuration for a question in an evaluation form.",
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
         "PointsConfiguration" : {
-          "description" : "The points configuration for the question.",
+          "description" : "The points configuration for point-based scoring.",
           "$ref" : "#/definitions/QuestionPointsConfiguration"
         },
         "IsExcludedFromScoring" : {
-          "description" : "Whether the question is excluded from scoring.",
+          "description" : "The flag to exclude the question from scoring.",
           "type" : "boolean"
         },
         "ScoreThresholds" : {
-          "description" : "The score thresholds for the question.",
+          "description" : "The score thresholds for performance categories.",
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/EvaluationFormScoreThreshold"
@@ -263,11 +263,11 @@
           "$ref" : "#/definitions/Weight"
         },
         "IsExcludedFromScoring" : {
-          "description" : "",
+          "description" : "The flag to exclude the section from scoring.",
           "type" : "boolean"
         },
         "ScoreThresholds" : {
-          "description" : "",
+          "description" : "The score thresholds for performance categories.",
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/EvaluationFormScoreThreshold"
@@ -416,7 +416,7 @@
           "$ref" : "#/definitions/AutomaticFailConfiguration"
         },
         "PointsConfiguration" : {
-          "description" : "",
+          "description" : "The points configuration for point-based scoring.",
           "$ref" : "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
@@ -568,7 +568,7 @@
           "$ref" : "#/definitions/AutomaticFailConfiguration"
         },
         "PointsConfiguration" : {
-          "description" : "",
+          "description" : "The points configuration for point-based scoring.",
           "$ref" : "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
@@ -712,11 +712,11 @@
           "maxLength" : 128
         },
         "Score" : {
-          "description" : "",
+          "description" : "The score assigned to the answer option.",
           "$ref" : "#/definitions/Score"
         },
         "AutomaticFail" : {
-          "description" : "",
+          "description" : "The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation gets a score of 0.",
           "type" : "boolean"
         },
         "AutomaticFailConfiguration" : {
@@ -724,7 +724,7 @@
           "$ref" : "#/definitions/AutomaticFailConfiguration"
         },
         "PointsConfiguration" : {
-          "description" : "",
+          "description" : "The points configuration for point-based scoring.",
           "$ref" : "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
@@ -818,7 +818,7 @@
           "$ref" : "#/definitions/Weight"
         },
         "ScoringConfiguration" : {
-          "description" : "",
+          "description" : "The scoring configuration of the question.",
           "$ref" : "#/definitions/EvaluationFormQuestionScoringConfiguration"
         },
         "Enablement" : {
