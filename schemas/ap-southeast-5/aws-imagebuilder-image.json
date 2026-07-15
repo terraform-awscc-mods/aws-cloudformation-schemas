@@ -5,7 +5,7 @@
     "tagOnCreate" : true,
     "tagUpdatable" : true,
     "tagProperty" : "/properties/Tags",
-    "cloudFormationSystemTags" : true
+    "cloudFormationSystemTags" : false
   },
   "typeName" : "AWS::ImageBuilder::Image",
   "readOnlyProperties" : [ "/properties/Arn", "/properties/Name", "/properties/ImageId", "/properties/ImageUri", "/properties/LatestVersion", "/properties/LatestVersion/Arn", "/properties/LatestVersion/Major", "/properties/LatestVersion/Minor", "/properties/LatestVersion/Patch" ],
