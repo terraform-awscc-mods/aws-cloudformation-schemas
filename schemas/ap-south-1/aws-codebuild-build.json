@@ -36,10 +36,12 @@
     },
     "StartTime" : {
       "type" : "string",
+      "format" : "date-time",
       "description" : "When the build process started, in ISO 8601 format."
     },
     "EndTime" : {
       "type" : "string",
+      "format" : "date-time",
       "description" : "When the build process ended, in ISO 8601 format."
     },
     "ServiceRole" : {

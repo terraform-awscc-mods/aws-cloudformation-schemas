@@ -20,6 +20,7 @@
     },
     "StartTime" : {
       "type" : "string",
+      "format" : "date-time",
       "description" : "The time the reservation started."
     },
     "Duration" : {
