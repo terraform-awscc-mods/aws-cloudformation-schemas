@@ -11,10 +11,10 @@
       "permissions" : [ "apigateway:PATCH", "iam:GetRole", "iam:PassRole" ]
     },
     "update" : {
-      "permissions" : [ "apigateway:PATCH", "iam:GetRole", "iam:PassRole" ]
+      "permissions" : [ "apigateway:GET", "apigateway:PATCH", "iam:GetRole", "iam:PassRole" ]
     },
     "delete" : {
-      "permissions" : [ "apigateway:PATCH" ]
+      "permissions" : [ "apigateway:GET", "apigateway:PATCH" ]
     }
   },
   "typeName" : "AWS::ApiGateway::Account",

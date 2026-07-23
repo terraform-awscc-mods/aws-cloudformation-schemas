@@ -8,7 +8,7 @@
     "cloudFormationSystemTags" : false
   },
   "typeName" : "AWS::SageMaker::Cluster",
-  "readOnlyProperties" : [ "/properties/ClusterArn", "/properties/CreationTime", "/properties/ClusterStatus", "/properties/FailureMessage", "/properties/InstanceGroups/*/CurrentCount", "/properties/RestrictedInstanceGroups/*/CurrentCount" ],
+  "readOnlyProperties" : [ "/properties/ClusterArn", "/properties/CreationTime", "/properties/ClusterStatus", "/properties/FailureMessage", "/properties/InstanceGroups/*/CurrentCount", "/properties/RestrictedInstanceGroups/*/CurrentCount", "/properties/InstanceGroups/*/AutoPatchConfig/PatchSchedule/NextPatchDate" ],
   "description" : "Resource Type definition for AWS::SageMaker::Cluster",
   "createOnlyProperties" : [ "/properties/ClusterName", "/properties/VpcConfig", "/properties/Orchestrator/Eks" ],
   "primaryIdentifier" : [ "/properties/ClusterArn" ],
@@ -149,6 +149,17 @@
       },
       "required" : [ "SecurityGroupIds", "Subnets" ]
     },
+    "PatchSchedule" : {
+      "description" : "The schedule configuration for automatic patching.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "NextPatchDate" : {
+          "description" : "The date and time of the next scheduled patch, set by the system when a patch AMI is detected.",
+          "type" : "string"
+        }
+      }
+    },
     "ClusterKubernetesTaint" : {
       "description" : "A Kubernetes taint to apply to cluster nodes.",
       "additionalProperties" : false,
@@ -220,7 +231,7 @@
           "$ref" : "#/definitions/ExecutionRole"
         }
       },
-      "required" : [ "ExecutionRole", "InstanceCount", "InstanceGroupName", "InstanceType", "EnvironmentConfig" ]
+      "required" : [ "ExecutionRole", "InstanceCount", "InstanceGroupName", "InstanceType" ]
     },
     "AutoRollbackConfiguration" : {
       "description" : "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
@@ -229,6 +240,17 @@
       "items" : {
         "$ref" : "#/definitions/AlarmDetails"
       }
+    },
+    "RestrictedInstanceGroupsConfig" : {
+      "description" : "The cluster-level configuration for restricted instance groups, including shared environment settings for inter-RIG communication and FSx Lustre sharing.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "SharedEnvironmentConfig" : {
+          "$ref" : "#/definitions/SharedEnvironmentConfig"
+        }
+      },
+      "required" : [ "SharedEnvironmentConfig" ]
     },
     "ClusterCapacityRequirements" : {
       "description" : "Specifies the capacity requirements configuration for an instance group",
@@ -306,6 +328,25 @@
       "description" : "The instance type of the instance group of a SageMaker HyperPod cluster.",
       "type" : "string"
     },
+    "AutoPatchConfig" : {
+      "description" : "The configuration for automatic patching of the instance group. Enables workload-aware, patch-level AMI updates.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "PatchingStrategy" : {
+          "description" : "The patching strategy that determines when and how instances are patched. WhenIdle patches instances as they become idle. WhenAllIdle patches all instances when they are all idle.",
+          "type" : "string",
+          "enum" : [ "WhenIdle", "WhenAllIdle" ]
+        },
+        "PatchSchedule" : {
+          "$ref" : "#/definitions/PatchSchedule"
+        },
+        "DeploymentConfig" : {
+          "$ref" : "#/definitions/DeploymentConfig"
+        }
+      },
+      "required" : [ "PatchingStrategy" ]
+    },
     "ClusterOrchestratorSlurmConfig" : {
       "description" : "Specifies parameter(s) related to Slurm as orchestrator.",
       "additionalProperties" : false,
@@ -329,6 +370,22 @@
       "description" : "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
       "type" : "string",
       "enum" : [ "InstanceStress", "InstanceConnectivity" ]
+    },
+    "SharedEnvironmentConfig" : {
+      "description" : "The shared environment configuration for restricted instance groups that use cluster-level shared FSx Lustre storage.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "FSxLustreDeletionPolicy" : {
+          "description" : "The deletion policy for the shared FSx Lustre file system. Keep retains the FSx when RIGs are deleted. DeleteIfNotUsed deletes the FSx when no RIGs reference it.",
+          "type" : "string",
+          "enum" : [ "Keep", "DeleteIfNotUsed" ]
+        },
+        "FSxLustreConfig" : {
+          "$ref" : "#/definitions/FSxLustreConfig"
+        }
+      },
+      "required" : [ "FSxLustreDeletionPolicy" ]
     },
     "ClusterSlurmConfig" : {
       "description" : "Slurm configuration for the instance group.",
@@ -599,6 +656,9 @@
         "InstanceType" : {
           "$ref" : "#/definitions/InstanceType"
         },
+        "AutoPatchConfig" : {
+          "$ref" : "#/definitions/AutoPatchConfig"
+        },
         "ExecutionRole" : {
           "$ref" : "#/definitions/ExecutionRole"
         },
@@ -783,6 +843,9 @@
       "description" : "The cluster role for the autoscaler to assume.",
       "type" : "string",
       "maxLength" : 2048
+    },
+    "RestrictedInstanceGroupsConfig" : {
+      "$ref" : "#/definitions/RestrictedInstanceGroupsConfig"
     },
     "NodeProvisioningMode" : {
       "description" : "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
