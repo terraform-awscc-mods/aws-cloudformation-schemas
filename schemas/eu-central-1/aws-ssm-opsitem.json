@@ -107,7 +107,7 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "ssm:CreateOpsItem", "ssm:GetOpsItem", "ssm:AddTagsToResource" ]
+      "permissions" : [ "ssm:CreateOpsItem", "ssm:GetOpsItem", "ssm:DescribeOpsItems", "ssm:AddTagsToResource" ]
     },
     "read" : {
       "permissions" : [ "ssm:GetOpsItem", "ssm:ListTagsForResource" ]
@@ -116,7 +116,7 @@
       "permissions" : [ "ssm:UpdateOpsItem", "ssm:GetOpsItem", "ssm:AddTagsToResource", "ssm:RemoveTagsFromResource", "ssm:ListTagsForResource" ]
     },
     "delete" : {
-      "permissions" : [ "ssm:GetOpsItem", "ssm:DeleteOpsItem" ]
+      "permissions" : [ "ssm:GetOpsItem", "ssm:ListTagsForResource", "ssm:DeleteOpsItem" ]
     },
     "list" : {
       "permissions" : [ "ssm:DescribeOpsItems" ]
