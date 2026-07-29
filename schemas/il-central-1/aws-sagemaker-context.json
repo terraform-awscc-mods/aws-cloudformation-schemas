@@ -130,21 +130,6 @@
       "permissions" : [ "sagemaker:DeleteContext", "sagemaker:DescribeContext", "sagemaker:ListTags" ]
     },
     "list" : {
-      "handlerSchema" : {
-        "properties" : {
-          "Source" : {
-            "type" : "object",
-            "properties" : {
-              "SourceUri" : {
-                "type" : "string",
-                "minLength" : 1,
-                "maxLength" : 2048
-              }
-            },
-            "additionalProperties" : false
-          }
-        }
-      },
       "permissions" : [ "sagemaker:ListContexts" ]
     }
   }
