@@ -1,0 +1,93 @@
+{
+  "typeName" : "AWS::MediaConnect::Reservation",
+  "description" : "Represents a purchased AWS Elemental MediaConnect offering that provides discounted pricing for a usage commitment.",
+  "definitions" : {
+    "ResourceSpecification" : {
+      "type" : "object",
+      "description" : "A definition of what is being billed for, including the type and amount.",
+      "properties" : {
+        "ReservedBitrate" : {
+          "type" : "integer",
+          "description" : "The amount of outbound bandwidth that is discounted in the offering."
+        },
+        "ResourceType" : {
+          "type" : "string",
+          "description" : "The type of resource and the unit that is being billed for.",
+          "enum" : [ "Mbps_Outbound_Bandwidth" ]
+        }
+      },
+      "required" : [ "ResourceType" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "ReservationArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when you purchase an offering."
+    },
+    "OfferingArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the offering."
+    },
+    "ReservationName" : {
+      "type" : "string",
+      "description" : "The name that you assigned to the reservation when you purchased the offering."
+    },
+    "Start" : {
+      "type" : "string",
+      "description" : "The day and time that the reservation becomes active."
+    },
+    "End" : {
+      "type" : "string",
+      "description" : "The day and time that this reservation expires."
+    },
+    "Duration" : {
+      "type" : "integer",
+      "description" : "The length of time that this reservation is active."
+    },
+    "DurationUnits" : {
+      "type" : "string",
+      "description" : "The unit of measurement for the duration of the reservation.",
+      "enum" : [ "MONTHS" ]
+    },
+    "CurrencyCode" : {
+      "type" : "string",
+      "description" : "The type of currency that is used for billing."
+    },
+    "PricePerUnit" : {
+      "type" : "string",
+      "description" : "The cost of a single unit."
+    },
+    "PriceUnits" : {
+      "type" : "string",
+      "description" : "The unit of measurement that is used for billing.",
+      "enum" : [ "HOURLY" ]
+    },
+    "ReservationState" : {
+      "type" : "string",
+      "description" : "The status of the reservation.",
+      "enum" : [ "ACTIVE", "EXPIRED", "PROCESSING", "CANCELED" ]
+    },
+    "OfferingDescription" : {
+      "type" : "string",
+      "description" : "A description of the offering."
+    },
+    "ResourceSpecification" : {
+      "$ref" : "#/definitions/ResourceSpecification"
+    }
+  },
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/ReservationArn", "/properties/OfferingArn", "/properties/ReservationName", "/properties/Start", "/properties/End", "/properties/Duration", "/properties/DurationUnits", "/properties/CurrencyCode", "/properties/PricePerUnit", "/properties/PriceUnits", "/properties/ReservationState", "/properties/OfferingDescription", "/properties/ResourceSpecification" ],
+  "primaryIdentifier" : [ "/properties/ReservationArn" ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "mediaconnect:DescribeReservation" ]
+    },
+    "list" : {
+      "permissions" : [ "mediaconnect:ListReservations" ]
+    }
+  }
+}

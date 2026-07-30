@@ -1,0 +1,67 @@
+{
+  "typeName" : "AWS::MediaConnect::Offering",
+  "description" : "Represents a savings plan offering that provides discounted pricing for AWS Elemental MediaConnect Flows.",
+  "properties" : {
+    "OfferingArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) that MediaConnect assigns to the offering."
+    },
+    "CurrencyCode" : {
+      "type" : "string",
+      "description" : "The type of currency that is used for billing. The currencyCode used for all reservations is US dollars."
+    },
+    "Duration" : {
+      "type" : "integer",
+      "description" : "The length of time that your reservation would be active."
+    },
+    "DurationUnits" : {
+      "type" : "string",
+      "description" : "The unit of measurement for the duration of the offering.",
+      "enum" : [ "MONTHS" ]
+    },
+    "OfferingDescription" : {
+      "type" : "string",
+      "description" : "A description of the offering."
+    },
+    "PricePerUnit" : {
+      "type" : "string",
+      "description" : "The cost of a single unit. This value, in combination with priceUnits, makes up the rate."
+    },
+    "PriceUnits" : {
+      "type" : "string",
+      "description" : "The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate.",
+      "enum" : [ "HOURLY" ]
+    },
+    "ResourceSpecification" : {
+      "type" : "object",
+      "description" : "A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering.",
+      "properties" : {
+        "ReservedBitrate" : {
+          "type" : "integer",
+          "description" : "The amount of outbound bandwidth that is discounted in the offering."
+        },
+        "ResourceType" : {
+          "type" : "string",
+          "description" : "The type of resource and the unit that is being billed for.",
+          "enum" : [ "Mbps_Outbound_Bandwidth" ]
+        }
+      },
+      "required" : [ "ResourceType" ],
+      "additionalProperties" : false
+    }
+  },
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/OfferingArn", "/properties/CurrencyCode", "/properties/Duration", "/properties/DurationUnits", "/properties/OfferingDescription", "/properties/PricePerUnit", "/properties/PriceUnits", "/properties/ResourceSpecification" ],
+  "primaryIdentifier" : [ "/properties/OfferingArn" ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "read" : {
+      "permissions" : [ "mediaconnect:DescribeOffering" ]
+    },
+    "list" : {
+      "permissions" : [ "mediaconnect:ListOfferings" ]
+    }
+  }
+}
