@@ -81,7 +81,7 @@
   "additionalProperties" : false,
   "required" : [ ],
   "createOnlyProperties" : [ "/properties/KeyspaceName" ],
-  "writeOnlyProperties" : [ "/properties/ClientSideTimestampsEnabled" ],
+  "writeOnlyProperties" : [ "/properties/ClientSideTimestampsEnabled", "/properties/ReplicationSpecification/RegionList" ],
   "primaryIdentifier" : [ "/properties/KeyspaceName" ],
   "tagging" : {
     "taggable" : true,
