@@ -14,6 +14,7 @@
     }
   },
   "required" : [ "FleetName", "StackName" ],
+  "createOnlyProperties" : [ "/properties/FleetName", "/properties/StackName" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id" ]
 }
