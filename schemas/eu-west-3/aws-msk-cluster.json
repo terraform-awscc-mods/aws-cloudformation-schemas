@@ -87,6 +87,21 @@
       },
       "required" : [ "Enabled" ]
     },
+    "AuthorizerLogs" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "S3" : {
+          "$ref" : "#/definitions/S3"
+        },
+        "CloudWatchLogs" : {
+          "$ref" : "#/definitions/CloudWatchLogs"
+        },
+        "Firehose" : {
+          "$ref" : "#/definitions/Firehose"
+        }
+      }
+    },
     "BrokerLogs" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -463,9 +478,11 @@
       "properties" : {
         "BrokerLogs" : {
           "$ref" : "#/definitions/BrokerLogs"
+        },
+        "AuthorizerLogs" : {
+          "$ref" : "#/definitions/AuthorizerLogs"
         }
-      },
-      "required" : [ "BrokerLogs" ]
+      }
     },
     "EncryptionInTransit" : {
       "type" : "object",
