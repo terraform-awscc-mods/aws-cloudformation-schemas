@@ -39,12 +39,6 @@
         "DetailedMetricsEnabled" : {
           "type" : "boolean"
         },
-        "LoggingLevel" : {
-          "type" : "string"
-        },
-        "DataTraceEnabled" : {
-          "type" : "boolean"
-        },
         "ThrottlingBurstLimit" : {
           "type" : "integer"
         },
@@ -67,10 +61,20 @@
           "type" : "boolean"
         },
         "RouteSettings" : {
-          "type" : "object"
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "$ref" : "#/definitions/RouteSettings"
+            }
+          }
         },
         "StageVariables" : {
-          "type" : "object"
+          "type" : "object",
+          "patternProperties" : {
+            "[a-zA-Z0-9]+" : {
+              "type" : "string"
+            }
+          }
         },
         "DefaultRouteSettings" : {
           "$ref" : "#/definitions/RouteSettings"
