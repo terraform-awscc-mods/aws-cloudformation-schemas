@@ -370,7 +370,15 @@
       "permissions" : [ "bedrock-agentcore:DeleteGatewayRule", "bedrock-agentcore:GetGatewayRule" ]
     },
     "list" : {
-      "permissions" : [ "bedrock-agentcore:ListGatewayRules" ]
+      "permissions" : [ "bedrock-agentcore:ListGatewayRules" ],
+      "handlerSchema" : {
+        "properties" : {
+          "GatewayIdentifier" : {
+            "$ref" : "resource-schema.json#/properties/GatewayIdentifier"
+          }
+        },
+        "required" : [ "GatewayIdentifier" ]
+      }
     },
     "read" : {
       "permissions" : [ "bedrock-agentcore:GetGatewayRule" ]
