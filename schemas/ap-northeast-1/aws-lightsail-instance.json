@@ -340,6 +340,11 @@
       "description" : "The name of your key pair.",
       "type" : "string"
     },
+    "IpAddressType" : {
+      "description" : "The IP address type for the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.",
+      "type" : "string",
+      "enum" : [ "dualstack", "ipv4", "ipv6" ]
+    },
     "Tags" : {
       "description" : "An array of key-value pairs to apply to this resource.",
       "type" : "array",
@@ -373,7 +378,7 @@
       "permissions" : [ "lightsail:GetInstances" ]
     },
     "update" : {
-      "permissions" : [ "lightsail:GetInstances", "lightsail:GetInstance", "lightsail:DeleteInstance", "lightsail:EnableAddOn", "lightsail:DisableAddOn", "lightsail:PutInstancePublicPorts", "lightsail:AttachDisk", "lightsail:DetachDisk", "lightsail:StartInstance", "lightsail:StopInstance", "lightsail:GetDisk", "lightsail:TagResource", "lightsail:UntagResource" ],
+      "permissions" : [ "lightsail:GetInstances", "lightsail:GetInstance", "lightsail:DeleteInstance", "lightsail:EnableAddOn", "lightsail:DisableAddOn", "lightsail:PutInstancePublicPorts", "lightsail:AttachDisk", "lightsail:DetachDisk", "lightsail:StartInstance", "lightsail:StopInstance", "lightsail:GetDisk", "lightsail:SetIpAddressType", "lightsail:TagResource", "lightsail:UntagResource" ],
       "timeoutInMinutes" : 2160
     }
   },
