@@ -413,7 +413,8 @@
           "description" : "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "TokenEndpointUrl", "TokenEndpointAuthenticationMethod" ]
     },
     "KafkaClusterOAuthClientCredentials" : {
       "description" : "Details for SASL/OAUTHBEARER using the standard client_credentials grant. The referenced secret must contain client_id and client_secret.",
@@ -424,7 +425,8 @@
           "description" : "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "TokenRequestSecretArn" ]
     },
     "KafkaClusterOAuthIamJwtBearer" : {
       "description" : "Details for SASL/OAUTHBEARER using the JWT Bearer assertion grant (RFC 7523). An STS-vended JWT is used as the assertion.",
@@ -443,7 +445,8 @@
           "description" : "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "Audience", "SigningAlgorithm" ]
     },
     "KafkaClusterOAuthClientCredentialsAssertion" : {
       "description" : "Details for SASL/OAUTHBEARER using the client credentials grant with a JWT client assertion (RFC 7521/7523 Section 2.2). An STS-vended JWT is used as the client_assertion.",
@@ -462,7 +465,8 @@
           "description" : "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
           "type" : "string"
         }
-      }
+      },
+      "required" : [ "Audience", "SigningAlgorithm" ]
     },
     "TokenEndpointAuthenticationMethod" : {
       "description" : "How client credentials are sent to the identity provider's token endpoint.",
