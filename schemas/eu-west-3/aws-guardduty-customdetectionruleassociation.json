@@ -82,17 +82,17 @@
     "tagUpdatable" : true,
     "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
-    "permissions" : [ "guardduty:TagResource", "guardduty:UntagResource", "guardduty:ListTagsForResource" ]
+    "permissions" : [ "guardduty:GetCustomDetectionRuleAssociation", "guardduty:TagResource", "guardduty:UntagResource" ]
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "guardduty:CreateCustomDetectionRuleAssociation", "guardduty:GetCustomDetectionRuleAssociation", "guardduty:TagResource", "guardduty:ListTagsForResource" ]
+      "permissions" : [ "guardduty:CreateCustomDetectionRuleAssociation", "guardduty:GetCustomDetectionRuleAssociation", "guardduty:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "guardduty:GetCustomDetectionRuleAssociation", "guardduty:ListTagsForResource" ]
+      "permissions" : [ "guardduty:GetCustomDetectionRuleAssociation" ]
     },
     "update" : {
-      "permissions" : [ "guardduty:UpdateCustomDetectionRuleAssociation", "guardduty:GetCustomDetectionRuleAssociation", "guardduty:TagResource", "guardduty:UntagResource", "guardduty:ListTagsForResource" ]
+      "permissions" : [ "guardduty:UpdateCustomDetectionRuleAssociation", "guardduty:GetCustomDetectionRuleAssociation", "guardduty:TagResource", "guardduty:UntagResource" ]
     },
     "delete" : {
       "permissions" : [ "guardduty:DeleteCustomDetectionRuleAssociation", "guardduty:GetCustomDetectionRuleAssociation" ]
