@@ -1086,7 +1086,15 @@
       "permissions" : [ "bedrock-agentcore:DeleteGatewayTarget", "bedrock-agentcore:GetGatewayTarget", "kms:Decrypt", "kms:GenerateDataKey", "kms:ListGrants", "vpc-lattice:DeleteResourceConfiguration", "vpc-lattice:DeleteResourceGateway", "vpc-lattice:DeleteServiceNetworkResourceAssociation" ]
     },
     "list" : {
-      "permissions" : [ "bedrock-agentcore:ListGatewayTargets" ]
+      "permissions" : [ "bedrock-agentcore:ListGatewayTargets" ],
+      "handlerSchema" : {
+        "properties" : {
+          "GatewayIdentifier" : {
+            "$ref" : "resource-schema.json#/properties/GatewayIdentifier"
+          }
+        },
+        "required" : [ "GatewayIdentifier" ]
+      }
     },
     "read" : {
       "permissions" : [ "bedrock-agentcore:GetGatewayTarget" ]
