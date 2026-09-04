@@ -120,7 +120,7 @@
           "items" : {
             "$ref" : "#/definitions/DataSetReference"
           },
-          "maxItems" : 20,
+          "maxItems" : 32,
           "minItems" : 1
         },
         "DataSetRelations" : {
@@ -128,7 +128,7 @@
           "items" : {
             "$ref" : "#/definitions/DataSetRelation"
           },
-          "maxItems" : 20,
+          "maxItems" : 32,
           "minItems" : 0
         }
       },
@@ -154,7 +154,7 @@
       "items" : {
         "$ref" : "#/definitions/DataSetReference"
       },
-      "maxItems" : 20,
+      "maxItems" : 32,
       "minItems" : 1
     },
     "DataSetRelations" : {
@@ -162,7 +162,7 @@
       "items" : {
         "$ref" : "#/definitions/DataSetRelation"
       },
-      "maxItems" : 20,
+      "maxItems" : 32,
       "minItems" : 0
     },
     "Description" : {
@@ -207,7 +207,7 @@
     }
   },
   "readOnlyProperties" : [ "/properties/Arn" ],
-  "writeOnlyProperties" : [ "/properties/FolderArns", "/properties/DataSets/*/DataSetName" ],
+  "writeOnlyProperties" : [ "/properties/FolderArns" ],
   "createOnlyProperties" : [ "/properties/AwsAccountId", "/properties/FolderArns", "/properties/TopicId", "/properties/Tags" ],
   "primaryIdentifier" : [ "/properties/AwsAccountId", "/properties/TopicId" ],
   "handlers" : {
