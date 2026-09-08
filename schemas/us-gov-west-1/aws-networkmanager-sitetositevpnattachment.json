@@ -55,6 +55,10 @@
       "description" : "The attachment to move from one network function group to another.",
       "$ref" : "#/definitions/ProposedNetworkFunctionGroupChange"
     },
+    "RoutingPolicyLabel" : {
+      "description" : "Routing policy label",
+      "type" : "string"
+    },
     "Tags" : {
       "description" : "Tags for the attachment.",
       "type" : "array",
@@ -154,13 +158,14 @@
     "taggable" : true,
     "tagOnCreate" : true,
     "tagUpdatable" : true,
-    "cloudFormationSystemTags" : false,
+    "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:ListTagsForResource" ]
   },
   "additionalProperties" : false,
   "createOnlyProperties" : [ "/properties/CoreNetworkId", "/properties/VpnConnectionArn" ],
-  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/ResourceArn", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/EdgeLocation", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/LastModificationErrors" ],
+  "writeOnlyProperties" : [ "/properties/RoutingPolicyLabel" ],
+  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/ResourceArn", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/EdgeLocation", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/LastModificationErrors", "/properties/ProposedSegmentChange", "/properties/ProposedNetworkFunctionGroupChange" ],
   "primaryIdentifier" : [ "/properties/AttachmentId" ],
   "additionalIdentifiers" : [ [ "/properties/CoreNetworkId", "/properties/VpnConnectionArn" ] ],
   "required" : [ "CoreNetworkId", "VpnConnectionArn" ],
@@ -173,7 +178,7 @@
       "permissions" : [ "networkmanager:GetSiteToSiteVpnAttachment" ]
     },
     "update" : {
-      "permissions" : [ "networkmanager:GetSiteToSiteVpnAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "ec2:DescribeRegions" ]
+      "permissions" : [ "networkmanager:GetSiteToSiteVpnAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:PutAttachmentRoutingPolicyLabel", "networkmanager:RemoveAttachmentRoutingPolicyLabel", "networkmanager:ListAttachmentRoutingPolicyAssociations", "ec2:DescribeRegions" ]
     },
     "delete" : {
       "permissions" : [ "networkmanager:GetSiteToSiteVpnAttachment", "networkmanager:DeleteAttachment", "ec2:DescribeRegions" ],
