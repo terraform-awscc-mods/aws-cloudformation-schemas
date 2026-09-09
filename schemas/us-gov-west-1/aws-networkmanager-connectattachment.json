@@ -55,10 +55,6 @@
       "description" : "The attachment to move from one network function group to another.",
       "$ref" : "#/definitions/ProposedNetworkFunctionGroupChange"
     },
-    "RoutingPolicyLabel" : {
-      "description" : "Routing policy label",
-      "type" : "string"
-    },
     "Tags" : {
       "description" : "Tags for the attachment.",
       "type" : "array",
@@ -174,13 +170,12 @@
     "taggable" : true,
     "tagOnCreate" : true,
     "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
+    "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:ListTagsForResource" ]
   },
-  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/ResourceArn", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/LastModificationErrors", "/properties/ProposedSegmentChange", "/properties/ProposedNetworkFunctionGroupChange" ],
+  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/ResourceArn", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/LastModificationErrors" ],
   "createOnlyProperties" : [ "/properties/CoreNetworkId", "/properties/EdgeLocation", "/properties/TransportAttachmentId", "/properties/Options" ],
-  "writeOnlyProperties" : [ "/properties/RoutingPolicyLabel" ],
   "primaryIdentifier" : [ "/properties/AttachmentId" ],
   "required" : [ "CoreNetworkId", "EdgeLocation", "TransportAttachmentId", "Options" ],
   "handlers" : {
@@ -191,7 +186,7 @@
       "permissions" : [ "networkmanager:GetConnectAttachment" ]
     },
     "update" : {
-      "permissions" : [ "networkmanager:GetConnectAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:PutAttachmentRoutingPolicyLabel", "networkmanager:RemoveAttachmentRoutingPolicyLabel", "networkmanager:ListAttachmentRoutingPolicyAssociations", "ec2:DescribeRegions" ]
+      "permissions" : [ "networkmanager:GetConnectAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "ec2:DescribeRegions" ]
     },
     "delete" : {
       "permissions" : [ "networkmanager:GetConnectAttachment", "networkmanager:DeleteAttachment", "ec2:DescribeRegions" ]
