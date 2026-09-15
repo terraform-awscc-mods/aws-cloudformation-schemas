@@ -16,7 +16,7 @@
         "SchemaArn" : {
           "description" : "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
           "type" : "string",
-          "pattern" : "arn:(aws|aws-us-gov|aws-cn):glue:.*"
+          "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):glue:.*"
         },
         "SchemaName" : {
           "description" : "Name of the schema. This parameter requires RegistryName to be provided.",
