@@ -161,7 +161,7 @@
         "Weight" : {
           "type" : "integer",
           "maximum" : 999,
-          "minimum" : 1
+          "minimum" : 0
         }
       },
       "required" : [ "TargetGroupIdentifier" ],
@@ -218,7 +218,7 @@
     },
     "Priority" : {
       "type" : "integer",
-      "maximum" : 100,
+      "maximum" : 2000,
       "minimum" : 1
     },
     "ServiceIdentifier" : {
