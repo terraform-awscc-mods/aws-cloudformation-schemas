@@ -1,0 +1,126 @@
+{
+  "typeName" : "AWS::IoTManagedIntegrations::AccountAssociation",
+  "description" : "Resource type definition for AWS::IoTManagedIntegrations::AccountAssociation. An account association links a managed integrations connector destination to a third-party (cloud-to-cloud) account so that managed things can be discovered and controlled.",
+  "definitions" : {
+    "GeneralAuthorization" : {
+      "type" : "object",
+      "description" : "The General Authorization reference by authorization material name.",
+      "properties" : {
+        "AuthMaterialName" : {
+          "type" : "string",
+          "description" : "The name of the authorization material.",
+          "minLength" : 1,
+          "maxLength" : 100,
+          "pattern" : "^[a-zA-Z0-9=_+/-]+$"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "Tag" : {
+      "type" : "object",
+      "description" : "A key-value pair to associate with the account association.",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The tag's key.",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The tag's value.",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "Arn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the account association.",
+      "minLength" : 67,
+      "maxLength" : 1011,
+      "pattern" : "^arn:[a-z-]+:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:account-association/[0-9a-zA-Z]+$"
+    },
+    "AccountAssociationId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the account association.",
+      "minLength" : 1,
+      "maxLength" : 64,
+      "pattern" : "^[0-9a-zA-Z]+$"
+    },
+    "ConnectorDestinationId" : {
+      "type" : "string",
+      "description" : "The identifier of the connector destination associated with this account association.",
+      "minLength" : 1,
+      "maxLength" : 64,
+      "pattern" : "^[A-Za-z0-9-_]+$"
+    },
+    "Name" : {
+      "type" : "string",
+      "description" : "The name of the account association.",
+      "minLength" : 1,
+      "maxLength" : 128,
+      "pattern" : "^[A-Za-z0-9-_ ]+$"
+    },
+    "Description" : {
+      "type" : "string",
+      "description" : "A description of the account association.",
+      "minLength" : 1,
+      "maxLength" : 4096,
+      "pattern" : "^[A-Za-z0-9-_ ]+$"
+    },
+    "AssociationState" : {
+      "type" : "string",
+      "description" : "The current state of the account association.",
+      "enum" : [ "ASSOCIATION_IN_PROGRESS", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCEEDED", "ASSOCIATION_DELETING", "REFRESH_TOKEN_EXPIRED" ]
+    },
+    "GeneralAuthorization" : {
+      "$ref" : "#/definitions/GeneralAuthorization"
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "A set of key/value pairs that are used to manage the account association.",
+      "uniqueItems" : true,
+      "insertionOrder" : false,
+      "maxItems" : 50,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "required" : [ "ConnectorDestinationId" ],
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/AccountAssociationId", "/properties/AssociationState" ],
+  "createOnlyProperties" : [ "/properties/ConnectorDestinationId", "/properties/GeneralAuthorization" ],
+  "primaryIdentifier" : [ "/properties/Arn" ],
+  "additionalIdentifiers" : [ [ "/properties/AccountAssociationId" ] ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "iotmanagedintegrations:CreateAccountAssociation", "iotmanagedintegrations:GetAccountAssociation", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:ListTagsForResource", "secretsmanager:GetSecretValue" ]
+    },
+    "read" : {
+      "permissions" : [ "iotmanagedintegrations:GetAccountAssociation", "iotmanagedintegrations:ListTagsForResource", "secretsmanager:GetSecretValue" ]
+    },
+    "update" : {
+      "permissions" : [ "iotmanagedintegrations:UpdateAccountAssociation", "iotmanagedintegrations:GetAccountAssociation", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource", "secretsmanager:GetSecretValue" ]
+    },
+    "delete" : {
+      "permissions" : [ "iotmanagedintegrations:DeleteAccountAssociation", "iotmanagedintegrations:GetAccountAssociation", "iotmanagedintegrations:ListTagsForResource", "secretsmanager:GetSecretValue" ]
+    },
+    "list" : {
+      "permissions" : [ "iotmanagedintegrations:ListAccountAssociations" ]
+    }
+  }
+}
