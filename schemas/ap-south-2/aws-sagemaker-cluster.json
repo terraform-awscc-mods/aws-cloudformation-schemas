@@ -8,7 +8,7 @@
     "cloudFormationSystemTags" : false
   },
   "typeName" : "AWS::SageMaker::Cluster",
-  "readOnlyProperties" : [ "/properties/ClusterArn", "/properties/CreationTime", "/properties/ClusterStatus", "/properties/FailureMessage", "/properties/InstanceGroups/*/CurrentCount", "/properties/RestrictedInstanceGroups/*/CurrentCount" ],
+  "readOnlyProperties" : [ "/properties/ClusterArn", "/properties/CreationTime", "/properties/ClusterStatus", "/properties/FailureMessage", "/properties/InstanceGroups/*/CurrentCount", "/properties/RestrictedInstanceGroups/*/CurrentCount", "/properties/InstanceGroups/*/AutoPatchConfig/PatchSchedule/NextPatchDate" ],
   "description" : "Resource Type definition for AWS::SageMaker::Cluster",
   "createOnlyProperties" : [ "/properties/ClusterName", "/properties/VpcConfig", "/properties/Orchestrator/Eks" ],
   "primaryIdentifier" : [ "/properties/ClusterArn" ],
@@ -48,6 +48,42 @@
         }
       },
       "required" : [ "ClusterArn" ]
+    },
+    "ClusterAccountingDatabase" : {
+      "description" : "External MySQL-compatible accounting database that a Slurm cluster's slurmdbd connects to. Database credentials are supplied out-of-band through the referenced Secrets Manager secret. Supported only with Continuous node provisioning.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "SecretArn" : {
+          "minLength" : 20,
+          "description" : "ARN of the Secrets Manager secret holding the database credentials.",
+          "type" : "string",
+          "maxLength" : 2048
+        },
+        "Endpoint" : {
+          "minLength" : 1,
+          "pattern" : "^(?=.{1,255}$)([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*$",
+          "description" : "Hostname or endpoint of the accounting database, such as an RDS endpoint.",
+          "type" : "string",
+          "maxLength" : 255
+        },
+        "Port" : {
+          "default" : 3306,
+          "description" : "TCP port of the accounting database. Defaults to 3306 when omitted.",
+          "maximum" : 65535,
+          "type" : "integer",
+          "minimum" : 1
+        },
+        "Name" : {
+          "default" : "slurm_acct_db",
+          "minLength" : 1,
+          "pattern" : "^[a-zA-Z0-9$_]+$",
+          "description" : "Name of the accounting database schema. Defaults to slurm_acct_db when omitted.",
+          "type" : "string",
+          "maxLength" : 64
+        }
+      },
+      "required" : [ "Endpoint", "SecretArn" ]
     },
     "RollingUpdatePolicy" : {
       "description" : "The policy that SageMaker uses when updating the AMI versions of the cluster.",
@@ -148,6 +184,17 @@
         }
       },
       "required" : [ "SecurityGroupIds", "Subnets" ]
+    },
+    "PatchSchedule" : {
+      "description" : "The schedule configuration for automatic patching.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "NextPatchDate" : {
+          "description" : "The date and time of the next scheduled patch, set by the system when a patch AMI is detected.",
+          "type" : "string"
+        }
+      }
     },
     "ClusterKubernetesTaint" : {
       "description" : "A Kubernetes taint to apply to cluster nodes.",
@@ -317,6 +364,25 @@
       "description" : "The instance type of the instance group of a SageMaker HyperPod cluster.",
       "type" : "string"
     },
+    "AutoPatchConfig" : {
+      "description" : "The configuration for automatic patching of the instance group. Enables workload-aware, patch-level AMI updates.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "PatchingStrategy" : {
+          "description" : "The patching strategy that determines when and how instances are patched. WhenIdle patches instances as they become idle. WhenAllIdle patches all instances when they are all idle.",
+          "type" : "string",
+          "enum" : [ "WhenIdle", "WhenAllIdle" ]
+        },
+        "PatchSchedule" : {
+          "$ref" : "#/definitions/PatchSchedule"
+        },
+        "DeploymentConfig" : {
+          "$ref" : "#/definitions/DeploymentConfig"
+        }
+      },
+      "required" : [ "PatchingStrategy" ]
+    },
     "ClusterOrchestratorSlurmConfig" : {
       "description" : "Specifies parameter(s) related to Slurm as orchestrator.",
       "additionalProperties" : false,
@@ -326,6 +392,9 @@
           "description" : "The strategy for managing Slurm configuration on the cluster.",
           "type" : "string",
           "enum" : [ "Overwrite", "Managed", "Merge" ]
+        },
+        "AccountingDatabase" : {
+          "$ref" : "#/definitions/ClusterAccountingDatabase"
         }
       }
     },
@@ -625,6 +694,9 @@
         },
         "InstanceType" : {
           "$ref" : "#/definitions/InstanceType"
+        },
+        "AutoPatchConfig" : {
+          "$ref" : "#/definitions/AutoPatchConfig"
         },
         "ExecutionRole" : {
           "$ref" : "#/definitions/ExecutionRole"
