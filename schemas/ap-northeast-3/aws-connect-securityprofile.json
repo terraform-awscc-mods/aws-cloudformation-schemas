@@ -49,24 +49,6 @@
       },
       "additionalProperties" : false
     },
-    "AIAgent" : {
-      "description" : "An AI agent that the security profile grants access to.",
-      "type" : "object",
-      "properties" : {
-        "Arn" : {
-          "type" : "string",
-          "description" : "The ARN of the AI agent application (App Integrations application ARN).",
-          "pattern" : "^arn:aws[-a-z0-9]*:app-integrations:[-a-z0-9]*:[0-9]{12}:application/[-a-zA-Z0-9]*$"
-        },
-        "Type" : {
-          "type" : "string",
-          "description" : "The type of the AI agent.",
-          "enum" : [ "THIRD_PARTY" ]
-        }
-      },
-      "required" : [ "Arn", "Type" ],
-      "additionalProperties" : false
-    },
     "FlowModule" : {
       "description" : "A first-party application's metadata.",
       "type" : "object",
@@ -258,16 +240,6 @@
         "$ref" : "#/definitions/FlowModule"
       }
     },
-    "AllowedAIAgents" : {
-      "type" : "array",
-      "maxItems" : 10,
-      "uniqueItems" : true,
-      "insertionOrder" : false,
-      "description" : "The list of AI agents that a security profile grants access to.",
-      "items" : {
-        "$ref" : "#/definitions/AIAgent"
-      }
-    },
     "Tags" : {
       "type" : "array",
       "maxItems" : 50,
@@ -315,7 +287,7 @@
       "permissions" : [ "connect:CreateSecurityProfile", "connect:TagResource" ]
     },
     "read" : {
-      "permissions" : [ "connect:DescribeSecurityProfile", "connect:ListSecurityProfileAIAgents", "connect:ListSecurityProfileApplications", "connect:ListSecurityProfileFlowModules", "connect:ListSecurityProfilePermissions" ]
+      "permissions" : [ "connect:DescribeSecurityProfile", "connect:ListSecurityProfileApplications", "connect:ListSecurityProfileFlowModules", "connect:ListSecurityProfilePermissions" ]
     },
     "update" : {
       "permissions" : [ "connect:TagResource", "connect:UpdateSecurityProfile", "connect:UntagResource" ]
