@@ -59,10 +59,6 @@
       "description" : "The attachment to move from one network function group to another.",
       "$ref" : "#/definitions/ProposedNetworkFunctionGroupChange"
     },
-    "RoutingPolicyLabel" : {
-      "description" : "Routing policy label",
-      "type" : "string"
-    },
     "Tags" : {
       "description" : "Tags for the attachment.",
       "type" : "array",
@@ -197,15 +193,14 @@
     "taggable" : true,
     "tagOnCreate" : true,
     "tagUpdatable" : true,
-    "cloudFormationSystemTags" : true,
+    "cloudFormationSystemTags" : false,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:ListTagsForResource" ]
   },
   "additionalProperties" : false,
   "required" : [ "CoreNetworkId", "VpcArn", "SubnetArns" ],
   "createOnlyProperties" : [ "/properties/CoreNetworkId", "/properties/VpcArn" ],
-  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/EdgeLocation", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/NetworkFunctionGroupName", "/properties/ResourceArn", "/properties/LastModificationErrors", "/properties/ProposedSegmentChange", "/properties/ProposedNetworkFunctionGroupChange" ],
-  "writeOnlyProperties" : [ "/properties/RoutingPolicyLabel" ],
+  "readOnlyProperties" : [ "/properties/CoreNetworkArn", "/properties/CreatedAt", "/properties/UpdatedAt", "/properties/AttachmentType", "/properties/State", "/properties/AttachmentId", "/properties/OwnerAccountId", "/properties/EdgeLocation", "/properties/AttachmentPolicyRuleNumber", "/properties/SegmentName", "/properties/NetworkFunctionGroupName", "/properties/ResourceArn", "/properties/LastModificationErrors" ],
   "primaryIdentifier" : [ "/properties/AttachmentId" ],
   "additionalIdentifiers" : [ [ "/properties/CoreNetworkId", "/properties/VpcArn" ] ],
   "handlers" : {
@@ -217,7 +212,7 @@
       "permissions" : [ "networkmanager:GetVpcAttachment" ]
     },
     "update" : {
-      "permissions" : [ "networkmanager:UpdateVpcAttachment", "networkmanager:GetVpcAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "networkmanager:PutAttachmentRoutingPolicyLabel", "networkmanager:RemoveAttachmentRoutingPolicyLabel", "networkmanager:ListAttachmentRoutingPolicyAssociations", "ec2:DescribeRegions" ],
+      "permissions" : [ "networkmanager:UpdateVpcAttachment", "networkmanager:GetVpcAttachment", "networkmanager:ListTagsForResource", "networkmanager:TagResource", "networkmanager:UntagResource", "ec2:DescribeRegions" ],
       "timeoutInMinutes" : 60
     },
     "delete" : {
