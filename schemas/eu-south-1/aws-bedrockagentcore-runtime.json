@@ -36,12 +36,18 @@
     },
     "AgentStatus" : {
       "type" : "string",
-      "enum" : [ "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING" ]
+      "enum" : [ "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED" ]
     },
     "Description" : {
       "type" : "string",
       "maxLength" : 1200,
       "minLength" : 1
+    },
+    "PlatformVersion" : {
+      "type" : "string",
+      "maxLength" : 128,
+      "minLength" : 1,
+      "pattern" : "^[^\\s]+$"
     },
     "NetworkConfiguration" : {
       "type" : "object",
@@ -140,6 +146,12 @@
         },
         "AllowedWorkloadConfiguration" : {
           "$ref" : "#/definitions/AllowedWorkloadConfiguration"
+        },
+        "PrivateEndpoint" : {
+          "$ref" : "#/definitions/PrivateEndpoint"
+        },
+        "PrivateEndpointOverrides" : {
+          "$ref" : "#/definitions/PrivateEndpointOverridesList"
         }
       },
       "required" : [ "DiscoveryUrl" ],
@@ -437,7 +449,7 @@
       "type" : "string",
       "minLength" : 1,
       "maxLength" : 1024,
-      "pattern" : "^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$",
+      "pattern" : "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.([a-z0-9-]+(?:\\.[a-z0-9-]+)+)|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
       "description" : "The ECR URI of the container"
     },
     "RoleArn" : {
@@ -490,13 +502,13 @@
         "IdleRuntimeSessionTimeout" : {
           "type" : "integer",
           "minimum" : 60,
-          "maximum" : 28800,
+          "maximum" : 1209600,
           "description" : "Timeout in seconds for idle runtime sessions"
         },
         "MaxLifetime" : {
           "type" : "integer",
           "minimum" : 60,
-          "maximum" : 28800,
+          "maximum" : 1209600,
           "description" : "Maximum lifetime in seconds for runtime sessions"
         }
       },
@@ -588,6 +600,44 @@
       "required" : [ "AccessPointArn", "MountPath" ],
       "additionalProperties" : false
     },
+    "CapacityProviderArn" : {
+      "type" : "string",
+      "description" : "ARN of the capacity provider",
+      "maxLength" : 2048,
+      "pattern" : "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+    },
+    "CapacityProviderConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for a capacity provider",
+      "properties" : {
+        "CapacityProviderArn" : {
+          "$ref" : "#/definitions/CapacityProviderArn"
+        }
+      },
+      "required" : [ "CapacityProviderArn" ],
+      "additionalProperties" : false
+    },
+    "CapacityProviderVolumeName" : {
+      "type" : "string",
+      "description" : "Name of the capacity provider volume",
+      "minLength" : 1,
+      "maxLength" : 48,
+      "pattern" : "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"
+    },
+    "CapacityProviderVolumeConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+      "properties" : {
+        "VolumeName" : {
+          "$ref" : "#/definitions/CapacityProviderVolumeName"
+        },
+        "MountPath" : {
+          "$ref" : "#/definitions/MountPath"
+        }
+      },
+      "required" : [ "VolumeName", "MountPath" ],
+      "additionalProperties" : false
+    },
     "FilesystemConfiguration" : {
       "type" : "object",
       "description" : "Filesystem configuration for the runtime",
@@ -600,6 +650,9 @@
         },
         "S3FilesAccessPoint" : {
           "$ref" : "#/definitions/S3FilesAccessPointConfiguration"
+        },
+        "CapacityProviderVolume" : {
+          "$ref" : "#/definitions/CapacityProviderVolumeConfiguration"
         }
       },
       "additionalProperties" : false
@@ -613,6 +666,118 @@
       "minItems" : 0,
       "maxItems" : 5,
       "insertionOrder" : false
+    },
+    "PrivateEndpoint" : {
+      "type" : "object",
+      "description" : "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+      "oneOf" : [ {
+        "type" : "object",
+        "title" : "SelfManagedLatticeResource",
+        "properties" : {
+          "SelfManagedLatticeResource" : {
+            "$ref" : "#/definitions/SelfManagedLatticeResource"
+          }
+        },
+        "required" : [ "SelfManagedLatticeResource" ],
+        "additionalProperties" : false
+      }, {
+        "type" : "object",
+        "title" : "ManagedVpcResource",
+        "properties" : {
+          "ManagedVpcResource" : {
+            "$ref" : "#/definitions/ManagedVpcResource"
+          }
+        },
+        "required" : [ "ManagedVpcResource" ],
+        "additionalProperties" : false
+      } ]
+    },
+    "SelfManagedLatticeResource" : {
+      "type" : "object",
+      "description" : "Self-managed VPC Lattice resource configuration",
+      "properties" : {
+        "ResourceConfigurationIdentifier" : {
+          "type" : "string",
+          "description" : "The identifier of the VPC Lattice resource configuration"
+        }
+      },
+      "required" : [ "ResourceConfigurationIdentifier" ],
+      "additionalProperties" : false
+    },
+    "ManagedVpcResource" : {
+      "type" : "object",
+      "description" : "Managed VPC resource configuration",
+      "properties" : {
+        "VpcIdentifier" : {
+          "type" : "string",
+          "description" : "The VPC identifier"
+        },
+        "SubnetIds" : {
+          "type" : "array",
+          "description" : "The subnet IDs",
+          "minItems" : 1,
+          "insertionOrder" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "EndpointIpAddressType" : {
+          "type" : "string",
+          "description" : "The IP address type for the endpoint",
+          "enum" : [ "IPV4", "IPV6" ]
+        },
+        "SecurityGroupIds" : {
+          "type" : "array",
+          "description" : "The security group IDs",
+          "insertionOrder" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "RoutingDomain" : {
+          "type" : "string",
+          "description" : "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain"
+        },
+        "Tags" : {
+          "type" : "object",
+          "description" : "Tags to apply to the managed VPC Lattice resource gateway",
+          "additionalProperties" : false,
+          "patternProperties" : {
+            "^[\\s\\S]+$" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "required" : [ "VpcIdentifier", "SubnetIds", "EndpointIpAddressType" ],
+      "additionalProperties" : false
+    },
+    "PrivateEndpointOverride" : {
+      "type" : "object",
+      "description" : "Override mapping of a domain to a private endpoint",
+      "properties" : {
+        "Domain" : {
+          "type" : "string",
+          "description" : "The domain to override",
+          "minLength" : 1,
+          "maxLength" : 253
+        },
+        "PrivateEndpoint" : {
+          "$ref" : "#/definitions/PrivateEndpoint"
+        }
+      },
+      "required" : [ "Domain", "PrivateEndpoint" ],
+      "additionalProperties" : false
+    },
+    "PrivateEndpointOverridesList" : {
+      "type" : "array",
+      "description" : "List of private endpoint overrides",
+      "minItems" : 0,
+      "maxItems" : 5,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/PrivateEndpointOverride"
+      }
     }
   },
   "properties" : {
@@ -648,6 +813,10 @@
       "$ref" : "#/definitions/ProtocolConfiguration",
       "description" : "Protocol configuration for the agent runtime"
     },
+    "PlatformVersion" : {
+      "$ref" : "#/definitions/PlatformVersion",
+      "description" : "The version of the runtime platform"
+    },
     "EnvironmentVariables" : {
       "$ref" : "#/definitions/EnvironmentVariablesMap",
       "description" : "Environment variables for the agent runtime"
@@ -667,6 +836,10 @@
     "FilesystemConfigurations" : {
       "$ref" : "#/definitions/FilesystemConfigurations",
       "description" : "Filesystem configurations for the agent runtime"
+    },
+    "CapacityProviderConfiguration" : {
+      "$ref" : "#/definitions/CapacityProviderConfiguration",
+      "description" : "Capacity provider configuration for the agent runtime"
     },
     "AgentRuntimeVersion" : {
       "$ref" : "#/definitions/AgentRuntimeVersion",
@@ -697,19 +870,19 @@
     }
   },
   "primaryIdentifier" : [ "/properties/AgentRuntimeId" ],
-  "required" : [ "AgentRuntimeName", "AgentRuntimeArtifact", "RoleArn", "NetworkConfiguration" ],
+  "required" : [ "AgentRuntimeName", "AgentRuntimeArtifact", "RoleArn" ],
   "createOnlyProperties" : [ "/properties/AgentRuntimeName" ],
   "readOnlyProperties" : [ "/properties/AgentRuntimeArn", "/properties/AgentRuntimeId", "/properties/AgentRuntimeVersion", "/properties/Status", "/properties/CreatedAt", "/properties/LastUpdatedAt", "/properties/WorkloadIdentityDetails", "/properties/FailureReason" ],
   "replacementStrategy" : "create_then_delete",
   "handlers" : {
     "create" : {
-      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:TagResource", "bedrock-agentcore:ListTagsForResource", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt" ]
+      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:TagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface" ]
     },
     "read" : {
       "permissions" : [ "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt" ]
+      "permissions" : [ "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface" ]
     },
     "delete" : {
       "permissions" : [ "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint" ]
