@@ -53,7 +53,7 @@
     "Status" : {
       "description" : "The status of the template.",
       "type" : "string",
-      "enum" : [ "DRAFT", "ACTIVE" ]
+      "enum" : [ "DRAFT", "ACTIVE", "DISABLED" ]
     },
     "Version" : {
       "description" : "The version number.",
@@ -61,6 +61,11 @@
       "pattern" : "^[1-9][0-9]*$",
       "minLength" : 1,
       "maxLength" : 10
+    },
+    "UpdatedAt" : {
+      "description" : "An ISO 8601 timestamp indicating when the template was last modified.",
+      "type" : "string",
+      "format" : "date-time"
     },
     "AssociatedRuleList" : {
       "description" : "List of rules associated with this template.",
@@ -73,7 +78,7 @@
     "FirewallType" : {
       "description" : "The type of firewall.",
       "type" : "string",
-      "enum" : [ "WAF" ]
+      "enum" : [ "WAF", "NETWORK_FIREWALL", "NETWORK_FIREWALL_V2", "IGW_FIREWALL" ]
     },
     "Tags" : {
       "description" : "The tags associated with the template.",
@@ -88,7 +93,7 @@
   "additionalProperties" : false,
   "required" : [ "TemplateName" ],
   "createOnlyProperties" : [ "/properties/TemplateName", "/properties/FirewallType" ],
-  "readOnlyProperties" : [ "/properties/TemplateId", "/properties/TemplateArn", "/properties/Status", "/properties/Version" ],
+  "readOnlyProperties" : [ "/properties/TemplateId", "/properties/TemplateArn", "/properties/Status", "/properties/Version", "/properties/UpdatedAt" ],
   "primaryIdentifier" : [ "/properties/TemplateArn" ],
   "additionalIdentifiers" : [ [ "/properties/TemplateId" ] ],
   "tagging" : {

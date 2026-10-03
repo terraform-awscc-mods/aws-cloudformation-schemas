@@ -25,7 +25,7 @@
     "Status" : {
       "description" : "The status of the scope.",
       "type" : "string",
-      "enum" : [ "DRAFT", "ACTIVE" ]
+      "enum" : [ "DRAFT", "ACTIVE", "DISABLED" ]
     },
     "Version" : {
       "description" : "The version number of the scope.",
@@ -33,6 +33,11 @@
       "pattern" : "^[1-9][0-9]*$",
       "minLength" : 1,
       "maxLength" : 10
+    },
+    "UpdatedAt" : {
+      "description" : "An ISO 8601 timestamp indicating when the scope was last modified.",
+      "type" : "string",
+      "format" : "date-time"
     },
     "Tags" : {
       "description" : "The tags associated with the scope.",
@@ -67,7 +72,7 @@
   "additionalProperties" : false,
   "required" : [ "ScopeName" ],
   "createOnlyProperties" : [ "/properties/ScopeName" ],
-  "readOnlyProperties" : [ "/properties/ScopeId", "/properties/ScopeArn", "/properties/Status", "/properties/Version" ],
+  "readOnlyProperties" : [ "/properties/ScopeId", "/properties/ScopeArn", "/properties/Status", "/properties/Version", "/properties/UpdatedAt" ],
   "primaryIdentifier" : [ "/properties/ScopeArn" ],
   "additionalIdentifiers" : [ [ "/properties/ScopeId" ] ],
   "tagging" : {

@@ -75,7 +75,10 @@
     "Status" : {
       "description" : "The status of the deployment.",
       "type" : "string",
-      "enum" : [ "DRAFT", "ACTIVE" ]
+      "enum" : [ "DRAFT", "ACTIVE", "DISABLED" ]
+    },
+    "DeploymentConfiguration" : {
+      "$ref" : "#/definitions/DeploymentConfiguration"
     },
     "AssociatedPolicyList" : {
       "description" : "List of policies associated with this deployment.",
@@ -93,15 +96,17 @@
         "$ref" : "#/definitions/AssociatedScope"
       }
     },
-    "DeploymentConfiguration" : {
-      "$ref" : "#/definitions/DeploymentConfiguration"
-    },
     "Version" : {
       "description" : "The version number.",
       "type" : "string",
       "pattern" : "^[1-9][0-9]*$",
       "minLength" : 1,
       "maxLength" : 10
+    },
+    "UpdatedAt" : {
+      "description" : "An ISO 8601 timestamp indicating when the deployment was last modified.",
+      "type" : "string",
+      "format" : "date-time"
     },
     "Tags" : {
       "description" : "The tags associated with the deployment.",
@@ -116,7 +121,7 @@
   "additionalProperties" : false,
   "required" : [ "DeploymentName" ],
   "createOnlyProperties" : [ "/properties/DeploymentName" ],
-  "readOnlyProperties" : [ "/properties/DeploymentId", "/properties/DeploymentArn", "/properties/Status", "/properties/Version" ],
+  "readOnlyProperties" : [ "/properties/DeploymentId", "/properties/DeploymentArn", "/properties/Status", "/properties/Version", "/properties/UpdatedAt" ],
   "primaryIdentifier" : [ "/properties/DeploymentArn" ],
   "additionalIdentifiers" : [ [ "/properties/DeploymentId" ] ],
   "tagging" : {

@@ -35,7 +35,7 @@
     "Status" : {
       "description" : "The status of the rule.",
       "type" : "string",
-      "enum" : [ "DRAFT", "ACTIVE" ]
+      "enum" : [ "DRAFT", "ACTIVE", "DISABLED" ]
     },
     "Version" : {
       "description" : "The version number of the rule.",
@@ -43,6 +43,11 @@
       "pattern" : "^[1-9][0-9]*$",
       "minLength" : 1,
       "maxLength" : 10
+    },
+    "UpdatedAt" : {
+      "description" : "An ISO 8601 timestamp indicating when the rule was last modified.",
+      "type" : "string",
+      "format" : "date-time"
     },
     "Tags" : {
       "description" : "The tags associated with the rule.",
@@ -77,7 +82,7 @@
   "additionalProperties" : false,
   "required" : [ "RuleName" ],
   "createOnlyProperties" : [ "/properties/RuleName", "/properties/FirewallType", "/properties/RuleType" ],
-  "readOnlyProperties" : [ "/properties/RuleId", "/properties/RuleArn", "/properties/Status", "/properties/Version" ],
+  "readOnlyProperties" : [ "/properties/RuleId", "/properties/RuleArn", "/properties/Status", "/properties/Version", "/properties/UpdatedAt" ],
   "primaryIdentifier" : [ "/properties/RuleArn" ],
   "additionalIdentifiers" : [ [ "/properties/RuleId" ] ],
   "tagging" : {
