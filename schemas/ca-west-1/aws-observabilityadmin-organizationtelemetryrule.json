@@ -14,7 +14,7 @@
     "ResourceType" : {
       "description" : "Resource Type associated with the Organization Telemetry Rule",
       "type" : "string",
-      "enum" : [ "AWS::EC2::VPC", "AWS::WAFv2::WebACL", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::EC2::Instance", "AWS::SecurityHub::Hub" ]
+      "enum" : [ "AWS::EC2::VPC", "AWS::WAFv2::WebACL", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::EC2::Instance", "AWS::SecurityHub::Hub", "AWS::SecurityHub::HubV2", "AWS::S3::Bucket", "AWS::MSK::Cluster", "AWS::CloudFront::Distribution", "AWS::CloudWatch::OTelEnrichment" ]
     },
     "TelemetryType" : {
       "description" : "Telemetry Type associated with the Organization Telemetry Rule",
@@ -46,6 +46,13 @@
     "RetentionInDays" : {
       "description" : "Number of days to retain the telemetry data in the specified destination",
       "type" : "integer"
+    },
+    "KmsKeyArn" : {
+      "description" : "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 2048,
+      "pattern" : "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:\\d{12}:key/(mrk-)?[a-f0-9-]+$"
     },
     "VPCFlowLogParameters" : {
       "description" : "Telemetry parameters for VPC Flow logs",
@@ -135,6 +142,18 @@
         }
       }
     },
+    "MskMonitoringParameters" : {
+      "description" : "Configuration parameters for Amazon MSK cluster monitoring.",
+      "type" : "object",
+      "properties" : {
+        "EnhancedMonitoring" : {
+          "description" : "The level of enhanced monitoring for the MSK cluster.",
+          "type" : "string",
+          "enum" : [ "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION" ]
+        }
+      },
+      "additionalProperties" : false
+    },
     "TelemetryDestinationConfiguration" : {
       "description" : "The destination configuration for telemetry data",
       "type" : "object",
@@ -148,6 +167,9 @@
         "RetentionInDays" : {
           "$ref" : "#/definitions/RetentionInDays"
         },
+        "KmsKeyArn" : {
+          "$ref" : "#/definitions/KmsKeyArn"
+        },
         "VPCFlowLogParameters" : {
           "$ref" : "#/definitions/VPCFlowLogParameters"
         },
@@ -159,6 +181,9 @@
         },
         "WAFLoggingParameters" : {
           "$ref" : "#/definitions/WAFLoggingParameters"
+        },
+        "MskMonitoringParameters" : {
+          "$ref" : "#/definitions/MskMonitoringParameters"
         },
         "LogDeliveryParameters" : {
           "description" : "Parameters for log delivery configuration",
@@ -172,7 +197,7 @@
               "minItems" : 1,
               "items" : {
                 "type" : "string",
-                "enum" : [ "SECURITY_FINDING_LOGS" ]
+                "enum" : [ "SECURITY_FINDING_LOGS", "S3_SERVER_ACCESS_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS" ]
               }
             }
           },
@@ -529,20 +554,21 @@
   "additionalProperties" : false,
   "required" : [ "RuleName", "Rule" ],
   "createOnlyProperties" : [ "/properties/RuleName", "/properties/Rule/AllRegions" ],
+  "writeOnlyProperties" : [ "/properties/Rule/Regions" ],
   "readOnlyProperties" : [ "/properties/RuleArn", "/properties/RegionStatuses" ],
   "primaryIdentifier" : [ "/properties/RuleArn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "observabilityadmin:CreateTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:TagResource", "observabilityadmin:ListTagsForResource", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators", "iam:CreateServiceLinkedRole" ]
+      "permissions" : [ "observabilityadmin:CreateTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:TagResource", "observabilityadmin:ListTagsForResource", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators", "iam:CreateServiceLinkedRole", "kms:DescribeKey" ]
     },
     "read" : {
       "permissions" : [ "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:ListTagsForResource", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators" ]
     },
     "update" : {
-      "permissions" : [ "observabilityadmin:UpdateTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:TagResource", "observabilityadmin:UntagResource", "observabilityadmin:ListTagsForResource", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators" ]
+      "permissions" : [ "observabilityadmin:UpdateTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:TagResource", "observabilityadmin:UntagResource", "observabilityadmin:ListTagsForResource", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators", "kms:DescribeKey" ]
     },
     "delete" : {
-      "permissions" : [ "observabilityadmin:DeleteTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators" ]
+      "permissions" : [ "observabilityadmin:DeleteTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryRuleForOrganization", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators" ]
     },
     "list" : {
       "permissions" : [ "observabilityadmin:ListTelemetryRulesForOrganization", "observabilityadmin:GetTelemetryEvaluationStatusForOrganization", "organizations:ListDelegatedAdministrators" ]

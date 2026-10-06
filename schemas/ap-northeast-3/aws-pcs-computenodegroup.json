@@ -144,6 +144,10 @@
         }
       }
     },
+    "SecurityGroupId" : {
+      "description" : "An EC2 security group ID.",
+      "type" : "string"
+    },
     "NodeLifecycleActions" : {
       "description" : "Custom scripts that run at defined points in a compute node's lifecycle.",
       "additionalProperties" : false,
@@ -208,7 +212,7 @@
       "required" : [ "ParameterName", "ParameterValue" ]
     }
   },
-  "required" : [ "ClusterId", "CustomLaunchTemplate", "IamInstanceProfileArn", "InstanceConfigs", "ScalingConfiguration", "SubnetIds" ],
+  "required" : [ "ClusterId", "IamInstanceProfileArn", "InstanceConfigs", "ScalingConfiguration", "SubnetIds" ],
   "properties" : {
     "Status" : {
       "description" : "The provisioning status of the compute node group. The provisioning status doesn't indicate the overall health of the compute node group.",
