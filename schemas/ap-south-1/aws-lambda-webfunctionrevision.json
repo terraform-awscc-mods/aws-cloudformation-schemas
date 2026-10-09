@@ -29,7 +29,6 @@
   "typeName" : "AWS::Lambda::WebFunctionRevision",
   "readOnlyProperties" : [ "/properties/FunctionArn", "/properties/RevisionId", "/properties/RevisionArn", "/properties/State", "/properties/StateReason", "/properties/CreatedAt" ],
   "description" : "Resource Type definition for AWS::Lambda::WebFunctionRevision. An immutable revision of a Lambda web function, containing the function code and configuration.",
-  "additionalIdentifiers" : [ [ "/properties/FunctionName", "/properties/RevisionId" ] ],
   "createOnlyProperties" : [ "/properties/FunctionName", "/properties/Description", "/properties/KmsKeyArn", "/properties/BuildConfig", "/properties/ServiceConfig" ],
   "additionalProperties" : false,
   "primaryIdentifier" : [ "/properties/RevisionArn" ],
@@ -84,7 +83,6 @@
       "required" : [ "Bucket", "Key" ]
     }
   },
-  "required" : [ "FunctionName", "BuildConfig", "ServiceConfig" ],
   "properties" : {
     "FunctionName" : {
       "minLength" : 1,
@@ -224,5 +222,6 @@
       "type" : "string",
       "maxLength" : 256
     }
-  }
+  },
+  "required" : [ "FunctionName", "BuildConfig", "ServiceConfig" ]
 }

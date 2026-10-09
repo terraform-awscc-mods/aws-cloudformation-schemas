@@ -18,6 +18,20 @@
       "type" : "string",
       "enum" : [ "TS", "CMAF", "ISM" ]
     },
+    "ContentKeyPeriodConfiguration" : {
+      "type" : "object",
+      "description" : "<p>The configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.</p>",
+      "properties" : {
+        "ContentKeyPeriodTiming" : {
+          "$ref" : "#/definitions/ContentKeyPeriodTiming"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "ContentKeyPeriodTiming" : {
+      "type" : "string",
+      "enum" : [ "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END" ]
+    },
     "CustomAdType" : {
       "type" : "string",
       "enum" : [ "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK" ]
@@ -752,10 +766,20 @@
           "minLength" : 20,
           "pattern" : "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
           "description" : "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>"
+        },
+        "SpekeVersion" : {
+          "$ref" : "#/definitions/SpekeVersion"
+        },
+        "ContentKeyPeriodConfiguration" : {
+          "$ref" : "#/definitions/ContentKeyPeriodConfiguration"
         }
       },
       "required" : [ "DrmSystems", "EncryptionContractConfiguration", "ResourceId", "RoleArn", "Url" ],
       "additionalProperties" : false
+    },
+    "SpekeVersion" : {
+      "type" : "string",
+      "enum" : [ "V2_0", "V2_1" ]
     },
     "StartTag" : {
       "type" : "object",
