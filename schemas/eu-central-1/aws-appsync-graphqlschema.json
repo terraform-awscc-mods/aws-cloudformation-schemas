@@ -17,7 +17,6 @@
     }
   },
   "required" : [ "ApiId" ],
-  "createOnlyProperties" : [ "/properties/ApiId" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id" ]
 }

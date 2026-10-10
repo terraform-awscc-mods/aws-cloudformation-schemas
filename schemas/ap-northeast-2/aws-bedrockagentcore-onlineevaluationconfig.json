@@ -315,7 +315,7 @@
         "$ref" : "#/definitions/EvaluatorReference"
       },
       "minItems" : 0,
-      "maxItems" : 10,
+      "maxItems" : 25,
       "insertionOrder" : false
     },
     "Rule" : {

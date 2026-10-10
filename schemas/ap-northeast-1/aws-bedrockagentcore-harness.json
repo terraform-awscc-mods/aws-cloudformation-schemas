@@ -78,12 +78,12 @@
         "IdleRuntimeSessionTimeout" : {
           "type" : "integer",
           "minimum" : 60,
-          "maximum" : 28800
+          "maximum" : 1209600
         },
         "MaxLifetime" : {
           "type" : "integer",
           "minimum" : 60,
-          "maximum" : 28800
+          "maximum" : 1209600
         }
       },
       "additionalProperties" : false
@@ -262,6 +262,12 @@
           "type" : "string",
           "pattern" : "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-.]+$"
         },
+        "ApiBase" : {
+          "type" : "string",
+          "description" : "Optional custom endpoint URL for an OpenAI-compatible endpoint.",
+          "minLength" : 1,
+          "maxLength" : 16383
+        },
         "MaxTokens" : {
           "type" : "integer",
           "minimum" : 1
@@ -353,6 +359,10 @@
           "type" : "integer",
           "minimum" : 0,
           "maximum" : 500
+        },
+        "AdditionalParams" : {
+          "type" : "object",
+          "description" : "Provider-specific parameters passed through to the Gemini model provider unchanged."
         }
       },
       "required" : [ "ModelId", "ApiKeyArn" ],
@@ -397,6 +407,21 @@
             "pattern" : "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
           },
           "minItems" : 1
+        },
+        "AdvertisedScopeMapping" : {
+          "type" : "object",
+          "description" : "A map that associates each scope in AllowedScopes with a corresponding advertised scope value. The advertised scope appears in OAuth protected resource metadata and WWW-Authenticate response headers.",
+          "patternProperties" : {
+            "^[\\x21\\x23-\\x5B\\x5D-\\x7E]{1,255}$" : {
+              "type" : "string",
+              "minLength" : 1,
+              "maxLength" : 255,
+              "pattern" : "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
+            }
+          },
+          "additionalProperties" : false,
+          "minProperties" : 1,
+          "maxProperties" : 50
         },
         "CustomClaims" : {
           "type" : "array",
