@@ -276,6 +276,16 @@
           "description" : "The top-p sampling parameter that controls the diversity of the model's responses.",
           "minimum" : 0,
           "maximum" : 1
+        },
+        "StopSequences" : {
+          "type" : "array",
+          "description" : "The sequences that make the model stop generating further tokens.",
+          "items" : {
+            "type" : "string",
+            "minLength" : 1
+          },
+          "maxItems" : 2500,
+          "insertionOrder" : false
         }
       },
       "additionalProperties" : false

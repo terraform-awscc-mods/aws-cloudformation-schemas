@@ -22,7 +22,7 @@
     },
     "OnlineEvaluationConfigStatus" : {
       "type" : "string",
-      "enum" : [ "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING" ]
+      "enum" : [ "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "ERROR" ]
     },
     "ExecutionStatus" : {
       "type" : "string",

@@ -190,18 +190,21 @@
   "primaryIdentifier" : [ "/properties/ProvisionedProductId" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "servicecatalog:provisionProduct", "servicecatalog:TagResource", "cloudformation:CreateStack" ],
+      "permissions" : [ "servicecatalog:provisionProduct", "servicecatalog:TagResource", "servicecatalog:describeProvisionedProduct", "servicecatalog:describeRecord", "cloudformation:CreateStack" ],
       "timeoutInMinutes" : 720
     },
     "read" : {
-      "permissions" : [ "servicecatalog:describeProvisionedProduct", "servicecatalog:ListTagsForResource", "cloudformation:ListStacks" ]
+      "permissions" : [ "servicecatalog:describeProvisionedProduct", "servicecatalog:describeRecord", "servicecatalog:DescribeProduct", "servicecatalog:ListTagsForResource", "cloudformation:ListStacks", "cloudformation:DescribeStacks" ]
     },
     "update" : {
-      "permissions" : [ "servicecatalog:updateProvisionedProduct", "servicecatalog:TagResource", "servicecatalog:UntagResource", "cloudformation:UpdateStack" ],
+      "permissions" : [ "servicecatalog:updateProvisionedProduct", "servicecatalog:TagResource", "servicecatalog:UntagResource", "servicecatalog:describeProvisionedProduct", "servicecatalog:describeRecord", "servicecatalog:DescribeProduct", "cloudformation:UpdateStack" ],
       "timeoutInMinutes" : 720
     },
     "delete" : {
       "permissions" : [ "servicecatalog:terminateProvisionedProduct", "servicecatalog:describeRecord", "cloudformation:DeleteStack" ]
+    },
+    "list" : {
+      "permissions" : [ "servicecatalog:ScanProvisionedProducts" ]
     }
   }
 }
