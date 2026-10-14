@@ -1,72 +1,35 @@
 {
   "typeName" : "AWS::DynamoDB::Backup",
-  "description" : "Creates an on-demand backup of a DynamoDB table.",
+  "description" : "Resource Type definition for AWS::DynamoDB::Backup",
+  "additionalProperties" : false,
   "properties" : {
     "BackupArn" : {
-      "type" : "string",
-      "description" : "The ARN associated with the backup.",
-      "minLength" : 37,
-      "maxLength" : 1024
+      "type" : "string"
     },
     "TableName" : {
-      "type" : "string",
-      "description" : "The name of the table to back up.",
-      "minLength" : 3,
-      "maxLength" : 255,
-      "pattern" : "^[a-zA-Z0-9_.-]+$"
-    },
-    "BackupName" : {
-      "type" : "string",
-      "description" : "The name for the backup.",
-      "minLength" : 3,
-      "maxLength" : 255,
-      "pattern" : "^[a-zA-Z0-9_.-]+$"
+      "type" : "string"
     },
     "BackupId" : {
-      "type" : "string",
-      "description" : "The identifier portion of the backup ARN (server-generated)."
-    },
-    "BackupStatus" : {
-      "type" : "string",
-      "description" : "The current state of the backup.",
-      "enum" : [ "CREATING", "DELETED", "AVAILABLE" ]
+      "type" : "string"
     },
     "BackupType" : {
-      "type" : "string",
-      "description" : "The type of backup (USER, SYSTEM, or AWS_BACKUP).",
-      "enum" : [ "USER", "SYSTEM", "AWS_BACKUP" ]
-    },
-    "BackupCreationDateTime" : {
-      "type" : "string",
-      "format" : "date-time",
-      "description" : "The time at which the backup was created."
+      "type" : "string"
     },
     "BackupSizeBytes" : {
-      "type" : "integer",
-      "description" : "The size of the backup in bytes."
+      "type" : "integer"
+    },
+    "BackupStatus" : {
+      "type" : "string"
+    },
+    "BackupCreationDateTime" : {
+      "type" : "string"
+    },
+    "BackupName" : {
+      "type" : "string"
     }
   },
   "required" : [ "TableName", "BackupName" ],
-  "additionalProperties" : false,
-  "readOnlyProperties" : [ "/properties/BackupArn", "/properties/BackupId", "/properties/BackupStatus", "/properties/BackupType", "/properties/BackupCreationDateTime", "/properties/BackupSizeBytes" ],
-  "createOnlyProperties" : [ "/properties/TableName", "/properties/BackupName" ],
-  "primaryIdentifier" : [ "/properties/BackupArn" ],
-  "additionalIdentifiers" : [ [ "/properties/TableName", "/properties/BackupId" ] ],
-  "tagging" : {
-    "taggable" : false
-  },
-  "handlers" : {
-    "create" : {
-      "permissions" : [ "dynamodb:CreateBackup", "dynamodb:DescribeBackup" ]
-    },
-    "read" : {
-      "permissions" : [ "dynamodb:DescribeBackup" ]
-    },
-    "delete" : {
-      "permissions" : [ "dynamodb:DeleteBackup", "dynamodb:DescribeBackup" ]
-    },
-    "list" : {
-      "permissions" : [ "dynamodb:ListBackups" ]
-    }
-  }
+  "createOnlyProperties" : [ "/properties/BackupName", "/properties/TableName" ],
+  "primaryIdentifier" : [ "/properties/BackupId" ],
+  "readOnlyProperties" : [ "/properties/BackupStatus", "/properties/BackupSizeBytes", "/properties/BackupArn", "/properties/BackupType", "/properties/BackupId", "/properties/BackupCreationDateTime" ]
 }
