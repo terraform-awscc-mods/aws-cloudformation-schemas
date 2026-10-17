@@ -24,6 +24,9 @@
     "Dimension" : {
       "type" : "string"
     },
+    "DeploymentType" : {
+      "type" : "string"
+    },
     "Id" : {
       "type" : "string"
     }

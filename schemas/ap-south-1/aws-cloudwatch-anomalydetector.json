@@ -9,14 +9,11 @@
     "MetricName" : {
       "type" : "string"
     },
-    "AnomalyDetectorId" : {
-      "type" : "string"
-    },
     "Stat" : {
       "type" : "string"
     },
     "Configuration" : {
-      "$ref" : "#/definitions/MetricConfiguration"
+      "$ref" : "#/definitions/Configuration"
     },
     "MetricMathAnomalyDetector" : {
       "$ref" : "#/definitions/MetricMathAnomalyDetector"
@@ -27,6 +24,9 @@
       "items" : {
         "$ref" : "#/definitions/Dimension"
       }
+    },
+    "Id" : {
+      "type" : "string"
     },
     "Namespace" : {
       "type" : "string"
@@ -58,7 +58,7 @@
         }
       }
     },
-    "MetricConfiguration" : {
+    "Configuration" : {
       "type" : "object",
       "additionalProperties" : false,
       "properties" : {
@@ -194,6 +194,6 @@
     }
   },
   "createOnlyProperties" : [ "/properties/Dimensions", "/properties/MetricCharacteristics", "/properties/MetricName", "/properties/Namespace", "/properties/SingleMetricAnomalyDetector", "/properties/MetricMathAnomalyDetector", "/properties/Stat" ],
-  "primaryIdentifier" : [ "/properties/AnomalyDetectorId" ],
-  "readOnlyProperties" : [ "/properties/AnomalyDetectorId" ]
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
 }
