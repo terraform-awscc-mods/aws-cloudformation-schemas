@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::Route53Resolver::FirewallConfig",
-  "description" : "Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).",
+  "description" : "Resource Type definition for AWS::Route53Resolver::FirewallConfig. Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).",
   "properties" : {
     "Arn" : {
       "type" : "string",
@@ -31,7 +31,8 @@
     }
   },
   "additionalProperties" : false,
-  "createOnlyProperties" : [ "/properties/FirewallFailOpen", "/properties/ResourceId" ],
+  "required" : [ "ResourceId", "FirewallFailOpen" ],
+  "createOnlyProperties" : [ "/properties/ResourceId" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/Id", "/properties/OwnerId" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "additionalIdentifiers" : [ [ "/properties/ResourceId" ] ],
@@ -39,8 +40,17 @@
     "taggable" : false
   },
   "handlers" : {
+    "create" : {
+      "permissions" : [ "route53resolver:UpdateFirewallConfig", "route53resolver:GetFirewallConfig", "ec2:DescribeVpcs" ]
+    },
     "read" : {
       "permissions" : [ "route53resolver:GetFirewallConfig", "ec2:DescribeVpcs" ]
+    },
+    "update" : {
+      "permissions" : [ "route53resolver:UpdateFirewallConfig", "route53resolver:GetFirewallConfig", "ec2:DescribeVpcs" ]
+    },
+    "delete" : {
+      "permissions" : [ "route53resolver:UpdateFirewallConfig", "route53resolver:GetFirewallConfig", "ec2:DescribeVpcs" ]
     },
     "list" : {
       "permissions" : [ "route53resolver:ListFirewallConfigs", "ec2:DescribeVpcs" ]
