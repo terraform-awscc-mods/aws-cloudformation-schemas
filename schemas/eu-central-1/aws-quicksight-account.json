@@ -1,0 +1,143 @@
+{
+  "typeName" : "AWS::QuickSight::Account",
+  "description" : "Resource Type definition for AWS::QuickSight::Account, which represents an Amazon QuickSight account subscription.",
+  "properties" : {
+    "AwsAccountId" : {
+      "type" : "string",
+      "description" : "The AWS account ID of the QuickSight account.",
+      "minLength" : 12,
+      "maxLength" : 12,
+      "pattern" : "^[0-9]{12}$"
+    },
+    "AccountName" : {
+      "type" : "string",
+      "description" : "The name of the QuickSight account.",
+      "minLength" : 1,
+      "maxLength" : 62,
+      "pattern" : "^(?!D-|d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*$"
+    },
+    "Edition" : {
+      "type" : "string",
+      "description" : "The edition of QuickSight.",
+      "enum" : [ "STANDARD", "ENTERPRISE", "ENTERPRISE_AND_Q" ]
+    },
+    "NotificationEmail" : {
+      "type" : "string",
+      "description" : "The email address for QuickSight notifications."
+    },
+    "AuthenticationMethod" : {
+      "type" : "string",
+      "description" : "The authentication method for the QuickSight account.",
+      "enum" : [ "IAM_AND_QUICKSIGHT", "IAM_ONLY", "ACTIVE_DIRECTORY", "IAM_IDENTITY_CENTER" ]
+    },
+    "AccountSubscriptionStatus" : {
+      "type" : "string",
+      "description" : "The status of the account subscription."
+    },
+    "IAMIdentityCenterInstanceArn" : {
+      "type" : "string",
+      "description" : "The ARN of the IAM Identity Center instance."
+    },
+    "ActiveDirectoryName" : {
+      "type" : "string",
+      "description" : "The name of the Active Directory."
+    },
+    "Realm" : {
+      "type" : "string",
+      "description" : "The realm for Active Directory."
+    },
+    "DirectoryId" : {
+      "type" : "string",
+      "description" : "The directory ID for Active Directory."
+    },
+    "AdminGroup" : {
+      "type" : "array",
+      "description" : "The admin group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "AuthorGroup" : {
+      "type" : "array",
+      "description" : "The author group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "ReaderGroup" : {
+      "type" : "array",
+      "description" : "The reader group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "AdminProGroup" : {
+      "type" : "array",
+      "description" : "The admin pro group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "AuthorProGroup" : {
+      "type" : "array",
+      "description" : "The author pro group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "ReaderProGroup" : {
+      "type" : "array",
+      "description" : "The reader pro group associated with the Active Directory.",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "FirstName" : {
+      "type" : "string",
+      "description" : "The first name of the QuickSight account admin."
+    },
+    "LastName" : {
+      "type" : "string",
+      "description" : "The last name of the QuickSight account admin."
+    },
+    "EmailAddress" : {
+      "type" : "string",
+      "description" : "The email address of the QuickSight account admin."
+    },
+    "ContactNumber" : {
+      "type" : "string",
+      "description" : "The contact number for the QuickSight account."
+    },
+    "TerminationProtectionEnabled" : {
+      "type" : "boolean",
+      "description" : "A boolean value that determines whether the QuickSight account is protected from deletion. When true, DeleteAccountSubscription is blocked until it is set to false. A new subscription defaults to true."
+    }
+  },
+  "required" : [ "AccountName", "NotificationEmail", "Edition" ],
+  "additionalProperties" : false,
+  "writeOnlyProperties" : [ "/properties/AuthenticationMethod", "/properties/ActiveDirectoryName", "/properties/Realm", "/properties/DirectoryId", "/properties/AdminGroup", "/properties/AuthorGroup", "/properties/ReaderGroup", "/properties/AdminProGroup", "/properties/AuthorProGroup", "/properties/ReaderProGroup", "/properties/FirstName", "/properties/LastName", "/properties/EmailAddress", "/properties/ContactNumber", "/properties/IAMIdentityCenterInstanceArn" ],
+  "readOnlyProperties" : [ "/properties/AwsAccountId", "/properties/AccountSubscriptionStatus" ],
+  "createOnlyProperties" : [ "/properties/AccountName", "/properties/Edition", "/properties/AuthenticationMethod", "/properties/ActiveDirectoryName", "/properties/Realm", "/properties/DirectoryId", "/properties/AdminGroup", "/properties/AuthorGroup", "/properties/ReaderGroup", "/properties/AdminProGroup", "/properties/AuthorProGroup", "/properties/ReaderProGroup", "/properties/FirstName", "/properties/LastName", "/properties/EmailAddress", "/properties/ContactNumber", "/properties/IAMIdentityCenterInstanceArn" ],
+  "primaryIdentifier" : [ "/properties/AwsAccountId" ],
+  "replacementStrategy" : "delete_then_create",
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "quicksight:CreateAccountSubscription", "quicksight:DescribeAccountSubscription", "quicksight:UpdateAccountSettings", "quicksight:DescribeAccountSettings", "quicksight:Subscribe", "quicksight:CheckAlias", "iam:CreateServiceLinkedRole", "ds:AuthorizeApplication", "ds:CheckAlias", "ds:CreateAlias", "ds:CreateIdentityPoolDirectory", "ds:DescribeDirectories", "ds:UnauthorizeApplication", "sso:DescribeApplication", "sso:DescribeInstance", "sso:CreateApplication", "sso:PutApplicationAuthenticationMethod", "sso:PutApplicationGrant", "sso:DeleteApplication", "sso:SearchGroups", "sso:GetProfile", "sso:CreateApplicationAssignment", "sso:DeleteApplicationAssignment", "sso:ListInstances", "sso:ListApplicationAssignments", "sso:DescribeRegisteredRegions", "sso-directory:DescribeUser", "sso-directory:DescribeGroup", "identitystore:DescribeUser", "identitystore:DescribeGroup", "user-subscriptions:CreateClaim", "user-subscriptions:UpdateClaim", "organizations:DescribeOrganization", "organizations:ListAWSServiceAccessForOrganization" ]
+    },
+    "read" : {
+      "permissions" : [ "quicksight:DescribeAccountSubscription", "quicksight:DescribeAccountSettings" ]
+    },
+    "update" : {
+      "permissions" : [ "quicksight:UpdateAccountSettings", "quicksight:DescribeAccountSettings", "quicksight:DescribeAccountSubscription" ]
+    },
+    "delete" : {
+      "permissions" : [ "quicksight:DeleteAccountSubscription", "quicksight:DescribeAccountSubscription", "quicksight:DescribeAccountSettings", "sso:DescribeApplication", "sso:DescribeInstance", "sso:ListInstances", "sso:ListApplicationAssignments", "sso:DeleteApplicationAssignment", "sso:DeleteApplication" ]
+    },
+    "list" : {
+      "permissions" : [ "quicksight:DescribeAccountSubscription", "quicksight:DescribeAccountSettings" ]
+    }
+  }
+}
