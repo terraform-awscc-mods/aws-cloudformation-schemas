@@ -4,7 +4,7 @@
   "definitions" : {
     "ApplicableTo" : {
       "type" : "object",
-      "description" : "Scoping: who the policy applies to.\nGROUP: `groupArns` required (one or more group ARNs).",
+      "description" : "Scoping: who the policy applies to.",
       "properties" : {
         "Type" : {
           "$ref" : "#/definitions/ApplicableToType"
@@ -27,12 +27,12 @@
     },
     "AssetType" : {
       "type" : "string",
-      "description" : "Asset types that can be governed by approval policies.\nMust stay in sync with cedar-schema.json entityTypes:\nhttps://code.amazon.com/packages/AmazonQuickApprovalWFService/blobs/mainline/--/src/main/resources/cedar-schema.json",
+      "description" : "Asset types that can be governed by approval policies.",
       "enum" : [ "AGENT", "SPACE", "KNOWLEDGE_BASE", "FLOW" ]
     },
     "GovernedAction" : {
       "type" : "string",
-      "description" : "Actions that can be governed by approval policies.\nThis enum controls SDK-exposed actions. The Cedar schema may define additional\ninternal actions (e.g. PUBLISH) not yet exposed to customers.\nSee: https://code.amazon.com/packages/AmazonQuickApprovalWFService/blobs/mainline/--/src/main/resources/cedar-schema.json",
+      "description" : "Actions that can be governed by approval policies.",
       "enum" : [ "SHARE" ]
     }
   },
@@ -55,7 +55,7 @@
         "type" : "string"
       },
       "minItems" : 1,
-      "description" : "List of approval group ARNs (e.g. QuickSight group ARNs).\nAt least one approval group is required; the upper bound is enforced\nper-account at the service layer via the configurable approver-group limit."
+      "description" : "List of approval group ARNs (e.g. QuickSight group ARNs).\nAt least one approval group is required."
     },
     "AssetTypes" : {
       "type" : "array",

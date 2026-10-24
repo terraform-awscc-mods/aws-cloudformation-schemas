@@ -4,46 +4,31 @@
   "additionalProperties" : false,
   "properties" : {
     "EnableIssues" : {
-      "description" : "Indicates whether to enable issues for the GitHub repository. You can use GitHub issues to track information and bugs for your repository.",
       "type" : "boolean"
     },
     "ConnectionArn" : {
-      "description" : "The ARN of the CodeStar Connection used to authenticate with GitHub.",
-      "type" : "string",
-      "pattern" : "^arn:aws(-[a-z]+)*:(codestar-connections|codeconnections):[a-z]+-[a-z]+-[0-9]:[0-9]{12}:connection/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+      "type" : "string"
     },
     "RepositoryName" : {
-      "description" : "The name of the repository you want to create in GitHub with CloudFormation stack creation.",
-      "type" : "string",
-      "minLength" : 1,
-      "maxLength" : 100
+      "type" : "string"
     },
     "RepositoryAccessToken" : {
-      "description" : "The GitHub user's personal access token for the GitHub repository.",
-      "type" : "string",
-      "minLength" : 1
+      "type" : "string"
     },
     "Id" : {
-      "description" : "The repository owner and name combination, e.g. owner/repo-name.",
       "type" : "string"
     },
     "RepositoryOwner" : {
-      "description" : "The GitHub user name for the owner of the GitHub repository to be created. If this repository should be owned by a GitHub organization, provide its name.",
-      "type" : "string",
-      "minLength" : 1
+      "type" : "string"
     },
     "IsPrivate" : {
-      "description" : "Indicates whether the GitHub repository is a private repository. If so, you choose who can see and commit to this repository.",
       "type" : "boolean"
     },
     "Code" : {
-      "description" : "Information about code to be committed to a repository after it is created in an CloudFormation stack.",
       "$ref" : "#/definitions/Code"
     },
     "RepositoryDescription" : {
-      "description" : "A comment or description about the new repository. This description is displayed in GitHub after the repository is created.",
-      "type" : "string",
-      "minLength" : 1
+      "type" : "string"
     }
   },
   "definitions" : {
@@ -52,22 +37,13 @@
       "additionalProperties" : false,
       "properties" : {
         "ObjectVersion" : {
-          "description" : "The object version of the ZIP file.",
-          "type" : "string",
-          "minLength" : 1,
-          "maxLength" : 1024
+          "type" : "string"
         },
         "Bucket" : {
-          "description" : "The name of the S3 bucket that contains the ZIP file.",
-          "type" : "string",
-          "minLength" : 3,
-          "maxLength" : 63
+          "type" : "string"
         },
         "Key" : {
-          "description" : "The S3 object key of the ZIP file.",
-          "type" : "string",
-          "minLength" : 1,
-          "maxLength" : 1024
+          "type" : "string"
         }
       },
       "required" : [ "Bucket", "Key" ]
@@ -77,7 +53,6 @@
       "additionalProperties" : false,
       "properties" : {
         "S3" : {
-          "description" : "The S3 location of the source code ZIP file.",
           "$ref" : "#/definitions/S3"
         }
       },
@@ -85,39 +60,6 @@
     }
   },
   "required" : [ "RepositoryName", "RepositoryOwner" ],
-  "createOnlyProperties" : [ "/properties/RepositoryName", "/properties/RepositoryOwner", "/properties/RepositoryAccessToken", "/properties/ConnectionArn", "/properties/EnableIssues", "/properties/IsPrivate", "/properties/RepositoryDescription", "/properties/Code" ],
-  "writeOnlyProperties" : [ "/properties/RepositoryAccessToken", "/properties/Code" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id" ],
-  "tagging" : {
-    "taggable" : false
-  },
-  "handlers" : {
-    "create" : {
-      "permissions" : [ "codeconnections:GetConnection", "codeconnections:UseConnection", "codestar-connections:GetConnection", "codestar-connections:UseConnection", "s3:GetObject", "s3:GetObjectVersion" ]
-    },
-    "read" : {
-      "permissions" : [ "codeconnections:GetConnection", "codeconnections:UseConnection", "codestar-connections:GetConnection", "codestar-connections:UseConnection" ]
-    },
-    "delete" : {
-      "permissions" : [ "codeconnections:GetConnection", "codeconnections:UseConnection", "codestar-connections:GetConnection", "codestar-connections:UseConnection" ]
-    },
-    "list" : {
-      "permissions" : [ "codeconnections:GetConnection", "codeconnections:UseConnection", "codestar-connections:GetConnection", "codestar-connections:UseConnection" ],
-      "handlerSchema" : {
-        "properties" : {
-          "RepositoryOwner" : {
-            "$ref" : "resource-schema.json#/properties/RepositoryOwner"
-          },
-          "ConnectionArn" : {
-            "$ref" : "resource-schema.json#/properties/ConnectionArn"
-          },
-          "RepositoryAccessToken" : {
-            "$ref" : "resource-schema.json#/properties/RepositoryAccessToken"
-          }
-        },
-        "required" : [ "RepositoryOwner" ]
-      }
-    }
-  }
+  "readOnlyProperties" : [ "/properties/Id" ]
 }
