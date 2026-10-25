@@ -12,10 +12,10 @@
     "RepositoryName" : {
       "type" : "string"
     },
-    "RepositoryAccessToken" : {
+    "Id" : {
       "type" : "string"
     },
-    "Id" : {
+    "RepositoryAccessToken" : {
       "type" : "string"
     },
     "RepositoryOwner" : {
@@ -60,6 +60,7 @@
     }
   },
   "required" : [ "RepositoryName", "RepositoryOwner" ],
+  "createOnlyProperties" : [ "/properties/ConnectionArn", "/properties/RepositoryOwner", "/properties/RepositoryName", "/properties/EnableIssues", "/properties/RepositoryDescription", "/properties/IsPrivate", "/properties/Code", "/properties/RepositoryAccessToken" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "readOnlyProperties" : [ "/properties/Id" ]
 }
