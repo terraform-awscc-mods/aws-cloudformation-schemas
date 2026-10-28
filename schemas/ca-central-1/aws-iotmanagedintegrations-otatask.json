@@ -1,0 +1,278 @@
+{
+  "typeName" : "AWS::IoTManagedIntegrations::OtaTask",
+  "description" : "Resource type definition for AWS::IoTManagedIntegrations::OtaTask. An over-the-air (OTA) task deploys a firmware update to targeted managed things through AWS IoT managed integrations.",
+  "definitions" : {
+    "RetryConfigCriteria" : {
+      "type" : "object",
+      "description" : "Structure representing one retry configuration criteria for an over-the-air (OTA) task.",
+      "properties" : {
+        "FailureType" : {
+          "type" : "string",
+          "description" : "The over-the-air (OTA) retry criteria failure type.",
+          "enum" : [ "FAILED", "TIMED_OUT", "ALL" ]
+        },
+        "MinNumberOfRetries" : {
+          "type" : "integer",
+          "description" : "The number of retries allowed for a failure type for the over-the-air (OTA) task.",
+          "minimum" : 0,
+          "maximum" : 10
+        }
+      },
+      "additionalProperties" : false
+    },
+    "OtaTaskExecutionRetryConfig" : {
+      "type" : "object",
+      "description" : "The execution retry configuration for an over-the-air (OTA) task.",
+      "properties" : {
+        "RetryConfigCriteria" : {
+          "type" : "array",
+          "description" : "The list of retry configuration criteria.",
+          "insertionOrder" : false,
+          "items" : {
+            "$ref" : "#/definitions/RetryConfigCriteria"
+          }
+        }
+      },
+      "additionalProperties" : false
+    },
+    "ScheduleMaintenanceWindow" : {
+      "type" : "object",
+      "description" : "A recurring maintenance window with a predetermined start time and duration for the rollout of the over-the-air (OTA) task.",
+      "properties" : {
+        "StartTime" : {
+          "type" : "string",
+          "description" : "The cron expression that determines the start time of the recurring maintenance window."
+        },
+        "DurationInMinutes" : {
+          "type" : "integer",
+          "description" : "The duration of the maintenance window in minutes.",
+          "minimum" : 1,
+          "maximum" : 1430
+        }
+      },
+      "additionalProperties" : false
+    },
+    "OtaTaskSchedulingConfig" : {
+      "type" : "object",
+      "description" : "The scheduling configuration for an over-the-air (OTA) task.",
+      "properties" : {
+        "EndBehavior" : {
+          "type" : "string",
+          "description" : "Specifies the end behavior for all over-the-air (OTA) task executions after the task reaches the selected end time. If an end time is not selected when creating the task, then the end behavior does not apply.",
+          "enum" : [ "STOP_ROLLOUT", "CANCEL", "FORCE_CANCEL" ]
+        },
+        "EndTime" : {
+          "type" : "string",
+          "description" : "The time an over-the-air (OTA) task will stop."
+        },
+        "MaintenanceWindows" : {
+          "type" : "array",
+          "description" : "The list of maintenance windows for the over-the-air (OTA) task scheduling configuration.",
+          "insertionOrder" : false,
+          "items" : {
+            "$ref" : "#/definitions/ScheduleMaintenanceWindow"
+          }
+        },
+        "StartTime" : {
+          "type" : "string",
+          "description" : "The time an over-the-air (OTA) task will start."
+        }
+      },
+      "additionalProperties" : false
+    },
+    "TaskProcessingDetails" : {
+      "type" : "object",
+      "description" : "Details about the over-the-air (OTA) task process.",
+      "properties" : {
+        "NumberOfCanceledThings" : {
+          "type" : "integer",
+          "description" : "The number of canceled things in an over-the-air (OTA) task."
+        },
+        "NumberOfFailedThings" : {
+          "type" : "integer",
+          "description" : "The number of failed things in an over-the-air (OTA) task."
+        },
+        "NumberOfInProgressThings" : {
+          "type" : "integer",
+          "description" : "The number of in progress things in an over-the-air (OTA) task."
+        },
+        "NumberOfQueuedThings" : {
+          "type" : "integer",
+          "description" : "The number of queued things in an over-the-air (OTA) task."
+        },
+        "NumberOfRejectedThings" : {
+          "type" : "integer",
+          "description" : "The number of rejected things in an over-the-air (OTA) task."
+        },
+        "NumberOfRemovedThings" : {
+          "type" : "integer",
+          "description" : "The number of removed things in an over-the-air (OTA) task."
+        },
+        "NumberOfSucceededThings" : {
+          "type" : "integer",
+          "description" : "The number of succeeded things in an over-the-air (OTA) task."
+        },
+        "NumberOfTimedOutThings" : {
+          "type" : "integer",
+          "description" : "The number of timed out things in an over-the-air (OTA) task."
+        },
+        "ProcessingTargets" : {
+          "type" : "array",
+          "description" : "The targets of the over-the-air (OTA) task.",
+          "insertionOrder" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "additionalProperties" : false
+    },
+    "Tag" : {
+      "type" : "object",
+      "description" : "A key-value pair to associate with the over-the-air (OTA) task.",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The tag's key.",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The tag's value.",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "Arn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the over-the-air (OTA) task.",
+      "minLength" : 32,
+      "maxLength" : 1011,
+      "pattern" : "^arn:[a-z-]+:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:ota-task/[0-9a-zA-Z]+$"
+    },
+    "TaskId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the over-the-air (OTA) task.",
+      "minLength" : 1,
+      "maxLength" : 200,
+      "pattern" : "^[A-Za-z0-9]+$"
+    },
+    "Description" : {
+      "type" : "string",
+      "description" : "The description of the over-the-air (OTA) task.",
+      "minLength" : 1,
+      "maxLength" : 256,
+      "pattern" : "^[0-9A-Za-z_\\- ]+$"
+    },
+    "S3Url" : {
+      "type" : "string",
+      "description" : "The URL to the Amazon S3 bucket where the over-the-air (OTA) task is stored.",
+      "minLength" : 1,
+      "maxLength" : 1000
+    },
+    "Protocol" : {
+      "type" : "string",
+      "description" : "The connection protocol the over-the-air (OTA) task uses to update the device.",
+      "enum" : [ "HTTP" ]
+    },
+    "Target" : {
+      "type" : "array",
+      "description" : "The managed things targeted by the over-the-air (OTA) task.",
+      "insertionOrder" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "TaskConfigurationId" : {
+      "type" : "string",
+      "description" : "The identifier for the over-the-air (OTA) task configuration.",
+      "minLength" : 1,
+      "maxLength" : 64,
+      "pattern" : "^[a-zA-Z0-9]*$"
+    },
+    "OtaMechanism" : {
+      "type" : "string",
+      "description" : "The deployment mechanism for the over-the-air (OTA) task.",
+      "enum" : [ "PUSH" ]
+    },
+    "OtaType" : {
+      "type" : "string",
+      "description" : "The frequency type for the over-the-air (OTA) task.",
+      "enum" : [ "ONE_TIME", "CONTINUOUS" ]
+    },
+    "OtaTargetQueryString" : {
+      "type" : "string",
+      "description" : "The query string to add managed things to the thing group targeted by the over-the-air (OTA) task."
+    },
+    "OtaTaskExecutionRetryConfig" : {
+      "$ref" : "#/definitions/OtaTaskExecutionRetryConfig"
+    },
+    "OtaSchedulingConfig" : {
+      "$ref" : "#/definitions/OtaTaskSchedulingConfig"
+    },
+    "Status" : {
+      "type" : "string",
+      "description" : "The status of the over-the-air (OTA) task.",
+      "enum" : [ "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS", "SCHEDULED" ]
+    },
+    "CreatedAt" : {
+      "type" : "string",
+      "description" : "The timestamp value of when the over-the-air (OTA) task was created.",
+      "format" : "date-time"
+    },
+    "LastUpdatedAt" : {
+      "type" : "string",
+      "description" : "The timestamp value of when the over-the-air (OTA) task was last updated.",
+      "format" : "date-time"
+    },
+    "TaskProcessingDetails" : {
+      "$ref" : "#/definitions/TaskProcessingDetails"
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "A set of key/value pairs that are used to manage the over-the-air (OTA) task.",
+      "uniqueItems" : true,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "required" : [ "S3Url", "OtaType" ],
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/TaskId", "/properties/Status", "/properties/CreatedAt", "/properties/LastUpdatedAt", "/properties/TaskProcessingDetails" ],
+  "createOnlyProperties" : [ "/properties/S3Url", "/properties/Protocol", "/properties/Target", "/properties/OtaMechanism", "/properties/OtaType", "/properties/OtaTargetQueryString", "/properties/OtaTaskExecutionRetryConfig", "/properties/OtaSchedulingConfig" ],
+  "primaryIdentifier" : [ "/properties/Arn" ],
+  "additionalIdentifiers" : [ [ "/properties/TaskId" ] ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "iotmanagedintegrations:CreateOtaTask", "iotmanagedintegrations:TagResource", "s3:GetObject" ]
+    },
+    "read" : {
+      "permissions" : [ "iotmanagedintegrations:GetOtaTask", "iotmanagedintegrations:ListTagsForResource" ]
+    },
+    "update" : {
+      "permissions" : [ "iotmanagedintegrations:UpdateOtaTask", "iotmanagedintegrations:TagResource", "iotmanagedintegrations:UntagResource", "iotmanagedintegrations:ListTagsForResource" ]
+    },
+    "delete" : {
+      "permissions" : [ "iotmanagedintegrations:DeleteOtaTask", "iotmanagedintegrations:GetOtaTask", "iotmanagedintegrations:ListTagsForResource" ]
+    },
+    "list" : {
+      "permissions" : [ "iotmanagedintegrations:ListOtaTasks" ]
+    }
+  }
+}

@@ -146,7 +146,7 @@
   "readOnlyProperties" : [ "/properties/StreamingUrl" ],
   "createOnlyProperties" : [ "/properties/Name" ],
   "writeOnlyProperties" : [ "/properties/SoftwaresToInstall", "/properties/SoftwaresToUninstall", "/properties/ImageName" ],
-  "oneOf" : [ {
+  "anyOf" : [ {
     "required" : [ "ImageName" ]
   }, {
     "required" : [ "ImageArn" ]
@@ -154,7 +154,7 @@
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
-    "tagUpdatable" : true,
+    "tagUpdatable" : false,
     "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "appstream:ListTagsForResource", "appstream:TagResource", "appstream:UntagResource" ]
