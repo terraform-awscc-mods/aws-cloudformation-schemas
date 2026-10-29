@@ -323,6 +323,9 @@
         },
         "StreamingConfiguration" : {
           "$ref" : "#/definitions/StreamingConfiguration"
+        },
+        "DisableMcpListToolsPagination" : {
+          "type" : "boolean"
         }
       },
       "additionalProperties" : false

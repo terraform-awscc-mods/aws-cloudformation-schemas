@@ -146,7 +146,7 @@
   "readOnlyProperties" : [ "/properties/StreamingUrl" ],
   "createOnlyProperties" : [ "/properties/Name" ],
   "writeOnlyProperties" : [ "/properties/SoftwaresToInstall", "/properties/SoftwaresToUninstall", "/properties/ImageName" ],
-  "oneOf" : [ {
+  "anyOf" : [ {
     "required" : [ "ImageName" ]
   }, {
     "required" : [ "ImageArn" ]

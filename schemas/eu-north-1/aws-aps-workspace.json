@@ -196,7 +196,7 @@
     "Arn" : {
       "description" : "Workspace arn.",
       "type" : "string",
-      "pattern" : "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
+      "pattern" : "^arn:aws[-a-z]*:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
       "minLength" : 1,
       "maxLength" : 128
     },
@@ -249,13 +249,13 @@
   "primaryIdentifier" : [ "/properties/Arn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "aps:CreateWorkspace", "aps:DescribeWorkspace", "aps:TagResource", "aps:CreateAlertManagerDefinition", "aps:DescribeAlertManagerDefinition", "aps:CreateLoggingConfiguration", "aps:CreateQueryLoggingConfiguration", "aps:DescribeWorkspaceConfiguration", "aps:UpdateWorkspaceConfiguration", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "kms:CreateGrant", "kms:Decrypt", "kms:GenerateDataKey" ]
+      "permissions" : [ "aps:CreateWorkspace", "aps:DescribeWorkspace", "aps:TagResource", "aps:CreateAlertManagerDefinition", "aps:DescribeAlertManagerDefinition", "aps:CreateLoggingConfiguration", "aps:CreateQueryLoggingConfiguration", "aps:DescribeWorkspaceConfiguration", "aps:UpdateWorkspaceConfiguration", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "logs:DescribeResourcePolicies", "logs:DescribeLogGroups", "kms:CreateGrant", "kms:Decrypt", "kms:GenerateDataKey" ]
     },
     "read" : {
       "permissions" : [ "aps:DescribeWorkspace", "aps:ListTagsForResource", "aps:DescribeAlertManagerDefinition", "aps:DescribeLoggingConfiguration", "aps:DescribeQueryLoggingConfiguration", "aps:DescribeWorkspaceConfiguration" ]
     },
     "update" : {
-      "permissions" : [ "aps:UpdateWorkspaceAlias", "aps:DescribeWorkspace", "aps:TagResource", "aps:UntagResource", "aps:ListTagsForResource", "aps:CreateAlertManagerDefinition", "aps:PutAlertManagerDefinition", "aps:DeleteAlertManagerDefinition", "aps:CreateLoggingConfiguration", "aps:DescribeLoggingConfiguration", "aps:UpdateLoggingConfiguration", "aps:DeleteLoggingConfiguration", "aps:DescribeWorkspaceConfiguration", "aps:UpdateWorkspaceConfiguration", "aps:CreateQueryLoggingConfiguration", "aps:UpdateQueryLoggingConfiguration", "aps:DeleteQueryLoggingConfiguration", "aps:DescribeQueryLoggingConfiguration", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "logs:DeleteLogDelivery", "logs:PutResourcePolicy" ]
+      "permissions" : [ "aps:UpdateWorkspaceAlias", "aps:DescribeWorkspace", "aps:TagResource", "aps:UntagResource", "aps:ListTagsForResource", "aps:CreateAlertManagerDefinition", "aps:PutAlertManagerDefinition", "aps:DeleteAlertManagerDefinition", "aps:CreateLoggingConfiguration", "aps:DescribeLoggingConfiguration", "aps:UpdateLoggingConfiguration", "aps:DeleteLoggingConfiguration", "aps:DescribeWorkspaceConfiguration", "aps:UpdateWorkspaceConfiguration", "aps:CreateQueryLoggingConfiguration", "aps:UpdateQueryLoggingConfiguration", "aps:DeleteQueryLoggingConfiguration", "aps:DescribeQueryLoggingConfiguration", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "logs:DeleteLogDelivery", "logs:PutResourcePolicy", "logs:DescribeResourcePolicies", "logs:DescribeLogGroups" ]
     },
     "delete" : {
       "permissions" : [ "aps:DeleteWorkspace", "aps:DescribeWorkspace", "aps:DeleteAlertManagerDefinition", "aps:DeleteLoggingConfiguration", "aps:DeleteQueryLoggingConfiguration", "logs:DeleteLogDelivery" ]
