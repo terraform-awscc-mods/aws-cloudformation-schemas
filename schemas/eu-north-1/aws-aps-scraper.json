@@ -239,32 +239,6 @@
       },
       "required" : [ "ScraperComponents", "LoggingDestination" ],
       "additionalProperties" : false
-    },
-    "OpenSearchConfiguration" : {
-      "description" : "Configuration for OpenSearch exporter",
-      "type" : "object",
-      "properties" : {
-        "DomainArn" : {
-          "description" : "ARN of an OpenSearch Service domain",
-          "type" : "string",
-          "pattern" : "^arn:aws[-a-z]*:es:[-a-z0-9]+:[0-9]{12}:domain/.+$"
-        }
-      },
-      "required" : [ "DomainArn" ],
-      "additionalProperties" : false
-    },
-    "ExporterConfiguration" : {
-      "description" : "Exporter configuration",
-      "type" : "object",
-      "properties" : {
-        "OpenSearchConfiguration" : {
-          "$ref" : "#/definitions/OpenSearchConfiguration"
-        }
-      },
-      "oneOf" : [ {
-        "required" : [ "OpenSearchConfiguration" ]
-      } ],
-      "additionalProperties" : false
     }
   },
   "properties" : {
@@ -309,15 +283,6 @@
     "Destination" : {
       "$ref" : "#/definitions/Destination"
     },
-    "Exporters" : {
-      "description" : "Exporter configurations for the scraper.",
-      "type" : "array",
-      "insertionOrder" : false,
-      "items" : {
-        "$ref" : "#/definitions/ExporterConfiguration"
-      },
-      "maxItems" : 1
-    },
     "Tags" : {
       "description" : "An array of key-value pairs to apply to this resource.",
       "type" : "array",
@@ -343,13 +308,13 @@
   "primaryIdentifier" : [ "/properties/Arn" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "aps:CreateScraper", "aps:UpdateScraperLoggingConfiguration", "aps:DescribeScraperLoggingConfiguration", "aps:DescribeScraper", "aps:DescribeWorkspace", "aps:TagResource", "eks:CreateAccessEntry", "eks:AssociateAccessPolicy", "eks:DescribeCluster", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeNetworkInterfaces", "ec2:CreateNetworkInterface", "ec2:DeleteNetworkInterface", "ec2:AttachNetworkInterface", "ec2:DetachNetworkInterface", "ec2:ModifyNetworkInterfaceAttribute", "ec2:DescribeVpcs", "kafka:DescribeCluster", "kafka:DescribeClusterV2", "kafka:GetBootstrapBrokers", "kafka:ListClusters", "kafka:ListNodes", "kafka-cluster:Connect", "kafka-cluster:DescribeTopic", "es:DescribeDomain", "iam:CreateServiceLinkedRole", "iam:PassRole", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "logs:DescribeLogGroups" ]
+      "permissions" : [ "aps:CreateScraper", "aps:UpdateScraperLoggingConfiguration", "aps:DescribeScraper", "aps:DescribeWorkspace", "aps:TagResource", "eks:CreateAccessEntry", "eks:AssociateAccessPolicy", "eks:DescribeCluster", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeNetworkInterfaces", "ec2:CreateNetworkInterface", "ec2:DeleteNetworkInterface", "ec2:AttachNetworkInterface", "ec2:DetachNetworkInterface", "ec2:ModifyNetworkInterfaceAttribute", "ec2:DescribeVpcs", "kafka:DescribeCluster", "kafka:DescribeClusterV2", "kafka:GetBootstrapBrokers", "kafka:ListClusters", "kafka:ListNodes", "iam:CreateServiceLinkedRole", "iam:PassRole", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "logs:DescribeLogGroups" ]
     },
     "read" : {
       "permissions" : [ "aps:DescribeScraper", "aps:DescribeScraperLoggingConfiguration", "aps:ListTagsForResource", "ec2:DescribeNetworkInterfaces" ]
     },
     "update" : {
-      "permissions" : [ "aps:CreateScraper", "aps:DescribeScraper", "aps:UpdateScraper", "aps:DescribeWorkspace", "aps:DescribeScraperLoggingConfiguration", "aps:DeleteScraperLoggingConfiguration", "aps:UpdateScraperLoggingConfiguration", "aps:TagResource", "aps:UntagResource", "aps:ListTagsForResource", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeNetworkInterfaces", "ec2:ModifyNetworkInterfaceAttribute", "ec2:DescribeVpcs", "kafka:DescribeCluster", "kafka:DescribeClusterV2", "kafka:GetBootstrapBrokers", "kafka-cluster:Connect", "kafka-cluster:DescribeTopic", "es:DescribeDomain", "iam:PassRole", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "logs:DescribeLogGroups" ]
+      "permissions" : [ "aps:CreateScraper", "aps:DescribeScraper", "aps:UpdateScraper", "aps:DescribeWorkspace", "aps:DescribeScraperLoggingConfiguration", "aps:DeleteScraperLoggingConfiguration", "aps:UpdateScraperLoggingConfiguration", "aps:TagResource", "aps:UntagResource", "aps:ListTagsForResource", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeNetworkInterfaces", "ec2:ModifyNetworkInterfaceAttribute", "ec2:DescribeVpcs", "kafka:DescribeCluster", "kafka:DescribeClusterV2", "kafka:GetBootstrapBrokers", "iam:PassRole", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:ListLogDeliveries", "logs:PutResourcePolicy", "logs:DescribeLogGroups" ]
     },
     "delete" : {
       "permissions" : [ "aps:DeleteScraper", "aps:DescribeScraper", "aps:DescribeWorkspace", "aps:DeleteScraperLoggingConfiguration", "eks:AssociateAccessPolicy", "eks:DescribeCluster", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeNetworkInterfaces", "ec2:DeleteNetworkInterface", "ec2:DetachNetworkInterface", "ec2:DescribeVpcs", "kafka:DescribeCluster", "iam:DeleteServiceLinkedRole", "logs:DeleteLogDelivery" ]

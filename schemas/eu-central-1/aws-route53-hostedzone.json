@@ -43,6 +43,10 @@
         "EnableAcceleratedRecovery" : {
           "description" : "",
           "type" : "boolean"
+        },
+        "EnablePublicDNSFallback" : {
+          "description" : "",
+          "type" : "boolean"
         }
       }
     },

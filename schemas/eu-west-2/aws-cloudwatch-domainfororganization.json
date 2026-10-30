@@ -21,7 +21,8 @@
       "uniqueItems" : true
     },
     "IdentityProviderConfiguration" : {
-      "$ref" : "#/definitions/IdentityProviderConfiguration"
+      "$ref" : "#/definitions/IdentityProviderConfiguration",
+      "description" : "Identity provider configuration for the domain."
     },
     "DomainAccessRoleArn" : {
       "type" : "string",

@@ -57,7 +57,7 @@
       "properties" : {
         "Architecture" : {
           "type" : "string",
-          "enum" : [ "ARM_64" ]
+          "enum" : [ "ARM_64", "X86_64" ]
         }
       },
       "required" : [ "Architecture" ]

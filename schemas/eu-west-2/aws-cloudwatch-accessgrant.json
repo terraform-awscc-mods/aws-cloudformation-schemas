@@ -32,7 +32,8 @@
       "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Principal" : {
-      "$ref" : "#/definitions/AccessGrantPrincipal"
+      "$ref" : "#/definitions/AccessGrantPrincipal",
+      "description" : "The principal receiving the grant."
     },
     "Permission" : {
       "type" : "string",
