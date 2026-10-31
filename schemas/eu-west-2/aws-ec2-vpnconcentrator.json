@@ -31,7 +31,7 @@
       }
     }
   },
-  "required" : [ "Type" ],
+  "required" : [ "TransitGatewayId", "Type" ],
   "createOnlyProperties" : [ "/properties/TransitGatewayId", "/properties/Type" ],
   "definitions" : {
     "Tag" : {

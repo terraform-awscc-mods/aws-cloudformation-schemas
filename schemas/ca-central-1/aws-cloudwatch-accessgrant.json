@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::CloudWatch::AccessGrant",
-  "description" : "Resource type definition for AWS::CloudWatch::AccessGrant",
+  "description" : "Resource Type definition for AWS::CloudWatch::AccessGrant. An access grant authorizes a principal to perform a set of actions on resources in a space.",
   "properties" : {
     "Arn" : {
       "type" : "string",
@@ -11,7 +11,7 @@
     },
     "GrantId" : {
       "type" : "string",
-      "description" : "The unique identifier of the access grant.",
+      "description" : "The unique ID of the access grant.",
       "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Name" : {
@@ -23,12 +23,12 @@
     },
     "DomainId" : {
       "type" : "string",
-      "description" : "The unique identifier of the domain that contains the space.",
+      "description" : "The ID of the domain the grant belongs to.",
       "pattern" : "^d-[0-9a-z]{1,25}$"
     },
     "SpaceId" : {
       "type" : "string",
-      "description" : "The unique identifier of the space the access grant is scoped to.",
+      "description" : "The space this grant applies to. Domain-scoped grants are returned by ListDomainAccessGrantsForOrganization instead.",
       "pattern" : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Principal" : {
@@ -37,14 +37,14 @@
     },
     "Permission" : {
       "type" : "string",
-      "description" : "The permission granted. Exactly one permission is granted per access grant.",
+      "description" : "The permission granted.",
       "enum" : [ "SPACE_ADMIN", "READ", "READ_WRITE_DELETE", "CUSTOM" ]
     },
     "ScopedActions" : {
       "type" : "array",
       "uniqueItems" : false,
       "insertionOrder" : true,
-      "description" : "Groups of actions to allow, each with the resource scopes and conditions that limit those actions.",
+      "description" : "Groups of actions allowed by the grant, each with the resource scopes and conditions that limit those actions.",
       "items" : {
         "$ref" : "#/definitions/ScopedActions"
       },
@@ -52,29 +52,29 @@
     },
     "AccountId" : {
       "type" : "string",
-      "description" : "The AWS account ID that owns the access grant.",
+      "description" : "The AWS account ID that owns the grant.",
       "pattern" : "^[0-9]{12}$",
       "minLength" : 12,
       "maxLength" : 12
     },
     "GrantType" : {
       "type" : "string",
-      "description" : "Whether the access grant is managed by the service or by the customer.",
+      "description" : "Who manages the grant.",
       "enum" : [ "SERVICE_MANAGED", "CUSTOMER_MANAGED" ]
     },
     "CreatedBy" : {
       "type" : "string",
-      "description" : "The principal that created the access grant."
+      "description" : "The principal that created the grant."
     },
     "CreatedAt" : {
       "type" : "string",
       "format" : "date-time",
-      "description" : "The time the access grant was created."
+      "description" : "The timestamp when the grant was created."
     },
     "UpdatedAt" : {
       "type" : "string",
       "format" : "date-time",
-      "description" : "The time the access grant was last updated."
+      "description" : "The timestamp when the grant was last updated."
     },
     "Tags" : {
       "type" : "array",
