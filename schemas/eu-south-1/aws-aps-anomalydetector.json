@@ -119,7 +119,7 @@
     "Workspace" : {
       "description" : "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
       "type" : "string",
-      "pattern" : "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"
+      "pattern" : "^arn:aws[-a-z]*:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"
     },
     "Alias" : {
       "description" : "The AnomalyDetector alias.",
@@ -135,7 +135,7 @@
     "Arn" : {
       "description" : "The AnomalyDetector ARN.",
       "type" : "string",
-      "pattern" : "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:anomalydetector/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+      "pattern" : "^arn:aws[-a-z]*:aps:[a-z0-9-]+:[0-9]+:anomalydetector/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$"
     },
     "Labels" : {
       "description" : "An array of key-value pairs to provide meta-data.",

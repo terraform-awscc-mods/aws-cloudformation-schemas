@@ -253,16 +253,46 @@
       "required" : [ "DomainArn" ],
       "additionalProperties" : false
     },
+    "KafkaConfiguration" : {
+      "description" : "Configuration for an Amazon MSK Kafka exporter",
+      "type" : "object",
+      "properties" : {
+        "ClusterArn" : {
+          "description" : "ARN of an Amazon MSK cluster",
+          "type" : "string",
+          "pattern" : "^arn:aws[-a-z]*:kafka:[-a-z0-9]+:[0-9]{12}:cluster/.+$"
+        },
+        "TopicFilter" : {
+          "description" : "Anchored RE2 regular expression that selects Kafka topics. The expression must start with ^ and end with $. If not specified, all topics are selected.",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 256
+        },
+        "ConsumerGroupFilter" : {
+          "description" : "Anchored RE2 regular expression that selects Kafka consumer groups. The expression must start with ^ and end with $. If not specified, all consumer groups are selected.",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "ClusterArn" ],
+      "additionalProperties" : false
+    },
     "ExporterConfiguration" : {
       "description" : "Exporter configuration",
       "type" : "object",
       "properties" : {
         "OpenSearchConfiguration" : {
           "$ref" : "#/definitions/OpenSearchConfiguration"
+        },
+        "KafkaConfiguration" : {
+          "$ref" : "#/definitions/KafkaConfiguration"
         }
       },
       "oneOf" : [ {
         "required" : [ "OpenSearchConfiguration" ]
+      }, {
+        "required" : [ "KafkaConfiguration" ]
       } ],
       "additionalProperties" : false
     }
