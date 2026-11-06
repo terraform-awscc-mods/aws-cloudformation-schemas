@@ -53,7 +53,7 @@
       "description" : "List of tags to tag the Registry",
       "type" : "array",
       "minItems" : 0,
-      "maxItems" : 10,
+      "maxItems" : 50,
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
