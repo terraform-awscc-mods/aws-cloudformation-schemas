@@ -376,7 +376,7 @@
         "Namespace" : {
           "description" : "The namespace to use for aggregation.",
           "type" : "string",
-          "pattern" : "^[0-9A-Za-z_:-]{1,1024}$"
+          "pattern" : "^[0-9A-Za-z_:.-]{1,1024}$"
         }
       },
       "required" : [ "Namespace" ],
@@ -1018,7 +1018,7 @@
     "LabelName" : {
       "description" : "Name of the Label.",
       "type" : "string",
-      "pattern" : "^[0-9A-Za-z_:-]{1,1024}$"
+      "pattern" : "^[0-9A-Za-z_:.-]{1,1024}$"
     },
     "LabelSummary" : {
       "type" : "object",
@@ -1041,7 +1041,7 @@
     },
     "LabelMatchKey" : {
       "type" : "string",
-      "pattern" : "^[0-9A-Za-z_:-]{1,1024}$"
+      "pattern" : "^[0-9A-Za-z_:.-]{1,1024}$"
     },
     "LabelMatchScope" : {
       "type" : "string",
