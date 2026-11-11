@@ -408,7 +408,7 @@
     "DeepHealthCheckType" : {
       "description" : "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
       "type" : "string",
-      "enum" : [ "InstanceStress", "InstanceConnectivity" ]
+      "enum" : [ "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation" ]
     },
     "SharedEnvironmentConfig" : {
       "description" : "The shared environment configuration for restricted instance groups that use cluster-level shared FSx Lustre storage.",
