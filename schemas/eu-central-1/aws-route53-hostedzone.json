@@ -1,8 +1,5 @@
 {
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53.git",
-  "propertyTransform" : {
-    "/properties/Name" : "Name $OR $join([Name, \".\"]) $OR $lowercase(Name) $OR $lowercase($join([Name, \".\"]))"
-  },
   "tagging" : {
     "permissions" : [ "route53:ChangeTagsForResource", "route53:ListTagsForResource" ],
     "taggable" : true,
@@ -10,6 +7,9 @@
     "tagUpdatable" : true,
     "tagProperty" : "/properties/HostedZoneTags",
     "cloudFormationSystemTags" : false
+  },
+  "propertyTransform" : {
+    "/properties/Name" : "Name $OR $join([Name, \".\"]) $OR $lowercase(Name) $OR $lowercase($join([Name, \".\"]))"
   },
   "handlers" : {
     "read" : {
@@ -19,7 +19,7 @@
       "permissions" : [ "route53:CreateHostedZone", "route53:CreateQueryLoggingConfig", "route53:ChangeTagsForResource", "route53:GetChange", "route53:GetHostedZone", "route53:UpdateHostedZoneFeatures", "route53:AssociateVPCWithHostedZone", "ec2:DescribeVpcs" ]
     },
     "update" : {
-      "permissions" : [ "route53:GetChange", "route53:GetHostedZone", "route53:ListTagsForResource", "route53:ListQueryLoggingConfigs", "route53:UpdateHostedZoneComment", "route53:UpdateHostedZoneFeatures", "route53:ChangeTagsForResource", "route53:AssociateVPCWithHostedZone", "route53:DisassociateVPCFromHostedZone", "route53:CreateQueryLoggingConfig", "route53:DeleteQueryLoggingConfig", "ec2:DescribeVpcs" ]
+      "permissions" : [ "route53:GetChange", "route53:GetHostedZone", "route53:ListTagsForResource", "route53:ListQueryLoggingConfigs", "route53:UpdateHostedZoneComment", "route53:UpdateHostedZoneFeatures", "route53:UpdateHostedZoneTier", "route53:ChangeTagsForResource", "route53:AssociateVPCWithHostedZone", "route53:DisassociateVPCFromHostedZone", "route53:CreateQueryLoggingConfig", "route53:DeleteQueryLoggingConfig", "ec2:DescribeVpcs" ]
     },
     "list" : {
       "permissions" : [ "route53:GetHostedZone", "route53:ListHostedZones", "route53:ListQueryLoggingConfigs", "route53:ListTagsForResource" ]
