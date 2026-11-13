@@ -95,54 +95,6 @@
         }
       }
     },
-    "SidewalkDeviceProfile" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "ApplicationServerPublicKey" : {
-          "description" : "The Sidewalk application server public key.",
-          "type" : "string"
-        },
-        "QualificationStatus" : {
-          "description" : "Gets information about the certification status of a Sidewalk device profile.",
-          "type" : "boolean"
-        },
-        "DakCertificateMetadata" : {
-          "description" : "The DAK certificate information of the Sidewalk device profile.",
-          "type" : "array",
-          "insertionOrder" : false,
-          "items" : {
-            "$ref" : "#/definitions/DakCertificateMetadata"
-          }
-        }
-      }
-    },
-    "DakCertificateMetadata" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "ApId" : {
-          "description" : "The advertised product ID (APID) that's used for pre-production and production applications.",
-          "type" : "string"
-        },
-        "CertificateId" : {
-          "description" : "The certificate ID for the DAK.",
-          "type" : "string"
-        },
-        "DeviceTypeId" : {
-          "description" : "The device type ID that's used for prototyping applications.",
-          "type" : "string"
-        },
-        "FactorySupport" : {
-          "description" : "Whether factory support has been enabled.",
-          "type" : "boolean"
-        },
-        "MaxAllowedSignature" : {
-          "description" : "The maximum number of signatures that the DAK can sign. A value of -1 indicates that there's no device limit.",
-          "type" : "integer"
-        }
-      }
-    },
     "Tag" : {
       "type" : "object",
       "properties" : {
@@ -175,10 +127,6 @@
       "description" : "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
       "$ref" : "#/definitions/LoRaWANDeviceProfile"
     },
-    "Sidewalk" : {
-      "description" : "The Sidewalk-related information for creating the Sidewalk device profile. Set to an empty object to create a Sidewalk device profile. Its attributes are read-only and set by the service. Cannot be used together with LoRaWAN.",
-      "$ref" : "#/definitions/SidewalkDeviceProfile"
-    },
     "Tags" : {
       "description" : "A list of key-value pairs that contain metadata for the device profile.",
       "type" : "array",
@@ -201,8 +149,8 @@
   },
   "additionalProperties" : false,
   "required" : [ ],
-  "readOnlyProperties" : [ "/properties/Arn", "/properties/Id", "/properties/Sidewalk/ApplicationServerPublicKey", "/properties/Sidewalk/QualificationStatus", "/properties/Sidewalk/DakCertificateMetadata" ],
-  "createOnlyProperties" : [ "/properties/Name", "/properties/LoRaWAN", "/properties/Sidewalk" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/Id" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/LoRaWAN" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "tagging" : {
     "taggable" : true,
@@ -214,7 +162,7 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "iotwireless:CreateDeviceProfile", "iotwireless:TagResource", "iotwireless:GetDeviceProfile" ]
+      "permissions" : [ "iotwireless:CreateDeviceProfile", "iotwireless:TagResource" ]
     },
     "update" : {
       "permissions" : [ "iotwireless:GetDeviceProfile", "iotwireless:TagResource", "iotwireless:UntagResource" ]

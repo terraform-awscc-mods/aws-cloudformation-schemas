@@ -14,13 +14,13 @@
       "description" : "",
       "type" : "integer",
       "minimum" : 0,
-      "exclusiveMaximum" : 1000
+      "exclusiveMaximum" : 1001
     },
     "ValueBoundary" : {
       "description" : "",
       "type" : "integer",
       "minimum" : 0,
-      "exclusiveMaximum" : 100
+      "exclusiveMaximum" : 101
     },
     "AttributeId" : {
       "description" : "",
