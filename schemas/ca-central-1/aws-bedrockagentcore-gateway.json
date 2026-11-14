@@ -151,6 +151,30 @@
       "required" : [ "DiscoveryUrl" ],
       "additionalProperties" : false
     },
+    "DomainOverride" : {
+      "type" : "object",
+      "properties" : {
+        "DefaultDomain" : {
+          "type" : "string",
+          "maxLength" : 253,
+          "minLength" : 1,
+          "pattern" : "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+        },
+        "AlternateDomains" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "maxLength" : 253,
+            "minLength" : 1,
+            "pattern" : "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+          },
+          "maxItems" : 10,
+          "minItems" : 1
+        }
+      },
+      "required" : [ "DefaultDomain" ],
+      "additionalProperties" : false
+    },
     "EndpointIpAddressType" : {
       "type" : "string",
       "enum" : [ "IPV4", "IPV6" ]
@@ -486,6 +510,9 @@
       "type" : "string",
       "maxLength" : 200,
       "minLength" : 1
+    },
+    "DomainOverride" : {
+      "$ref" : "#/definitions/DomainOverride"
     },
     "ExceptionLevel" : {
       "$ref" : "#/definitions/ExceptionLevel"

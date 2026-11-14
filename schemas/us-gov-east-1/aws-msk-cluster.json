@@ -284,11 +284,7 @@
         "InstanceType" : {
           "type" : "string",
           "minLength" : 5,
-          "maxLength" : 64
-        },
-        "TopicReassignment" : {
-          "type" : "string",
-          "enum" : [ "AUTO", "MANUAL" ]
+          "maxLength" : 32
         }
       },
       "required" : [ "ClientSubnets", "InstanceType" ]
@@ -515,7 +511,7 @@
   "createOnlyProperties" : [ "/properties/BrokerNodeGroupInfo/BrokerAZDistribution", "/properties/BrokerNodeGroupInfo/ClientSubnets", "/properties/BrokerNodeGroupInfo/SecurityGroups", "/properties/EncryptionInfo/EncryptionAtRest", "/properties/EncryptionInfo/EncryptionInTransit/InCluster", "/properties/ClusterName" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/CurrentVersion" ],
-  "writeOnlyProperties" : [ "/properties/ZookeeperAccess", "/properties/BrokerNodeGroupInfo/TopicReassignment" ],
+  "writeOnlyProperties" : [ "/properties/ZookeeperAccess" ],
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
@@ -526,8 +522,8 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "iam:AttachRolePolicy", "iam:CreateServiceLinkedRole", "iam:PutRolePolicy", "kms:CreateGrant", "kms:DescribeKey", "kafka:CreateCluster", "kafka:UpdateConnectivity", "kafka:DescribeClusterOperation", "kafka:DescribeCluster", "kafka:TagResource", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:ListLogDeliveries", "s3:GetBucketPolicy", "s3:PutBucketPolicy", "logs:PutResourcePolicy", "logs:DescribeResourcePolicies", "logs:DescribeLogGroups", "firehose:TagDeliveryStream", "acm-pca:GetCertificateAuthorityCertificate" ],
-      "timeoutInMinutes" : 180
+      "permissions" : [ "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "iam:AttachRolePolicy", "iam:CreateServiceLinkedRole", "iam:PutRolePolicy", "kms:CreateGrant", "kms:DescribeKey", "kafka:CreateCluster", "kafka:DescribeCluster", "kafka:TagResource", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:ListLogDeliveries", "s3:GetBucketPolicy", "s3:PutBucketPolicy", "logs:PutResourcePolicy", "logs:DescribeResourcePolicies", "logs:DescribeLogGroups", "firehose:TagDeliveryStream", "acm-pca:GetCertificateAuthorityCertificate" ],
+      "timeoutInMinutes" : 120
     },
     "update" : {
       "permissions" : [ "kafka:UpdateMonitoring", "kafka:UpdateClusterKafkaVersion", "kafka:UpdateClusterConfiguration", "kafka:UpdateBrokerType", "kafka:UpdateBrokerCount", "kafka:UpdateBrokerStorage", "kafka:UpdateStorage", "kafka:UpdateSecurity", "kafka:UpdateConnectivity", "kafka:UpdateRebalancing", "kafka:DescribeCluster", "kafka:DescribeClusterOperation", "kafka:TagResource", "kafka:UntagResource", "ec2:CreateTags", "ec2:DescribeSubnets", "ec2:DescribeVpcs", "ec2:DescribeSecurityGroups", "ec2:DescribeRouteTables", "iam:AttachRolePolicy", "iam:CreateServiceLinkedRole", "iam:PutRolePolicy", "kms:DescribeKey", "kms:CreateGrant", "logs:CreateLogDelivery", "logs:GetLogDelivery", "logs:UpdateLogDelivery", "logs:DeleteLogDelivery", "logs:ListLogDeliveries", "s3:GetBucketPolicy", "logs:PutResourcePolicy", "logs:DescribeResourcePolicies", "logs:DescribeLogGroups", "firehose:TagDeliveryStream", "acm-pca:GetCertificateAuthorityCertificate" ],

@@ -806,7 +806,7 @@
     },
     "RequestBody" : {
       "patternProperties" : {
-        "^(CLOUDFRONT|API_GATEWAY|COGNITO_USER_POOL|APP_RUNNER_SERVICE|VERIFIED_ACCESS_INSTANCE)$" : {
+        "^(CLOUDFRONT|API_GATEWAY|COGNITO_USER_POOL|APP_RUNNER_SERVICE|VERIFIED_ACCESS_INSTANCE|AGENTCORE_GATEWAY|APPLICATION_LOAD_BALANCER)$" : {
           "$ref" : "#/definitions/RequestBodyAssociatedResourceTypeConfig"
         }
       },
@@ -1533,7 +1533,7 @@
     },
     "SizeInspectionLimit" : {
       "type" : "string",
-      "enum" : [ "KB_16", "KB_32", "KB_48", "KB_64" ]
+      "enum" : [ "KB_8", "KB_16", "KB_32", "KB_48", "KB_64" ]
     },
     "CustomRequestHandling" : {
       "description" : "Custom request handling.",
