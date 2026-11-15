@@ -1,0 +1,155 @@
+{
+  "typeName" : "AWS::SSO::TrustedTokenIssuer",
+  "description" : "Resource Type definition for AWS::SSO::TrustedTokenIssuer, a trusted token issuer configuration for IAM Identity Center that enables trusted identity propagation with external identity providers using OIDC.",
+  "properties" : {
+    "TrustedTokenIssuerArn" : {
+      "type" : "string",
+      "description" : "The ARN of the trusted token issuer configuration.",
+      "minLength" : 10,
+      "maxLength" : 1224,
+      "pattern" : "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "InstanceArn" : {
+      "type" : "string",
+      "description" : "The ARN of the IAM Identity Center instance.",
+      "minLength" : 10,
+      "maxLength" : 1224,
+      "pattern" : "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+    },
+    "Name" : {
+      "type" : "string",
+      "description" : "The name of the trusted token issuer configuration.",
+      "minLength" : 1,
+      "maxLength" : 255,
+      "pattern" : "^[\\w+=,.@-]+$"
+    },
+    "TrustedTokenIssuerType" : {
+      "type" : "string",
+      "description" : "The type of the trusted token issuer.",
+      "enum" : [ "OIDC_JWT" ]
+    },
+    "TrustedTokenIssuerConfiguration" : {
+      "description" : "The configuration settings for the trusted token issuer.",
+      "$ref" : "#/definitions/TrustedTokenIssuerConfiguration"
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "A list of tags to attach to the trusted token issuer.",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      },
+      "maxItems" : 75,
+      "insertionOrder" : false
+    }
+  },
+  "definitions" : {
+    "TrustedTokenIssuerConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration of a trusted token issuer.",
+      "properties" : {
+        "OidcJwtConfiguration" : {
+          "$ref" : "#/definitions/OidcJwtConfiguration"
+        }
+      },
+      "required" : [ "OidcJwtConfiguration" ],
+      "additionalProperties" : false
+    },
+    "OidcJwtConfiguration" : {
+      "type" : "object",
+      "description" : "The configuration settings for a trusted token issuer that uses OIDC with JWTs.",
+      "properties" : {
+        "IssuerUrl" : {
+          "type" : "string",
+          "description" : "The URL that IAM Identity Center uses for OpenID Discovery.",
+          "minLength" : 1,
+          "maxLength" : 512,
+          "pattern" : "^https?://[-a-zA-Z0-9+&@/%=~_|!:,.;]*[-a-zA-Z0-9+&@/%=~_|]$"
+        },
+        "ClaimAttributePath" : {
+          "type" : "string",
+          "description" : "The path of the source attribute in the JWT from the trusted token issuer.",
+          "minLength" : 1,
+          "maxLength" : 255,
+          "pattern" : "^\\p{L}+(?:([._])\\p{L}+){0,2}$"
+        },
+        "IdentityStoreAttributePath" : {
+          "type" : "string",
+          "description" : "The path of the destination attribute in a JWT from IAM Identity Center.",
+          "minLength" : 1,
+          "maxLength" : 255,
+          "pattern" : "^\\p{L}+(?:\\.\\p{L}+){0,2}$"
+        },
+        "JwksRetrievalOption" : {
+          "type" : "string",
+          "description" : "The method that the trusted token issuer can use to retrieve the JSON Web Key Set.",
+          "enum" : [ "OPEN_ID_DISCOVERY" ]
+        }
+      },
+      "required" : [ "IssuerUrl", "ClaimAttributePath", "IdentityStoreAttributePath", "JwksRetrievalOption" ],
+      "additionalProperties" : false
+    },
+    "Tag" : {
+      "type" : "object",
+      "description" : "A key-value pair to associate with a resource.",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The key for the tag.",
+          "minLength" : 1,
+          "maxLength" : 128,
+          "pattern" : "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The value of the tag.",
+          "minLength" : 0,
+          "maxLength" : 256,
+          "pattern" : "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
+    }
+  },
+  "required" : [ "InstanceArn", "Name", "TrustedTokenIssuerType", "TrustedTokenIssuerConfiguration" ],
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/TrustedTokenIssuerArn" ],
+  "createOnlyProperties" : [ "/properties/InstanceArn", "/properties/TrustedTokenIssuerType", "/properties/TrustedTokenIssuerConfiguration/OidcJwtConfiguration/IssuerUrl", "/properties/TrustedTokenIssuerConfiguration/OidcJwtConfiguration/JwksRetrievalOption" ],
+  "primaryIdentifier" : [ "/properties/TrustedTokenIssuerArn" ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : false,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "sso:TagResource", "sso:UntagResource", "sso:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "sso:CreateTrustedTokenIssuer", "sso:DescribeTrustedTokenIssuer", "sso:TagResource", "sso:ListTagsForResource" ]
+    },
+    "read" : {
+      "permissions" : [ "sso:DescribeTrustedTokenIssuer", "sso:ListTagsForResource" ]
+    },
+    "update" : {
+      "permissions" : [ "sso:UpdateTrustedTokenIssuer", "sso:DescribeTrustedTokenIssuer", "sso:TagResource", "sso:UntagResource", "sso:ListTagsForResource" ]
+    },
+    "delete" : {
+      "permissions" : [ "sso:DeleteTrustedTokenIssuer", "sso:DescribeTrustedTokenIssuer" ]
+    },
+    "list" : {
+      "handlerSchema" : {
+        "properties" : {
+          "InstanceArn" : {
+            "type" : "string",
+            "minLength" : 10,
+            "maxLength" : 1224,
+            "pattern" : "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+          }
+        },
+        "required" : [ "InstanceArn" ]
+      },
+      "permissions" : [ "sso:ListTrustedTokenIssuers" ]
+    }
+  }
+}

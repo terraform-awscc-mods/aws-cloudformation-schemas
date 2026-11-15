@@ -285,6 +285,10 @@
           "type" : "string",
           "minLength" : 5,
           "maxLength" : 64
+        },
+        "TopicReassignment" : {
+          "type" : "string",
+          "enum" : [ "AUTO", "MANUAL" ]
         }
       },
       "required" : [ "ClientSubnets", "InstanceType" ]
@@ -511,7 +515,7 @@
   "createOnlyProperties" : [ "/properties/BrokerNodeGroupInfo/BrokerAZDistribution", "/properties/BrokerNodeGroupInfo/ClientSubnets", "/properties/BrokerNodeGroupInfo/SecurityGroups", "/properties/EncryptionInfo/EncryptionAtRest", "/properties/EncryptionInfo/EncryptionInTransit/InCluster", "/properties/ClusterName" ],
   "primaryIdentifier" : [ "/properties/Arn" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/CurrentVersion" ],
-  "writeOnlyProperties" : [ "/properties/ZookeeperAccess" ],
+  "writeOnlyProperties" : [ "/properties/ZookeeperAccess", "/properties/BrokerNodeGroupInfo/TopicReassignment" ],
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
