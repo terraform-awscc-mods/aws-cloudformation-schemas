@@ -40,6 +40,20 @@
   "additionalProperties" : false,
   "primaryIdentifier" : [ "/properties/Name", "/properties/Id", "/properties/Scope" ],
   "definitions" : {
+    "ConnectedAccountPrice" : {
+      "description" : "A connected-account price configuration. The payment provider rejects amounts below $0.01 and does not support sub-cent amounts.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "$ref" : "#/definitions/ConnectedAccountPriceAmount"
+        },
+        "Currency" : {
+          "$ref" : "#/definitions/CryptoCurrency"
+        }
+      },
+      "required" : [ "Amount", "Currency" ]
+    },
     "CustomHTTPHeaderName" : {
       "minLength" : 1,
       "description" : "HTTP header name.",
@@ -88,6 +102,16 @@
       "maximum" : 599,
       "type" : "integer",
       "minimum" : 200
+    },
+    "ConnectedAccountConfigs" : {
+      "minItems" : 1,
+      "maxItems" : 1,
+      "description" : "List of connected account configurations. A connected account delegates deposit-address provisioning to the payments provider instead of specifying a wallet directly.",
+      "insertionOrder" : false,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ConnectedAccountConfig"
+      }
     },
     "HeaderMatchPattern" : {
       "description" : "The pattern to look for in the request headers.",
@@ -288,6 +312,13 @@
         }
       },
       "required" : [ "UsageOfAction" ]
+    },
+    "ConnectedAccountArn" : {
+      "minLength" : 56,
+      "pattern" : "^arn:aws(-[a-z]+)*:payments::[0-9]{12}:connectedaccount/[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}-[A-Za-z0-9]{6}$",
+      "description" : "The ARN of the connected account that provisions deposit addresses for this configuration.",
+      "type" : "string",
+      "maxLength" : 140
     },
     "RulePriority" : {
       "description" : "Priority of the Rule, Rules get evaluated from lower to higher priority.",
@@ -689,6 +720,16 @@
       },
       "required" : [ "SuccessStrings", "FailureStrings" ]
     },
+    "ConnectedAccountPrices" : {
+      "minItems" : 1,
+      "maxItems" : 1,
+      "description" : "List of connected-account price configurations. A single price is supported.",
+      "insertionOrder" : false,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ConnectedAccountPrice"
+      }
+    },
     "ExcludedRules" : {
       "type" : "array",
       "items" : {
@@ -783,6 +824,20 @@
         }
       },
       "required" : [ "Challenge" ]
+    },
+    "ConnectedAccountChainConfig" : {
+      "description" : "Per-chain price configuration for a connected account. The deposit address is provisioned by the payments provider and is not specified here.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "Chain" : {
+          "$ref" : "#/definitions/ConnectedAccountChain"
+        },
+        "Prices" : {
+          "$ref" : "#/definitions/ConnectedAccountPrices"
+        }
+      },
+      "required" : [ "Chain", "Prices" ]
     },
     "Statement" : {
       "description" : "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
@@ -1795,6 +1850,20 @@
       },
       "required" : [ "OversizeHandling" ]
     },
+    "ConnectedAccountConfig" : {
+      "description" : "Configuration for a single connected account and the chains it accepts payment on.",
+      "additionalProperties" : false,
+      "type" : "object",
+      "properties" : {
+        "PaymentNetworks" : {
+          "$ref" : "#/definitions/ConnectedAccountChainConfigs"
+        },
+        "ConnectedAccountArn" : {
+          "$ref" : "#/definitions/ConnectedAccountArn"
+        }
+      },
+      "required" : [ "ConnectedAccountArn", "PaymentNetworks" ]
+    },
     "WalletAddress" : {
       "minLength" : 26,
       "pattern" : ".*\\S.*",
@@ -1908,6 +1977,13 @@
         }
       },
       "required" : [ "LoginPath" ]
+    },
+    "ConnectedAccountPriceAmount" : {
+      "minLength" : 1,
+      "pattern" : "^([1-9][0-9]{0,5}(\\.[0-9]{1,2})?|0\\.(0[1-9]|[1-9][0-9]?))$",
+      "description" : "The price amount for a connected account. Whole cents only, from 0.01 up to the payment provider's maximum of 999999.99.",
+      "type" : "string",
+      "maxLength" : 9
     },
     "RequestInspection" : {
       "description" : "Configures the inspection of login requests",
@@ -2042,6 +2118,9 @@
       "additionalProperties" : false,
       "type" : "object",
       "properties" : {
+        "ConnectedAccountConfigs" : {
+          "$ref" : "#/definitions/ConnectedAccountConfigs"
+        },
         "CurrencyMode" : {
           "$ref" : "#/definitions/CurrencyMode"
         },
@@ -2075,6 +2154,16 @@
       "type" : "object",
       "minProperties" : 1
     },
+    "ConnectedAccountChainConfigs" : {
+      "minItems" : 1,
+      "maxItems" : 2,
+      "description" : "List of per-chain configurations for a connected account.",
+      "insertionOrder" : false,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ConnectedAccountChainConfig"
+      }
+    },
     "EntityId" : {
       "pattern" : "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
       "description" : "Id of the WebACL",
@@ -2100,6 +2189,11 @@
       "description" : "Use CLOUDFRONT for CloudFront WebACL, use REGIONAL for Application Load Balancer and API Gateway.",
       "type" : "string",
       "enum" : [ "CLOUDFRONT", "REGIONAL" ]
+    },
+    "ConnectedAccountChain" : {
+      "description" : "The blockchain chain to use with a connected account. Connected accounts are mainnet only.",
+      "type" : "string",
+      "enum" : [ "BASE", "SOLANA" ]
     },
     "CustomResponseBody" : {
       "description" : "Custom response body.",

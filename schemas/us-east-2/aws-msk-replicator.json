@@ -15,7 +15,7 @@
     "ReplicatorArn" : {
       "description" : "Amazon Resource Name for the created replicator.",
       "type" : "string",
-      "pattern" : "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
+      "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"
     },
     "ReplicatorName" : {
       "description" : "The name of the replicator.",
@@ -58,7 +58,7 @@
     "ServiceExecutionRoleArn" : {
       "description" : "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
       "type" : "string",
-      "pattern" : "arn:(aws|aws-us-gov|aws-cn):iam:.*"
+      "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*"
     },
     "Tags" : {
       "description" : "A collection of tags associated with a resource",
@@ -231,7 +231,7 @@
         "SourceKafkaClusterArn" : {
           "description" : "Amazon Resource Name of the source Kafka cluster.",
           "type" : "string",
-          "pattern" : "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
+          "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"
         },
         "SourceKafkaClusterId" : {
           "description" : "The ID of the source Kafka cluster.",
@@ -240,7 +240,7 @@
         "TargetKafkaClusterArn" : {
           "description" : "Amazon Resource Name of the target Kafka cluster.",
           "type" : "string",
-          "pattern" : "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
+          "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"
         },
         "TargetKafkaClusterId" : {
           "description" : "The ID of the target Kafka cluster.",
@@ -270,7 +270,7 @@
         "MskClusterArn" : {
           "description" : "The ARN of an Amazon MSK cluster.",
           "type" : "string",
-          "pattern" : "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
+          "pattern" : "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"
         }
       },
       "required" : [ "MskClusterArn" ]
