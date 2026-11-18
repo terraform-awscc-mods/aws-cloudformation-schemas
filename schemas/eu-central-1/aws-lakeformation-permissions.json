@@ -143,5 +143,19 @@
   "required" : [ "DataLakePrincipal", "Resource" ],
   "createOnlyProperties" : [ "/properties/DataLakePrincipal", "/properties/Resource" ],
   "primaryIdentifier" : [ "/properties/Id" ],
-  "readOnlyProperties" : [ "/properties/Id" ]
+  "readOnlyProperties" : [ "/properties/Id" ],
+  "tagging" : {
+    "taggable" : false
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "lakeformation:GrantPermissions", "lakeformation:GetDataLakeSettings", "lakeformation:ListPermissions", "glue:GetTable", "glue:GetDatabase" ]
+    },
+    "update" : {
+      "permissions" : [ "lakeformation:GrantPermissions", "lakeformation:GetDataLakeSettings", "lakeformation:ListPermissions", "glue:GetTable", "glue:GetDatabase" ]
+    },
+    "delete" : {
+      "permissions" : [ "lakeformation:RevokePermissions", "lakeformation:GetDataLakeSettings", "lakeformation:ListPermissions", "glue:GetTable", "glue:GetDatabase" ]
+    }
+  }
 }
