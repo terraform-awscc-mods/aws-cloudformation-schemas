@@ -22,6 +22,11 @@
       "description" : "The scope configuration as a JSON string.",
       "type" : "string"
     },
+    "SpecializedScopeType" : {
+      "description" : "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
+      "type" : "string",
+      "enum" : [ "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE" ]
+    },
     "Status" : {
       "description" : "The status of the scope.",
       "type" : "string",
@@ -71,7 +76,7 @@
   },
   "additionalProperties" : false,
   "required" : [ "ScopeName" ],
-  "createOnlyProperties" : [ "/properties/ScopeName" ],
+  "createOnlyProperties" : [ "/properties/ScopeName", "/properties/SpecializedScopeType" ],
   "readOnlyProperties" : [ "/properties/ScopeId", "/properties/ScopeArn", "/properties/Status", "/properties/Version", "/properties/UpdatedAt" ],
   "primaryIdentifier" : [ "/properties/ScopeArn" ],
   "additionalIdentifiers" : [ [ "/properties/ScopeId" ] ],

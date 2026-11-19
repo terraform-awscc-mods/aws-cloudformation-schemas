@@ -13,7 +13,6 @@
   "createOnlyProperties" : [ "/properties/ClusterName", "/properties/VpcConfig", "/properties/Orchestrator/Eks" ],
   "primaryIdentifier" : [ "/properties/ClusterArn" ],
   "required" : [ ],
-  "conditionalCreateOnlyProperties" : [ "/properties/InstanceGroups/*/CustomMetadata", "/properties/RestrictedInstanceGroups/*/CustomMetadata" ],
   "handlers" : {
     "read" : {
       "permissions" : [ "sagemaker:DescribeCluster", "sagemaker:ListTags" ]
