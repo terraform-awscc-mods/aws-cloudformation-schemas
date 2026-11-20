@@ -26,7 +26,7 @@
     "Visibility" : {
       "description" : "The visibility of the Connect workspace",
       "type" : "string",
-      "enum" : [ "ALL", "ASSIGNED", "NONE" ]
+      "enum" : [ "ALL", "ASSIGNED", "PUBLIC", "NONE" ]
     },
     "WorkspaceFontFamily" : {
       "type" : "string",

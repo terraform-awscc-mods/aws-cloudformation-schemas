@@ -22,6 +22,21 @@
       },
       "required" : [ "SubnetId" ]
     },
+    "UpdateIpAddress" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IpId" : {
+          "type" : "string",
+          "description" : "The ID of the IP address, which is in the format of the Availability Zone and network interface, for example ipv4-ip-10-0-0-7."
+        },
+        "Ipv6" : {
+          "type" : "string",
+          "description" : "The IPv6 address that you want to use for DNS queries."
+        }
+      },
+      "required" : [ "IpId", "Ipv6" ]
+    },
     "Tag" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -127,6 +142,15 @@
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
+    },
+    "UpdateIpAddresses" : {
+      "type" : "array",
+      "description" : "Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. If you don't specify an IPv6 address, one will be automatically chosen from your subnet.",
+      "uniqueItems" : false,
+      "insertionOrder" : false,
+      "items" : {
+        "$ref" : "#/definitions/UpdateIpAddress"
+      }
     }
   },
   "additionalProperties" : false,
@@ -134,11 +158,12 @@
   "createOnlyProperties" : [ "/properties/Direction", "/properties/OutpostArn", "/properties/PreferredInstanceType", "/properties/SecurityGroupIds" ],
   "primaryIdentifier" : [ "/properties/ResolverEndpointId" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/HostVPCId", "/properties/IpAddressCount", "/properties/ResolverEndpointId" ],
+  "writeOnlyProperties" : [ "/properties/UpdateIpAddresses" ],
   "tagging" : {
     "taggable" : true,
     "tagOnCreate" : true,
     "tagUpdatable" : true,
-    "cloudFormationSystemTags" : false,
+    "cloudFormationSystemTags" : true,
     "tagProperty" : "/properties/Tags",
     "permissions" : [ "route53resolver:TagResource", "route53resolver:UntagResource" ]
   },

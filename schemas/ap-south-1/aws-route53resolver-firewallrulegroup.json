@@ -44,6 +44,32 @@
       "required" : [ "Category" ],
       "additionalProperties" : false
     },
+    "AutoAllowlistConfig" : {
+      "description" : "Configuration for an AutoAllowlist rule, which observes the domains resolved in the DNS traffic of the VPCs associated with the rule group. To review the observed domains, call ListFirewallRuleDomains. The rule allows only the domains on its managed domain list: the domains copied from ImportFromFirewallDomainListId when the rule is created and the domains that you add with UpdateFirewallDomains, such as suggestions that you approve. The rule is ALLOW-only, takes no Qtype or block settings, and uses INSPECT_REDIRECTION_DOMAIN. If CloudFormation replaces the rule group, for example when you change Name, or you remove this rule, DNS Firewall deletes the rule's domain list and the domains you added to it, and a new rule starts without the old rule's suggestions or denied domains; set UpdateReplacePolicy to Retain to keep the old rule group and its list. An AutoAllowlist rule that this stack did not create, for example one in an imported rule group, is left in place with its domain list when you remove it from the template; delete it with DeleteFirewallRule. If an update that removes the rule later rolls back, CloudFormation can recreate the rule but cannot restore the removed managed list or its domains.",
+      "type" : "object",
+      "properties" : {
+        "InitialDataTimeframeHours" : {
+          "description" : "The look-back window, in hours (1 to 168), of DNS traffic that DNS Firewall uses for the initial set of observed domains, from the VPCs associated with the rule group when the rule is created. It does not add domains to the rule's domain list. A rule created together with its rule group has no associated VPCs yet; the stack does not wait for the analysis, so associations created in the same stack are usually included. When the stack creates the rule with ImportFromFirewallDomainListId, it first waits for the copy, so those associations can miss the initial suggestions when the copy takes more than about two minutes, for example for a large list. To be certain, add the rule in a stack update after the rule group is associated. Cannot be changed after creation: because this is not a create-only property, CloudFormation accepts a changed value in a change set and the stack update then fails while it runs.",
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 168
+        },
+        "ImportFromFirewallDomainListId" : {
+          "description" : "Optional ID of a domain list in this account whose domains DNS Firewall copies onto the rule's domain list after it creates the rule. It must be a standard, regional list that you own. When the stack creates the rule, it waits while the source is importing or updating, and fails if the source is in a terminal state other than COMPLETE. If the stack operation that creates the rule group also creates the source list with Domains, add a DependsOn on the list: with a Ref alone, CloudFormation can start the rule group before the list's domains are added, and the stack can then fail or the rule can copy none of them. DNS Firewall uses it only for that copy: changing or removing it later does not modify the rule, which keeps reporting the ID it was created with. Drift detection reports a changed or added ID until the template matches the rule again; it does not report a removed ID. When the stack creates the rule, it also waits for the copy: the operation stays in progress until GetFirewallDomainList on AutoAllowlistFirewallDomainListId reports COMPLETE, and fails, rolling the change back, if the copy ends in COMPLETE_IMPORT_FAILED; this needs the route53resolver:GetFirewallDomainList permission. While the copy runs, the rule allows only the domains copied so far, so when you replace a rule that allows the source list, keep that rule in the same update and remove it in a later stack update. If the rule group already has an AutoAllowlist rule, for example one created with the console, the stack takes that rule over instead: it changes at most its Priority, reads no source, copies nothing and does not wait, and the rule keeps its own domain list; a template whose ImportFromFirewallDomainListId differs from the one that rule was created with is rejected. Before you remove a rule that allows the source list, add those domains to the AutoAllowlistFirewallDomainListId list with UpdateFirewallDomains.",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 64
+        },
+        "AutoAllowlistFirewallDomainListId" : {
+          "description" : "The ID of the managed domain list that DNS Firewall creates for the rule; the rule allows the domains on this list. Read-only.",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 64
+        }
+      },
+      "required" : [ "InitialDataTimeframeHours" ],
+      "additionalProperties" : false
+    },
     "FirewallRuleType" : {
       "description" : "Firewall rule type union. Exactly one member must be set. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
       "type" : "object",
@@ -56,6 +82,9 @@
         },
         "FirewallAdvancedThreatCategory" : {
           "$ref" : "#/definitions/FirewallAdvancedThreatCategoryConfig"
+        },
+        "AutoAllowlist" : {
+          "$ref" : "#/definitions/AutoAllowlistConfig"
         }
       },
       "oneOf" : [ {
@@ -64,6 +93,8 @@
         "required" : [ "FirewallAdvancedContentCategory" ]
       }, {
         "required" : [ "FirewallAdvancedThreatCategory" ]
+      }, {
+        "required" : [ "AutoAllowlist" ]
       } ],
       "additionalProperties" : false
     },
@@ -259,12 +290,12 @@
     "permissions" : [ "route53resolver:TagResource", "route53resolver:UntagResource" ]
   },
   "createOnlyProperties" : [ "/properties/Name" ],
-  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn", "/properties/RuleCount", "/properties/Status", "/properties/StatusMessage", "/properties/OwnerId", "/properties/ShareStatus", "/properties/CreatorRequestId", "/properties/CreationTime", "/properties/ModificationTime", "/properties/FirewallRules/*/FirewallThreatProtectionId", "/properties/FirewallRules/*/Status" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn", "/properties/RuleCount", "/properties/Status", "/properties/StatusMessage", "/properties/OwnerId", "/properties/ShareStatus", "/properties/CreatorRequestId", "/properties/CreationTime", "/properties/ModificationTime", "/properties/FirewallRules/*/FirewallThreatProtectionId", "/properties/FirewallRules/*/Status", "/properties/FirewallRules/*/FirewallRuleType/AutoAllowlist/AutoAllowlistFirewallDomainListId" ],
   "primaryIdentifier" : [ "/properties/Id" ],
   "additionalProperties" : false,
   "handlers" : {
     "create" : {
-      "permissions" : [ "route53resolver:CreateFirewallRuleGroup", "route53resolver:GetFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:CreateFirewallRule", "route53resolver:DeleteFirewallRule", "route53resolver:TagResource", "route53resolver:ListTagsForResource" ]
+      "permissions" : [ "route53resolver:CreateFirewallRuleGroup", "route53resolver:GetFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:GetFirewallDomainList", "route53resolver:CreateFirewallRule", "route53resolver:DeleteFirewallRule", "route53resolver:TagResource", "route53resolver:ListTagsForResource" ]
     },
     "read" : {
       "permissions" : [ "route53resolver:GetFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:ListTagsForResource" ]
@@ -276,7 +307,7 @@
       "permissions" : [ "route53resolver:GetFirewallRuleGroup", "route53resolver:DeleteFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:DeleteFirewallRule", "route53resolver:UntagResource", "route53resolver:ListTagsForResource" ]
     },
     "update" : {
-      "permissions" : [ "route53resolver:GetFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:CreateFirewallRule", "route53resolver:UpdateFirewallRule", "route53resolver:DeleteFirewallRule", "route53resolver:TagResource", "route53resolver:UntagResource", "route53resolver:ListTagsForResource" ]
+      "permissions" : [ "route53resolver:GetFirewallRuleGroup", "route53resolver:ListFirewallRules", "route53resolver:GetFirewallDomainList", "route53resolver:CreateFirewallRule", "route53resolver:UpdateFirewallRule", "route53resolver:DeleteFirewallRule", "route53resolver:TagResource", "route53resolver:UntagResource", "route53resolver:ListTagsForResource" ]
     }
   }
 }

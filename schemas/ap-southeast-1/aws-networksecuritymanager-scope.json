@@ -12,11 +12,13 @@
     },
     "ScopeName" : {
       "description" : "The name of the scope.",
-      "type" : "string"
+      "type" : "string",
+      "pattern" : "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "ScopeDescription" : {
       "description" : "A description of the scope.",
-      "type" : "string"
+      "type" : "string",
+      "pattern" : "^[a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "ScopeConfiguration" : {
       "description" : "The scope configuration as a JSON string.",

@@ -42,7 +42,7 @@
     "DataType" : {
       "type" : "string",
       "description" : "The data type of the parameter, such as ``text`` or ``aws:ec2:image``. The default is ``text``.",
-      "enum" : [ "text", "aws:ec2:image" ]
+      "enum" : [ "text", "aws:ec2:image", "aws:region", "aws:account:id", "boolean", "integer", "float", "binary", "hostname", "email", "ipv4-address", "ipv6-address", "url", "json", "jsonc" ]
     },
     "Name" : {
       "type" : "string",

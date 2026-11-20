@@ -197,7 +197,7 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:ModifyCapacityReservation", "elasticloadbalancing:AddTags", "elasticloadbalancing:SetSecurityGroups", "ec2:DescribeIpamPools" ],
+      "permissions" : [ "elasticloadbalancing:CreateLoadBalancer", "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:ModifyCapacityReservation", "elasticloadbalancing:AddTags", "elasticloadbalancing:SetSecurityGroups", "ec2:DescribeIpamPools", "ec2:GetSecurityGroupsForVpc", "ec2:ValidateSecurityGroupQuotasForInterface" ],
       "timeoutInMinutes" : 2160
     },
     "delete" : {
@@ -210,7 +210,7 @@
       "permissions" : [ "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:DescribeLoadBalancerAttributes", "elasticloadbalancing:DescribeCapacityReservation", "elasticloadbalancing:DescribeTags" ]
     },
     "update" : {
-      "permissions" : [ "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:ModifyCapacityReservation", "elasticloadbalancing:SetSubnets", "elasticloadbalancing:SetIpAddressType", "elasticloadbalancing:ModifyIpPools", "elasticloadbalancing:SetSecurityGroups", "elasticloadbalancing:AddTags", "elasticloadbalancing:RemoveTags" ],
+      "permissions" : [ "elasticloadbalancing:ModifyLoadBalancerAttributes", "elasticloadbalancing:ModifyCapacityReservation", "elasticloadbalancing:SetSubnets", "elasticloadbalancing:SetIpAddressType", "elasticloadbalancing:ModifyIpPools", "elasticloadbalancing:SetSecurityGroups", "elasticloadbalancing:AddTags", "elasticloadbalancing:RemoveTags", "ec2:GetSecurityGroupsForVpc", "ec2:ValidateSecurityGroupQuotasForInterface" ],
       "timeoutInMinutes" : 2160
     }
   }

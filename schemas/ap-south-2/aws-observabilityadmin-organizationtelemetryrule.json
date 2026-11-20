@@ -472,7 +472,7 @@
           "type" : "string",
           "minLength" : 1,
           "maxLength" : 1024,
-          "pattern" : "^[0-9A-Za-z_\\-:]+$"
+          "pattern" : "^[0-9A-Za-z_\\-:.]+$"
         }
       }
     },
