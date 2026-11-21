@@ -133,14 +133,14 @@
       "properties" : {
         "SecurityGroupIds" : {
           "type" : "array",
-          "uniqueItems" : true,
+          "uniqueItems" : false,
           "items" : {
             "type" : "string"
           }
         },
         "SubnetIds" : {
           "type" : "array",
-          "uniqueItems" : true,
+          "uniqueItems" : false,
           "items" : {
             "type" : "string"
           }

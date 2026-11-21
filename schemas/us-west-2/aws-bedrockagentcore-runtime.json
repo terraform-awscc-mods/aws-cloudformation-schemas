@@ -212,8 +212,8 @@
     },
     "DiscoveryUrl" : {
       "type" : "string",
-      "pattern" : "^.+/\\.well-known/openid-configuration$",
-      "description" : "OpenID Connect discovery URL"
+      "pattern" : "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
+      "description" : "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL"
     },
     "AllowedAudienceList" : {
       "type" : "array",
@@ -973,18 +973,18 @@
   "handlers" : {
     "create" : {
       "timeoutInMinutes" : 35,
-      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:TagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface" ]
+      "permissions" : [ "bedrock-agentcore:CreateAgentRuntime", "bedrock-agentcore:CreateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:CreateWorkloadIdentity", "bedrock-agentcore:TagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "vpc-lattice:DeleteServiceNetworkResourceAssociation", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface", "secretsmanager:GetSecretValue" ]
     },
     "read" : {
       "permissions" : [ "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:ListTagsForResource" ]
     },
     "update" : {
       "timeoutInMinutes" : 35,
-      "permissions" : [ "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface" ]
+      "permissions" : [ "bedrock-agentcore:UpdateAgentRuntime", "bedrock-agentcore:UpdateAgentRuntimeEndpoint", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "bedrock-agentcore:TagResource", "bedrock-agentcore:UntagResource", "bedrock-agentcore:ListTagsForResource", "bedrock-agentcore:PassCapacityProvider", "iam:CreateServiceLinkedRole", "iam:PassRole", "s3:GetObject", "s3:GetObjectVersion", "kms:Decrypt", "vpc-lattice:GetResourceConfiguration", "vpc-lattice:CreateServiceNetworkResourceAssociation", "vpc-lattice:GetServiceNetworkResourceAssociation", "vpc-lattice:ListServiceNetworkResourceAssociations", "vpc-lattice:AssociateViaAWSService", "vpc-lattice:DeleteServiceNetworkResourceAssociation", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:CreateNetworkInterface", "secretsmanager:GetSecretValue" ]
     },
     "delete" : {
       "timeoutInMinutes" : 130,
-      "permissions" : [ "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint" ]
+      "permissions" : [ "bedrock-agentcore:DeleteAgentRuntime", "bedrock-agentcore:DeleteAgentRuntimeEndpoint", "bedrock-agentcore:DeleteWorkloadIdentity", "bedrock-agentcore:GetAgentRuntime", "bedrock-agentcore:GetAgentRuntimeEndpoint", "vpc-lattice:DeleteServiceNetworkResourceAssociation" ]
     },
     "list" : {
       "permissions" : [ "bedrock-agentcore:ListAgentRuntimes", "bedrock-agentcore:ListAgentRuntimeEndpoints" ]

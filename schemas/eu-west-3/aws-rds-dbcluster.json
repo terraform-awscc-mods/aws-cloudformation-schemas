@@ -462,14 +462,14 @@
   "writeOnlyProperties" : [ "/properties/ClusterScalabilityType", "/properties/DBInstanceParameterGroupName", "/properties/DeleteAutomatedBackups", "/properties/WithExpressConfiguration", "/properties/MasterUserAuthenticationType", "/properties/MasterUserPassword", "/properties/RestoreToTime", "/properties/RestoreType", "/properties/SnapshotIdentifier", "/properties/SourceDBClusterIdentifier", "/properties/SourceDbClusterResourceId", "/properties/SourceRegion", "/properties/UseLatestRestorableTime" ],
   "handlers" : {
     "create" : {
-      "permissions" : [ "iam:CreateServiceLinkedRole", "iam:PassRole", "rds:AddRoleToDBCluster", "rds:AddTagsToResource", "rds:CreateDBCluster", "rds:CreateDBInstance", "rds:DescribeDBClusters", "rds:DescribeDBClusterAutomatedBackups", "rds:DescribeDBClusterSnapshots", "rds:DescribeDBSnapshots", "rds:DescribeEvents", "rds:EnableHttpEndpoint", "rds:EnableInternetAccessGateway", "rds:ModifyDBCluster", "rds:RestoreDBClusterFromSnapshot", "rds:RestoreDBClusterToPointInTime", "rds:DescribeDBClusterSnapshots", "secretsmanager:CreateSecret", "secretsmanager:TagResource" ],
+      "permissions" : [ "iam:CreateServiceLinkedRole", "iam:PassRole", "rds:AddRoleToDBCluster", "rds:AddTagsToResource", "rds:CreateDBCluster", "rds:CreateDBInstance", "rds:DescribeDBClusters", "rds:DescribeDBClusterAutomatedBackups", "rds:DescribeDBClusterSnapshots", "rds:DescribeDBSnapshots", "rds:DescribeEvents", "rds:DisableInternetAccessGateway", "rds:DisableVpcNetworking", "rds:EnableHttpEndpoint", "rds:EnableInternetAccessGateway", "rds:EnableVpcNetworking", "rds:ModifyDBCluster", "rds:RestoreDBClusterFromSnapshot", "rds:RestoreDBClusterToPointInTime", "rds:DescribeDBClusterSnapshots", "secretsmanager:CreateSecret", "secretsmanager:TagResource" ],
       "timeoutInMinutes" : 2160
     },
     "read" : {
       "permissions" : [ "rds:DescribeDBClusters" ]
     },
     "update" : {
-      "permissions" : [ "ec2:DescribeSecurityGroups", "iam:PassRole", "rds:AddRoleToDBCluster", "rds:AddTagsToResource", "rds:DescribeDBClusters", "rds:DescribeDBSubnetGroups", "rds:DescribeEvents", "rds:DescribeGlobalClusters", "rds:DisableHttpEndpoint", "rds:EnableHttpEndpoint", "rds:ModifyDBCluster", "rds:ModifyDBInstance", "rds:RemoveFromGlobalCluster", "rds:RemoveRoleFromDBCluster", "rds:RemoveTagsFromResource", "secretsmanager:CreateSecret", "secretsmanager:TagResource" ],
+      "permissions" : [ "ec2:DescribeSecurityGroups", "iam:PassRole", "rds:AddRoleToDBCluster", "rds:AddTagsToResource", "rds:DescribeDBClusters", "rds:DescribeDBSubnetGroups", "rds:DescribeEvents", "rds:DescribeGlobalClusters", "rds:DisableHttpEndpoint", "rds:DisableInternetAccessGateway", "rds:DisableVpcNetworking", "rds:EnableHttpEndpoint", "rds:EnableInternetAccessGateway", "rds:EnableVpcNetworking", "rds:ModifyDBCluster", "rds:ModifyDBInstance", "rds:RemoveFromGlobalCluster", "rds:RemoveRoleFromDBCluster", "rds:RemoveTagsFromResource", "secretsmanager:CreateSecret", "secretsmanager:TagResource" ],
       "timeoutInMinutes" : 2160
     },
     "delete" : {
