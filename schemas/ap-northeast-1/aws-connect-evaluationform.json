@@ -348,6 +348,10 @@
         "Expression" : {
           "description" : "An expression of the enablement condition.",
           "$ref" : "#/definitions/EvaluationFormItemEnablementExpression"
+        },
+        "Condition" : {
+          "description" : "",
+          "$ref" : "#/definitions/EvaluationFormItemEnablementCondition"
         }
       }
     },
@@ -372,7 +376,7 @@
         "Comparator" : {
           "description" : "A comparator to be used against list of values.",
           "type" : "string",
-          "enum" : [ "IN", "NOT_IN", "ALL_IN", "EXACT" ]
+          "enum" : [ "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO" ]
         }
       },
       "required" : [ "Source", "Values", "Comparator" ]
@@ -385,14 +389,53 @@
         "Type" : {
           "description" : "A type of source item.",
           "type" : "string",
-          "enum" : [ "QUESTION_REF_ID" ]
+          "enum" : [ "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "AI_METRICS" ]
         },
         "RefId" : {
-          "$ref" : "#/definitions/RefId",
-          "description" : "A referenceId of the source item."
+          "description" : "A referenceId of the source item.",
+          "$ref" : "#/definitions/RefId"
+        },
+        "ContactField" : {
+          "description" : "",
+          "$ref" : "#/definitions/EvaluationFormContactField"
+        },
+        "ContactAttributeKey" : {
+          "description" : "",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 32767
+        },
+        "SegmentAttributeKey" : {
+          "description" : "",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "EvaluationMetadataField" : {
+          "description" : "",
+          "$ref" : "#/definitions/EvaluationFormEvaluationMetadataField"
+        },
+        "AiMetricsField" : {
+          "description" : "",
+          "$ref" : "#/definitions/EvaluationFormAiMetricsField"
         }
       },
       "required" : [ "Type" ]
+    },
+    "EvaluationFormContactField" : {
+      "description" : "The contact field used by a CONTACT enablement source.",
+      "type" : "string",
+      "enum" : [ "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES" ]
+    },
+    "EvaluationFormEvaluationMetadataField" : {
+      "description" : "The evaluation metadata field used by an EVALUATION_METADATA enablement source.",
+      "type" : "string",
+      "enum" : [ "EVALUATION_TYPE" ]
+    },
+    "EvaluationFormAiMetricsField" : {
+      "description" : "The AI metrics field used by an AI_METRICS enablement source.",
+      "type" : "string",
+      "enum" : [ "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY" ]
     },
     "EvaluationFormItemEnablementSourceValue" : {
       "description" : "An enablement expression source value.",
@@ -402,11 +445,25 @@
         "Type" : {
           "description" : "A type of source item value.",
           "type" : "string",
-          "enum" : [ "OPTION_REF_ID" ]
+          "enum" : [ "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE" ]
         },
         "RefId" : {
           "description" : "A referenceId of the source value.",
           "$ref" : "#/definitions/RefId"
+        },
+        "StringValue" : {
+          "description" : "",
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 512
+        },
+        "NumericValue" : {
+          "description" : "",
+          "type" : "number"
+        },
+        "BooleanValue" : {
+          "description" : "",
+          "type" : "boolean"
         }
       }
     },
@@ -450,7 +507,7 @@
         "Label" : {
           "description" : "The property label of the automation.",
           "type" : "string",
-          "enum" : [ "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" ]
+          "enum" : [ "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY" ]
         }
       },
       "required" : [ "Label" ]

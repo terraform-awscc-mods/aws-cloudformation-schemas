@@ -1,57 +1,7 @@
 {
-  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
-  "tagging" : {
-    "permissions" : [ "fsx:TagResource", "fsx:UntagResource", "fsx:ListTagsForResource" ],
-    "taggable" : true,
-    "tagOnCreate" : true,
-    "tagUpdatable" : true,
-    "tagProperty" : "/properties/Tags",
-    "cloudFormationSystemTags" : true
-  },
-  "handlers" : {
-    "read" : {
-      "permissions" : [ "fsx:DescribeSnapshots", "fsx:ListTagsForResource" ]
-    },
-    "create" : {
-      "permissions" : [ "fsx:CreateSnapshot", "fsx:TagResource", "fsx:DescribeSnapshots" ],
-      "timeoutInMinutes" : 490
-    },
-    "update" : {
-      "permissions" : [ "fsx:UpdateSnapshot", "fsx:TagResource", "fsx:UntagResource", "fsx:DescribeSnapshots" ],
-      "timeoutInMinutes" : 490
-    },
-    "list" : {
-      "permissions" : [ "fsx:DescribeSnapshots" ]
-    },
-    "delete" : {
-      "permissions" : [ "fsx:DeleteSnapshot", "fsx:DescribeSnapshots" ],
-      "timeoutInMinutes" : 70
-    }
-  },
   "typeName" : "AWS::FSx::Snapshot",
-  "readOnlyProperties" : [ "/properties/ResourceARN", "/properties/Id" ],
   "description" : "Resource Type definition for AWS::FSx::Snapshot",
-  "createOnlyProperties" : [ "/properties/VolumeId" ],
-  "additionalProperties" : false,
-  "primaryIdentifier" : [ "/properties/Id" ],
-  "definitions" : {
-    "Tag" : {
-      "additionalProperties" : false,
-      "type" : "object",
-      "properties" : {
-        "Value" : {
-          "description" : "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
-          "type" : "string"
-        },
-        "Key" : {
-          "description" : "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
-          "type" : "string"
-        }
-      },
-      "required" : [ "Value", "Key" ]
-    }
-  },
-  "required" : [ "VolumeId", "Name" ],
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "properties" : {
     "ResourceARN" : {
       "description" : "Returns the snapshot's Amazon Resource Name (ARN).",
@@ -66,9 +16,9 @@
       "type" : "string"
     },
     "Tags" : {
-      "uniqueItems" : false,
       "description" : "A list of Tag values, with a maximum of 50 elements.",
       "type" : "array",
+      "uniqueItems" : false,
       "items" : {
         "$ref" : "#/definitions/Tag"
       }
@@ -76,6 +26,92 @@
     "Name" : {
       "description" : "The name of the snapshot.",
       "type" : "string"
+    },
+    "SnapshotType" : {
+      "description" : "The type of the snapshot: ONTAP for an FSx for NetApp ONTAP volume snapshot, OPENZFS for an FSx for OpenZFS volume snapshot.",
+      "type" : "string"
+    },
+    "OntapConfiguration" : {
+      "description" : "The configuration of an FSx for NetApp ONTAP snapshot. Only for snapshots of ONTAP volumes.",
+      "$ref" : "#/definitions/OntapConfiguration"
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "VolumeId", "Name" ],
+  "readOnlyProperties" : [ "/properties/ResourceARN", "/properties/Id", "/properties/SnapshotType", "/properties/OntapConfiguration/UUID" ],
+  "createOnlyProperties" : [ "/properties/VolumeId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "tagging" : {
+    "taggable" : true,
+    "tagProperty" : "/properties/Tags",
+    "cloudFormationSystemTags" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "permissions" : [ "fsx:TagResource", "fsx:UntagResource", "fsx:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "fsx:CreateSnapshot", "fsx:TagResource", "fsx:DescribeSnapshots" ],
+      "timeoutInMinutes" : 490
+    },
+    "read" : {
+      "permissions" : [ "fsx:DescribeSnapshots", "fsx:ListTagsForResource" ]
+    },
+    "update" : {
+      "permissions" : [ "fsx:UpdateSnapshot", "fsx:TagResource", "fsx:UntagResource", "fsx:DescribeSnapshots" ],
+      "timeoutInMinutes" : 490
+    },
+    "delete" : {
+      "permissions" : [ "fsx:DeleteSnapshot", "fsx:DescribeSnapshots" ],
+      "timeoutInMinutes" : 70
+    },
+    "list" : {
+      "permissions" : [ "fsx:DescribeSnapshots" ]
+    }
+  },
+  "definitions" : {
+    "OntapConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SnapmirrorLabel" : {
+          "description" : "The SnapMirror label of the snapshot. SnapMirror policies use the label to select which snapshots a relationship transfers and retains. After it is set, it can be changed but not removed; removing it from the template leaves the current value.",
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 31
+        },
+        "ExpiryTime" : {
+          "description" : "The ONTAP expiry time of the snapshot. The snapshot can't be deleted before this time. After it is set, it can be changed but not removed; removing it from the template leaves the current value.",
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "SnaplockExpiryTime" : {
+          "description" : "The time until which the snapshot is locked against deletion. Only for volumes with ONTAP snapshot locking enabled. After it is set, it can be changed but not removed; removing it from the template leaves the current value.",
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "UUID" : {
+          "description" : "The ONTAP UUID of the snapshot. Present once the snapshot exists on the file system.",
+          "type" : "string",
+          "maxLength" : 36,
+          "pattern" : "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,36}$"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Key" : {
+          "description" : "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
+          "type" : "string"
+        },
+        "Value" : {
+          "description" : "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
     }
   }
 }

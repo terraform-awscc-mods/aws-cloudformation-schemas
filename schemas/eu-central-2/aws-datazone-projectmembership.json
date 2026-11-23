@@ -55,15 +55,22 @@
     "ProjectIdentifier" : {
       "type" : "string",
       "pattern" : "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "UserCreatedDesignationId" : {
+      "type" : "string",
+      "pattern" : "^[a-zA-Z0-9_-]{1,36}$"
     }
   },
   "required" : [ "Designation", "DomainIdentifier", "ProjectIdentifier", "Member" ],
   "readOnlyProperties" : [ "/properties/MemberIdentifier", "/properties/MemberIdentifierType" ],
-  "writeOnlyProperties" : [ "/properties/Designation", "/properties/Member" ],
+  "writeOnlyProperties" : [ "/properties/Designation", "/properties/Member", "/properties/UserCreatedDesignationId" ],
   "createOnlyProperties" : [ "/properties/DomainIdentifier", "/properties/ProjectIdentifier", "/properties/Member" ],
   "primaryIdentifier" : [ "/properties/DomainIdentifier", "/properties/MemberIdentifier", "/properties/MemberIdentifierType", "/properties/ProjectIdentifier" ],
   "tagging" : {
-    "taggable" : false
+    "taggable" : false,
+    "tagOnCreate" : false,
+    "tagUpdatable" : false,
+    "cloudFormationSystemTags" : false
   },
   "handlers" : {
     "create" : {

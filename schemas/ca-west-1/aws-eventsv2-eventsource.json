@@ -162,12 +162,12 @@
         "Level" : {
           "type" : "string",
           "enum" : [ "OFF", "ERROR", "INFO" ],
-          "description" : "The minimum log level: OFF (no logging), ERROR, or INFO. Records below this level are not emitted. The default is OFF."
+          "description" : "The minimum level of the log records EventBridge emits.\n\nValid values:\n- OFF - No log records are emitted.\n- ERROR - Only error records are emitted.\n- INFO - Error and informational records are emitted.\n\nIf you do not specify a level, EventBridge uses OFF."
         },
         "IncludePayload" : {
           "type" : "string",
           "enum" : [ "FULL", "ON_ERROR_ONLY" ],
-          "description" : "Whether the event payload is included in emitted log records: FULL includes it in every emitted record, and ON_ERROR_ONLY includes it only in error records. The default is ON_ERROR_ONLY."
+          "description" : "Specifies whether the webhook request payload is included in emitted log records.\n\nValid values:\n- FULL - The payload is included in every emitted record.\n- ON_ERROR_ONLY - The payload is included only in error records.\n\nIf you do not specify a value, EventBridge uses ON_ERROR_ONLY."
         }
       },
       "description" : "Log settings for the webhook requests an event source receives."

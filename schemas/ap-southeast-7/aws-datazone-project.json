@@ -29,6 +29,10 @@
         },
         "Designation" : {
           "$ref" : "#/definitions/UserDesignation"
+        },
+        "UserCreatedDesignationId" : {
+          "type" : "string",
+          "pattern" : "^[a-zA-Z0-9_-]{1,36}$"
         }
       },
       "required" : [ "Member", "Designation" ],
