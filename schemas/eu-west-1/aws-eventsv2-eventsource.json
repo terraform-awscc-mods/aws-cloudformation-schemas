@@ -134,6 +134,10 @@
         "DeduplicationConfiguration" : {
           "$ref" : "#/definitions/WebhookDeduplicationConfiguration",
           "description" : "Deduplicates the event source's events on the event bus. If you do not specify a configuration, EventBridge does not deduplicate events."
+        },
+        "LogConfiguration" : {
+          "$ref" : "#/definitions/LogConfiguration",
+          "description" : "The log records Amazon EventBridge delivers for the webhook requests this event source receives. If you do not specify a configuration, EventBridge delivers no logs. Logs are delivered to the destinations you configure with Amazon CloudWatch Logs vended log delivery."
         }
       },
       "required" : [ "AuthConfiguration", "RoleArn" ]
@@ -150,6 +154,23 @@
         }
       },
       "required" : [ "DeduplicationType" ]
+    },
+    "LogConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Level" : {
+          "type" : "string",
+          "enum" : [ "OFF", "ERROR", "INFO" ],
+          "description" : "The minimum log level: OFF (no logging), ERROR, or INFO. Records below this level are not emitted. The default is OFF."
+        },
+        "IncludePayload" : {
+          "type" : "string",
+          "enum" : [ "FULL", "ON_ERROR_ONLY" ],
+          "description" : "Whether the event payload is included in emitted log records: FULL includes it in every emitted record, and ON_ERROR_ONLY includes it only in error records. The default is ON_ERROR_ONLY."
+        }
+      },
+      "description" : "Log settings for the webhook requests an event source receives."
     },
     "WebhookAuthConfiguration" : {
       "description" : "How the provider authenticates its webhook requests. Exactly one of the three variants must be set.",

@@ -638,6 +638,42 @@
       "required" : [ "VolumeName", "MountPath" ],
       "additionalProperties" : false
     },
+    "S3BucketMountConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for mounting an S3 bucket into the session with Mountpoint for Amazon S3",
+      "properties" : {
+        "Bucket" : {
+          "type" : "string",
+          "description" : "Name of the S3 bucket to mount",
+          "minLength" : 3,
+          "maxLength" : 63
+        },
+        "MountPath" : {
+          "$ref" : "#/definitions/MountPath"
+        },
+        "Prefix" : {
+          "type" : "string",
+          "description" : "S3 key prefix to mount. A trailing / is added if missing. May contain the {runtimeSessionId} placeholder, which is replaced with the session ID; that session ID must be 33-256 letters, digits, - or _, starting with a letter or digit. If omitted, the whole bucket is mounted",
+          "minLength" : 1,
+          "maxLength" : 1024,
+          "pattern" : "^[a-zA-Z0-9{][a-zA-Z0-9!_.*'()/{}-]*$"
+        },
+        "S3BucketOwner" : {
+          "type" : "string",
+          "description" : "AWS account ID of the expected bucket owner. Defaults to the runtime's account",
+          "pattern" : "^[0-9]{12}$"
+        },
+        "S3BucketRegion" : {
+          "type" : "string",
+          "description" : "Region of the S3 bucket. Defaults to the runtime's region",
+          "minLength" : 1,
+          "maxLength" : 32,
+          "pattern" : "^([a-z]+-){2,3}\\d+$"
+        }
+      },
+      "required" : [ "Bucket", "MountPath" ],
+      "additionalProperties" : false
+    },
     "FilesystemConfiguration" : {
       "type" : "object",
       "description" : "Filesystem configuration for the runtime",
@@ -653,6 +689,9 @@
         },
         "CapacityProviderVolume" : {
           "$ref" : "#/definitions/CapacityProviderVolumeConfiguration"
+        },
+        "S3BucketMount" : {
+          "$ref" : "#/definitions/S3BucketMountConfiguration"
         }
       },
       "additionalProperties" : false

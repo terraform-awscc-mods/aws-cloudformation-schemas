@@ -51,6 +51,20 @@
       "description" : "The target deployment configuration for the migrated network.",
       "enum" : [ "SINGLE_ACCOUNT", "MULTI_ACCOUNT" ]
     },
+    "VpcProvisioningStrategy" : {
+      "type" : "string",
+      "description" : "Specifies whether to create new target VPCs or use existing ones. CREATE_NEW provisions new target VPCs as part of the migration; USE_EXISTING migrates into existing VPCs in the target account.",
+      "enum" : [ "CREATE_NEW", "USE_EXISTING" ]
+    },
+    "CidrMappings" : {
+      "type" : "array",
+      "description" : "A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings can be provided only when VpcProvisioningStrategy is USE_EXISTING.",
+      "items" : {
+        "$ref" : "#/definitions/CidrMapping"
+      },
+      "minItems" : 0,
+      "maxItems" : 50
+    },
     "ScopeTags" : {
       "$ref" : "#/definitions/ScopeTagsMap",
       "description" : "Scope tags for the network migration definition."
@@ -83,7 +97,7 @@
         "SourceEnvironment" : {
           "type" : "string",
           "description" : "The source environment type.",
-          "enum" : [ "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT" ]
+          "enum" : [ "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR" ]
         },
         "SourceS3Configuration" : {
           "$ref" : "#/definitions/SourceS3Configuration"
@@ -169,6 +183,28 @@
         }
       },
       "required" : [ "Topology" ],
+      "additionalProperties" : false
+    },
+    "CidrMapping" : {
+      "type" : "object",
+      "description" : "Maps a source CIDR range to the corresponding target CIDR range to use in the target network.",
+      "properties" : {
+        "OriginalCidr" : {
+          "type" : "string",
+          "description" : "The original CIDR range in the source network.",
+          "minLength" : 9,
+          "maxLength" : 18,
+          "pattern" : "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"
+        },
+        "UpdatedCidr" : {
+          "type" : "string",
+          "description" : "The updated CIDR range to use in the target network.",
+          "minLength" : 9,
+          "maxLength" : 18,
+          "pattern" : "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"
+        }
+      },
+      "required" : [ "OriginalCidr", "UpdatedCidr" ],
       "additionalProperties" : false
     },
     "ScopeTagsMap" : {

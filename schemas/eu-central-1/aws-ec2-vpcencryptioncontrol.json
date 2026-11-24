@@ -58,6 +58,12 @@
         },
         "Lambda" : {
           "$ref" : "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "GlobalAccelerator" : {
+          "$ref" : "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "ApiGatewayV2" : {
+          "$ref" : "#/definitions/VpcEncryptionControlExclusion"
         }
       }
     },
@@ -146,6 +152,16 @@
       "type" : "string",
       "enum" : [ "enable", "disable" ]
     },
+    "GlobalAcceleratorExclusionInput" : {
+      "description" : "Used to enable or disable Global Accelerator exclusion",
+      "type" : "string",
+      "enum" : [ "enable", "disable" ]
+    },
+    "ApiGatewayV2ExclusionInput" : {
+      "description" : "Used to enable or disable API Gateway V2 exclusion",
+      "type" : "string",
+      "enum" : [ "enable", "disable" ]
+    },
     "ResourceExclusions" : {
       "description" : "Enumerates the states of all the VPC encryption control resource exclusions",
       "$ref" : "#/definitions/ResourceExclusions"
@@ -154,8 +170,8 @@
   "additionalProperties" : false,
   "required" : [ ],
   "createOnlyProperties" : [ "/properties/VpcId" ],
-  "readOnlyProperties" : [ "/properties/VpcEncryptionControlId", "/properties/State", "/properties/StateMessage", "/properties/ResourceExclusions", "/properties/ResourceExclusions/InternetGateway", "/properties/ResourceExclusions/InternetGateway/State", "/properties/ResourceExclusions/InternetGateway/StateMessage", "/properties/ResourceExclusions/EgressOnlyInternetGateway", "/properties/ResourceExclusions/EgressOnlyInternetGateway/State", "/properties/ResourceExclusions/EgressOnlyInternetGateway/StateMessage", "/properties/ResourceExclusions/NatGateway", "/properties/ResourceExclusions/NatGateway/State", "/properties/ResourceExclusions/NatGateway/StateMessage", "/properties/ResourceExclusions/VirtualPrivateGateway", "/properties/ResourceExclusions/VirtualPrivateGateway/State", "/properties/ResourceExclusions/VirtualPrivateGateway/StateMessage", "/properties/ResourceExclusions/VpcPeering", "/properties/ResourceExclusions/VpcPeering/State", "/properties/ResourceExclusions/VpcPeering/StateMessage", "/properties/ResourceExclusions/VpcLattice", "/properties/ResourceExclusions/VpcLattice/State", "/properties/ResourceExclusions/VpcLattice/StateMessage", "/properties/ResourceExclusions/ElasticFileSystem", "/properties/ResourceExclusions/ElasticFileSystem/State", "/properties/ResourceExclusions/ElasticFileSystem/StateMessage", "/properties/ResourceExclusions/Lambda", "/properties/ResourceExclusions/Lambda/State", "/properties/ResourceExclusions/Lambda/StateMessage" ],
-  "writeOnlyProperties" : [ "/properties/InternetGatewayExclusionInput", "/properties/EgressOnlyInternetGatewayExclusionInput", "/properties/NatGatewayExclusionInput", "/properties/VirtualPrivateGatewayExclusionInput", "/properties/VpcPeeringExclusionInput", "/properties/VpcLatticeExclusionInput", "/properties/ElasticFileSystemExclusionInput", "/properties/LambdaExclusionInput" ],
+  "readOnlyProperties" : [ "/properties/VpcEncryptionControlId", "/properties/State", "/properties/StateMessage", "/properties/ResourceExclusions", "/properties/ResourceExclusions/InternetGateway", "/properties/ResourceExclusions/InternetGateway/State", "/properties/ResourceExclusions/InternetGateway/StateMessage", "/properties/ResourceExclusions/EgressOnlyInternetGateway", "/properties/ResourceExclusions/EgressOnlyInternetGateway/State", "/properties/ResourceExclusions/EgressOnlyInternetGateway/StateMessage", "/properties/ResourceExclusions/NatGateway", "/properties/ResourceExclusions/NatGateway/State", "/properties/ResourceExclusions/NatGateway/StateMessage", "/properties/ResourceExclusions/VirtualPrivateGateway", "/properties/ResourceExclusions/VirtualPrivateGateway/State", "/properties/ResourceExclusions/VirtualPrivateGateway/StateMessage", "/properties/ResourceExclusions/VpcPeering", "/properties/ResourceExclusions/VpcPeering/State", "/properties/ResourceExclusions/VpcPeering/StateMessage", "/properties/ResourceExclusions/VpcLattice", "/properties/ResourceExclusions/VpcLattice/State", "/properties/ResourceExclusions/VpcLattice/StateMessage", "/properties/ResourceExclusions/ElasticFileSystem", "/properties/ResourceExclusions/ElasticFileSystem/State", "/properties/ResourceExclusions/ElasticFileSystem/StateMessage", "/properties/ResourceExclusions/Lambda", "/properties/ResourceExclusions/Lambda/State", "/properties/ResourceExclusions/Lambda/StateMessage", "/properties/ResourceExclusions/GlobalAccelerator", "/properties/ResourceExclusions/GlobalAccelerator/State", "/properties/ResourceExclusions/GlobalAccelerator/StateMessage", "/properties/ResourceExclusions/ApiGatewayV2", "/properties/ResourceExclusions/ApiGatewayV2/State", "/properties/ResourceExclusions/ApiGatewayV2/StateMessage" ],
+  "writeOnlyProperties" : [ "/properties/InternetGatewayExclusionInput", "/properties/EgressOnlyInternetGatewayExclusionInput", "/properties/NatGatewayExclusionInput", "/properties/VirtualPrivateGatewayExclusionInput", "/properties/VpcPeeringExclusionInput", "/properties/VpcLatticeExclusionInput", "/properties/ElasticFileSystemExclusionInput", "/properties/LambdaExclusionInput", "/properties/GlobalAcceleratorExclusionInput", "/properties/ApiGatewayV2ExclusionInput" ],
   "primaryIdentifier" : [ "/properties/VpcEncryptionControlId" ],
   "handlers" : {
     "create" : {

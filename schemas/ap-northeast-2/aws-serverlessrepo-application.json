@@ -82,7 +82,7 @@
   },
   "handlers" : {
     "create" : {
-      "permissions" : [ "serverlessrepo:CreateApplication", "serverlessrepo:GetApplication", "serverlessrepo:ListApplications" ]
+      "permissions" : [ "serverlessrepo:CreateApplication", "serverlessrepo:GetApplication" ]
     },
     "read" : {
       "permissions" : [ "serverlessrepo:GetApplication" ]
@@ -91,7 +91,7 @@
       "permissions" : [ "serverlessrepo:UpdateApplication" ]
     },
     "delete" : {
-      "permissions" : [ "serverlessrepo:DeleteApplication", "serverlessrepo:ListApplications" ]
+      "permissions" : [ "serverlessrepo:DeleteApplication" ]
     },
     "list" : {
       "permissions" : [ "serverlessrepo:ListApplications" ]

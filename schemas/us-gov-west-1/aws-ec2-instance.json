@@ -8,10 +8,11 @@
     "cloudFormationSystemTags" : true
   },
   "$schema" : "https://schema.cloudformation.us-east-1.amazonaws.com/provider.definition.schema.v1.json",
+  "deprecatedProperties" : [ "/properties/ElasticGpuSpecifications", "/properties/ElasticInferenceAccelerators" ],
   "typeName" : "AWS::EC2::Instance",
   "readOnlyProperties" : [ "/properties/InstanceId", "/properties/PrivateIp", "/properties/PublicDnsName", "/properties/PublicIp", "/properties/PrivateDnsName", "/properties/VpcId", "/properties/State" ],
   "description" : "Resource Type definition for AWS::EC2::Instance",
-  "createOnlyProperties" : [ "/properties/AvailabilityZone", "/properties/CpuOptions", "/properties/ElasticGpuSpecifications", "/properties/ElasticInferenceAccelerators", "/properties/EnclaveOptions", "/properties/HibernationOptions", "/properties/HostResourceGroupArn", "/properties/ImageId", "/properties/Ipv6AddressCount", "/properties/Ipv6Addresses", "/properties/KeyName", "/properties/LaunchTemplate", "/properties/LicenseSpecifications", "/properties/NetworkInterfaces", "/properties/PlacementGroupName", "/properties/PrivateIpAddress", "/properties/SecurityGroups", "/properties/SubnetId" ],
+  "createOnlyProperties" : [ "/properties/AvailabilityZone", "/properties/AvailabilityZoneId", "/properties/CpuOptions", "/properties/ElasticGpuSpecifications", "/properties/ElasticInferenceAccelerators", "/properties/EnclaveOptions", "/properties/HibernationOptions", "/properties/HostResourceGroupArn", "/properties/ImageId", "/properties/Ipv6AddressCount", "/properties/Ipv6Addresses", "/properties/KeyName", "/properties/LaunchTemplate", "/properties/LicenseSpecifications", "/properties/NetworkInterfaces", "/properties/PlacementGroupName", "/properties/PrivateIpAddress", "/properties/SecurityGroups", "/properties/SubnetId" ],
   "primaryIdentifier" : [ "/properties/InstanceId" ],
   "conditionalCreateOnlyProperties" : [ "/properties/AdditionalInfo", "/properties/Affinity", "/properties/EbsOptimized", "/properties/HostId", "/properties/InstanceType", "/properties/KernelId", "/properties/PrivateDnsNameOptions", "/properties/RamdiskId", "/properties/Tenancy", "/properties/UserData", "/properties/BlockDeviceMappings", "/properties/SecurityGroupIds" ],
   "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2.git",
@@ -20,7 +21,7 @@
       "permissions" : [ "ec2:DescribeNetworkInterfaces", "ec2:DescribeVolumes", "ec2:DescribeInstances", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceCreditSpecifications", "ec2:DescribeLaunchTemplates", "ssm:DescribeAssociation", "ssm:ListAssociations" ]
     },
     "create" : {
-      "permissions" : [ "iam:PassRole", "ec2:ModifyPrivateDnsNameOptions", "ec2:DescribeNetworkInterfaces", "ec2:DescribeVolumes", "ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:DescribeIamInstanceProfileAssociations", "ec2:DescribeInstances", "ec2:DescribeSubnets", "ec2:DescribeKeyPairs", "ec2:DescribeSecurityGroups", "ec2:DescribeVpcs", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceCreditSpecifications", "ec2:DescribeLaunchTemplates", "ec2:DescribeLaunchTemplateVersions", "ec2:DetachVolume", "ec2:DisassociateIamInstanceProfile", "ec2:ModifyInstanceAttribute", "ec2:ModifyInstanceCreditSpecification", "ec2:ModifyInstancePlacement", "ec2:MonitorInstances", "ec2:AttachVolume", "ec2:CreateTags", "ec2:ReplaceIamInstanceProfileAssociation", "ec2:StartInstances", "ssm:CreateAssociation", "ssm:DescribeAssociation", "ssm:ListAssociations" ]
+      "permissions" : [ "iam:PassRole", "ec2:ModifyPrivateDnsNameOptions", "ec2:DescribeNetworkInterfaces", "ec2:DescribeVolumes", "ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:DescribeIamInstanceProfileAssociations", "ec2:DescribeInstances", "ec2:DescribeSubnets", "ec2:DescribeKeyPairs", "ec2:DescribeSecurityGroups", "ec2:DescribeVpcs", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceStatus", "ec2:DescribeInstanceCreditSpecifications", "ec2:DescribeLaunchTemplates", "ec2:DescribeLaunchTemplateVersions", "ec2:DetachVolume", "ec2:DisassociateIamInstanceProfile", "ec2:ModifyInstanceAttribute", "ec2:ModifyInstanceCreditSpecification", "ec2:ModifyInstancePlacement", "ec2:MonitorInstances", "ec2:AttachVolume", "ec2:CreateTags", "ec2:ReplaceIamInstanceProfileAssociation", "ec2:StartInstances", "ssm:CreateAssociation", "ssm:DescribeAssociation", "ssm:ListAssociations" ]
     },
     "update" : {
       "permissions" : [ "ec2:ModifyPrivateDnsNameOptions", "ec2:DescribeNetworkInterfaces", "ec2:AssociateIamInstanceProfile", "ec2:DescribeIamInstanceProfileAssociations", "ec2:DescribeInstances", "ec2:DescribeSubnets", "ec2:DescribeKeyPairs", "ec2:DescribeSecurityGroups", "ec2:DescribeVpcs", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceCreditSpecifications", "ec2:DescribeLaunchTemplates", "ec2:DetachVolume", "ec2:DisassociateIamInstanceProfile", "ec2:ModifyInstanceAttribute", "ec2:ModifyInstanceCreditSpecification", "ec2:ModifyInstanceMaintenanceOptions", "ec2:ModifyInstanceMetadataOptions", "ec2:ModifyInstancePlacement", "ec2:MonitorInstances", "ec2:AttachVolume", "ec2:CreateTags", "ec2:DeleteTags", "ec2:ReplaceIamInstanceProfileAssociation", "ec2:StartInstances", "ec2:StopInstances", "ec2:UnmonitorInstances", "ssm:CreateAssociation", "ssm:DeleteAssociation", "ssm:DescribeAssociation", "ssm:ListAssociations" ]
@@ -32,7 +33,7 @@
       "permissions" : [ "ec2:DescribeInstances", "ec2:TerminateInstances", "ec2:DescribeNetworkInterfaces", "ec2:DescribeVolumes", "ec2:DescribeInstances", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceCreditSpecifications", "ec2:DescribeLaunchTemplates", "ssm:DescribeAssociation", "ssm:ListAssociations" ]
     }
   },
-  "writeOnlyProperties" : [ "/properties/BlockDeviceMappings/*/NoDevice", "/properties/BlockDeviceMappings/*/VirtualName", "/properties/LicenseSpecification", "/properties/AdditionalInfo", "/properties/Ipv6AddressCount", "/properties/Ipv6Addresses", "/properties/PropagateTagsToVolumeOnCreation", "/properties/LaunchTemplate" ],
+  "writeOnlyProperties" : [ "/properties/BlockDeviceMappings/*/NoDevice", "/properties/BlockDeviceMappings/*/VirtualName", "/properties/LicenseSpecifications", "/properties/AdditionalInfo", "/properties/Ipv6AddressCount", "/properties/Ipv6Addresses", "/properties/PropagateTagsToVolumeOnCreation", "/properties/LaunchTemplate" ],
   "additionalProperties" : false,
   "definitions" : {
     "LaunchTemplateSpecification" : {
@@ -366,6 +367,10 @@
           "description" : "Indicates whether the volume should be encrypted.",
           "type" : "boolean"
         },
+        "Throughput" : {
+          "description" : "The throughput that the volume supports, in MiB/s. This parameter is valid only for gp3 volumes. Valid Range: minimum value of 125, maximum value of 2000.",
+          "type" : "integer"
+        },
         "Iops" : {
           "description" : "The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.",
           "type" : "integer"
@@ -505,8 +510,12 @@
         }
       }
     },
+    "AvailabilityZoneId" : {
+      "description" : "The ID of the Availability Zone of the instance. \n\nOn input, you can specify AvailabilityZone or AvailabilityZoneId, but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone for you.",
+      "type" : "string"
+    },
     "AvailabilityZone" : {
-      "description" : "The Availability Zone of the instance.",
+      "description" : "The Availability Zone of the instance. \n\nOn input, you can specify AvailabilityZone or AvailabilityZoneId, but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone for you.",
       "type" : "string"
     },
     "PrivateDnsNameOptions" : {

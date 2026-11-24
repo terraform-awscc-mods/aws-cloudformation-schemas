@@ -379,10 +379,6 @@
         "ProjectDesignation" : {
           "$ref" : "#/definitions/ProjectDesignation"
         },
-        "UserCreatedDesignationId" : {
-          "type" : "string",
-          "pattern" : "^[a-zA-Z0-9_-]{1,36}$"
-        },
         "ProjectIdentifier" : {
           "type" : "string",
           "pattern" : "^[a-zA-Z0-9_-]{1,36}$"
