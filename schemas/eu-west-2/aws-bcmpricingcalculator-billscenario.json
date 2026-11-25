@@ -122,7 +122,7 @@
       "permissions" : [ "bcm-pricing-calculator:UpdateBillScenario", "bcm-pricing-calculator:GetBillScenario", "bcm-pricing-calculator:TagResource", "bcm-pricing-calculator:UntagResource", "bcm-pricing-calculator:ListTagsForResource" ]
     },
     "delete" : {
-      "permissions" : [ "bcm-pricing-calculator:DeleteBillScenario", "bcm-pricing-calculator:GetBillScenario" ]
+      "permissions" : [ "bcm-pricing-calculator:DeleteBillScenario", "bcm-pricing-calculator:GetBillScenario", "bcm-pricing-calculator:ListTagsForResource" ]
     },
     "list" : {
       "permissions" : [ "bcm-pricing-calculator:ListBillScenarios" ]

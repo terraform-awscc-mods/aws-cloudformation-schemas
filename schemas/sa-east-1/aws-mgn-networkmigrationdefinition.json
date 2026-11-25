@@ -97,7 +97,7 @@
         "SourceEnvironment" : {
           "type" : "string",
           "description" : "The source environment type.",
-          "enum" : [ "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR" ]
+          "enum" : [ "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS" ]
         },
         "SourceS3Configuration" : {
           "$ref" : "#/definitions/SourceS3Configuration"
