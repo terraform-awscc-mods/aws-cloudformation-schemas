@@ -63,6 +63,15 @@
       "minItems" : 0,
       "maxItems" : 5
     },
+    "PillarPriorities" : {
+      "type" : "array",
+      "description" : "The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its pillar ID.",
+      "items" : {
+        "type" : "string",
+        "minLength" : 1,
+        "maxLength" : 64
+      }
+    },
     "ArchitecturalDesign" : {
       "type" : "string",
       "description" : "The URL of the architectural design for the workload.",
@@ -124,6 +133,18 @@
       },
       "additionalProperties" : false
     },
+    "ProfileArns" : {
+      "type" : "array",
+      "description" : "The list of profile ARNs associated with the workload.",
+      "items" : {
+        "type" : "string",
+        "minLength" : 0,
+        "maxLength" : 2084,
+        "pattern" : "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$"
+      },
+      "minItems" : 0,
+      "maxItems" : 1
+    },
     "Tags" : {
       "type" : "array",
       "description" : "The tags associated with the workload.",
@@ -150,7 +171,7 @@
   "required" : [ "WorkloadName", "Description", "Environment", "Lenses" ],
   "additionalProperties" : false,
   "readOnlyProperties" : [ "/properties/WorkloadArn", "/properties/WorkloadId", "/properties/ImprovementStatus" ],
-  "createOnlyProperties" : [ "/properties/Lenses" ],
+  "createOnlyProperties" : [ "/properties/Lenses", "/properties/ProfileArns" ],
   "primaryIdentifier" : [ "/properties/WorkloadArn" ],
   "additionalIdentifiers" : [ [ "/properties/WorkloadId" ] ],
   "tagging" : {

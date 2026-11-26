@@ -2,6 +2,9 @@
   "tagging" : {
     "taggable" : false
   },
+  "propertyTransform" : {
+    "/properties/FunctionName" : "$substringAfter(FunctionName, \":web-function/\")"
+  },
   "handlers" : {
     "read" : {
       "permissions" : [ "lambda:GetWebFunctionRevision", "kms:Decrypt" ]
@@ -83,6 +86,7 @@
       "required" : [ "Bucket", "Key" ]
     }
   },
+  "required" : [ "FunctionName", "BuildConfig", "ServiceConfig" ],
   "properties" : {
     "FunctionName" : {
       "minLength" : 1,
@@ -229,6 +233,5 @@
       "type" : "string",
       "maxLength" : 256
     }
-  },
-  "required" : [ "FunctionName", "BuildConfig", "ServiceConfig" ]
+  }
 }

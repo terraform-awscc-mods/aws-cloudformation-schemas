@@ -1,0 +1,156 @@
+{
+  "typeName" : "AWS::ODB::AutonomousDatabaseBackup",
+  "description" : "A backup of an Oracle Database@AWS Autonomous Database.",
+  "sourceUrl" : "https://docs.aws.amazon.com/odb/latest/APIReference/API_CreateAutonomousDatabaseBackup.html",
+  "definitions" : {
+    "Tag" : {
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The key of the tag.",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The value of the tag.",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "Key", "Value" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "AutonomousDatabaseBackupArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the Autonomous Database backup.",
+      "minLength" : 20,
+      "maxLength" : 2048,
+      "pattern" : "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}$"
+    },
+    "AutonomousDatabaseBackupId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the Autonomous Database backup.",
+      "minLength" : 6,
+      "maxLength" : 64,
+      "pattern" : "^[a-zA-Z0-9_~.-]+$"
+    },
+    "AutonomousDatabaseId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the Autonomous Database that the backup was created from.",
+      "minLength" : 6,
+      "maxLength" : 64,
+      "pattern" : "^[a-zA-Z0-9_~.-]+$"
+    },
+    "Ocid" : {
+      "type" : "string",
+      "description" : "The Oracle Cloud Identifier (OCID) of the Autonomous Database backup."
+    },
+    "DisplayName" : {
+      "type" : "string",
+      "description" : "The user-friendly name of the Autonomous Database backup.",
+      "minLength" : 1,
+      "maxLength" : 255,
+      "pattern" : "^[a-zA-Z_](?!.*--)[a-zA-Z0-9_-]*$"
+    },
+    "DbVersion" : {
+      "type" : "string",
+      "description" : "The Oracle Database software version of the Autonomous Database backup."
+    },
+    "Status" : {
+      "type" : "string",
+      "description" : "The current status of the Autonomous Database backup.",
+      "enum" : [ "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED" ]
+    },
+    "IsAutomatic" : {
+      "type" : "boolean",
+      "description" : "Indicates whether the backup was created automatically."
+    },
+    "RetentionPeriodInDays" : {
+      "type" : "integer",
+      "description" : "The retention period, in days, for the Autonomous Database backup.",
+      "minimum" : 90,
+      "maximum" : 3650
+    },
+    "SizeInTBs" : {
+      "type" : "number",
+      "description" : "The size of the Autonomous Database backup, in terabytes (TB)."
+    },
+    "TimeAvailableTill" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The date and time until which the Autonomous Database backup is available for restore."
+    },
+    "TimeStarted" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The date and time when the Autonomous Database backup started."
+    },
+    "TimeEnded" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The date and time when the Autonomous Database backup ended."
+    },
+    "Type" : {
+      "type" : "string",
+      "description" : "The type of the Autonomous Database backup.",
+      "enum" : [ "INCREMENTAL", "FULL", "LONGTERM", "VIRTUAL_FULL", "CUMULATIVE_INCREMENTAL", "ROLL_FORWARD_IMAGE_COPY" ]
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "The list of resource tags applied to the Autonomous Database backup.",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      },
+      "uniqueItems" : true,
+      "insertionOrder" : false,
+      "maxItems" : 200
+    }
+  },
+  "required" : [ "AutonomousDatabaseId" ],
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/AutonomousDatabaseBackupArn", "/properties/AutonomousDatabaseBackupId", "/properties/Ocid", "/properties/DbVersion", "/properties/Status", "/properties/IsAutomatic", "/properties/SizeInTBs", "/properties/TimeAvailableTill", "/properties/TimeStarted", "/properties/TimeEnded", "/properties/Type" ],
+  "createOnlyProperties" : [ "/properties/AutonomousDatabaseId", "/properties/DisplayName" ],
+  "primaryIdentifier" : [ "/properties/AutonomousDatabaseBackupArn" ],
+  "additionalIdentifiers" : [ [ "/properties/AutonomousDatabaseBackupId" ] ],
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "odb:TagResource", "odb:UntagResource", "odb:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "odb:CreateAutonomousDatabaseBackup", "odb:GetAutonomousDatabaseBackup", "odb:TagResource", "odb:ListTagsForResource", "iam:CreateServiceLinkedRole" ]
+    },
+    "read" : {
+      "permissions" : [ "odb:GetAutonomousDatabaseBackup", "odb:ListTagsForResource" ]
+    },
+    "update" : {
+      "permissions" : [ "odb:UpdateAutonomousDatabaseBackup", "odb:GetAutonomousDatabaseBackup", "odb:TagResource", "odb:UntagResource", "odb:ListTagsForResource" ]
+    },
+    "delete" : {
+      "permissions" : [ "odb:DeleteAutonomousDatabaseBackup", "odb:GetAutonomousDatabaseBackup", "odb:ListTagsForResource" ]
+    },
+    "list" : {
+      "permissions" : [ "odb:ListAutonomousDatabaseBackups" ],
+      "handlerSchema" : {
+        "properties" : {
+          "AutonomousDatabaseId" : {
+            "type" : "string",
+            "description" : "The unique identifier of the Autonomous Database whose backups you want to list.",
+            "minLength" : 6,
+            "maxLength" : 64,
+            "pattern" : "^[a-zA-Z0-9_~.-]+$"
+          }
+        },
+        "required" : [ "AutonomousDatabaseId" ]
+      }
+    }
+  }
+}

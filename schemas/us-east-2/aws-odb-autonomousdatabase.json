@@ -1,0 +1,968 @@
+{
+  "typeName" : "AWS::ODB::AutonomousDatabase",
+  "description" : "The AWS::ODB::AutonomousDatabase resource creates an Oracle Database@AWS Autonomous Database.",
+  "sourceUrl" : "https://docs.aws.amazon.com/odb/latest/APIReference/API_CreateAutonomousDatabase.html",
+  "definitions" : {
+    "SourceConfiguration" : {
+      "type" : "object",
+      "description" : "The source configuration used to create the Autonomous Database from an existing database, a backup, or a cross-Region peer. Specify exactly one member, matching the Source property.",
+      "additionalProperties" : false,
+      "properties" : {
+        "DatabaseClone" : {
+          "$ref" : "#/definitions/DatabaseCloneConfiguration",
+          "description" : "Configuration for cloning an existing Autonomous Database."
+        },
+        "RestoreFromBackup" : {
+          "$ref" : "#/definitions/RestoreFromBackupConfiguration",
+          "description" : "Configuration for creating an Autonomous Database from a backup."
+        },
+        "PointInTimeRestore" : {
+          "$ref" : "#/definitions/PointInTimeRestoreConfiguration",
+          "description" : "Configuration for creating an Autonomous Database from a point in time."
+        },
+        "CrossRegionDataGuard" : {
+          "$ref" : "#/definitions/CrossRegionDataGuardConfiguration",
+          "description" : "Configuration for creating a cross-Region Autonomous Data Guard standby."
+        },
+        "CrossRegionDisasterRecovery" : {
+          "$ref" : "#/definitions/CrossRegionDisasterRecoveryConfiguration",
+          "description" : "Configuration for creating a cross-Region disaster recovery peer."
+        },
+        "CloneToRefreshable" : {
+          "$ref" : "#/definitions/CloneToRefreshableConfiguration",
+          "description" : "Configuration for creating a refreshable clone."
+        }
+      }
+    },
+    "DatabaseCloneConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for cloning an existing Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourceAutonomousDatabaseId" : {
+          "type" : "string",
+          "description" : "The ID or ARN of the source Autonomous Database to clone from.",
+          "minLength" : 6,
+          "maxLength" : 2048,
+          "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+        },
+        "CloneType" : {
+          "type" : "string",
+          "description" : "The type of clone to create.",
+          "enum" : [ "FULL", "METADATA", "PARTIAL" ]
+        }
+      },
+      "required" : [ "SourceAutonomousDatabaseId", "CloneType" ]
+    },
+    "RestoreFromBackupConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for creating an Autonomous Database from a backup.",
+      "additionalProperties" : false,
+      "properties" : {
+        "AutonomousDatabaseBackupId" : {
+          "type" : "string",
+          "description" : "The ID or ARN of the Autonomous Database backup to restore from.",
+          "minLength" : 6,
+          "maxLength" : 2048,
+          "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+        },
+        "CloneType" : {
+          "type" : "string",
+          "description" : "The type of clone to create.",
+          "enum" : [ "FULL", "METADATA", "PARTIAL" ]
+        },
+        "CloneTableSpaceList" : {
+          "type" : "array",
+          "description" : "The list of tablespace numbers to clone.",
+          "insertionOrder" : false,
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "required" : [ "AutonomousDatabaseBackupId", "CloneType" ]
+    },
+    "PointInTimeRestoreConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for creating an Autonomous Database from a point in time.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourceAutonomousDatabaseId" : {
+          "type" : "string",
+          "description" : "The ID or ARN of the source Autonomous Database.",
+          "minLength" : 6,
+          "maxLength" : 2048,
+          "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+        },
+        "CloneType" : {
+          "type" : "string",
+          "description" : "The type of clone to create.",
+          "enum" : [ "FULL", "METADATA", "PARTIAL" ]
+        },
+        "Timestamp" : {
+          "type" : "string",
+          "description" : "The point in time to which the Autonomous Database is restored.",
+          "format" : "date-time"
+        },
+        "UseLatestAvailableBackupTimestamp" : {
+          "type" : "boolean",
+          "description" : "Indicates whether to restore to the latest available backup timestamp."
+        },
+        "CloneTableSpaceList" : {
+          "type" : "array",
+          "description" : "The list of tablespace numbers to clone.",
+          "insertionOrder" : false,
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "required" : [ "SourceAutonomousDatabaseId", "CloneType" ]
+    },
+    "CrossRegionDataGuardConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for creating a cross-Region Autonomous Data Guard standby.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourceAutonomousDatabaseArn" : {
+          "type" : "string",
+          "description" : "The ARN of the source Autonomous Database.",
+          "minLength" : 20,
+          "maxLength" : 2048
+        }
+      },
+      "required" : [ "SourceAutonomousDatabaseArn" ]
+    },
+    "CrossRegionDisasterRecoveryConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for creating a cross-Region disaster recovery peer.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourceAutonomousDatabaseArn" : {
+          "type" : "string",
+          "description" : "The ARN of the source Autonomous Database.",
+          "minLength" : 20,
+          "maxLength" : 2048
+        },
+        "RemoteDisasterRecoveryType" : {
+          "type" : "string",
+          "description" : "The type of disaster recovery.",
+          "enum" : [ "ADG", "BACKUP_BASED" ]
+        },
+        "IsReplicateAutomaticBackups" : {
+          "type" : "boolean",
+          "description" : "Indicates whether automatic backups are replicated to the peer."
+        }
+      },
+      "required" : [ "SourceAutonomousDatabaseArn", "RemoteDisasterRecoveryType" ]
+    },
+    "CloneToRefreshableConfiguration" : {
+      "type" : "object",
+      "description" : "Configuration for creating a refreshable clone.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SourceAutonomousDatabaseId" : {
+          "type" : "string",
+          "description" : "The ID or ARN of the source Autonomous Database.",
+          "minLength" : 6,
+          "maxLength" : 2048,
+          "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+        },
+        "RefreshableMode" : {
+          "type" : "string",
+          "description" : "The refresh mode of the clone.",
+          "enum" : [ "AUTOMATIC", "MANUAL" ]
+        },
+        "AutoRefreshFrequencyInSeconds" : {
+          "type" : "integer",
+          "description" : "The frequency of automatic refresh, in seconds.",
+          "minimum" : 3600,
+          "maximum" : 604800
+        },
+        "AutoRefreshPointLagInSeconds" : {
+          "type" : "integer",
+          "description" : "The maximum lag for automatic refresh, in seconds.",
+          "minimum" : 0,
+          "maximum" : 604800
+        },
+        "TimeOfAutoRefreshStart" : {
+          "type" : "string",
+          "description" : "The time at which automatic refresh starts.",
+          "format" : "date-time"
+        },
+        "OpenMode" : {
+          "type" : "string",
+          "description" : "The open mode of the clone.",
+          "enum" : [ "READ_ONLY", "READ_WRITE" ]
+        },
+        "CloneType" : {
+          "type" : "string",
+          "description" : "The type of clone to create.",
+          "enum" : [ "FULL", "METADATA", "PARTIAL" ]
+        }
+      },
+      "required" : [ "SourceAutonomousDatabaseId" ]
+    },
+    "EncryptionKeyConfiguration" : {
+      "type" : "object",
+      "description" : "The customer-managed encryption key configuration for the Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "AwsEncryptionKey" : {
+          "$ref" : "#/definitions/AwsEncryptionKeyConfiguration",
+          "description" : "The AWS KMS encryption key configuration."
+        }
+      }
+    },
+    "AwsEncryptionKeyConfiguration" : {
+      "type" : "object",
+      "description" : "The AWS KMS encryption key configuration for the Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "IamRoleArn" : {
+          "type" : "string",
+          "description" : "The ARN of the IAM role that grants access to the AWS KMS key.",
+          "minLength" : 20,
+          "maxLength" : 2048,
+          "pattern" : "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalIdType" : {
+          "type" : "string",
+          "description" : "The type of external ID used for the role assumption.",
+          "enum" : [ "database_ocid", "compartment_ocid", "tenant_ocid" ]
+        },
+        "KmsKeyId" : {
+          "type" : "string",
+          "description" : "The ID or ARN of the AWS KMS key.",
+          "minLength" : 1,
+          "maxLength" : 2048,
+          "pattern" : "^[a-zA-Z0-9_:./-]+$"
+        }
+      }
+    },
+    "AdminPasswordSourceConfiguration" : {
+      "type" : "object",
+      "description" : "The AWS Secrets Manager configuration for the ADMIN password.",
+      "additionalProperties" : false,
+      "properties" : {
+        "SecretArn" : {
+          "type" : "string",
+          "description" : "The ARN of the AWS Secrets Manager secret that contains the ADMIN password.",
+          "minLength" : 1,
+          "maxLength" : 2048
+        },
+        "IamRoleArn" : {
+          "type" : "string",
+          "description" : "The ARN of the IAM role that grants access to the secret.",
+          "minLength" : 20,
+          "maxLength" : 2048,
+          "pattern" : "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalIdType" : {
+          "type" : "string",
+          "description" : "The type of external ID used for the role assumption.",
+          "enum" : [ "database_ocid", "compartment_ocid", "tenant_ocid" ]
+        }
+      },
+      "required" : [ "SecretArn" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "description" : "A key-value pair to associate with a resource.",
+      "additionalProperties" : false,
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "description" : "The key of the tag.",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "description" : "The value of the tag.",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "required" : [ "Key", "Value" ]
+    },
+    "CustomerContact" : {
+      "type" : "object",
+      "description" : "A contact to receive notification from Oracle about maintenance updates.",
+      "additionalProperties" : false,
+      "properties" : {
+        "Email" : {
+          "type" : "string",
+          "description" : "The email address of the contact.",
+          "minLength" : 1,
+          "maxLength" : 320
+        }
+      }
+    },
+    "ScheduledOperationDetails" : {
+      "type" : "object",
+      "description" : "The scheduling details for a scheduled start or stop of the Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "DayOfWeek" : {
+          "type" : "string",
+          "description" : "The day of the week for the scheduled operation.",
+          "enum" : [ "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY" ]
+        },
+        "ScheduledStartTime" : {
+          "type" : "string",
+          "description" : "The scheduled start time, in hh:mm format."
+        },
+        "ScheduledStopTime" : {
+          "type" : "string",
+          "description" : "The scheduled stop time, in hh:mm format."
+        }
+      },
+      "required" : [ "DayOfWeek" ]
+    },
+    "LongTermBackupSchedule" : {
+      "type" : "object",
+      "description" : "The long-term backup schedule configuration.",
+      "additionalProperties" : false,
+      "properties" : {
+        "IsDisabled" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the long-term backup schedule is disabled."
+        },
+        "RepeatCadence" : {
+          "type" : "string",
+          "description" : "The repeat cadence of the long-term backup schedule.",
+          "enum" : [ "ONE_TIME", "WEEKLY", "MONTHLY", "YEARLY" ]
+        },
+        "RetentionPeriodInDays" : {
+          "type" : "integer",
+          "description" : "The retention period, in days, for long-term backups.",
+          "minimum" : 90,
+          "maximum" : 3650
+        },
+        "TimeOfBackup" : {
+          "type" : "string",
+          "description" : "The time of the backup.",
+          "format" : "date-time"
+        }
+      }
+    },
+    "DatabaseTool" : {
+      "type" : "object",
+      "description" : "Information about a database tool.",
+      "additionalProperties" : false,
+      "properties" : {
+        "IsEnabled" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the tool is enabled."
+        },
+        "Name" : {
+          "type" : "string",
+          "description" : "The name of the database tool."
+        },
+        "ComputeCount" : {
+          "type" : "number",
+          "description" : "The compute count for the tool."
+        },
+        "MaxIdleTimeInMinutes" : {
+          "type" : "integer",
+          "description" : "The maximum idle time, in minutes."
+        }
+      }
+    },
+    "ResourcePoolSummary" : {
+      "type" : "object",
+      "description" : "Summary information about the elastic resource pool.",
+      "additionalProperties" : false,
+      "properties" : {
+        "IsDisabled" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the resource pool is disabled."
+        },
+        "PoolSize" : {
+          "type" : "integer",
+          "description" : "The size of the resource pool."
+        }
+      }
+    },
+    "AutonomousDatabaseConnectionStrings" : {
+      "type" : "object",
+      "description" : "The connection strings for the Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "Dedicated" : {
+          "type" : "string",
+          "description" : "The dedicated connection string."
+        },
+        "High" : {
+          "type" : "string",
+          "description" : "The high connection string."
+        },
+        "Medium" : {
+          "type" : "string",
+          "description" : "The medium connection string."
+        },
+        "Low" : {
+          "type" : "string",
+          "description" : "The low connection string."
+        }
+      }
+    },
+    "AutonomousDatabaseConnectionUrls" : {
+      "type" : "object",
+      "description" : "The connection URLs for the Autonomous Database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "ApexUrl" : {
+          "type" : "string",
+          "description" : "The Oracle Application Express (APEX) URL."
+        },
+        "GraphStudioUrl" : {
+          "type" : "string",
+          "description" : "The Graph Studio URL."
+        },
+        "MachineLearningNotebookUrl" : {
+          "type" : "string",
+          "description" : "The Machine Learning Notebook URL."
+        },
+        "MongoDbUrl" : {
+          "type" : "string",
+          "description" : "The MongoDB API URL."
+        },
+        "OrdsUrl" : {
+          "type" : "string",
+          "description" : "The Oracle REST Data Services (ORDS) URL."
+        },
+        "SqlDevWebUrl" : {
+          "type" : "string",
+          "description" : "The SQL Developer Web URL."
+        }
+      }
+    },
+    "AutonomousDatabaseApex" : {
+      "type" : "object",
+      "description" : "Oracle APEX Application Development details.",
+      "additionalProperties" : false,
+      "properties" : {
+        "ApexVersion" : {
+          "type" : "string",
+          "description" : "The Oracle APEX version."
+        },
+        "OrdsVersion" : {
+          "type" : "string",
+          "description" : "The Oracle REST Data Services (ORDS) version."
+        }
+      }
+    },
+    "DatabaseStandbySummary" : {
+      "type" : "object",
+      "description" : "Summary information about the standby database.",
+      "additionalProperties" : false,
+      "properties" : {
+        "LagTimeInSeconds" : {
+          "type" : "integer",
+          "description" : "The lag time, in seconds."
+        },
+        "Status" : {
+          "type" : "string",
+          "description" : "The current status of the standby database.",
+          "enum" : [ "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS", "STOPPING", "STOPPED", "STARTING", "UNAVAILABLE", "RESTORE_IN_PROGRESS", "RESTORE_FAILED", "BACKUP_IN_PROGRESS", "SCALE_IN_PROGRESS", "AVAILABLE_NEEDS_ATTENTION", "RESTARTING", "RECREATING", "ROLE_CHANGE_IN_PROGRESS", "UPGRADING", "INACCESSIBLE", "STANDBY" ]
+        },
+        "StatusReason" : {
+          "type" : "string",
+          "description" : "Additional information about the status."
+        }
+      }
+    },
+    "DisasterRecoveryConfiguration" : {
+      "type" : "object",
+      "description" : "The disaster recovery configuration.",
+      "additionalProperties" : false,
+      "properties" : {
+        "DisasterRecoveryType" : {
+          "type" : "string",
+          "description" : "The type of disaster recovery.",
+          "enum" : [ "ADG", "BACKUP_BASED" ]
+        },
+        "IsReplicateAutomaticBackups" : {
+          "type" : "boolean",
+          "description" : "Indicates whether automatic backups are replicated."
+        },
+        "IsSnapshotStandby" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the standby is a snapshot standby."
+        }
+      }
+    }
+  },
+  "properties" : {
+    "AutonomousDatabaseArn" : {
+      "type" : "string",
+      "description" : "The Amazon Resource Name (ARN) of the Autonomous Database.",
+      "minLength" : 20,
+      "maxLength" : 2048,
+      "pattern" : "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}$"
+    },
+    "AutonomousDatabaseId" : {
+      "type" : "string",
+      "description" : "The unique identifier of the Autonomous Database.",
+      "minLength" : 6,
+      "maxLength" : 64,
+      "pattern" : "^[a-zA-Z0-9_~.-]+$"
+    },
+    "Source" : {
+      "type" : "string",
+      "description" : "The source from which to create the Autonomous Database. NONE creates an empty database.",
+      "enum" : [ "NONE", "DATABASE", "BACKUP_FROM_ID", "BACKUP_FROM_TIMESTAMP", "CROSS_REGION_DATAGUARD", "CROSS_REGION_DISASTER_RECOVERY", "CLONE_TO_REFRESHABLE" ]
+    },
+    "SourceConfiguration" : {
+      "$ref" : "#/definitions/SourceConfiguration",
+      "description" : "The configuration for the source specified by Source."
+    },
+    "OdbNetworkId" : {
+      "type" : "string",
+      "description" : "The ID or ARN of the ODB network for the Autonomous Database.",
+      "minLength" : 6,
+      "maxLength" : 2048,
+      "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+    },
+    "CharacterSet" : {
+      "type" : "string",
+      "description" : "The character set for the Autonomous Database.",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "NcharacterSet" : {
+      "type" : "string",
+      "description" : "The national character set for the Autonomous Database.",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "EncryptionKeyProvider" : {
+      "type" : "string",
+      "description" : "The provider of the encryption key for the Autonomous Database.",
+      "enum" : [ "ORACLE_MANAGED", "AWS_KMS" ]
+    },
+    "EncryptionKeyConfiguration" : {
+      "$ref" : "#/definitions/EncryptionKeyConfiguration",
+      "description" : "The customer-managed encryption key configuration. Required when EncryptionKeyProvider is AWS_KMS."
+    },
+    "DisplayName" : {
+      "type" : "string",
+      "description" : "The user-friendly name for the Autonomous Database.",
+      "minLength" : 1,
+      "maxLength" : 255,
+      "pattern" : "^[a-zA-Z_](?!.*--)[a-zA-Z0-9_-]*$"
+    },
+    "DbName" : {
+      "type" : "string",
+      "description" : "The database name.",
+      "minLength" : 1,
+      "maxLength" : 30
+    },
+    "AdminPasswordSource" : {
+      "type" : "string",
+      "description" : "The source of the ADMIN password. Only passwords stored in AWS Secrets Manager are supported through CloudFormation.",
+      "enum" : [ "CUSTOMER_MANAGED_AWS_SECRET" ]
+    },
+    "AdminPasswordSourceConfiguration" : {
+      "$ref" : "#/definitions/AdminPasswordSourceConfiguration",
+      "description" : "The AWS Secrets Manager configuration for the ADMIN password."
+    },
+    "ComputeCount" : {
+      "type" : "number",
+      "description" : "The compute amount (ECPUs) available to the database.",
+      "minimum" : 0.1,
+      "maximum" : 512
+    },
+    "CpuCoreCount" : {
+      "type" : "integer",
+      "description" : "The number of CPU cores (OCPUs) available to the database.",
+      "minimum" : 1,
+      "maximum" : 128
+    },
+    "DataStorageSizeInTBs" : {
+      "type" : "integer",
+      "description" : "The quantity of data in the database, in terabytes.",
+      "minimum" : 1,
+      "maximum" : 384
+    },
+    "DataStorageSizeInGBs" : {
+      "type" : "integer",
+      "description" : "The quantity of data in the database, in gigabytes.",
+      "minimum" : 20,
+      "maximum" : 393216
+    },
+    "DbWorkload" : {
+      "type" : "string",
+      "description" : "The Autonomous Database workload type.",
+      "enum" : [ "OLTP", "AJD", "APEX", "LH" ]
+    },
+    "DbVersion" : {
+      "type" : "string",
+      "description" : "A valid Oracle Database version for Autonomous Database.",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "DatabaseEdition" : {
+      "type" : "string",
+      "description" : "The Oracle Database edition that applies to the Autonomous Database.",
+      "enum" : [ "STANDARD_EDITION", "ENTERPRISE_EDITION" ]
+    },
+    "LicenseModel" : {
+      "type" : "string",
+      "description" : "The Oracle license model that applies to the Autonomous Database.",
+      "enum" : [ "BRING_YOUR_OWN_LICENSE", "LICENSE_INCLUDED" ]
+    },
+    "ByolComputeCountLimit" : {
+      "type" : "number",
+      "description" : "The maximum compute count that can be used with a bring-your-own-license model.",
+      "minimum" : 2
+    },
+    "IsAutoScalingEnabled" : {
+      "type" : "boolean",
+      "description" : "Indicates whether compute auto scaling is enabled."
+    },
+    "IsAutoScalingForStorageEnabled" : {
+      "type" : "boolean",
+      "description" : "Indicates whether storage auto scaling is enabled."
+    },
+    "IsMtlsConnectionRequired" : {
+      "type" : "boolean",
+      "description" : "Indicates whether the Autonomous Database requires mTLS connections."
+    },
+    "IsLocalDataGuardEnabled" : {
+      "type" : "boolean",
+      "description" : "Indicates whether local Autonomous Data Guard is enabled."
+    },
+    "LocalAdgAutoFailoverMaxDataLossLimit" : {
+      "type" : "integer",
+      "description" : "The maximum data loss limit, in seconds, for local Autonomous Data Guard automatic failover.",
+      "minimum" : 0,
+      "maximum" : 3600
+    },
+    "IsBackupRetentionLocked" : {
+      "type" : "boolean",
+      "description" : "Indicates whether the backup retention period is locked."
+    },
+    "BackupRetentionPeriodInDays" : {
+      "type" : "integer",
+      "description" : "The retention period for automatic backups, in days.",
+      "minimum" : 1,
+      "maximum" : 60
+    },
+    "LongTermBackupSchedule" : {
+      "$ref" : "#/definitions/LongTermBackupSchedule",
+      "description" : "The long-term backup schedule for the Autonomous Database."
+    },
+    "AutonomousMaintenanceScheduleType" : {
+      "type" : "string",
+      "description" : "The maintenance schedule type.",
+      "enum" : [ "EARLY", "REGULAR" ]
+    },
+    "CustomerContactsToSendToOCI" : {
+      "type" : "array",
+      "description" : "The contacts that receive maintenance notifications from Oracle.",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/CustomerContact"
+      }
+    },
+    "PrivateEndpointIp" : {
+      "type" : "string",
+      "description" : "The private endpoint IP address for the Autonomous Database."
+    },
+    "PrivateEndpointLabel" : {
+      "type" : "string",
+      "description" : "The private endpoint label for the Autonomous Database."
+    },
+    "ResourcePoolLeaderId" : {
+      "type" : "string",
+      "description" : "The ID or ARN of the elastic resource pool leader.",
+      "minLength" : 6,
+      "maxLength" : 2048,
+      "pattern" : "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$"
+    },
+    "ResourcePoolSummary" : {
+      "$ref" : "#/definitions/ResourcePoolSummary",
+      "description" : "The elastic resource pool configuration, when this database is a resource pool leader."
+    },
+    "ScheduledOperations" : {
+      "type" : "array",
+      "description" : "The scheduled start and stop times for the Autonomous Database.",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/ScheduledOperationDetails"
+      }
+    },
+    "AllowlistedIps" : {
+      "type" : "array",
+      "description" : "The client IP access control list (ACL).",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      },
+      "minItems" : 1,
+      "maxItems" : 1024
+    },
+    "StandbyAllowlistedIps" : {
+      "type" : "array",
+      "description" : "The client IP access control list for the standby database.",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      },
+      "minItems" : 1,
+      "maxItems" : 1024
+    },
+    "StandbyAllowlistedIpsSource" : {
+      "type" : "string",
+      "description" : "The source of the standby access control list.",
+      "enum" : [ "PRIMARY", "SEPARATE", "NOT_APPLICABLE" ]
+    },
+    "DbToolsDetails" : {
+      "type" : "array",
+      "description" : "The database tools configuration.",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/DatabaseTool"
+      }
+    },
+    "OpenMode" : {
+      "type" : "string",
+      "description" : "The open mode of the Autonomous Database.",
+      "enum" : [ "READ_ONLY", "READ_WRITE" ]
+    },
+    "PermissionLevel" : {
+      "type" : "string",
+      "description" : "The permission level of the Autonomous Database.",
+      "enum" : [ "RESTRICTED", "UNRESTRICTED" ]
+    },
+    "IsRefreshableClone" : {
+      "type" : "boolean",
+      "description" : "Indicates whether the Autonomous Database is a refreshable clone. A refreshable clone is created with Source CLONE_TO_REFRESHABLE."
+    },
+    "RefreshableMode" : {
+      "type" : "string",
+      "description" : "The refresh mode of a refreshable clone, set through SourceConfiguration.CloneToRefreshable.",
+      "enum" : [ "AUTOMATIC", "MANUAL" ]
+    },
+    "Tags" : {
+      "type" : "array",
+      "description" : "The list of resource tags applied to the Autonomous Database.",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      },
+      "uniqueItems" : true,
+      "insertionOrder" : false,
+      "maxItems" : 200
+    },
+    "Status" : {
+      "type" : "string",
+      "description" : "The current status of the Autonomous Database.",
+      "enum" : [ "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS", "STOPPING", "STOPPED", "STARTING", "UNAVAILABLE", "RESTORE_IN_PROGRESS", "RESTORE_FAILED", "BACKUP_IN_PROGRESS", "SCALE_IN_PROGRESS", "AVAILABLE_NEEDS_ATTENTION", "RESTARTING", "RECREATING", "ROLE_CHANGE_IN_PROGRESS", "UPGRADING", "INACCESSIBLE", "STANDBY" ]
+    },
+    "StatusReason" : {
+      "type" : "string",
+      "description" : "Additional information about the current status."
+    },
+    "DatabaseType" : {
+      "type" : "string",
+      "description" : "The type of the Autonomous Database.",
+      "enum" : [ "REGULAR", "CLONE" ]
+    },
+    "OciResourceAnchorName" : {
+      "type" : "string",
+      "description" : "The name of the OCI resource anchor."
+    },
+    "Ocid" : {
+      "type" : "string",
+      "description" : "The Oracle Cloud Identifier (OCID) of the Autonomous Database."
+    },
+    "OciUrl" : {
+      "type" : "string",
+      "description" : "The HTTPS link to the Autonomous Database in OCI."
+    },
+    "PercentProgress" : {
+      "type" : "number",
+      "description" : "The progress of the current operation, as a percentage."
+    },
+    "ComputeModel" : {
+      "type" : "string",
+      "description" : "The compute model of the Autonomous Database.",
+      "enum" : [ "ECPU", "OCPU" ]
+    },
+    "ConnectionStringDetails" : {
+      "$ref" : "#/definitions/AutonomousDatabaseConnectionStrings",
+      "description" : "The connection strings for the Autonomous Database."
+    },
+    "ConnectionUrls" : {
+      "$ref" : "#/definitions/AutonomousDatabaseConnectionUrls",
+      "description" : "The connection URLs for the Autonomous Database."
+    },
+    "ApexDetails" : {
+      "$ref" : "#/definitions/AutonomousDatabaseApex",
+      "description" : "Oracle APEX Application Development details."
+    },
+    "StandbyDb" : {
+      "$ref" : "#/definitions/DatabaseStandbySummary",
+      "description" : "Summary information about the standby database."
+    },
+    "RemoteDisasterRecoveryConfiguration" : {
+      "$ref" : "#/definitions/DisasterRecoveryConfiguration",
+      "description" : "The remote disaster recovery configuration."
+    },
+    "ServiceConsoleUrl" : {
+      "type" : "string",
+      "description" : "The URL of the Service Console for the Autonomous Database."
+    },
+    "AvailabilityZone" : {
+      "type" : "string",
+      "description" : "The Availability Zone of the Autonomous Database."
+    },
+    "AvailabilityZoneId" : {
+      "type" : "string",
+      "description" : "The Availability Zone ID of the Autonomous Database."
+    },
+    "NetServicesArchitecture" : {
+      "type" : "string",
+      "description" : "The net services architecture.",
+      "enum" : [ "DEDICATED", "SHARED" ]
+    },
+    "PrivateEndpoint" : {
+      "type" : "string",
+      "description" : "The private endpoint of the Autonomous Database."
+    },
+    "MemoryPerOracleComputeUnitInGBs" : {
+      "type" : "integer",
+      "description" : "The amount of memory per Oracle Compute Unit, in GB."
+    },
+    "UsedDataStorageSizeInTBs" : {
+      "type" : "number",
+      "description" : "The amount of storage used, in terabytes."
+    },
+    "UsedDataStorageSizeInGBs" : {
+      "type" : "integer",
+      "description" : "The amount of storage used, in gigabytes."
+    },
+    "ActualUsedDataStorageSizeInTBs" : {
+      "type" : "number",
+      "description" : "The actual amount of storage used, in terabytes."
+    },
+    "AllocatedStorageSizeInTBs" : {
+      "type" : "number",
+      "description" : "The amount of storage allocated, in terabytes."
+    },
+    "InMemoryAreaInGBs" : {
+      "type" : "integer",
+      "description" : "The size of the in-memory area, in GB."
+    },
+    "IsRemoteDataGuardEnabled" : {
+      "type" : "boolean",
+      "description" : "Indicates whether remote Autonomous Data Guard is enabled."
+    },
+    "LocalDisasterRecoveryType" : {
+      "type" : "string",
+      "description" : "The local disaster recovery type.",
+      "enum" : [ "ADG", "BACKUP_BASED" ]
+    },
+    "Role" : {
+      "type" : "string",
+      "description" : "The Data Guard role of the Autonomous Database.",
+      "enum" : [ "PRIMARY", "STANDBY", "DISABLED_STANDBY", "BACKUP_COPY", "SNAPSHOT_STANDBY" ]
+    },
+    "PeerDbIds" : {
+      "type" : "array",
+      "description" : "The IDs of the peer databases.",
+      "insertionOrder" : false,
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "FailedDataRecoveryInSeconds" : {
+      "type" : "integer",
+      "description" : "The amount of data loss, in seconds, during the last failover."
+    },
+    "RefreshableStatus" : {
+      "type" : "string",
+      "description" : "The refresh status of a refreshable clone.",
+      "enum" : [ "REFRESHING", "NOT_REFRESHING" ]
+    },
+    "DataSafeStatus" : {
+      "type" : "string",
+      "description" : "The status of the Data Safe registration.",
+      "enum" : [ "REGISTERING", "REGISTERED", "DEREGISTERING", "NOT_REGISTERED", "FAILED" ]
+    },
+    "DatabaseManagementStatus" : {
+      "type" : "string",
+      "description" : "The status of Database Management.",
+      "enum" : [ "ENABLING", "ENABLED", "DISABLING", "NOT_ENABLED", "FAILED_ENABLING", "FAILED_DISABLING" ]
+    },
+    "OperationsInsightsStatus" : {
+      "type" : "string",
+      "description" : "The status of Operations Insights.",
+      "enum" : [ "ENABLING", "ENABLED", "DISABLING", "NOT_ENABLED", "FAILED_ENABLING", "FAILED_DISABLING" ]
+    },
+    "TotalBackupStorageSizeInGBs" : {
+      "type" : "number",
+      "description" : "The total backup storage used, in gigabytes."
+    },
+    "OdbNetworkArn" : {
+      "type" : "string",
+      "description" : "The ARN of the ODB network.",
+      "minLength" : 20,
+      "maxLength" : 2048
+    },
+    "CreatedAt" : {
+      "type" : "string",
+      "description" : "The date and time when the Autonomous Database was created.",
+      "format" : "date-time"
+    }
+  },
+  "additionalProperties" : false,
+  "readOnlyProperties" : [ "/properties/AutonomousDatabaseArn", "/properties/AutonomousDatabaseId", "/properties/Status", "/properties/StatusReason", "/properties/DatabaseType", "/properties/OciResourceAnchorName", "/properties/Ocid", "/properties/OciUrl", "/properties/PercentProgress", "/properties/ComputeModel", "/properties/ConnectionStringDetails", "/properties/ConnectionUrls", "/properties/ApexDetails", "/properties/StandbyDb", "/properties/ServiceConsoleUrl", "/properties/AvailabilityZone", "/properties/AvailabilityZoneId", "/properties/NetServicesArchitecture", "/properties/PrivateEndpoint", "/properties/MemoryPerOracleComputeUnitInGBs", "/properties/UsedDataStorageSizeInTBs", "/properties/UsedDataStorageSizeInGBs", "/properties/ActualUsedDataStorageSizeInTBs", "/properties/AllocatedStorageSizeInTBs", "/properties/InMemoryAreaInGBs", "/properties/IsRemoteDataGuardEnabled", "/properties/LocalDisasterRecoveryType", "/properties/RemoteDisasterRecoveryConfiguration", "/properties/Role", "/properties/PeerDbIds", "/properties/FailedDataRecoveryInSeconds", "/properties/IsRefreshableClone", "/properties/RefreshableMode", "/properties/RefreshableStatus", "/properties/DataSafeStatus", "/properties/DatabaseManagementStatus", "/properties/OperationsInsightsStatus", "/properties/TotalBackupStorageSizeInGBs", "/properties/OdbNetworkArn", "/properties/CreatedAt" ],
+  "createOnlyProperties" : [ "/properties/OdbNetworkId", "/properties/CharacterSet", "/properties/NcharacterSet", "/properties/Source", "/properties/SourceConfiguration" ],
+  "writeOnlyProperties" : [ "/properties/Source", "/properties/SourceConfiguration", "/properties/EncryptionKeyProvider", "/properties/EncryptionKeyConfiguration", "/properties/AdminPasswordSourceConfiguration" ],
+  "propertyTransform" : {
+    "/properties/OdbNetworkId" : "$split(OdbNetworkId, \"odb-network/\")[-1] $OR OdbNetworkId"
+  },
+  "primaryIdentifier" : [ "/properties/AutonomousDatabaseArn" ],
+  "additionalIdentifiers" : [ [ "/properties/AutonomousDatabaseId" ] ],
+  "replacementStrategy" : "delete_then_create",
+  "tagging" : {
+    "taggable" : true,
+    "tagOnCreate" : true,
+    "tagUpdatable" : true,
+    "cloudFormationSystemTags" : true,
+    "tagProperty" : "/properties/Tags",
+    "permissions" : [ "odb:TagResource", "odb:UntagResource", "odb:ListTagsForResource" ]
+  },
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "odb:CreateAutonomousDatabase", "odb:GetAutonomousDatabase", "odb:UpdateAutonomousDatabase", "odb:GetAutonomousDatabaseBackup", "odb:TagResource", "odb:ListTagsForResource", "iam:CreateServiceLinkedRole", "iam:PassRole", "kms:DescribeKey", "secretsmanager:DescribeSecret" ],
+      "timeoutInMinutes" : 1140
+    },
+    "read" : {
+      "permissions" : [ "odb:GetAutonomousDatabase", "odb:ListTagsForResource" ]
+    },
+    "update" : {
+      "permissions" : [ "odb:UpdateAutonomousDatabase", "odb:GetAutonomousDatabase", "odb:TagResource", "odb:UntagResource", "odb:ListTagsForResource", "iam:PassRole", "kms:DescribeKey", "secretsmanager:DescribeSecret" ],
+      "timeoutInMinutes" : 2160
+    },
+    "delete" : {
+      "permissions" : [ "odb:DeleteAutonomousDatabase", "odb:GetAutonomousDatabase", "odb:ListTagsForResource" ],
+      "timeoutInMinutes" : 180
+    },
+    "list" : {
+      "permissions" : [ "odb:ListAutonomousDatabases" ]
+    }
+  }
+}
