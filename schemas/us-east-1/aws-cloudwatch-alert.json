@@ -1,6 +1,6 @@
 {
   "typeName" : "AWS::CloudWatch::Alert",
-  "description" : "Resource Type definition for AWS::CloudWatch::Alert. An alert runs a SQL or PromQL query in a CloudWatch Omni space on a fixed interval, compares the result against warning and critical thresholds, and sends notifications to Amazon SNS topics or integrations when its state changes.",
+  "description" : "Resource Type definition for AWS::CloudWatch::Alert. An alert runs a SQL or PromQL query in a CloudWatch Omni space on a fixed interval, or reads the burn rate or error budget of a service level objective (SLO), compares the result against warning and critical thresholds, and sends notifications to Amazon SNS topics or integrations, or requests an investigation, when its state changes.",
   "properties" : {
     "SpaceId" : {
       "type" : "string",
@@ -186,16 +186,20 @@
       "required" : [ "Query", "Condition", "Evaluation" ]
     },
     "Rule" : {
-      "description" : "The rule that defines how the alert is evaluated.",
       "type" : "object",
+      "description" : "The rule that defines how the alert is evaluated. Specify exactly one of TelemetryRule and SloRule. An alert cannot change from one to the other: an update that does so fails. To change the kind, give the alert a new logical ID, so that CloudFormation creates a new alert and deletes the old one.",
       "properties" : {
         "TelemetryRule" : {
           "$ref" : "#/definitions/TelemetryRule"
+        },
+        "SloRule" : {
+          "$ref" : "#/definitions/SloRule"
         }
       },
-      "required" : [ "TelemetryRule" ],
       "oneOf" : [ {
         "required" : [ "TelemetryRule" ]
+      }, {
+        "required" : [ "SloRule" ]
       } ],
       "additionalProperties" : false
     },
@@ -224,7 +228,7 @@
         }
       },
       "additionalProperties" : false,
-      "description" : "Settings specific to the target, as key-value pairs (up to 20). The keys depend on the integration type. Not used for sns targets.",
+      "description" : "Settings specific to the target, as key-value pairs (up to 20). The keys depend on the integration type. Not used for sns and investigation targets.",
       "maxProperties" : 20
     },
     "Target" : {
@@ -232,12 +236,12 @@
       "properties" : {
         "Type" : {
           "type" : "string",
-          "description" : "The target type. Valid values: sns, slack, pagerduty.",
-          "enum" : [ "sns", "slack", "pagerduty" ]
+          "description" : "The target type. Valid values: sns, slack, pagerduty, investigation.",
+          "enum" : [ "sns", "slack", "pagerduty", "investigation" ]
         },
         "Arn" : {
           "type" : "string",
-          "description" : "The ARN of the target. For sns, the ARN of the Amazon SNS topic. For slack and pagerduty, the ARN of a CloudWatch Omni integration.",
+          "description" : "The ARN of the target. For sns, the ARN of the Amazon SNS topic. For slack and pagerduty, the ARN of a CloudWatch Omni integration. For investigation, the ARN of an external agent integration in the same account and Region; the rule's StateValues must list one or more of WARNING, CRITICAL and NODATA.",
           "pattern" : "^arn:.+$",
           "minLength" : 1,
           "maxLength" : 1024
@@ -283,6 +287,130 @@
         }
       },
       "required" : [ "Key", "Value" ]
+    },
+    "SloEvaluation" : {
+      "type" : "object",
+      "properties" : {
+        "IntervalSeconds" : {
+          "type" : "integer",
+          "enum" : [ 60, 120, 300, 600, 900, 1800, 3600 ],
+          "description" : "The time between evaluations, in seconds. Valid values: 60, 120, 300, 600, 900, 1800, 3600."
+        },
+        "PendingDurationSeconds" : {
+          "type" : "integer",
+          "description" : "How long a threshold breach must last before the alert changes state, in seconds. Must be a multiple of IntervalSeconds. 0 changes state immediately."
+        },
+        "RecoveryDurationSeconds" : {
+          "type" : "integer",
+          "description" : "How long the result must stay within its thresholds before the alert returns to OK, in seconds. Must be a multiple of IntervalSeconds. 0 returns to OK immediately."
+        }
+      },
+      "required" : [ "IntervalSeconds" ],
+      "additionalProperties" : false,
+      "description" : "How often the alert is evaluated, and how long a change must last before the state changes."
+    },
+    "SloBurnRateCondition" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "description" : "A burn-rate condition. With one window, the burn rate over WindowMinutes is compared with the thresholds. With ShortWindowMinutes as well, the lower of the two burn rates is compared, so the alert changes state only when both windows breach. Specify at least one of WarningThreshold and CriticalThreshold. Each is breached at or above its value.",
+      "properties" : {
+        "WindowMinutes" : {
+          "type" : "integer",
+          "minimum" : 5,
+          "maximum" : 10080,
+          "multipleOf" : 5,
+          "description" : "The burn-rate window, in minutes. A multiple of 5, from 5 through 10080 (7 days). WindowMinutes x 60 must be at least Evaluation IntervalSeconds."
+        },
+        "ShortWindowMinutes" : {
+          "type" : "integer",
+          "minimum" : 5,
+          "maximum" : 10080,
+          "multipleOf" : 5,
+          "description" : "The short window of a pair, in minutes. A multiple of 5, from 5 through 10080, and shorter than WindowMinutes. Omit for a single window. Recommended pairs: 60/5, 360/30, 1440/60 and 4320/360."
+        },
+        "WarningThreshold" : {
+          "type" : "number",
+          "exclusiveMinimum" : 0,
+          "description" : "The alert is WARNING when the burn rate reaches this multiple of the sustainable rate. Greater than 0."
+        },
+        "CriticalThreshold" : {
+          "type" : "number",
+          "exclusiveMinimum" : 0,
+          "description" : "The alert is CRITICAL when the burn rate reaches this multiple of the sustainable rate. Greater than 0, and greater than WarningThreshold when both are set."
+        }
+      },
+      "required" : [ "WindowMinutes" ],
+      "anyOf" : [ {
+        "required" : [ "WarningThreshold" ]
+      }, {
+        "required" : [ "CriticalThreshold" ]
+      } ]
+    },
+    "SloErrorBudgetCondition" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "description" : "An error-budget condition on the share of the error budget used over the SLO's window, from 0 to 1. Specify at least one of WarningThreshold and CriticalThreshold. Each is breached at or above its value. A CriticalThreshold of 1 is breached when the SLO misses its target.",
+      "properties" : {
+        "WarningThreshold" : {
+          "type" : "number",
+          "exclusiveMinimum" : 0,
+          "maximum" : 1,
+          "description" : "The alert is WARNING when the used share reaches this value. Greater than 0, at most 1."
+        },
+        "CriticalThreshold" : {
+          "type" : "number",
+          "exclusiveMinimum" : 0,
+          "maximum" : 1,
+          "description" : "The alert is CRITICAL when the used share reaches this value. Greater than 0, at most 1, and greater than WarningThreshold when both are set."
+        }
+      },
+      "anyOf" : [ {
+        "required" : [ "WarningThreshold" ]
+      }, {
+        "required" : [ "CriticalThreshold" ]
+      } ]
+    },
+    "SloAlertCondition" : {
+      "type" : "object",
+      "description" : "What changes the alert's state. Specify exactly one of BurnRate and ErrorBudget.",
+      "properties" : {
+        "BurnRate" : {
+          "$ref" : "#/definitions/SloBurnRateCondition"
+        },
+        "ErrorBudget" : {
+          "$ref" : "#/definitions/SloErrorBudgetCondition"
+        }
+      },
+      "oneOf" : [ {
+        "required" : [ "BurnRate" ]
+      }, {
+        "required" : [ "ErrorBudget" ]
+      } ],
+      "additionalProperties" : false
+    },
+    "SloRule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "description" : "A rule on the burn rate or the error budget of a service level objective (SLO) in the same space as the alert.",
+      "properties" : {
+        "SloId" : {
+          "type" : "string",
+          "pattern" : "^[0-9a-f]{32}$",
+          "minLength" : 32,
+          "maxLength" : 32,
+          "description" : "The ID of the SLO. It must be in the same space as the alert."
+        },
+        "Condition" : {
+          "$ref" : "#/definitions/SloAlertCondition"
+        },
+        "Evaluation" : {
+          "$ref" : "#/definitions/SloEvaluation"
+        },
+        "NoData" : {
+          "$ref" : "#/definitions/NoData"
+        }
+      },
+      "required" : [ "SloId", "Condition", "Evaluation" ]
     }
   },
   "primaryIdentifier" : [ "/properties/SpaceId", "/properties/AlertId" ],
